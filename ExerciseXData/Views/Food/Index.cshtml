@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Food>
+@{
+    ViewData["Title"] = "List of Foods";
+}
+
+@*<partial name =" _Notification" /> @*calls on the partial view from_Notification in shared folder*@
+
+<div class=" container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h1>Food Lists</h1>
+        </div>
+        <div class=" col-6 text-end">
+            <a asp-controller="Food" asp-action="Create" class="btn btn-primary">Create New Food</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Food Image
+                </th>
+                <th>
+                    Food Name
+                </th>
+                <th>
+                    Food Calorie in kcal (per 100 grams)
+                </th>
+                @*<th>
+                Modify Date
+                </th>*@
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>
+                        @obj.F_Image
+                    </td>
+                    <td>
+                        @obj.F_Name
+                    </td>
+                    <td>
+                        @obj.F_Food_Calories
+                    </td>
+                    @* <td>
+                @obj.F_Modify_Date
+                </td>*@
+
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            @*<a asp-controller="Food" asp-action="Details" asp-route-id="@obj.D_Id"
+                        class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>Details</a>*@
+
+                            <a asp-controller="Food" asp-action="Edit" asp-route-id="@obj.F_Id"
+                               class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>Edit</a>
+
+                            <a asp-controller="Food" asp-action="Delete" asp-route-id="@obj.F_Id"
+                               class="btn btn-primary mx-2"> <i class="bi bi-trash-fill"></i>Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

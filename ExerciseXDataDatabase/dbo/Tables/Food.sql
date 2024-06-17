@@ -1,0 +1,7 @@
+﻿
+
+CREATE TABLE [dbo].[Food]
+(
+[F_Id] NVARCHAR(128) NOT NULL PRIMARY KEY, 
+[F_Name] NVARCHAR(128) NOT NULL 
+)

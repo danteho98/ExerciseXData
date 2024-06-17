@@ -1,0 +1,8 @@
+﻿
+
+CREATE TABLE [dbo].[UserDiet]
+(
+    [UD_Id] NVARCHAR(128) NOT NULL PRIMARY KEY, 
+    [U_ID] NVARCHAR(128) NOT NULL, 
+    [D_ID] NVARCHAR(128) NOT NULL
+)

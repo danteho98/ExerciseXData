@@ -1,0 +1,64 @@
+﻿@model Diet
+
+<form method="post">
+    <div class=" border p-3 mt-4">
+        <div class=" row pb-2">
+            <h1 class="text-primary">Edit Diets</h1>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
+
+        
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Pros_1"></label>
+            <input asp-for="Pros_1" class="form-control" />
+            <span asp-validation-for="Pros_1" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Pros_2"></label>
+            <input asp-for="Pros_2" class="form-control" />
+            <span asp-validation-for="Pros_2" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Pros_3"></label>
+            <input asp-for="Pros_3" class="form-control" />
+            <span asp-validation-for="Pros_3" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Cons_1"></label>
+            <input asp-for="Cons_1" class="form-control" />
+            <span asp-validation-for="Cons_1" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Cons_2"></label>
+            <input asp-for="Cons_2" class="form-control" />
+            <span asp-validation-for="Cons_2" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Cons_3"></label>
+            <input asp-for="Cons_3" class="form-control" />
+            <span asp-validation-for="Cons_3" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+        <a asp-controller="Diet" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </div>
+</form>
+
+@section Scripts{
+    @*this part is responsible for the client side*@
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

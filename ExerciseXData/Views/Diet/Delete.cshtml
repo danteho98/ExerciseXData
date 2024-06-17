@@ -1,0 +1,70 @@
+﻿@model Diet
+
+<form method="post" asp-action="DeletePOST">
+    @*DeletePOST here can change name with the CategoryController POST method*@
+    <input type="hidden" asp-for="D_Id" />
+    <div class=" border p-3 mt-4">
+        <div class=" row pb-2">
+            <h1 class="text-primary">Delete Diets</h1>
+            <hr />
+        </div>
+
+        <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Pros_1"></label>
+            <input asp-for="Pros_1" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Pros_2"></label>
+            <input asp-for="Pros_2" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Pros_3"></label>
+            <input asp-for="Pros_3" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Cons_1"></label>
+            <input asp-for="Cons_1" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Cons_2"></label>
+            <input asp-for="Cons_2" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Cons_3"></label>
+            <input asp-for="Cons_3" disabled class="form-control" />
+
+        </div>
+        <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+        <a asp-controller="Exercise" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </div>
+</form>
+
+@section Scripts{
+    @*this part is responsible for the client side*@
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

@@ -1,0 +1,76 @@
+﻿@model Exercise
+
+<form method="post" asp-action="Delete">
+    @*DeletePOST here can change name with the CategoryController POST method*@
+    <input type="hidden" asp-for="E_Id" />
+    <div class=" border p-3 mt-4">
+        <div class=" row pb-2">
+            <h1 class="text-primary">Delete Exercise</h1>
+            <hr />
+        </div>
+        <div asp-validation-summary="ModelOnly"></div> @*Displays all the validation texts*@
+
+
+        </div>
+
+        <div class="mb-3">
+        <label asp-for="E_Id"></label>
+        <input asp-for="E_Id" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+        <label asp-for="E_Image"></label>
+        <input asp-for="E_Image" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="E_Name"></label>
+            <input asp-for="E_Name" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="E_Pros_1"></label>
+            <input asp-for="E_Pros_1" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="E_Pros_2"></label>
+            <input asp-for="E_Pros_2" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="E_Pros_3"></label>
+            <input asp-for="E_Pros_3" disabled class="form-control" />
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="E_Cons_1"></label>
+            <input asp-for="E_Cons_1" class="form-control" />
+            
+        </div>
+        <div class="mb-3">
+            <label asp-for="E_Cons_2"></label>
+            <input asp-for="E_Cons_2" class="form-control" />
+            
+        </div>
+        <div class="mb-3">
+            <label asp-for="E_Cons_3"></label>
+            <input asp-for="E_Cons_3" class="form-control" />
+
+        </div>
+        <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+        <a asp-controller="Exercise" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </div>
+</form>
+
+@section Scripts{
+    @*this part is responsible for the client side*@
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

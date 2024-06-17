@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[Foods]
+(
+	[Id] INT NOT NULL PRIMARY KEY
+)

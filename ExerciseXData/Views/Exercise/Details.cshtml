@@ -1,0 +1,74 @@
+﻿@model Exercise
+
+
+    <div class=" border p-3 mt-4">
+        <div class=" row pb-2">
+            <h1 class="text-primary"> Exercise Details</h1>
+            <h1>Details for @Model.E_Name</h1>
+            <hr />
+        </div>
+        
+        <div class = "form-group text-center"></div>
+
+        @*<div class="mb-3">
+        <label asp-for="C_Id"></label>
+        <input asp-for="C_Id" class="form-control" readonly />
+        <span asp-validation-for="C_Id" class="text-danger"></span>
+        </div>*@
+
+        <div class="mb-3">
+        <label asp-for="E_Image"></label>
+        <input asp-for="E_Image" class="form-control" readonly />
+        <span asp-validation-for="E_Image" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="E_Name"></label>
+            <input asp-for="E_Name" class="form-control" readonly />
+            <span asp-validation-for="E_Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="E_Pros_1"></label>
+        <input asp-for="E_Pros_1" class="form-control" readonly />
+            <span asp-validation-for="E_Pros_1" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="E_Pros_2"></label>
+        <input asp-for="E_Pros_2" class="form-control" readonly />
+            <span asp-validation-for="E_Pros_2" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="E_Pros_3"></label>
+        <input asp-for="E_Pros_3" class="form-control" readonly />
+            <span asp-validation-for="E_Pros_3" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="E_Cons_1"></label>
+        <input asp-for="E_Cons_1" class="form-control" readonly />
+            <span asp-validation-for="E_Cons_1" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="E_Cons_2"></label>
+        <input asp-for="E_Cons_2" class="form-control" readonly />
+            <span asp-validation-for="E_Cons_2" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="E_Cons_3"></label>
+        <input asp-for="E_Cons_3" class="form-control" readonly />
+            <span asp-validation-for="E_Cons_3" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+        
+        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.E_Id" ></a>
+        <a class="btn btn-secondary" asp-action="Index" style="width:150px">Back to List</a>
+    </div>
+</div>
+
+@section Scripts{
+    @*this part is responsible for the client side*@
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
