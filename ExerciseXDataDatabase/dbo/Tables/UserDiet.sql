@@ -2,7 +2,7 @@
 
 CREATE TABLE [dbo].[UserDiet]
 (
-    [UD_Id] NVARCHAR(128) NOT NULL PRIMARY KEY, 
-    [U_Id] NVARCHAR(128) NOT NULL, 
-    [D_Id] NVARCHAR(128) NOT NULL
+    [UD_Id] INT NOT NULL PRIMARY KEY, 
+    [U_Id] INT NULL, 
+    [D_Id] INT NULL
 )

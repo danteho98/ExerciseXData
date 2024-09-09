@@ -8,14 +8,14 @@ namespace ExerciseXData.Models
         [Key]
         public int D_Id { get; set; }
 
-        [Required]
+        //[Required]
         [DisplayName("Exercise Name")]/*This part allows programmer to put any name*/
         public string D_Name { get; set; }
 
         [DisplayName("Description")]/*This part allows programmer to put any name*/
         public string D_Description { get; set; }
 
-        [Required]
+        //[Required]
         [DisplayName("Diets Pros 1")]
         public string D_Pros_1 { get; set; }
 
@@ -25,7 +25,7 @@ namespace ExerciseXData.Models
         [DisplayName("Diets Pros 3")]
         public string ? D_Pros_3 { get; set; }
 
-        [Required]
+        //[Required]
         [DisplayName("Diets Cons 1")]
         public string D_Cons_1 { get; set; }
 

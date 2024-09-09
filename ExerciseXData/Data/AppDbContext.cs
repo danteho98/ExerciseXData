@@ -1,13 +1,21 @@
-﻿using ExerciseXData.Models;
+﻿
+using ExerciseXData.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<IdentityUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options){}
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options){
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
 
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+            /*
+         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //UserExercise junction table
             modelBuilder.Entity<UserExercise>()
@@ -41,11 +49,14 @@ namespace ExerciseXData.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Seed();
 
-        }*/
+        }
+        */
+        
+    }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Diet> Diets { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
-        public DbSet<Food> Foods { get; set; } 
+        public DbSet<Food> Foods { get; set; }
         public DbSet<User> Users { get; set; }
 
         //Many to many tables

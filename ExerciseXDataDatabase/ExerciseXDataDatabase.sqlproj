@@ -59,22 +59,22 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\StoredProcedures" />
     <Folder Include="dbo\Tables" />
-    <Folder Include="dbo\Views" />
     <Folder Include="PublishLocation" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Category.sql" />
-    <Build Include="dbo\Tables\Diet.sql" />
-    <Build Include="dbo\Tables\Exercise.sql" />
+    <Build Include="dbo\Tables\Diets.sql" />
+    <Build Include="dbo\Tables\Exercises.sql" />
     <Build Include="dbo\Tables\Food.sql" />
     <Build Include="dbo\Tables\UserDiet.sql" />
     <Build Include="dbo\Tables\UsersExercises.sql" />
-    <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Tables\DietFood.sql" />
     <Build Include="dbo\StoredProcedures\ExercisesProcedure.sql" />
     <Build Include="dbo\StoredProcedures\CategoryProcedure.sql" />
     <Build Include="dbo\StoredProcedures\DietProcedure.sql" />
     <Build Include="dbo\StoredProcedures\FoodProcedure.sql" />
+    <Build Include="dbo\StoredProcedures\UserProcedure.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ExerciseXDataDatabase.refactorlog" />

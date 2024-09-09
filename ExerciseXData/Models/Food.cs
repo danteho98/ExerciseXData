@@ -9,14 +9,14 @@ namespace ExerciseXData.Models
         [Key]
         public int F_Id { get; set; }
 
-        [Display(Name = "Food Image")]
-        public string ? F_Image { get; set; }
+        [Display(Name = "Food C_Image")]
+        public string ? F_C_Image { get; set; }
 
         [Display(Name = "Food Name")]
-        public string F_Name { get; set; }
+        public string? F_Name { get; set; }
 
         [Display(Name = "Food Calorie in kcal (per 100 grams)")]
-        public int F_Food_Calories { get; set; }
+        public int ? F_Food_Calories { get; set; }
 
         //public date Modify_Date_ { get; set; }
 
@@ -24,9 +24,8 @@ namespace ExerciseXData.Models
         public List<UserDiet> UserDiet { get; set; }
 
         //Diets
-        [Display(Name ="Diet Id")]
-        [ForeignKey("DietId")]
-        public int DietId { get; set; }
+        [ForeignKey("D_Id")]
+        public int D_Id { get; set; }
         public Diet Diet { get; set; }
 
         

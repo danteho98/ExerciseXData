@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ExerciseXDataApi.Models
+namespace ExerciseXDataApi.Models.Data
 {
     public class Users
     {
@@ -12,7 +12,7 @@ namespace ExerciseXDataApi.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Full Name")]/*This part allows programmer to put any name*/
         public string U_Name { get; set; }
 
@@ -42,5 +42,6 @@ namespace ExerciseXDataApi.Models
 
         [Display(Name = "Lifestyle Condition 5")]
         public string? Lifestyle_Condition_5 { get; set; }
+        
     }
 }

@@ -8,20 +8,20 @@ namespace ExerciseXData.Models
         [Key]
         public int E_Id { get; set; }
 
-        [Display(Name ="Exercise Image")]
-        public string ? E_Image { get; set; }
+        [Display(Name ="Exercise C_Image")]
+        public string ? C_Image { get; set; }
 
-        [Required(ErrorMessage = "Exercise name cannot be empty.")]
-        [Display(Name="Exercise Name")]/*This part allows programmer to put any name*/
-        public string E_Name { get; set; }
+        //[Required(ErrorMessage = "Exercise name cannot be empty.")]
+        [Display(Name="Exercise Name")] /*This part allows programmer to put any name*/
+        public string ? E_Name { get; set; }
 
-        [Required(ErrorMessage = "Exercise description cannot be empty.")]
-        [Display(Name = "Exercise Description")]/*This part allows programmer to put any name*/
-        public string E_Description { get; set; }
+        //[Required(ErrorMessage = "Exercise description cannot be empty.")]
+        [Display(Name = "Exercise Description")]
+        public string ? E_Description { get; set; }
 
-        [Required(ErrorMessage = "Exercise Pros 1 cannot be empty.")]
+        //[Required(ErrorMessage = "Exercise Pros 1 cannot be empty.")]
         [Display(Name = "Exercise Pros 1")]
-        public string E_Pros_1 { get; set; }
+        public string ? E_Pros_1 { get; set; }
 
         [Display(Name = "Exercise Pros 2")]
         public string ? E_Pros_2 { get; set; }
@@ -29,9 +29,9 @@ namespace ExerciseXData.Models
         [Display(Name = "Exercise Pros 3")]
         public string ? E_Pros_3 { get; set; }
 
-        [Required(ErrorMessage = "Exercise Cons 1 cannot be empty.")]
+        //[Required(ErrorMessage = "Exercise Cons 1 cannot be empty.")]
         [Display(Name = "Exercise Cons 1")]
-        public string E_Cons_1 { get; set; }
+        public string ? E_Cons_1 { get; set; }
 
         [Display(Name ="Exercise Cons 2")]
         public string ? E_Cons_2 { get; set; }
@@ -45,7 +45,7 @@ namespace ExerciseXData.Models
         //Relationships
         //Category
         [ForeignKey("CategoryId")]
-        public int CategoryId { get; set; }
+        public int C_Id { get; set; }
         public Category Category { get; set; }
 
         public List<UserExercise> UserExercises { get; set; }

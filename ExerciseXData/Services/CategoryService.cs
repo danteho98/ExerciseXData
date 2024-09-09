@@ -22,7 +22,7 @@ namespace ExerciseXData.Interfaces
 
         public async Task DeleteAsync(int id)
         {
-            var result = await _context.Categories.FirstOrDefaultAsync(n => n.Id == id);
+            var result = await _context.Categories.FirstOrDefaultAsync(n => n.C_Id == id);
             _context.Categories.Remove(result);
             await _context.SaveChangesAsync();
         }
@@ -35,7 +35,7 @@ namespace ExerciseXData.Interfaces
 
         public async Task<Category> GetByIdAsync(int id)
         {
-            var result = await _context.Categories.FirstOrDefaultAsync(n => n.Id == id);
+            var result = await _context.Categories.FirstOrDefaultAsync(n => n.C_Id == id);
             return result;
         }
 

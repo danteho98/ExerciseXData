@@ -7,9 +7,9 @@ namespace ExerciseXData.Models
     public class UserExercise
     {
         [Key]
-        public int Id { get; set; }
+        public int UE_Id { get; set; }
 
-        [Required(ErrorMessage = "Please enter the number of times you want to perform this exercise.")]
+        //[Required(ErrorMessage = "Please enter the number of times you want to perform this exercise.")]
         [DisplayName("Times performed")]
         public int Times_Performed { get; set; }
 
@@ -17,13 +17,13 @@ namespace ExerciseXData.Models
         public DateTime Modify_Date { get; set; } = DateTime.Now;
 
         //Relationship
-        [ForeignKey("UserId")]
-        public int UserId { get; set; }
+        [ForeignKey("U_Id")]
+        public int U_Id { get; set; }
         public User User { get; set; }
 
         
-        [ForeignKey("ExerciseId")]
-        public int ExerciseId { get; set; }
+        [ForeignKey("E_Id")]
+        public int E_Id { get; set; }
         public Exercise Exercise { get; set; }
         
     }

@@ -1,4 +1,5 @@
-﻿namespace ExerciseXData.Models
+﻿/*
+namespace ExerciseXData.Models
 {
     public class ExercisePlanItem
     {
@@ -8,3 +9,4 @@
         public string ExercisePlanId { get; set; }
     }
 }
+*/

@@ -1,5 +1,4 @@
 ﻿using ExerciseXData.Data;
-using ExerciseXData.Data.Base;
 using ExerciseXData.Interfaces;
 using ExerciseXData.Models;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +23,7 @@ namespace ExerciseXData.Services
 
         public async Task DeleteAsync(int id)
         {
-            var result = await _context.Diets.FirstOrDefaultAsync(n => n.Id == id);
+            var result = await _context.Diets.FirstOrDefaultAsync(n => n.D_Id == id);
             _context.Diets.Remove(result);
             await _context.SaveChangesAsync();
         }
@@ -37,7 +36,7 @@ namespace ExerciseXData.Services
 
         public async Task<Diet> GetByIdAsync(int id)
         {
-            var result = await _context.Diets.FirstOrDefaultAsync(n => n.Id == id);
+            var result = await _context.Diets.FirstOrDefaultAsync(n => n.D_Id == id);
             return result;
         }
 

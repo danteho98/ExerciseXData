@@ -2,7 +2,7 @@
 
 <form method="post" asp-action="Delete">
     @*DeletePOST here can change name with the CategoryController POST method*@
-    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="C_Id" />
     <div class=" border p-3 mt-4">
         <div class=" row pb-2">
             <h1 class="text-primary">Delete Category</h1>
@@ -12,22 +12,19 @@
 
 
         </div>
-        @*<div class="mb-3">
+        <div class="mb-3">
             <label asp-for="C_Id"></label>
             <input asp-for="C_Id" disabled class="form-control" />
-
-        </div>*@
-
-        <div class="mb-3">
-            <label asp-for="Image"></label>
-            <input asp-for="Image" disabled class="form-control" />
-
         </div>
-
+        @*
         <div class="mb-3">
-            <label asp-for="Name"></label>
-            <input asp-for="Name" disabled class="form-control" />
-
+            <label asp-for="C_Image"></label>
+            <input asp-for="C_Image" disabled class="form-control" />
+        </div>
+        *@
+        <div class="mb-3">
+            <label asp-for="C_Name"></label>
+            <input asp-for="C_Name" disabled class="form-control" />
         </div>
 
         

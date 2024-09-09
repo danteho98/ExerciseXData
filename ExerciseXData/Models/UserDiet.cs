@@ -7,17 +7,17 @@ namespace ExerciseXData.Models
     public class UserDiet
     {
         [Key]
-        public int Id { get; set; }
+        public int UD_Id { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Food Name")]
         public string Food_Name { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Food Quantity")]
         public int Food_Quantity { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Food Calorie in kcal (per 100 grams)")]
         public int Food_Calories { get; set; }
 
@@ -29,16 +29,16 @@ namespace ExerciseXData.Models
 
         //Relationships
         
-        [ForeignKey("UserId")]
-        public int UserId { get; set; }
+        [ForeignKey("U_Id")]
+        public int U_Id { get; set; }
         public User User { get; set; }
         
-        [ForeignKey("DietId")]
-        public int DietId { get; set; }
+        [ForeignKey("D_Id")]
+        public int D_Id { get; set; }
         public Diet Diet { get; set; }
         
-        [ForeignKey("FoodId")]
-        public int FoodId { get; set; }
+        [ForeignKey("F_Id")]
+        public int F_Id { get; set; }
         public Food Food { get; set; }
         
     }

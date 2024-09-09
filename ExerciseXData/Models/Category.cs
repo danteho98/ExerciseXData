@@ -9,12 +9,12 @@ namespace ExerciseXData.Models
         [DisplayName("Category Id")]
         public int C_Id { get; set; }
 
-        [Display(Name = "Category Image")]
+        [Display(Name = "Category C_Image")]
         public string ? C_Image { get; set; }
 
-        [Required]
+        //[Required]
         [DisplayName("Category Name")]
-        public string C_Name { get; set; }
+        public string ? C_Name { get; set; }
 
         //Relationships
         public List<Exercise> Exercises { get; set; }

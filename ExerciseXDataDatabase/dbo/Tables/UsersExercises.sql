@@ -1,11 +1,11 @@
 ﻿CREATE TABLE [dbo].[UsersExercises]
 (
-	[UE_Id] NVARCHAR(128) NOT NULL PRIMARY KEY, 
-    [U_Id] NVARCHAR(128) NOT NULL, 
-    [E_Id] INT NOT NULL, 
+	[UE_Id] INT NOT NULL PRIMARY KEY, 
+    [U_Id] INT NULL, 
+    [E_Id] INT NULL, 
     [Times_Performed] INT NULL, 
     [Time(sec)] INT NULL, 
-    [UE_Modify_Date] DATE NOT NULL DEFAULT getutcdate()
+    [UE_Modify_Date] DATE NULL DEFAULT getutcdate()
     
     
 )

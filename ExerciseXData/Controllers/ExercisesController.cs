@@ -27,7 +27,7 @@ namespace ExerciseXData.Controllers
 
         [HttpPost]
         public async Task< IActionResult> Create(
-            [Bind("C_ID, E_Image, E_Name, E_Pros_1, E_Pros_2, E_Pros_3, E_Cons_1, E_Cons_2, E_Cons_3")] Exercise exercise)
+            [Bind("C_ID, C_Image, E_Name, E_Pros_1, E_Pros_2, E_Pros_3, E_Cons_1, E_Cons_2, E_Cons_3")] Exercise exercise)
         {
             if (!ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace ExerciseXData.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id,
-            [Bind("C_ID, E_Image, E_Name, E_Pros_1, E_Pros_2, E_Pros_3, E_Cons_1, E_Cons_2, E_Cons_3")] Exercise exercise)
+            [Bind("C_ID, C_Image, E_Name, E_Pros_1, E_Pros_2, E_Pros_3, E_Cons_1, E_Cons_2, E_Cons_3")] Exercise exercise)
         {
             if (!ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace ExerciseXData.Controllers
 
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id,
-            [Bind("C_ID, E_Image, E_Name, E_Pros_1, E_Pros_2, E_Pros_3, E_Cons_1, E_Cons_2, E_Cons_3")] Exercise exercise)
+            [Bind("C_ID, C_Image, E_Name, E_Pros_1, E_Pros_2, E_Pros_3, E_Cons_1, E_Cons_2, E_Cons_3")] Exercise exercise)
         {
             var exerciseDetails = await _service.GetByIdAsync(id);
 
