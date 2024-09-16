@@ -3,13 +3,18 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace ExerciseXData.Models
 {
-    public class Exercise
+    public class Exercises
     {
         [Key]
         public int E_Id { get; set; }
 
-        [Display(Name ="Exercise C_Image")]
-        public string ? C_Image { get; set; }
+        // Category Relationship
+        [ForeignKey("CategoryId")]
+        public int C_Id { get; set; }
+        public Categories Category { get; set; }
+
+        [Display(Name ="Exercise Image")]
+        public string ? E_Image { get; set; }
 
         //[Required(ErrorMessage = "Exercise name cannot be empty.")]
         [Display(Name="Exercise Name")] /*This part allows programmer to put any name*/
@@ -39,15 +44,9 @@ namespace ExerciseXData.Models
         [Display(Name = "Exercise Cons 3")]
         public string ? E_Cons_3 { get; set; }
 
-        [DisplayName("Modify Date")]
-        public DateTime ModifyDate { get; set; } = DateTime.Now;
+        [DisplayName("Modified Date")]
+        public DateTime E_Modified_Date { get; set; } = DateTime.Now;
 
-        //Relationships
-        //Category
-        [ForeignKey("CategoryId")]
-        public int C_Id { get; set; }
-        public Category Category { get; set; }
-
-        public List<UserExercise> UserExercises { get; set; }
+        public List<UsersExercises> UserExercises { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace ExerciseXData.ViewModels
         public string F_Name { get; set; }
 
         [Display(Name = "Food Calorie in kcal (per 1 gram)")]
-        public int F_Food_Calories { get; set; }
+        public int F_Calories { get; set; }
 
         [Display(Name = "Quantity")]
         public int F_Quantity { get; set; }

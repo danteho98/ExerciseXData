@@ -1,4 +1,5 @@
-﻿using ExerciseXData.Controllers;
+﻿/*
+using ExerciseXData.Controllers;
 using ExerciseXData.Data;
 using ExerciseXData.Models;
 using Microsoft.AspNetCore.Identity;
@@ -130,3 +131,4 @@ namespace ExerciseXData.Controllers
             }
         }
 }
+*/

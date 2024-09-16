@@ -4,10 +4,10 @@ namespace ExerciseXData.Interfaces
 {
     public interface IUserService //: IEntityBaseRepository<> User
     {
-        Task<IEnumerable<User>> GetAllAsync();
-        Task<User> GetByIdAsync(int id);
-        Task AddAsync(User user);
-        Task<User> UpdateAsync(int id, User newUser);
+        Task<IEnumerable<Users>> GetAllAsync();
+        Task<Users> GetByIdAsync(int id);
+        Task AddAsync(Users user);
+        Task<Users> UpdateAsync(int id, Users newUser);
         Task DeleteAsync(int id);
     }
 }

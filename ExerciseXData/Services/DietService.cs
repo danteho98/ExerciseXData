@@ -5,8 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Services
 {
-    public class DietService : IDietService // EntityBaseRepository<Diet>
+    public class DietService //: IDietService // EntityBaseRepository<Diet>
     {
+        /*
         //public DietService(AppDbContext context) : base(context) {}
         private readonly AppDbContext _context;
 
@@ -46,5 +47,6 @@ namespace ExerciseXData.Services
             await _context.SaveChangesAsync();
             return newDiet;
         }
+        */
     }
 }

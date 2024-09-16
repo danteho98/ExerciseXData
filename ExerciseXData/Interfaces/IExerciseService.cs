@@ -4,10 +4,10 @@ namespace ExerciseXData.Interfaces
 {
     public interface IExerciseService 
     {
-        Task<IEnumerable<Exercise>> GetAllAsync();
-        Task<Exercise> GetByIdAsync(int id);
-        Task AddAsync(Exercise exercise);
-        Task<Exercise> UpdateAsync(int id, Exercise newExercise);
+        Task<IEnumerable<Exercises>> GetAllAsync();
+        Task<Exercises> GetByIdAsync(int id);
+        Task AddAsync(Exercises exercise);
+        Task<Exercises> UpdateAsync(int id, Exercises newExercise);
         Task DeleteAsync(int id);
     }
 }

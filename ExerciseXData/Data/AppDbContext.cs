@@ -1,19 +1,16 @@
-﻿
-using ExerciseXData.Models;
+﻿using ExerciseXData.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Data
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options){
-        }
-        protected override void OnModelCreating(ModelBuilder builder)
+        public AppDbContext(DbContextOptions options) : base(options)
         {
-            base.OnModelCreating(builder);
-
+        }
+ 
             /*
          protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,23 +42,21 @@ namespace ExerciseXData.Data
                 .WithMany(userdiet => userdiet.UserDiets)
                 .HasForeignKey(diet => diet.U_Id);
 
-        
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Seed();
-
         }
         */
         
-    }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Diet> Diets { get; set; }
-        public DbSet<Exercise> Exercises { get; set; }
-        public DbSet<Food> Foods { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        public DbSet<Diets> Diets { get; set; }
+        public DbSet<Exercises> Exercises { get; set; }
+        public DbSet<Foods> Foods { get; set; }
+        public DbSet<Users> Users { get; set; }
 
+        
         //Many to many tables
-        public DbSet<UserDiet> UserDiets { get; set; }
-        public DbSet<UserExercise> UserExercises { get; set; }
+        public DbSet<UsersDiets> UserDiets { get; set; }
+        public DbSet<DietsFoods> DietFoods { get; set; }
+        public DbSet<UsersExercises> UserExercises { get; set; }
+        
 
     }
 }

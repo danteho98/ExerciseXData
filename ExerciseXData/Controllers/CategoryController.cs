@@ -1,11 +1,13 @@
-﻿using ExerciseXData.Interfaces;
+﻿/*
+using ExerciseXData.Interfaces;
 using ExerciseXData.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExerciseXData.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController //: Controller
     {
+        
         private readonly ICategoryService _service;
         public CategoryController(ICategoryService service)
         {
@@ -77,5 +79,7 @@ namespace ExerciseXData.Controllers
             await _service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
+        
     }
 }
+*/

@@ -5,8 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Services
 {
-    public class FoodService: IFoodService
+    public class FoodService //: IFoodService
     {
+        /*
         private readonly AppDbContext _context;
 
         public FoodService(AppDbContext foodcontext)
@@ -45,5 +46,6 @@ namespace ExerciseXData.Services
             await _context.SaveChangesAsync();
             return newFood;
         }
+        */
     }
 }

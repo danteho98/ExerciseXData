@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Interfaces
 {
-    public class CategoryService : ICategoryService 
+    
+    public class CategoryService //: ICategoryService 
     {
+        /*
         private readonly AppDbContext _context;
 
         public CategoryService(AppDbContext context) //: base(context) { }
@@ -45,5 +47,6 @@ namespace ExerciseXData.Interfaces
             await _context.SaveChangesAsync();
             return newCategory;
         }
+        */
     }
 }

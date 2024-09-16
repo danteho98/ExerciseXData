@@ -1,4 +1,4 @@
-﻿@model Food
+﻿@model Foods
 
 <form method="post" asp-action="DeletePOST">
     @*DeletePOST here can change name with the CategoryController POST method*@
@@ -11,8 +11,8 @@
         <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
 
         <div class="mb-3">
-            <label asp-for="F_C_Image"></label>
-            <input asp-for="F_C_Image" disabled class="form-control" />
+            <label asp-for="F_Image"></label>
+            <input asp-for="F_Image" disabled class="form-control" />
 
         </div>
 
@@ -23,16 +23,16 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="F_Food_Calories"></label>
-            <input asp-for="F_Food_Calories" disabled class="form-control" />
+            <label asp-for="F_Calories"></label>
+            <input asp-for="F_Calories" disabled class="form-control" />
 
         </div>
 
-        @*<div class="mb-3">
-        <label asp-for="F_Modify_Date"></label>
-        <input asp-for="F_Modify_Date" disabled class="form-control" />
+        <div class="mb-3">
+        <label asp-for="F_Modified_Date"></label>
+        <input asp-for="F_Modified_Date" disabled class="form-control" />
 
-        </div>*@
+        </div>
 
        
         <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>

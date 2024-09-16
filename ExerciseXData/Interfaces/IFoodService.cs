@@ -4,10 +4,10 @@ namespace ExerciseXData.Interfaces
 {
     public interface IFoodService
     {
-        Task<IEnumerable<Food>> GetAllAsync();
-        Task<Food> GetByIdAsync(int id);
-        Task AddAsync(Food food);
-        Task<Food> UpdateAsync(int id, Food newFood);
+        Task<IEnumerable<Foods>> GetAllAsync();
+        Task<Foods> GetByIdAsync(int id);
+        Task AddAsync(Foods food);
+        Task<Foods> UpdateAsync(int id, Foods newFood);
         Task DeleteAsync(int id);
     }
 }
