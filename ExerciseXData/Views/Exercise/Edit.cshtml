@@ -57,6 +57,13 @@
             <input asp-for="E_Cons_3" class="form-control" />
             <span asp-validation-for="E_Cons_3" class="text-danger"></span>
         </div>
+
+        <div class="mb-3">
+            <label asp-for="E_Modified_Date"></label>
+            <input asp-for="E_Modified_Date" class="form-control" />
+            <span asp-validation-for="E_Modified_Date" class="text-danger"></span>
+        </div>
+
         <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
         <a asp-controller="Exercise" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
         </div>

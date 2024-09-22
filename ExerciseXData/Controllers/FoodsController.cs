@@ -27,7 +27,7 @@
 
 //        [HttpPost]
 //        public async Task<IActionResult> Create(
-//            [Bind("F_Name, F_Calories, F_Modify_Date")] Food food)
+//            [Bind("F_Name, F_Calories, F_Modified_Date")] Food food)
 //        {
 //            if (!ModelState.IsValid)
 //            {

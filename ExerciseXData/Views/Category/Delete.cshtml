@@ -16,18 +16,23 @@
             <label asp-for="C_Id"></label>
             <input asp-for="C_Id" disabled class="form-control" />
         </div>
-        @*
+        
         <div class="mb-3">
             <label asp-for="C_Image"></label>
             <input asp-for="C_Image" disabled class="form-control" />
         </div>
-        *@
+        
         <div class="mb-3">
             <label asp-for="C_Name"></label>
             <input asp-for="C_Name" disabled class="form-control" />
         </div>
 
-        
+        <div class="mb-3">
+            <label asp-for="C_Modified_Date"></label>
+            <input asp-for="C_Modified_Date" class="form-control" />
+            <span asp-validation-for="C_Modified_Date" class="text-danger"></span>
+        </div>
+
         <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
         <a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
     </div>

@@ -22,13 +22,14 @@ namespace ExerciseXData.Models
         public DateTime F_Modified_Date { get; set; }
 
         //Relationship
-        public List<UsersDiets> UserDiet { get; set; }
+        public ICollection<DietsFoods>DietsFoods { get; set; }
+        public ICollection<UsersDiets> UsersDiets { get; set; }
+
 
         //Diets
-        [ForeignKey("D_Id")]
-        public int D_Id { get; set; }
-        public Diets Diet { get; set; }
+        //[ForeignKey("D_Id")]
+        //public int D_Id { get; set; }
+        //public Diets Diets { get; set; }
 
-        
     }
 }

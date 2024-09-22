@@ -13,9 +13,9 @@
 
 
         <div class="mb-3">
-        <label asp-for="F_Image"></label>
-        <input asp-for="F_Image" class="form-control" readonly />
-        <span asp-validation-for="F_Image" class="text-danger"></span>
+            <label asp-for="F_Image"></label>
+            <input asp-for="F_Image" class="form-control" readonly />
+            <span asp-validation-for="F_Image" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
@@ -26,20 +26,20 @@
 
         <div class="mb-3">
             <label asp-for="F_Calories"></label>
-        <input asp-for="F_Calories" class="form-control" readonly />
-        <span asp-validation-for="F_Calories" class="text-danger"></span>
+            <input asp-for="F_Calories" class="form-control" readonly />
+            <span asp-validation-for="F_Calories" class="text-danger"></span>
         </div>
-    @*<div class="mb-3">
-    <label asp-for="F_Modify_Date"></label>
-    <input asp-for="F_Modify_Date" class="form-control" readonly />
-    <span asp-validation-for="F_Modify_Date" class="text-danger"></span>
-    </div>*@
-
-    <div class="form-group">
         
-        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.F_Id" ></a>
-        <a class="btn btn-secondary" asp-action="Index" style="width:150px">Back to List</a>
-    </div>
+        <div class="mb-3">    
+            <label asp-for="F_Modified_Date"></label>
+            <input asp-for="F_Modified_Date" class="form-control" readonly />
+            <span asp-validation-for="F_Modified_Date" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.F_Id" ></a>
+            <a class="btn btn-secondary" asp-action="Index" style="width:150px">Back to List</a>
+        </div>
 </div>
 
 @section Scripts{

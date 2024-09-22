@@ -47,8 +47,8 @@ namespace ExerciseXData.Models
         public string ? Lifestyle_Condition_5 { get; set; }
 
         //Relationships
-        public List<UsersDiets> UserDiets { get; set; }
-        public List<UsersExercises> UserExercises { get; set; }
+        public List<UsersDiets> UsersDiets { get; set; }
+        public ICollection<UsersExercises> UsersExercises { get; set; }
 
 
     }

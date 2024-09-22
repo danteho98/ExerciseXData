@@ -59,6 +59,13 @@
             <span asp-validation-for="E_Cons_3" class="text-danger"></span>
 
         </div>
+
+        <div class="mb-3">
+            <label asp-for="E_Modified_Date"></label>
+            <input asp-for="E_Modified_Date" class="form-control" />
+            <span asp-validation-for="E_Modified_Date" class="text-danger"></span>
+        </div>
+
         <div class="form-group">
         
         <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.E_Id" ></a>

@@ -49,10 +49,17 @@
         </div>
         <div class="mb-3">
             <label asp-for="D_Cons_3"></label>
-        <input asp-for="D_Cons_3" class="form-control" readonly />
+            <input asp-for="D_Cons_3" class="form-control" readonly />
             <span asp-validation-for="D_Cons_3" class="text-danger"></span>
 
         </div>
+
+        <div class="mb-3">
+            <label asp-for="D_Modified_Date"></label>
+            <input asp-for="D_Modified_Date" class="form-control" />
+            <span asp-validation-for="D_Modified_Date" class="text-danger"></span>
+        </div>
+
         <div class="form-group">
         
         <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.D_Id" ></a>

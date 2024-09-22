@@ -9,11 +9,11 @@ namespace ExerciseXData.Models
         public int E_Id { get; set; }
 
         // Category Relationship
-        [ForeignKey("CategoryId")]
+        //[ForeignKey("Category Id")]
         public int C_Id { get; set; }
-        public Categories Category { get; set; }
+        public Categories Categories { get; set; }
 
-        [Display(Name ="Exercise Image")]
+        [DisplayName ("Exercise Image")]
         public string ? E_Image { get; set; }
 
         //[Required(ErrorMessage = "Exercise name cannot be empty.")]
@@ -47,6 +47,6 @@ namespace ExerciseXData.Models
         [DisplayName("Modified Date")]
         public DateTime E_Modified_Date { get; set; } = DateTime.Now;
 
-        public List<UsersExercises> UserExercises { get; set; }
+        public ICollection<UsersExercises> UsersExercises { get; set; }
     }
 }

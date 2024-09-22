@@ -15,6 +15,6 @@ namespace ExerciseXData.ViewModels
         public int F_Quantity { get; set; }
 
         [Display(Name = "Date Modify")]
-        public DateTime F_Modify_Date { get; set; } = DateTime.Now;
+        public DateTime F_Modified_Date { get; set; } = DateTime.Now;
     }
 }
