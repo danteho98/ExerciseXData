@@ -23,7 +23,7 @@ namespace ExerciseXData.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
-        //UserExercise junction table
+        //UsersExercises junction table
         modelBuilder.Entity<UsersExercises>()
                 .HasKey(ue => new { ue.U_Id, ue.E_Id });
 
@@ -37,7 +37,7 @@ namespace ExerciseXData.Data
                 .WithMany(e => e.UsersExercises)
                 .HasForeignKey(ue => ue.E_Id);
 
-            //UserDiet junction table
+            //UsersDiets junction table
             modelBuilder.Entity<UsersDiets>()
                .HasKey(ud => new { ud.U_Id, ud.D_Id });
 

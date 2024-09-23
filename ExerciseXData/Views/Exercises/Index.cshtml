@@ -16,8 +16,8 @@
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-               <th>Exercise Category</th>
-                <th> Eexercise Image </th>
+                <th> Exercise Category</th>
+                <th> Exercise Image </th>
                 <th> Exercise Name </th>
                 <th> Pros 1 </th>
                 <th> Pros 2 </th>
@@ -33,7 +33,7 @@
             @foreach (var obj in Model)
             {
                 <tr>
-                    @*<td>@obj.C_Id </td>*@
+                    <td> @obj.C_Id </td>
                     <td> @obj.E_Image</td>
                     <td> @obj.E_Name </td>
                     <td> @obj.E_Pros_1 </td>
@@ -46,13 +46,13 @@
 
                     <td>
                         <div class="w-75 btn-group" role="group">
-                            <a asp-controller="Exercise" asp-action="Details" asp-route-id="@obj.E_Id"
+                            <a asp-controller="Exercises" asp-action="Details" asp-route-id="@obj.E_Id"
                                class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>Details</a>
 
-                            <a asp-controller="Exercise" asp-action="Edit" asp-route-id="@obj.E_Id"
+                            <a asp-controller="Exercises" asp-action="Edit" asp-route-id="@obj.E_Id"
                                class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>Edit</a>
 
-                            <a asp-controller="Exercise" asp-action="Delete" asp-route-id="@obj.E_Id"
+                            <a asp-controller="Exercises" asp-action="Delete" asp-route-id="@obj.E_Id"
                                class="btn btn-primary mx-2"> <i class="bi bi-trash-fill"></i>Delete</a>
                         </div>
                     </td>

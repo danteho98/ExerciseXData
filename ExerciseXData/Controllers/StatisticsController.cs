@@ -17,7 +17,7 @@ namespace ExerciseXData.Controllers
         {
             return View();
         }
-        public IActionResult Exercise()
+        public IActionResult Exercises()
         {
             return View();
         }

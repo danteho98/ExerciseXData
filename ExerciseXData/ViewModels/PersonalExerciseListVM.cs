@@ -2,7 +2,7 @@
 
 namespace ExerciseXData.ViewModels
 {
-    public class PersonalExerciseListVM
+    public class PersonalExercisesListVM
     {
 
         public string Name { get; set; }

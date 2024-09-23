@@ -2,12 +2,12 @@
 
 namespace ExerciseXData.Interfaces
 {
-    public interface IExerciseService 
+    public interface IExercisesService 
     {
-        Task<IEnumerable<Exercises>> GetAllAsync();
+        Task<List<Exercises>> GetAllAsync();
         Task<Exercises> GetByIdAsync(int id);
         Task AddAsync(Exercises exercise);
-        Task<Exercises> UpdateAsync(int id, Exercises newExercise);
+        Task<Exercises> UpdateAsync(int id, Exercises newExercises);
         Task DeleteAsync(int id);
     }
 }

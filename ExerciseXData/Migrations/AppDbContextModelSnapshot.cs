@@ -318,7 +318,7 @@ namespace ExerciseXData.Migrations
                     b.Property<int>("E_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("ExerciseE_Id")
+                    b.Property<int>("ExercisesE_Id")
                         .HasColumnType("int");
 
                     b.Property<int?>("Times_Performed")
@@ -335,7 +335,7 @@ namespace ExerciseXData.Migrations
 
                     b.HasKey("UE_Id");
 
-                    b.HasIndex("ExerciseE_Id");
+                    b.HasIndex("ExercisesE_Id");
 
                     b.HasIndex("UserU_Id");
 
@@ -400,9 +400,9 @@ namespace ExerciseXData.Migrations
 
             modelBuilder.Entity("ExerciseXData.Models.UsersExercises", b =>
                 {
-                    b.HasOne("ExerciseXData.Models.Exercises", "Exercise")
+                    b.HasOne("ExerciseXData.Models.Exercises", "Exercises")
                         .WithMany("UserExercises")
-                        .HasForeignKey("ExerciseE_Id")
+                        .HasForeignKey("ExercisesE_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -412,7 +412,7 @@ namespace ExerciseXData.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Exercise");
+                    b.Navigation("Exercises");
 
                     b.Navigation("User");
                 });

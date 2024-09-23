@@ -1,23 +1,26 @@
-﻿using ExerciseXData.Data;
-using ExerciseXData.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ExerciseXData.Data;
 using ExerciseXData.Models;
-using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ExerciseXData.Controllers
 {
-    public class DietController : Controller
+    public class DietsController : Controller
     {
-        private readonly IDietService _service;
 
-        public DietController(IDietService service)
+        private readonly AppDbContext _context;
+        public DietsController(AppDbContext context)
         {
-            _service = service;
+            _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var data = await _service.GetAllAsync();
-            return View(data);
+            IEnumerable<Diets> objDietsList = _context.Diets;
+            /*Select statement is not needed here as _context.Diets will get all the categories from table*/
+
+            return View(objDietsList);
         }
 
         public IActionResult Create()
@@ -26,67 +29,81 @@ namespace ExerciseXData.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(
-            [Bind(" D_Name, D_Description, D_Pros_1, D_Pros_2, D_Pros_3, D_Cons_1, D_Cons_2, D_Cons_3", "D_Modified_Date")] Diets diet)
+        public IActionResult Create(Diets obj)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(diet);
+                _context.Diets.Add(obj); //items input from user
+                _context.SaveChanges(); //Save the items to the database
+                TempData["success"] = "Diets created successfully";
+                return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
+            }
+            return View(obj);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var categories = _context.Diets.Find(id);
+            if (categories == null)
+            {
+                return NotFound();
             }
 
-            await _service.AddAsync(diet);
-            return RedirectToAction(nameof(Index));
+            return View(categories);
         }
 
-        public async Task<IActionResult> Details(int id)
-        {
-            var dietDetails = await _service.GetByIdAsync(id);
-
-            if (dietDetails == null) return View("Empty");
-            return View(dietDetails);
-        }
-
-        public async Task<IActionResult> Edit(int id)
-        {
-            var dietDetails = await _service.GetByIdAsync(id);
-
-            if (dietDetails == null) return View("NotFound");
-            return View(dietDetails);
-        }
-
+        //post
         [HttpPost]
-        public async Task<IActionResult> Edit(int id,
-            [Bind("C_ID, C_Image, E_Name, E_Pros_1, E_Pros_2, E_Pros_3, E_Cons_1, E_Cons_2, E_Cons_3", "D_Modified_Date")] Diets diet)
+        [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
+        public IActionResult Edit(Diets obj)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(diet);
+                _context.Diets.Update(obj); //items input from user
+                _context.SaveChanges(); //Save the items to the database
+                TempData["success"] = "Diets updated successfully";
+                return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
+            }
+            return View(obj);
+        }
+
+        //Get
+        public IActionResult Delete(int ? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var categories = _context.Diets.Find(id); //find if used for finding the primary key of the table
+            //var categoriesFirst= _context.Diets.FirstOrDefault(u=>u.Id==id);
+            //var categoriesSingle = _context.Diets.SingleOrDefault(u => u.Id == id);
+
+            if (categories == null)
+            {
+                return NotFound();
             }
 
-            await _service.UpdateAsync(id, diet);
-            return RedirectToAction(nameof(Index));
+            return View(categories);
         }
 
-        //Get: 
-        public async Task<IActionResult> Delete(int id)
+        //POST
+        [HttpPost] //ActionName can be used to name explicitly for the delete page
+        [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
+        public IActionResult DeletePOST(int ? id)
         {
-            var dietDetails = await _service.GetByIdAsync(id);
-
-            if (dietDetails == null) return View("NotFound");
-            return View(dietDetails);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id,
-            [Bind("C_ID, C_Image, E_Name, E_Pros_1, E_Pros_2, E_Pros_3, E_Cons_1, E_Cons_2, E_Cons_3", "D_Modified Date")] Diets diet)
-        {
-            var dietDetails = await _service.GetByIdAsync(id);
-
-            if (dietDetails == null) return View("NotFound");
-
-            await _service.DeleteAsync(id);
-
-            return RedirectToAction(nameof(Index));
+            var obj = _context.Diets.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _context.Diets.Remove(obj); //items input from user
+            _context.SaveChanges(); //Save the items to the database
+            TempData["success"] = "Category deleted successfully";
+            return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
         }
     }
 }

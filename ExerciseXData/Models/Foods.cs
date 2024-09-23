@@ -9,7 +9,7 @@ namespace ExerciseXData.Models
         [Key]
         public int F_Id { get; set; }
 
-        [Display(Name = "Food C_Image")]
+        [DisplayName ("Food Image")]
         public string ? F_Image { get; set; }
 
         [Display(Name = "Food Name")]
@@ -22,8 +22,8 @@ namespace ExerciseXData.Models
         public DateTime F_Modified_Date { get; set; }
 
         //Relationship
-        public ICollection<DietsFoods>DietsFoods { get; set; }
-        public ICollection<UsersDiets> UsersDiets { get; set; }
+        public List<DietsFoods>DietsFoods { get; set; }
+        public List<UsersDiets> UsersDiets { get; set; }
 
 
         //Diets

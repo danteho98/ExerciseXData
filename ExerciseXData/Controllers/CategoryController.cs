@@ -1,85 +1,109 @@
-﻿/*
-using ExerciseXData.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ExerciseXData.Data;
 using ExerciseXData.Models;
-using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ExerciseXData.Controllers
 {
-    public class CategoryController //: Controller
+    public class CategoriesController : Controller
     {
-        
-        private readonly ICategoryService _service;
-        public CategoryController(ICategoryService service)
+
+        private readonly AppDbContext _context;
+        public CategoriesController(AppDbContext context)
         {
-            _service = service;
+            _context = context;
         }
-        
-        public async Task<IActionResult> Index()
+
+        public IActionResult Index()
         {
-            var data = await _service.GetAllAsync();
-            return View(data);
+            IEnumerable<Categories> objCategoriesList = _context.Categories;
+            /*Select statement is not needed here as _context.Categories will get all the categories from table*/
+
+            return View(objCategoriesList);
         }
 
         public IActionResult Create()
         {
             return View();
         }
-        
-        [HttpPost]
-        public async Task<IActionResult> Create([Bind("C_Image, C_Name")] Category category)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(category);
-            }
-            
-            await _service.AddAsync(category);
-            return RedirectToAction(nameof(Index));
-        }
-        
-        public async Task<IActionResult> Details(int id)
-        {
-            var cateogryDetails = await _service.GetByIdAsync(id);
-            if (cateogryDetails == null) return View("Empty");
-            return View(cateogryDetails);
-        }
-
-        public async Task<IActionResult> Edit(int id)
-        { 
-            var cateogryDetails = await _service.GetByIdAsync(id);
-            if (cateogryDetails == null) return View("NotFound");
-            return View(cateogryDetails);
-        }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("C_Image, C_Name")] Category category)
+        public IActionResult Create(Categories obj)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(category);
+                _context.Categories.Add(obj); //items input from user
+                _context.SaveChanges(); //Save the items to the database
+                TempData["success"] = "Categories created successfully";
+                return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
             }
-            
-            await _service.UpdateAsync(id, category);
-            return RedirectToAction(nameof(Index));
+            return View(obj);
         }
 
-            //Get: 
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Edit(int id)
         {
-            var cateogryDetails = await _service.GetByIdAsync(id);
-            if (cateogryDetails == null) return View("NotFound");
-            return View(cateogryDetails);
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var categories = _context.Categories.Find(id);
+            if (categories == null)
+            {
+                return NotFound();
+            }
+
+            return View(categories);
         }
 
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id, [Bind("C_Image, C_Name")] Category category)
+        //post
+        [HttpPost]
+        [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
+        public IActionResult Edit(Categories obj)
         {
-            var cateogryDetails = await _service.GetByIdAsync(id);
-            if (cateogryDetails == null) return View("NotFound");
-            await _service.DeleteAsync(id);
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                _context.Categories.Update(obj); //items input from user
+                _context.SaveChanges(); //Save the items to the database
+                TempData["success"] = "Categories updated successfully";
+                return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
+            }
+            return View(obj);
         }
-        
+
+        //Get
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var categories = _context.Categories.Find(id); //find if used for finding the primary key of the table
+            //var categoriesFirst= _context.Categories.FirstOrDefault(u=>u.Id==id);
+            //var categoriesSingle = _context.Categories.SingleOrDefault(u => u.Id == id);
+
+            if (categories == null)
+            {
+                return NotFound();
+            }
+
+            return View(categories);
+        }
+
+        //POST
+        [HttpPost] //ActionName can be used to name explicitly for the delete page
+        [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
+        public IActionResult DeletePOST(int ? id)
+        {
+            var obj = _context.Categories.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _context.Categories.Remove(obj); //items input from user
+            _context.SaveChanges(); //Save the items to the database
+            TempData["success"] = "Category deleted successfully";
+            return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
+        }
     }
 }
-*/

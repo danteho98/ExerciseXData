@@ -3,16 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ExerciseXData</title>
+    <title>@ViewData["Title"] - ExercisesXData</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ExerciseXData.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ExercisesXData.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="About">ExerciseXData</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="About">ExercisesXData</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" 
                 aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -25,11 +25,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Diet" asp-action="Index">Diets</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Diets" asp-action="Index">Diets</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Exercise" asp-action="Index">Exercise</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Exercises" asp-action="Index">Exercises</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -38,8 +38,8 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Statistic" asp-action="Diet">Diet</a>
-                                <a class="dropdown-item" asp-controller="Statistic" asp-action="Exercise"> Exercise</a>
+                                <a class="dropdown-item" asp-controller="Statistic" asp-action="Diets">Diets</a>
+                                <a class="dropdown-item" asp-controller="Statistic" asp-action="Exercises"> Exercises</a>
                                 
                             </div>
 
@@ -60,7 +60,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - ExerciseXData - <a asp-area="" asp-controller="" asp-action=""></a>
+            &copy; 2023 - ExercisesXData - <a asp-area="" asp-controller="" asp-action=""></a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

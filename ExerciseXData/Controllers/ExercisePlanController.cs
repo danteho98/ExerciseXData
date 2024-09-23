@@ -5,17 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace ExerciseXData.Controllers
 {
    
-    public class ExercisePlanController : Controller
+    public class ExercisesPlanController : Controller
     {
         
 
 
-        public IActionResult CurrentExercise()
+        public IActionResult CurrentExercises()
         {
             return View();
         }
 
-        public IActionResult EditCurrentExercise()
+        public IActionResult EditCurrentExercises()
         {
             return View();
         }

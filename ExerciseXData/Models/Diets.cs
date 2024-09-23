@@ -9,7 +9,7 @@ namespace ExerciseXData.Models
         public int D_Id { get; set; }
 
         //[Required]
-        [DisplayName("Exercise Name")]/*This part allows programmer to put any name*/
+        [DisplayName("Diets Name")]/*This part allows programmer to put any name*/
         public string ? D_Name { get; set; }
 
         [DisplayName("Description")]/*This part allows programmer to put any name*/
@@ -49,8 +49,8 @@ namespace ExerciseXData.Models
 
 
         //Relationships
-        public ICollection<DietsFoods> DietsFoods { get; set; }
-        public ICollection<UsersDiets> UsersDiets { get; set; }
+        public List<DietsFoods> DietsFoods { get; set; }
+        public List<UsersDiets> UsersDiets { get; set; }
         
     }
 }

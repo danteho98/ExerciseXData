@@ -68,7 +68,7 @@ namespace ExerciseXData.Migrations
                 {
                     E_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    C_Id = table.Column<int>(type: "int", nullable: false),
+                    C_Id = table.Column<int>(type: "int", nullable: true),
                     CategoryC_Id = table.Column<int>(type: "int", nullable: false),
                     E_Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     E_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -123,7 +123,7 @@ namespace ExerciseXData.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserExercises",
+                name: "UsersExercises",
                 columns: table => new
                 {
                     UE_Id = table.Column<int>(type: "int", nullable: false)
@@ -131,22 +131,22 @@ namespace ExerciseXData.Migrations
                     U_Id = table.Column<int>(type: "int", nullable: false),
                     UserU_Id = table.Column<int>(type: "int", nullable: false),
                     E_Id = table.Column<int>(type: "int", nullable: false),
-                    ExerciseE_Id = table.Column<int>(type: "int", nullable: false),
+                    ExercisesE_Id = table.Column<int>(type: "int", nullable: false),
                     Times_Performed = table.Column<int>(type: "int", nullable: true),
                     Duration = table.Column<int>(type: "int", nullable: true),
                     UE_Modify_Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserExercises", x => x.UE_Id);
+                    table.PrimaryKey("PK_UsersExercises", x => x.UE_Id);
                     table.ForeignKey(
-                        name: "FK_UserExercises_Exercises_ExerciseE_Id",
-                        column: x => x.ExerciseE_Id,
+                        name: "FK_UsersExercises_Exercises_ExercisesE_Id",
+                        column: x => x.ExercisesE_Id,
                         principalTable: "Exercises",
                         principalColumn: "E_Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserExercises_Users_UserU_Id",
+                        name: "FK_UsersExercises_Users_UserU_Id",
                         column: x => x.UserU_Id,
                         principalTable: "Users",
                         principalColumn: "U_Id",
@@ -184,15 +184,15 @@ namespace ExerciseXData.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserDiets",
+                name: "UsersDiets",
                 columns: table => new
                 {
                     UD_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    U_Id = table.Column<int>(type: "int", nullable: false),
-                    UsersU_Id = table.Column<int>(type: "int", nullable: false),
+                    U_Id = table.Column<int>(type: "int", nullable: true),
+                    //UsersU_Id = table.Column<int>(type: "int", nullable: false),
                     D_Id = table.Column<int>(type: "int", nullable: false),
-                    DietsD_Id = table.Column<int>(type: "int", nullable: false),
+                    F_Id = table.Column<int>(type: "int", nullable: false),
                     Food_Name = table.Column<int>(type: "int", nullable: true),
                     Food_Quantity = table.Column<int>(type: "int", nullable: true),
                     Food_Calories = table.Column<int>(type: "int", nullable: true),
@@ -205,18 +205,18 @@ namespace ExerciseXData.Migrations
                     table.PrimaryKey("PK_UserDiets", x => x.UD_Id);
                     table.ForeignKey(
                         name: "FK_UserDiets_Diets_DietsD_Id",
-                        column: x => x.DietsD_Id,
+                        column: x => x.D_Id,
                         principalTable: "Diets",
                         principalColumn: "D_Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserDiets_Foods_FoodsF_Id",
-                        column: x => x.FoodsF_Id,
+                        column: x => x.F_Id,
                         principalTable: "Foods",
                         principalColumn: "F_Id");
                     table.ForeignKey(
                         name: "FK_UserDiets_Users_UsersU_Id",
-                        column: x => x.UsersU_Id,
+                        column: x => x.U_Id,
                         principalTable: "Users",
                         principalColumn: "U_Id",
                         onDelete: ReferentialAction.Cascade);
@@ -253,14 +253,14 @@ namespace ExerciseXData.Migrations
                 column: "FoodsF_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserDiets_UsersU_Id",
+                name: "IX_UsersDiets_UsersU_Id",
                 table: "UserDiets",
                 column: "UsersU_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserExercises_ExerciseE_Id",
+                name: "IX_UserExercises_ExercisesE_Id",
                 table: "UserExercises",
-                column: "ExerciseE_Id");
+                column: "ExercisesE_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserExercises_UserU_Id",
@@ -271,10 +271,10 @@ namespace ExerciseXData.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserDiets");
+                name: "UsersDiets");
 
             migrationBuilder.DropTable(
-                name: "UserExercises");
+                name: "UsersExercises");
 
             migrationBuilder.DropTable(
                 name: "Foods");

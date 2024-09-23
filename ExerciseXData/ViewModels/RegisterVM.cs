@@ -5,8 +5,8 @@ namespace ExerciseXData.ViewModels
 {
     public class RegisterVM
     {
-        [Display (Name = "Full name")]
-        [Required(ErrorMessage = "Full name is required") ]
+        [Display(Name = "Full name")]
+        [Required(ErrorMessage = "Full name is required")]
         public string FullName { get; set; }
 
         [Display(Name = "Email address")]

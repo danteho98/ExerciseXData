@@ -8,14 +8,6 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-/*
- builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        options.LoginPath = "/Account/Login";
-        options.LogoutPath = "/Account/Logout";
-    });
-*/
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -23,19 +15,7 @@ builder.Services.AddControllersWithViews();
 /*DefaultConnection is set from appsettings.json*/
 //DbContext configuration
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-//builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AlternateConnection")));
-
-/*
-// For Identity
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
-//Services configuration
-builder.Services.AddScoped<IDietService, DietService>(); 
-builder.Services.AddScoped<IExerciseService, ExerciseService>();
-builder.Services.AddScoped<IFoodService, FoodService>();
-*/
-//builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AlternateConnection")));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

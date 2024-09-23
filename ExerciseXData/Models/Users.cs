@@ -48,7 +48,7 @@ namespace ExerciseXData.Models
 
         //Relationships
         public List<UsersDiets> UsersDiets { get; set; }
-        public ICollection<UsersExercises> UsersExercises { get; set; }
+        public List<UsersExercises> UsersExercises { get; set; }
 
 
     }

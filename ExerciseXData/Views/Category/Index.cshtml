@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Categories>
+﻿@model IEnumerable<ExerciseXData.Models.Categories>
 @{
     ViewData["Title"] = "List of Category";
 }
@@ -19,6 +19,7 @@
                <th>Category ID</th>
                 <th>Category Image</th>
                 <th>Category Name </th>
+                <th>Modified Date</th>
                 
             </tr>
         </thead>
@@ -30,6 +31,7 @@
                     <td>@obj.C_Id</td>
                     <td >@obj.C_Image</td>
                     <td>@obj.C_Name </td>
+                    <td>@obj.C_Modified_Date</td>
 
                     <td>
                         <div class="w-75 btn-group" role="group">
