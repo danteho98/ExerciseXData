@@ -7,14 +7,14 @@ namespace ExerciseXData.Models
     public class UsersDiets
     {
         [Key]
-        public int UD_Id { get; set; }
+        //public int UD_Id { get; set; }
 
         //Relationships
-        [ForeignKey("U_Id")]
+        //[ForeignKey("U_Id")]
         public int U_Id { get; set; }
         public Users Users { get; set; }
 
-        [ForeignKey("D_Id")]
+        //[ForeignKey("D_Id")]
         public int D_Id { get; set; }
         public Diets Diets { get; set; }
 
@@ -33,7 +33,5 @@ namespace ExerciseXData.Models
         [DisplayName("Date Modified")]
         public DateTime UD_Modified_Date { get; set; } = DateTime.Now;
 
-  
-        
     }
 }

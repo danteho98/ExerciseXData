@@ -7,7 +7,7 @@ namespace ExerciseXData.Models
     public class DietsFoods
     {
         [Key]
-        public int DF_Id { get; set; }
+        //public int DF_Id { get; set; }
 
         [DisplayName("Diet Id")]
         //[ForeignKey("D_Id")]

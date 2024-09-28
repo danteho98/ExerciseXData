@@ -14,7 +14,6 @@ namespace ExerciseXData.Data
         public DbSet<Foods> Foods { get; set; }
         public DbSet<Users> Users { get; set; }
 
-
         //Many to many tables
         public DbSet<UsersDiets> UsersDiets { get; set; }
         public DbSet<DietsFoods> DietsFoods { get; set; }
@@ -22,9 +21,14 @@ namespace ExerciseXData.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-        //UsersExercises junction table
-        modelBuilder.Entity<UsersExercises>()
+            //FK relationship with Exercises    
+            modelBuilder.Entity<Exercises>()
+                .HasOne(c => c.Categories)
+                .WithMany(c => c.Exercises)
+                .HasForeignKey(c => c.Categories);
+
+            //UsersExercises junction table
+            modelBuilder.Entity<UsersExercises>()
                 .HasKey(ue => new { ue.U_Id, ue.E_Id });
 
             modelBuilder.Entity<UsersExercises>()

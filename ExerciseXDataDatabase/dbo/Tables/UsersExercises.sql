@@ -1,11 +1,16 @@
 ﻿CREATE TABLE [dbo].[UsersExercises]
 (
-	[UE_Id] INT NOT NULL PRIMARY KEY, 
-    [U_Id] INT NULL, 
-    [E_Id] INT NULL, 
-    [Times_Performed] INT NULL, 
+	
+    [U_Id] INT NOT NULL, 
+    [E_Id] INT NOT NULL, 
+    [Repetition] INT NULL,
+    [Sets] Int NULL,
     [Time(sec)] INT NULL, 
-    [UE_Modify_Date] DATE NULL DEFAULT getutcdate()
+    [UE_Modified_Date] DATE NULL DEFAULT GETUTCDATE(),
+
+    CONSTRAINT FK_UsersExercises_Users FOREIGN KEY (U_Id) REFERENCES [dbo].[Users](U_Id) ON DELETE CASCADE,
+    CONSTRAINT FK_UsersExercises_Exercises FOREIGN KEY (E_ID) REFERENCES [dbo].[Exercises](E_Id) ON DELETE CASCADE,
+    PRIMARY KEY (U_Id, E_Id)
     
     
 )

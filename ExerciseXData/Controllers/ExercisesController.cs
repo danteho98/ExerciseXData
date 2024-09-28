@@ -1,5 +1,4 @@
 ﻿using ExerciseXData.Data;
-using ExerciseXData.Interfaces;
 using ExerciseXData.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -58,7 +57,7 @@ namespace ExerciseXData.Controllers
 
         //post
         [HttpPost]
-        [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
+        //[ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
         public IActionResult Edit(Exercises obj)
         {
             if (ModelState.IsValid)
@@ -92,7 +91,7 @@ namespace ExerciseXData.Controllers
 
         //POST
         [HttpPost] //ActionName can be used to name explicitly for the delete page
-        [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
+        //[ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
         public IActionResult DeletePOST(int? id)
         {
             var obj = _context.Exercises.Find(id);

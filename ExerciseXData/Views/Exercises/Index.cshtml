@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Exercises>
+﻿@using ExerciseXData.Models;
+@model IEnumerable<Exercises>
 @{
     ViewData["Title"] = "List of Exercises";
 }
@@ -16,7 +17,7 @@
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-                <th> Exercise Category</th>
+               @*  <th> Exercise Category</th> *@
                 <th> Exercise Image </th>
                 <th> Exercise Name </th>
                 <th> Pros 1 </th>
@@ -33,7 +34,7 @@
             @foreach (var obj in Model)
             {
                 <tr>
-                    <td> @obj.C_Id </td>
+                    @* <td> @obj.C_Id </td> *@
                     <td> @obj.E_Image</td>
                     <td> @obj.E_Name </td>
                     <td> @obj.E_Pros_1 </td>
