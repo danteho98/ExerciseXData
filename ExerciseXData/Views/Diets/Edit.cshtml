@@ -8,7 +8,13 @@
         </div>
         <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
 
-        
+        <div class="mb-3">
+            <label asp-for="D_Id"></label>
+            <input asp-for="D_Id" class="form-control" />
+            <span asp-validation-for="D_Id" class="text-danger"></span>
+        </div>
+
+
         <div class="mb-3">
             <label asp-for="D_Name"></label>
             <input asp-for="D_Name" class="form-control" />

@@ -25,11 +25,5 @@ namespace ExerciseXData.Models
         public List<DietsFoods>DietsFoods { get; set; }
         public List<UsersDiets> UsersDiets { get; set; }
 
-
-        //Diets
-        //[ForeignKey("D_Id")]
-        //public int D_Id { get; set; }
-        //public Diets Diets { get; set; }
-
     }
 }

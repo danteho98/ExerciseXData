@@ -10,6 +10,13 @@
         </div>
 
         <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
+        
+        <div class="mb-3">
+            <label asp-for="D_Id"></label>
+            <input asp-for="D_Id" disabled class="form-control" />
+
+        </div>
+
         <div class="mb-3">
             <label asp-for="D_Name"></label>
             <input asp-for="D_Name" disabled class="form-control" />

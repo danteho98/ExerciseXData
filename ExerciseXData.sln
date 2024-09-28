@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExerciseXData", "ExerciseXData\ExerciseXData.csproj", "{DE180382-5E0F-40BC-B879-243EB05CCC9E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{38CF7766-C3F5-4E38-9096-3C372B9DBBED} = {38CF7766-C3F5-4E38-9096-3C372B9DBBED}
+		{BC57D538-775D-42E9-8F4B-0ACB01EA17DA} = {BC57D538-775D-42E9-8F4B-0ACB01EA17DA}
+	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ExerciseXDataDatabase", "ExerciseXDataDatabase\ExerciseXDataDatabase.sqlproj", "{BC57D538-775D-42E9-8F4B-0ACB01EA17DA}"
 EndProject

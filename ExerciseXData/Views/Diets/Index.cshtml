@@ -19,6 +19,7 @@
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
+                <th> Diet Id</th>
                 <th> Diet Name</th>
                 <th> Descriptions</th>
                 <th> Pros 1</th>
@@ -35,6 +36,7 @@
             @foreach (var obj in Model)
             {
                 <tr>
+                    <td> @obj.D_Id</td>
                     <td> @obj.D_Name</td>
                     <td> @obj.D_Description</td>
                     <td> @obj.D_Pros_1 </td>

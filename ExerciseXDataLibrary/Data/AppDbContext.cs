@@ -21,12 +21,6 @@ namespace ExerciseXData.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //FK relationship with Exercises    
-            modelBuilder.Entity<Exercises>()
-                .HasOne(c => c.Categories)
-                .WithMany(c => c.Exercises)
-                .HasForeignKey(c => c.Categories);
-
             //UsersExercises junction table
             modelBuilder.Entity<UsersExercises>()
                 .HasKey(ue => new { ue.U_Id, ue.E_Id });
