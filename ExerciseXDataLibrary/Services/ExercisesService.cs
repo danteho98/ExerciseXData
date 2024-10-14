@@ -5,12 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Services
 {
-    public class ExercisesService //: IExercisesService //: EntityBaseRepository<Exercises>, 
+    public class ExercisesService
+
     {
-        /*
+
         private readonly AppDbContext _context;
 
-        public ExercisesService(AppDbContext context) //: base(context) { }
+        public ExercisesService(AppDbContext context) 
         {
             _context = context;
         }
@@ -46,6 +47,6 @@ namespace ExerciseXData.Services
             await _context.SaveChangesAsync();
             return newExercises;
         }
-        */
+
     }
 }

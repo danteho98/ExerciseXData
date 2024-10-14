@@ -5,19 +5,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Services
 {
-    public class FoodService //: IFoodService
+    public class FoodsService : IFoodsService
     {
-        /*
+
         private readonly AppDbContext _context;
 
-        public FoodService(AppDbContext foodcontext)
+        public FoodsService(AppDbContext foodscontext)
         {
-            _context = foodcontext;
+            _context = foodscontext;
         }
 
-        public async Task AddAsync(Food food)
+        public async Task AddAsync(Foods foods)
         {
-            await _context.Foods.AddAsync(food);
+            await _context.Foods.AddAsync(foods);
             await _context.SaveChangesAsync();
         }
 
@@ -28,24 +28,24 @@ namespace ExerciseXData.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Food>> GetAllAsync()
+        public async Task<IEnumerable<Foods>> GetAllAsync()
         {
             var result = await _context.Foods.ToListAsync();
             return result;
         }
 
-        public async Task<Food> GetByIdAsync(int id)
+        public async Task<Foods> GetByIdAsync(int id)
         {
             var result = await _context.Foods.FirstOrDefaultAsync(n => n.F_Id == id);
             return result;
         }
 
-        public async Task<Food> UpdateAsync(int id, Food newFood)
+        public async Task<Foods> UpdateAsync(int id, Foods newFoods)
         {
-            _context.Update(newFood);
+            _context.Update(newFoods);
             await _context.SaveChangesAsync();
-            return newFood;
+            return newFoods;
         }
-        */
+
     }
 }

@@ -3,8 +3,8 @@
 CREATE TABLE [dbo].[DietsFoods]
 ( 
     [D_Id] INT NOT NULL, 
-    [F_Id] INT NOT NULL, 
-    [Date_Mortified] DATETIME NULL DEFAULT GETUTCDATE() 
+    [F_Id] INT NOT NULL,
+    [DF_Date_Modified] DATETIME NULL DEFAULT GETUTCDATE() 
 
     CONSTRAINT FK_DietsFoods_Diets FOREIGN KEY (D_Id) REFERENCES [dbo].Diets(D_Id) ON DELETE CASCADE,
     CONSTRAINT  FK_DietsFoods_Foods FOREIGN KEY (F_ID) REFERENCES [dbo].Foods(F_Id) ON DELETE CASCADE,

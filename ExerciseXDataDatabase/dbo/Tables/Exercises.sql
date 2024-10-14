@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[Exercises]
 (
     [E_Id] INT PRIMARY KEY IDENTITY(1,1),
+    [C_Id] INT NOT NULL,
     [E_Name] VARCHAR(255) NULL, 
-    [C_Id] INT NULL, 
     [E_Image] VARBINARY(MAX) NULL, 
     [E_Description] VARCHAR(MAX) NULL, 
     [E_Pros_1] VARCHAR(255) NULL ,
