@@ -6,8 +6,8 @@ namespace ExerciseXData.Models
 {
     public class UsersDiets
     {
-        [Key]
-        public int UD_Id { get; set; }
+        //[Key]
+        //public int UD_Id { get; set; }
 
         //Relationships
         //[ForeignKey("U_Id")]

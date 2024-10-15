@@ -7,7 +7,9 @@ namespace ExerciseXData.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions options) : base(options) {}
+        public AppDbContext(DbContextOptions options) : base(options) 
+        {
+        }
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Diets> Diets { get; set; }
         public DbSet<Exercises> Exercises { get; set; }
@@ -21,6 +23,12 @@ namespace ExerciseXData.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //One to many relationship
+            modelBuilder.Entity<Exercises>()
+                .HasOne(c => c.Categories)
+                .WithMany()
+                .HasForeignKey(c => c.C_Id);
+
             //UsersExercises junction table
             modelBuilder.Entity<UsersExercises>()
                 .HasKey(ue => new { ue.U_Id, ue.E_Id });

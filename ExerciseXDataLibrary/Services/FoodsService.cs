@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Services
 {
-    public class FoodsService : IFoodsService
+    public class FoodsService
     {
 
         private readonly AppDbContext _context;

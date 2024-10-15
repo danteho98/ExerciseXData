@@ -12,7 +12,10 @@ namespace ExerciseXDataLibrary.Repositories
     public class UsersExercisesRepository 
     { 
         private readonly AppDbContext _context;
-        public UsersExercisesRepository(AppDbContext context) => _context = context;
+        public UsersExercisesRepository(AppDbContext context)
+        {
+            _context = context;
+        }
         public Task<List<UsersExercises>> GetByUserId(int userId) =>
             _context.UsersExercises.Where(ue => ue.U_Id == userId).ToListAsync();
     }

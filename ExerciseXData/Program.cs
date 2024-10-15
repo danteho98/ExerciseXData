@@ -1,10 +1,5 @@
 using ExerciseXData.Data;
-using ExerciseXData.Interfaces;
-using ExerciseXData.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
