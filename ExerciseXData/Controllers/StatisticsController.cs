@@ -1,9 +1,6 @@
-﻿using ExerciseXData.Data;
-using ExerciseXData.Models;
-using ExerciseXData.ViewModels;
-using Microsoft.AspNetCore.Identity;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace ExerciseXData.Controllers
 {

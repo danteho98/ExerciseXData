@@ -24,10 +24,10 @@ namespace ExerciseXData.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //One to many relationship
-            modelBuilder.Entity<Exercises>()
-                .HasOne(c => c.Categories)
-                .WithMany()
-                .HasForeignKey(c => c.C_Id);
+            modelBuilder.Entity<Categories>()
+                .HasMany(c => c.Exercises)
+                .WithOne(e => e.Categories)
+                .HasForeignKey(e => e.C_Id);
 
             //UsersExercises junction table
             modelBuilder.Entity<UsersExercises>()
