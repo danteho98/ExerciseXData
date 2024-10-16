@@ -22,6 +22,18 @@
                 <th> Diet Id</th>
                 <th> Diet Name</th>
                 <th> Descriptions</th>
+                @* <th>Food Name 1</th>
+                <th>Food Name 2</th>
+                <th>Food Name 3</th>
+                <th>Food Name 4</th>
+                <th>Food Name 5</th>
+                <th>Food Name 6</th>
+                <th>Food Name 7</th>
+                <th>Food Name 8</th>
+                <th>Food Name 9</th>
+                <th>Food Name 10</th> 
+                <th>Food Quantity</th>
+                <th>Total Calories</th> *@
                 <th> Pros 1</th>
                 <th> Pros 2</th>
                 <th> Pros 3</th>
@@ -36,12 +48,24 @@
             @foreach (var obj in Model)
             {
                 <tr>
-                    <td> @obj.D_Id</td>
-                    <td> @obj.D_Name</td>
-                    <td> @obj.D_Description</td>
+                    <td>@obj.D_Id</td>
+                    <td>@obj.D_Name</td>
+                    <td>@obj.D_Description</td>
+                    @* <td>@obj.D_Food_Name_1</td>
+                    <td>@obj.D_Food_Name_2</td>
+                    <td>@obj.D_Food_Name_3</td>
+                    <td>@obj.D_Food_Name_4</td>
+                    <td>@obj.D_Food_Name_5</td>
+                    <td>@obj.D_Food_Name_6</td>
+                    <td>@obj.D_Food_Name_7</td>
+                    <td>@obj.D_Food_Name_8</td>
+                    <td>@obj.D_Food_Name_9</td>
+                    <td>@obj.D_Food_Name_10</td> 
+                    <td>@obj.D_Food_Quantity</td>
+                    <td>@obj.D_Total_Calories</td> *@
                     <td> @obj.D_Pros_1 </td>
                     <td> @obj.D_Pros_2 </td>
-                    <td> @obj.D_Pros_3</td>
+                    <td> @obj.D_Pros_3 </td>
                     <td> @obj.D_Cons_1 </td>
                     <td> @obj.D_Cons_2 </td>
                     <td> @obj.D_Cons_3 </td>

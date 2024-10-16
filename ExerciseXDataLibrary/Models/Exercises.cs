@@ -10,7 +10,7 @@ namespace ExerciseXData.Models
         public int E_Id { get; set; }
 
         // Category Relationship
-        [ForeignKey("Category Id")]
+        //[ForeignKey("Category Id")]
         public int C_Id { get; set; }
         public Categories Categories { get; set; }
 

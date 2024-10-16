@@ -15,8 +15,7 @@ namespace ExerciseXData.Models
         //[Display(Name = "Password")]
         //public string ? Password { get; set; }
         
-        //[Required]
-        [DisplayName ("Full Name")]/*This part allows programmer to put any name*/
+        [DisplayName ("Full Name")]
         public string ? U_Name { get; set; }
 
         [DisplayName ("Gender")]
@@ -30,6 +29,9 @@ namespace ExerciseXData.Models
 
         [DisplayName("Weight (kg)")]
         public double ? Weight { get; set; }
+
+        [DisplayName("Goal")]
+        public string ? Goal { get; set; }
 
         [DisplayName("Lifestyle Condition 1")]
         public string ? Lifestyle_Condition_1 { get; set; }

@@ -6,20 +6,20 @@ namespace ExerciseXData.Models
 {
     public class UsersDiets
     {
-        //[Key]
-        //public int UD_Id { get; set; }
+        [Key]
+        public int UD_Id {  get; set; }
 
         //Relationships
         //[ForeignKey("U_Id")]
-        public int ? U_Id { get; set; }
+        public int U_Id { get; set; }
         public Users Users { get; set; }
 
         //[ForeignKey("D_Id")]
-        public int ? D_Id { get; set; }
+        public int D_Id { get; set; }
         public Diets Diets { get; set; }
 
         [DisplayName("Food name")]
-        public int ? Food_Name { get; set; }
+        public string ? Food_Name { get; set; }
 
         [DisplayName("Food quantity")]
         public int ? Food_Quantity { get; set; }

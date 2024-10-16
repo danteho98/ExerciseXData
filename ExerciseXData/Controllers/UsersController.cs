@@ -17,8 +17,6 @@ namespace ExerciseXData.Controllers
 
         public IActionResult PersonalStats()
         {
-           
-
             return View();
         }
 

@@ -31,7 +31,7 @@ namespace ExerciseXData.Data
 
             //UsersExercises junction table
             modelBuilder.Entity<UsersExercises>()
-                .HasKey(ue => new { ue.U_Id, ue.E_Id });
+                .HasKey(ue => ue.UE_Id);
 
             modelBuilder.Entity<UsersExercises>()
                 .HasOne(ue => ue.Users)
@@ -45,31 +45,31 @@ namespace ExerciseXData.Data
 
             //UsersDiets junction table
             modelBuilder.Entity<UsersDiets>()
-               .HasKey(ud => new { ud.U_Id, ud.D_Id });
+               .HasKey(ud =>  ud.UD_Id );
 
             modelBuilder.Entity<UsersDiets>()
-                .HasOne(u => u.Users)
-                .WithMany(ud => ud.UsersDiets)
-                .HasForeignKey(u => u.U_Id);
+                .HasOne(ud => ud.Users)
+                .WithMany(u => u.UsersDiets)
+                .HasForeignKey(ud => ud.U_Id);
 
             modelBuilder.Entity<UsersDiets>()
-                .HasOne(d => d.Diets)
-                .WithMany(ud => ud.UsersDiets)
-                .HasForeignKey(d => d.D_Id);
+                .HasOne(ud => ud.Diets)
+                .WithMany(d => d.UsersDiets)
+                .HasForeignKey(ud => ud.D_Id);
 
             //DietsFoods junction table
             modelBuilder.Entity<DietsFoods>()
-                .HasKey(df => new { df.D_Id, df.F_Id });
+                .HasKey(df => df.DF_Id );
             
             modelBuilder.Entity<DietsFoods>()
-                .HasOne(d => d.Diets)
-                .WithMany(df => df.DietsFoods)
-                .HasForeignKey(d => d.D_Id);
+                .HasOne(df => df.Diets)
+                .WithMany(d => d.DietsFoods)
+                .HasForeignKey(df => df.D_Id);
 
             modelBuilder.Entity<DietsFoods>()
-                .HasOne(f => f.Foods)
-                .WithMany(df => df.DietsFoods)
-                .HasForeignKey(f => f.F_Id);
+                .HasOne(df => df.Foods)
+                .WithMany(f => f.DietsFoods)
+                .HasForeignKey(df => df.F_Id);
 
         }   
     }

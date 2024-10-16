@@ -66,7 +66,7 @@
     <Build Include="dbo\Tables\Diets.sql" />
     <Build Include="dbo\Tables\Exercises.sql" />
     <Build Include="dbo\Tables\Food.sql" />
-    <Build Include="dbo\Tables\UserDiet.sql" />
+    <Build Include="dbo\Tables\UsersDiets.sql" />
     <Build Include="dbo\Tables\UsersExercises.sql" />
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Tables\DietsFoods.sql" />

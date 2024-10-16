@@ -6,11 +6,14 @@ namespace ExerciseXData.Controllers
 {
     public class StatisticsController : Controller
     {
-        public IActionResult Index()
+        private readonly ILogger<StatisticsController> _logger;
+
+        public StatisticsController(ILogger<StatisticsController> logger)
         {
-            return View();
+            _logger = logger;
         }
-        public IActionResult Diet() 
+      
+        public IActionResult Diets() 
         {
             return View();
         }
