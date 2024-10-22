@@ -59,27 +59,29 @@ namespace ExerciseXDataLibrary.Repositories
             }
         }
 
-        public async Task UpdateUserDietAsync(int userId, int dietId, string foodName, int foodQuantity, int foodCalories, int totalCalories)
-        {
-            var userDiet = await _context.UsersDiets.FirstOrDefaultAsync(ud => ud.U_Id == userId && ud.D_Id == dietId);
+        // Method to update a user's specific diet information
+        //public async Task UpdateUserDietAsync(int userId, int dietId, string foodName, int foodQuantity, int foodCalories, int totalCalories)
+        //{
+        //    var userDiet = await _context.UsersDiets.FirstOrDefaultAsync(ud => ud.U_Id == userId && ud.D_Id == dietId);
 
-            if (userDiet != null)
-            {
-                // Update specific fields of the user's diet
-                userDiet.Food_Name = foodName;
-                userDiet.Food_Quantity = foodQuantity;
-                userDiet.Food_Calories = foodCalories;
-                userDiet.Total_Calaroies = totalCalories;
+        //    // If the record exists, update it
+        //    if (userDiet != null)
+        //    {
+        //        // Update specific fields of the user's diet
+        //        userDiet.Food_Name = foodName;
+        //        userDiet.Food_Quantity = foodQuantity;
+        //        userDiet.Food_Calories = foodCalories;
+        //        userDiet.Total_Calaroies = totalCalories;
 
 
-                // Save the changes
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                // Handle case where the user-diet relationship doesn't exist
-                throw new Exception("UserDiet record not found");
-            }
-        }
+        //        // Save the changes
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    else
+        //    {
+        //        // Handle case where the user-diet relationship doesn't exist
+        //        throw new Exception("UserDiet record not found");
+        //    }
+        //}
     }
 }

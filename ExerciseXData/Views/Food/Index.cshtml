@@ -77,8 +77,10 @@
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>Food C_Image</th>
+                <th>Food ID</th>
+                <th>Food Image</th>
                 <th>Food Name </th>
+                <th>Food Group</th>
                 <th>Food Calorie in kcal</th>
                 <th>Modified Date </th>
 
@@ -89,8 +91,10 @@
             @foreach (var obj in Model)
             {
                 <tr>
+                    <td>@obj.F_Id</td>
                     <td>@obj.F_Image</td>
                     <td>@obj.F_Name</td>
+                    <td>@obj.F_Group</td>
                     <td>@obj.F_Calories</td>
                     <td>@obj.F_Modified_Date</td>
 

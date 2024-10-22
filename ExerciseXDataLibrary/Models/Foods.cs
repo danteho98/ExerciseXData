@@ -13,10 +13,10 @@ namespace ExerciseXData.Models
         public string ? F_Image { get; set; }
 
         [DisplayName ( "Food Name")]
-        public string? F_Name { get; set; }
+        public string ? F_Name { get; set; }
 
         [DisplayName("Food Group")]
-        public string? F_Group { get; set; }
+        public string ? F_Group { get; set; }
 
         [DisplayName ("Food Calorie in kcal")]
         public int ? F_Calories { get; set; }

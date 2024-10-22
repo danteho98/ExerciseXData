@@ -46,5 +46,10 @@ namespace ExerciseXData.Services
                 }
             }
         }
+
+        //public async Task UpdateUserDietAsync(int userId, int dietId, string goals)
+        //{
+        //    await _usersRepository.UpdateUserDietAsync(userId, dietId, goals);
+        //}
     }
 }

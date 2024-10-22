@@ -18,14 +18,14 @@ namespace ExerciseXData.Models
         public int D_Id { get; set; }
         public Diets Diets { get; set; }
 
-        [DisplayName("Food name")]
-        public string ? Food_Name { get; set; }
+        [DisplayName("Custom Diet name")]
+        public string ? Custom_Diet_Name { get; set; }
 
-        [DisplayName("Food quantity")]
-        public int ? Food_Quantity { get; set; }
+        [DisplayName("Serving Size")]
+        public int ? UD_Serving_Size { get; set; }
 
-        [DisplayName("Food Calories")]
-        public int ? Food_Calories { get; set; }
+        [DisplayName("Frequency (Day/week/month)")]
+        public string ? UD_Frequency { get; set; }
 
         [DisplayName("Total Calories")]
         public int ? Total_Calaroies { get; set; }

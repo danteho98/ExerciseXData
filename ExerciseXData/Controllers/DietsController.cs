@@ -15,7 +15,46 @@ namespace ExerciseXData.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        // Get a user's diet
+        //public IActionResult GetUserDiets(int userId)
+        //{
+        //    var diets = _context.Diets
+        //                        .Where(d => d.D_Id == userId)
+        //                        .Include(d => d.UsersDiets)
+        //                        .ThenInclude(df => df.Diets)
+        //                        .ToList();
+        //    return View(diets);
+        //}
+
+        // Add a food item to a diet
+        //[HttpPost]
+        //public IActionResult AddFoodToDiet(int dietId, int userId)
+        //{
+        //    var dietFoodItem = new UsersDiets
+        //    {
+        //        D_Id = dietId,
+        //        U_Id = userId
+        //    };
+        //    _context.UsersDiets.Add(UsersDiets);
+        //    _context.SaveChanges();
+        //    return RedirectToAction("GetUserDiets", new { userId = /* Get the current userId */ });
+        //}
+
+        //// Remove a food item from a diet
+        //[HttpPost]
+        //public IActionResult RemoveFoodFromDiet(int dietId, int userId)
+        //{
+        //    var dietFoodItem = _context.DietFood
+        //                               .FirstOrDefault(df => df.D_Id == dietId && df.U_Id == userId);
+        //    if (dietFoodItem != null)
+        //    {
+        //        _context.DietFood.Remove(dietFoodItem);
+        //        _context.SaveChanges();
+        //    }
+        //    return RedirectToAction("GetUserDiets", new { userId = /* Get the current userId */ });
+        //}
+    
+    public IActionResult Index()
         {
             IEnumerable<Diets> objDietsList = _context.Diets;
             /*Select statement is not needed here as _context.Diets will get all the categories from table*/

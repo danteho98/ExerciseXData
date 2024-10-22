@@ -434,4 +434,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="D_Cons_3" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="f752b87a-9feb-4a34-aeeb-b4a97a84ec63" ChangeDateTime="10/16/2024 22:15:45">
+    <Property Name="ElementName" Value="[dbo].[UsersDiets].[UD_Food_Calories]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UsersDiets]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UD_Frequency" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c1ecda31-e945-4fff-836a-7c0ce6b8fc92" ChangeDateTime="10/16/2024 22:21:19">
+    <Property Name="ElementName" Value="[dbo].[Diets].[RecommendedServings]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Diets]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="D_Recommended_Servings" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1d9ee965-d4e9-47fd-8241-bab67b90b9e4" ChangeDateTime="10/16/2024 22:26:06">
+    <Property Name="ElementName" Value="[dbo].[UsersDiets].[CustomDietName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UsersDiets]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Custom_Diet_Name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3712c9a8-f6f0-4c87-aeb9-bf0cc458a975" ChangeDateTime="10/16/2024 22:26:32">
+    <Property Name="ElementName" Value="[dbo].[UsersDiets].[UD_Food_Quantity]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UsersDiets]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UD_Serving_Size" />
+  </Operation>
 </Operations>
