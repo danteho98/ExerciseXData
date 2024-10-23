@@ -2,107 +2,132 @@
 using ExerciseXData.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using System.Linq;
 
-namespace ExerciseXData.Controllers
+public class ExercisesController : Controller
 {
-    public class ExercisesController : Controller
+    private readonly AppDbContext _context;
+
+    public ExercisesController(AppDbContext context)
     {
+        _context = context;
+    }
 
-        private readonly AppDbContext _context;
-        public ExercisesController(AppDbContext context)
+    // READ (GET): List all exercises
+    public async Task<IActionResult> Index()
+    {
+        var exercises = _context.Exercises.Include(e => e.Categories);
+        return View(await exercises.ToListAsync());
+    }
+
+    // CREATE (GET): Show the form to create a new exercise
+    public IActionResult Create()
+    {
+        ViewBag.Categories = _context.Categories.ToList();
+        return View();
+    }
+
+    // CREATE (POST): Save a new exercise to the database
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create([Bind("E_Id, C_Id, E_Image, E_Name, E_Description, E_Pros_1, E_Pros_2, E_Pros_3, " +
+        "E_Cons_1, E_Cons_2, E_Cons_3, E_Modified_Date")]  Exercises exercise)
+    {
+        if (ModelState.IsValid)
         {
-            _context = context;
+            _context.Add(exercise);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        ViewBag.Categories = _context.Categories.ToList();
+        return View(exercise);
+    }
+
+    // UPDATE (GET): Show the form to edit an exercise
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
         }
 
-        public IActionResult Index()
+        var exercise = await _context.Exercises.FindAsync(id);
+        if (exercise == null)
         {
-            IEnumerable<Exercises> objExercisesList = _context.Exercises;
-            /*Select statement is not needed here as _context.Exercises will get all the exercises from table*/
+            return NotFound();
+        }
+        ViewBag.Categories = _context.Categories.ToList();
+        return View(exercise);
+    }
 
-            return View(objExercisesList);
+    // UPDATE (POST): Save the edited exercise back to the database
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("E_Id, C_Id, E_Image, E_Name, E_Description, E_Pros_1, E_Pros_2, E_Pros_3, " +
+        "E_Cons_1, E_Cons_2, E_Cons_3, E_Modified_Date")] Exercises exercise)
+    {
+        if (id != exercise.E_Id)
+        {
+            return NotFound();
         }
 
-        public IActionResult Create()
+        if (ModelState.IsValid)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(Exercises obj)
-        {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Exercises.Add(obj); //items input from user
-                _context.SaveChanges(); //Save the items to the database
-                TempData["success"] = "Exercises created successfully";
-                return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
+                _context.Update(exercise);
+                await _context.SaveChangesAsync();
             }
-            return View(obj);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ExerciseExists(exercise.E_Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
+        ViewBag.Categories = _context.Categories.ToList();
+        return View(exercise);
+    }
 
-        public IActionResult Edit(int id)
+    // DELETE (GET): Show a confirmation page for deleting an exercise
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var exercises = _context.Exercises.Find(id);
-            if (exercises == null)
-            {
-                return NotFound();
-            }
-
-            return View(exercises);
+            return NotFound();
         }
 
-        //post
-        [HttpPost]
-        //[ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
-        public IActionResult Edit(Exercises obj)
+        var exercise = await _context.Exercises
+            .Include(e => e.Categories)
+            .FirstOrDefaultAsync(m => m.C_Id == id);
+        if (exercise == null)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Exercises.Update(obj); //items input from user
-                _context.SaveChanges(); //Save the items to the database
-                TempData["success"] = "Exercises updated successfully";
-                return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
-            }
-            return View(obj);
+            return NotFound();
         }
 
-        //Get
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var exercises = _context.Exercises.Find(id); //find if used for finding the primary key of the table
-            //var exercisesFirst= _context.Exercises.FirstOrDefault(u=>u.Id==id);
-            //var exercisesSingle = _context.Exercises.SingleOrDefault(u => u.Id == id);
+        return View(exercise);
+    }
 
-            if (exercises == null)
-            {
-                return NotFound();
-            }
+    // DELETE (POST): Remove the exercise from the database
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var exercise = await _context.Exercises.FindAsync(id);
+        _context.Exercises.Remove(exercise);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
 
-            return View(exercises);
-        }
-
-        //POST
-        [HttpPost] //ActionName can be used to name explicitly for the delete page
-        //[ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
-        public IActionResult DeletePOST(int? id)
-        {
-            var obj = _context.Exercises.Find(id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-            _context.Exercises.Remove(obj); //items input from user
-            _context.SaveChanges(); //Save the items to the database
-            TempData["success"] = "Exercises deleted successfully";
-            return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
-        }
+    private bool ExerciseExists(int id)
+    {
+        return _context.Exercises.Any(e => e.E_Id == id);
     }
 }

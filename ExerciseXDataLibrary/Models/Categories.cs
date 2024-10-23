@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExerciseXData.Models
@@ -20,6 +21,8 @@ namespace ExerciseXData.Models
         public DateTime C_Modified_Date { get; set; } = DateTime.Now;
 
         //Relationships
+        // Mark this as non-validated to prevent validation issues
+        [ValidateNever] // Prevent validation from trying to enforce exercises during category creation
         public List<Exercises> Exercises { get; set; }
     }
 }

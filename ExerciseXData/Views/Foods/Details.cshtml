@@ -10,7 +10,11 @@
         
         <div class = "form-group text-center"></div>
 
-
+        <div class="mb-3">
+            <label asp-for="F_Id"></label>
+            <input asp-for="F_Id" class="form-control" readonly />
+            <span asp-validation-for="F_Id" class="text-danger"></span>
+        </div>
 
         <div class="mb-3">
             <label asp-for="F_Image"></label>

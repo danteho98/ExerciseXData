@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ExerciseXDataLibrary.Repositories
 {
-    public class CateogoryRepository 
+    public class CategoriesRepository 
     {
         private readonly AppDbContext _context;
 
-        public CateogoryRepository(AppDbContext context)
+        public CategoriesRepository(AppDbContext context)
         {
             _context = context;
         }

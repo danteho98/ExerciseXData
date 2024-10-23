@@ -10,7 +10,7 @@ namespace ExerciseXData.Models
         public int U_Id { get; set; }
 
         [DisplayName ("Email")]
-        public string ? Email { get; set; }
+        public string ? U_Email { get; set; }
 
         //[Display(Name = "Password")]
         //public string ? Password { get; set; }
@@ -23,6 +23,8 @@ namespace ExerciseXData.Models
 
         [DisplayName ("Age")]
         public int ? Age { get; set; }
+
+        public string ? Role { get; set; }
 
         [DisplayName("Height (cm)")]
         public double ? Height { get; set; }

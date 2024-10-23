@@ -3,11 +3,17 @@
 <form method="post">
     <div class=" border p-3 mt-4">
         <div class=" row pb-2">
-            <h1 class="text-primary">Create Food</h1>
+            <h1 class="text-primary">Edit Food</h1>
             <hr />
         </div>
         <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
-        
+
+        <div class="mb-3">
+            <label asp-for="F_Id"></label>
+            <input asp-for="F_Id" class="form-control" />
+            <span asp-validation-for="F_Id" class="text-danger"></span>
+        </div>
+
         <div class="mb-3">
             <label asp-for="F_Image"></label>
             <input asp-for="F_Image" class="form-control" />
@@ -31,9 +37,9 @@
             <input asp-for="F_Modified_Date" class="form-control" />
             <span asp-validation-for="F_Modified_Date" class="text-danger"></span>
         </div>
-
-        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
-        <a asp-controller="Food" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+        
+        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+        <a asp-controller="Foods" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
     </div>
 </form>
 

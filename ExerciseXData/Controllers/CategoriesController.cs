@@ -29,81 +29,100 @@ namespace ExerciseXData.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Categories obj)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("C_Id, C_Image, C_Name, C_Modified_Date")] Categories category)
         {
             if (ModelState.IsValid)
             {
-                _context.Categories.Add(obj); //items input from user
-                _context.SaveChanges(); //Save the items to the database
-                TempData["success"] = "Categories created successfully";
-                return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
+                _context.Add(category);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            return View(obj);
+            return View(category);
         }
 
-        public IActionResult Edit(int id)
+        // UPDATE (GET): Show the form to edit a category
+        public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var categories = _context.Categories.Find(id);
-            if (categories == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            return View(categories);
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
         }
 
-        //post
+        // UPDATE (POST): Save the edited category back to the database
         [HttpPost]
-        [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
-        public IActionResult Edit(Categories obj)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("C_Id, C_Image, C_Name, C_Modified_Date")] Categories category)
         {
+            if (id != category.C_Id)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                _context.Categories.Update(obj); //items input from user
-                _context.SaveChanges(); //Save the items to the database
-                TempData["success"] = "Categories updated successfully";
-                return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
+                try
+                {
+                    _context.Update(category);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CategoryExists(category.C_Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
             }
-            return View(obj);
+            return View(category);
         }
 
-        //Get
-        public IActionResult Delete(int? id)
+        // DELETE (GET): Show a confirmation page for deleting a category
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var categories = _context.Categories.Find(id); //find if used for finding the primary key of the table
-            //var categoriesFirst= _context.Categories.FirstOrDefault(u=>u.Id==id);
-            //var categoriesSingle = _context.Categories.SingleOrDefault(u => u.Id == id);
-
-            if (categories == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            return View(categories);
+            var category = await _context.Categories
+                .FirstOrDefaultAsync(m => m.C_Id == id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
         }
 
-        //POST
-        [HttpPost] //ActionName can be used to name explicitly for the delete page
-        [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
-        public IActionResult DeletePOST(int ? id)
+        // DELETE (POST): Remove the category from the database
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var obj = _context.Categories.Find(id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-            _context.Categories.Remove(obj); //items input from user
-            _context.SaveChanges(); //Save the items to the database
-            TempData["success"] = "Category deleted successfully";
-            return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
+            var category = await _context.Categories.FindAsync(id);
+            _context.Categories.Remove(category);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool CategoryExists(int id)
+        {
+            return _context.Categories.Any(e => e.C_Id == id);
         }
     }
 }
+

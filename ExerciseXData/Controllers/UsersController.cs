@@ -1,24 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace ExerciseXData.Controllers
 {
+    [Authorize(Roles = "User,Admin")]
     public class UsersController : Controller
     {
-        public IActionResult Details()
+        public IActionResult UserDashboard()
         {
-            return View();
+            return View(); // User-specific dashboard
         }
-        public IActionResult Update()
-        {
-            return View();
-        }
-
-        public IActionResult PersonalStats()
-        {
-            return View();
-        }
-
     }
 }
