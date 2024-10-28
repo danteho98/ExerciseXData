@@ -12,12 +12,12 @@ namespace ExerciseXData.Models
         [DisplayName("Diet Id")]
         //[ForeignKey("D_Id")]
         public int D_Id { get; set; }
-        public Diets Diets { get; set; }
+        public DietsModel Diets { get; set; }
 
         [DisplayName("Food Id")]
         //[ForeignKey("F_Id")]
         public int ? F_Id { get; set; }
-        public Foods Foods { get; set; }
+        public FoodsModel Foods { get; set; }
 
         [DisplayName("Modified Date")]
         public DateTime DF_Modified_Date { get; set; } = DateTime.Now;

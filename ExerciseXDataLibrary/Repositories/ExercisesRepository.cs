@@ -14,7 +14,7 @@ namespace ExerciseXDataLibrary.Repositories
         private readonly AppDbContext _context;
         public async Task AddUserExerciseAsync(int userId, int exerciseId)
         {
-            var userExercise = new UsersExercises
+            var userExercise = new UsersExercisesModel
             {
                 U_Id = userId,
                 E_Id = exerciseId

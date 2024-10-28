@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace ExerciseXData.Models
 {
-    public class Diets
+    public class DietsModel
     {
         [Key]
         public int D_Id { get; set; }
@@ -50,7 +50,7 @@ namespace ExerciseXData.Models
 
         //Relationships
         public List<DietsFoods> DietsFoods { get; set; }
-        public List<UsersDiets> UsersDiets { get; set; }
+        public List<UsersDietsModel> UsersDiets { get; set; }
         
     }
 }

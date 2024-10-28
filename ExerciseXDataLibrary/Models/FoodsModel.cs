@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExerciseXData.Models
 {
-    public class Foods
+    public class FoodsModel
     {
         [Key]
         public int F_Id { get; set; }
@@ -26,7 +26,7 @@ namespace ExerciseXData.Models
 
         //Relationship
         public List<DietsFoods>DietsFoods { get; set; }
-        public List<UsersDiets> UsersDiets { get; set; }
+        public List<UsersDietsModel> UsersDiets { get; set; }
 
     }
 }

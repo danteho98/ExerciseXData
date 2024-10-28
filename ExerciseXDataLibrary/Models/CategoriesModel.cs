@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ExerciseXData.Models
 {
-    public class Categories
+    public class CategoriesModel
     {
         [Key]
         [DisplayName("Category Id")]
@@ -23,6 +23,6 @@ namespace ExerciseXData.Models
         //Relationships
         // Mark this as non-validated to prevent validation issues
         [ValidateNever] // Prevent validation from trying to enforce exercises during category creation
-        public List<Exercises> Exercises { get; set; }
+        public List<ExercisesModel> Exercises { get; set; }
     }
 }

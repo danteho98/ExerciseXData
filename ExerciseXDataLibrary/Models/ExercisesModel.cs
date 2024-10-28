@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExerciseXData.Models
 {
-    public class Exercises
+    public class ExercisesModel
     {
         [Key]
         public int E_Id { get; set; }
@@ -12,7 +12,7 @@ namespace ExerciseXData.Models
         // Category Relationship
         //[ForeignKey("Category Id")]
         public int C_Id { get; set; }
-        public Categories Categories { get; set; }
+        public CategoriesModel Categories { get; set; }
 
         [DisplayName ("Exercises Image")]
         public string ? E_Image { get; set; }
@@ -48,6 +48,6 @@ namespace ExerciseXData.Models
         [DisplayName("Modified Date")]
         public DateTime E_Modified_Date { get; set; } = DateTime.Now;
 
-        public List<UsersExercises> UsersExercises { get; set; }
+        public List<UsersExercisesModel> UsersExercises { get; set; }
     }
 }

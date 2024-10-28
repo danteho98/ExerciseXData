@@ -17,7 +17,7 @@ namespace ExerciseXData.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Categories> objCategoriesList = _context.Categories;
+            IEnumerable<CategoriesModel> objCategoriesList = _context.Categories;
             /*Select statement is not needed here as _context.Categories will get all the categories from table*/
 
             return View(objCategoriesList);
@@ -30,7 +30,7 @@ namespace ExerciseXData.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("C_Id, C_Image, C_Name, C_Modified_Date")] Categories category)
+        public async Task<IActionResult> Create([Bind("C_Id, C_Image, C_Name, C_Modified_Date")] CategoriesModel category)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace ExerciseXData.Controllers
         // UPDATE (POST): Save the edited category back to the database
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("C_Id, C_Image, C_Name, C_Modified_Date")] Categories category)
+        public async Task<IActionResult> Edit(int id, [Bind("C_Id, C_Image, C_Name, C_Modified_Date")] CategoriesModel category)
         {
             if (id != category.C_Id)
             {

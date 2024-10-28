@@ -16,7 +16,7 @@ namespace ExerciseXData.Services
             _context = context;
         }
 
-        public async Task AddAsync(Exercises exercise)
+        public async Task AddAsync(ExercisesModel exercise)
         {
             await _context.Exercises.AddAsync(exercise);
             await _context.SaveChangesAsync();
@@ -29,19 +29,19 @@ namespace ExerciseXData.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Exercises>> GetAllAsync()
+        public async Task<IEnumerable<ExercisesModel>> GetAllAsync()
         {
             var result = await _context.Exercises.ToListAsync();
             return result;
         }
 
-        public async Task<Exercises> GetByIdAsync(int id)
+        public async Task<ExercisesModel> GetByIdAsync(int id)
         {
             var result = await _context.Exercises.FirstOrDefaultAsync(n => n.E_Id == id);
             return result;
         }
 
-        public async Task<Exercises> UpdateAsync(int id, Exercises newExercises)
+        public async Task<ExercisesModel> UpdateAsync(int id, ExercisesModel newExercises)
         {
             _context.Update(newExercises);
             await _context.SaveChangesAsync();

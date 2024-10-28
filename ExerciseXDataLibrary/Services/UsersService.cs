@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using ExerciseXData.Interfaces;
 using ExerciseXData.Data;
 using ExerciseXDataLibrary.Repositories;
+using ExerciseXDataLibrary.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ExerciseXData.Services
 {
@@ -11,7 +14,7 @@ namespace ExerciseXData.Services
         private readonly UsersRepository _usersRepository;
         private readonly DietsRepository _dietsRepository;
         private readonly ExercisesRepository _exercisesRepository;
-        private readonly DbContext _context;
+        private readonly AppDbContext _context;
 
         public UsersService(AppDbContext context, UsersRepository usersRepo, DietsRepository dietsRepo, ExercisesRepository exercisesRepo)
         {
@@ -19,6 +22,19 @@ namespace ExerciseXData.Services
             _usersRepository = usersRepo;
             _dietsRepository = dietsRepo;
             _exercisesRepository = exercisesRepo;
+        }
+
+        public async Task<bool> RegisterUserAsync(string email, string userName, string password, string role, string gender, 
+            int age, double height, double weight, string goal)
+        {
+            // Example: additional validation, or orchestration between repositories
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                throw new ArgumentException("Email and Password are required");
+            }
+
+            // Register user through repository (with additional business logic as needed)
+            return await _usersRepository.RegisterUserAsync(email, userName, password, role, gender, age, height, weight, goal);
         }
 
         public async Task<bool> AddUserAndAssignPlanAsync(int userId, int exerciseId, int dietId)
@@ -46,10 +62,13 @@ namespace ExerciseXData.Services
                 }
             }
         }
+    }
+}
+    
 
         //public async Task UpdateUserDietAsync(int userId, int dietId, string goals)
         //{
         //    await _usersRepository.UpdateUserDietAsync(userId, dietId, goals);
         //}
-    }
-}
+    
+

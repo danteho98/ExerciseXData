@@ -1,21 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using ExerciseXDataLibrary.Models;
 
 namespace ExerciseXData.Models
 {
-    public class Users
+    public class UsersModel
     {
         [Key]
+        [DisplayName("User Id")]
         public int U_Id { get; set; }
 
         [DisplayName ("Email")]
         public string ? U_Email { get; set; }
-
-        //[Display(Name = "Password")]
-        //public string ? Password { get; set; }
         
-        [DisplayName ("Full Name")]
+        [DisplayName ("User Name")]
         public string ? U_Name { get; set; }
 
         [DisplayName ("Gender")]
@@ -50,9 +49,16 @@ namespace ExerciseXData.Models
         [DisplayName ("Lifestyle Condition 5")]
         public string ? Lifestyle_Condition_5 { get; set; }
 
+        [DisplayName("Created Date")]
+        public DateTime U_Created_Date { get; set; } = DateTime.UtcNow;
+
+        [DisplayName("Last Login")]
+        public DateTime U_Last_Login {  get; set; }
+
         //Relationships
-        public List<UsersDiets> UsersDiets { get; set; }
-        public List<UsersExercises> UsersExercises { get; set; }
+        public List<UsersCredentialsModel> UsersCredentials { get; set; }
+        public List<UsersDietsModel> UsersDiets { get; set; }
+        public List<UsersExercisesModel> UsersExercises { get; set; }
 
 
     }

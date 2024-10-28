@@ -4,19 +4,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExerciseXData.Models
 {
-    public class UsersDiets
+    public class UsersDietsModel
     {
         [Key]
         public int UD_Id {  get; set; }
 
-        //Relationships
-        //[ForeignKey("U_Id")]
+        [ForeignKey("U_Id")]
+        [DisplayName("User Id")]
         public int U_Id { get; set; }
-        public Users Users { get; set; }
+        public UsersModel Users { get; set; }
 
-        //[ForeignKey("D_Id")]
+        [ForeignKey("D_Id")]
+        [DisplayName("Diet Id")]
         public int D_Id { get; set; }
-        public Diets Diets { get; set; }
+        public DietsModel Diets { get; set; }
 
         [DisplayName("Custom Diet name")]
         public string ? Custom_Diet_Name { get; set; }

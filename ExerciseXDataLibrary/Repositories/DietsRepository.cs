@@ -19,7 +19,7 @@ namespace ExerciseXDataLibrary.Repositories
         }
         public async Task AddUserDietAsync(int userId, int dietId)
         {
-            var usersDiets = new UsersDiets
+            var usersDiets = new UsersDietsModel
             {
                 U_Id = userId,
                 D_Id = dietId,

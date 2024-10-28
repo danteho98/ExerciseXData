@@ -15,7 +15,7 @@ namespace ExerciseXData.Services
             _context = foodscontext;
         }
 
-        public async Task AddAsync(Foods foods)
+        public async Task AddAsync(FoodsModel foods)
         {
             await _context.Foods.AddAsync(foods);
             await _context.SaveChangesAsync();
@@ -28,19 +28,19 @@ namespace ExerciseXData.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Foods>> GetAllAsync()
+        public async Task<IEnumerable<FoodsModel>> GetAllAsync()
         {
             var result = await _context.Foods.ToListAsync();
             return result;
         }
 
-        public async Task<Foods> GetByIdAsync(int id)
+        public async Task<FoodsModel> GetByIdAsync(int id)
         {
             var result = await _context.Foods.FirstOrDefaultAsync(n => n.F_Id == id);
             return result;
         }
 
-        public async Task<Foods> UpdateAsync(int id, Foods newFoods)
+        public async Task<FoodsModel> UpdateAsync(int id, FoodsModel newFoods)
         {
             _context.Update(newFoods);
             await _context.SaveChangesAsync();

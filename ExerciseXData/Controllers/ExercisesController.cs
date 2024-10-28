@@ -32,7 +32,7 @@ public class ExercisesController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("E_Id, C_Id, E_Image, E_Name, E_Description, E_Pros_1, E_Pros_2, E_Pros_3, " +
-        "E_Cons_1, E_Cons_2, E_Cons_3, E_Modified_Date")]  Exercises exercise)
+        "E_Cons_1, E_Cons_2, E_Cons_3, E_Modified_Date")]  ExercisesModel exercise)
     {
         if (ModelState.IsValid)
         {
@@ -65,7 +65,7 @@ public class ExercisesController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, [Bind("E_Id, C_Id, E_Image, E_Name, E_Description, E_Pros_1, E_Pros_2, E_Pros_3, " +
-        "E_Cons_1, E_Cons_2, E_Cons_3, E_Modified_Date")] Exercises exercise)
+        "E_Cons_1, E_Cons_2, E_Cons_3, E_Modified_Date")] ExercisesModel exercise)
     {
         if (id != exercise.E_Id)
         {

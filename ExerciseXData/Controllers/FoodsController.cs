@@ -16,7 +16,7 @@ namespace foodXData.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Foods> objFoodsList = _context.Foods;
+            IEnumerable<FoodsModel> objFoodsList = _context.Foods;
             /*Select statement is not needed here as _context.Foods will get all the categories from table*/
 
             return View(objFoodsList);
@@ -28,7 +28,7 @@ namespace foodXData.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Foods obj)
+        public IActionResult Create(FoodsModel obj)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace foodXData.Controllers
         //post
         [HttpPost]
         [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
-        public IActionResult Edit(Foods obj)
+        public IActionResult Edit(FoodsModel obj)
         {
             if (ModelState.IsValid)
             {
