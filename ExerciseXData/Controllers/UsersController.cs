@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace ExerciseXData.Controllers
 {
-    [Authorize(Roles = "User,Admin")]
+    [Authorize (Roles = "User,Admin")]
     public class UsersController : Controller
     {
         public IActionResult UserDashboard()

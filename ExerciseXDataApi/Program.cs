@@ -1,9 +1,31 @@
+using ExerciseXData.Data;
+using ExerciseXData.Interfaces;
+using ExerciseXData.Services;
+using ExerciseXDataLibrary.Repositories;
+using ExerciseXDataLibrary.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
+//DbContext configuration
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AlternateConnection")));
+
 // Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<AuthService>();
+
+builder.Services.AddScoped<CategoriesService>();
+builder.Services.AddScoped<DietsService>();
+builder.Services.AddScoped<ExercisesService>();
+builder.Services.AddScoped<UsersService>();
+
+builder.Services.AddScoped<UsersRepository>();
+builder.Services.AddScoped<DietsRepository>();
+builder.Services.AddScoped<ExercisesRepository>();
 
 var app = builder.Build();
 
@@ -15,8 +37,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-
+app.UseAuthorization();
+app.MapControllers();
 
 app.Run();
-

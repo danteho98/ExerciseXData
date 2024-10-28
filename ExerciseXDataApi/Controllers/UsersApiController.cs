@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ExerciseXData.Models;
+using ExerciseXData.Services;
+
+using ExerciseXDataLibrary.DataTransferObject;
 
 namespace ExerciseXDataApi.Controllers
 {
@@ -7,21 +10,35 @@ namespace ExerciseXDataApi.Controllers
     [ApiController]
     public class UsersApiController : Controller
     {
-        /*
-        Uri baseAddress = new Uri("https://localhost:44385/");
-        private readonly HttpClient _client;
+        private readonly UsersService _userService;
 
-        public UserAPIController() {
-            _client = new HttpClient();
-            _client.BaseAddress = baseAddress;
+        public UsersApiController(UsersService userService) // Injected UserService
+        {
+            _userService = userService;
         }
-        */
 
-        //[HttpGet]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterUserDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // Return validation errors
+            }
 
+            try
+            {
+                var result = await _userService.RegisterUserAsync(dto.Email, dto.UserName, dto.Password, dto.Gender, dto.Age,
+                    dto.Height, dto.Weight, dto.Goal);
+                return Ok("User registered successfully.");
+
+                return BadRequest("Registration failed.");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (not shown here)
+                return StatusCode(500, "Internal server error"); // Handle server errors
+            }
+        }
     }
 }
 

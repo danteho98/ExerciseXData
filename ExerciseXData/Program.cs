@@ -1,4 +1,7 @@
 using ExerciseXData.Data;
+using ExerciseXData.Interfaces;
+using ExerciseXData.Services;
+using ExerciseXDataLibrary.Repositories;
 using ExerciseXDataLibrary.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -21,29 +24,39 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddControllersWithViews(); // Add controllers with views
 
-builder.Services.AddScoped<AuthService>(); // Register AuthService
+builder.Services.AddScoped<AuthService>(); 
+
+builder.Services.AddScoped<CategoriesService>();
+builder.Services.AddScoped<DietsService>();
+builder.Services.AddScoped<ExercisesService>();
+builder.Services.AddScoped<UsersService>();
+
+builder.Services.AddScoped<UsersRepository>();
+builder.Services.AddScoped<DietsRepository>();
+builder.Services.AddScoped<ExercisesRepository>();
+
 
 
 
 // Add authentication services and configure JWT Bearer.
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-    };
-});
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//})
+//.AddJwtBearer(options =>
+//{
+//    options.TokenValidationParameters = new TokenValidationParameters
+//    {
+//        ValidateIssuer = true,
+//        ValidateAudience = true,
+//        ValidateLifetime = true,
+//        ValidateIssuerSigningKey = true,
+//        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+//        ValidAudience = builder.Configuration["Jwt:Audience"],
+//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+//   };
+//});
 
 var app = builder.Build();
 

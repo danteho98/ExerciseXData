@@ -1,6 +1,7 @@
 ﻿using ExerciseXData.Data;
 using ExerciseXData.Models;
 using ExerciseXDataLibrary.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace ExerciseXDataLibrary.Repositories
             _context = context;
         }
 
-        public async Task<bool> RegisterUserAsync(string email, string userName, string password, string role, string gender, int age, 
+        
+        public async Task<bool> RegisterUserAsync(string email, string userName, string password, string gender, int age, 
             double height, double weight, string goal)
         {
             using (var transaction = await _context.Database.BeginTransactionAsync())
@@ -33,13 +35,19 @@ namespace ExerciseXDataLibrary.Repositories
                         U_Name = userName,
                         Gender = gender,
                         Age = age,
-                        Role = role,
+                        Role = "Normal User", //Default role
                         Height = height,
                         Weight = weight,
                         Goal = goal,
                         U_Created_Date = DateTime.UtcNow,
                         U_Last_Login = DateTime.UtcNow
                     };
+
+                    // Role validation to ensure the role is always "NormalUser" at registration
+                    if (newUser.Role != "NormalUser")
+                    {
+                        throw new UnauthorizedAccessException("Role assignment is restricted.");
+                    }
 
                     await _context.Users.AddAsync(newUser);
                     await _context.SaveChangesAsync();
@@ -94,47 +102,47 @@ namespace ExerciseXDataLibrary.Repositories
                 return Convert.ToBase64String(hashBytes);
             }
         }
-        public async Task<bool> AddUserWithExercisesAndDietAsync(int userId, int exerciseId, int dietId)
-        {
+        //public async Task<bool> AddUserWithExercisesAndDietAsync(int userId, int exerciseId, int dietId)
+        //{
 
-        using (var transaction = await _context.Database.BeginTransactionAsync())
-            {
-                try
-                {
-                    // Add a new exercise for a user
-                    var userExercise = new UsersExercisesModel
-                    {
-                        U_Id = userId,
-                        E_Id = exerciseId
-                    };
+        //using (var transaction = await _context.Database.BeginTransactionAsync())
+        //    {
+        //        try
+        //        {
+        //            // Add a new exercise for a user
+        //            var userExercise = new UsersExercisesModel
+        //            {
+        //                U_Id = userId,
+        //                E_Id = exerciseId
+        //            };
                     
-                    _context.UsersExercises.Add(userExercise);
+        //            _context.UsersExercises.Add(userExercise);
 
-                    // Add a new diet for a user
-                    var userDiet = new UsersDietsModel
-                    {
-                        U_Id = userId,
-                        D_Id = dietId
-                    };
+        //            // Add a new diet for a user
+        //            var userDiet = new UsersDietsModel
+        //            {
+        //                U_Id = userId,
+        //                D_Id = dietId
+        //            };
                     
-                    _context.UsersDiets.Add(userDiet);
+        //            _context.UsersDiets.Add(userDiet);
                     
-                    await _context.SaveChangesAsync();
+        //            await _context.SaveChangesAsync();
                     
-                    // Commit the transaction if everything is successful
-                    await transaction.CommitAsync();
-                    return true;
+        //            // Commit the transaction if everything is successful
+        //            await transaction.CommitAsync();
+        //            return true;
                     
-                }
+        //        }
                 
-                catch (Exception)
-                {
-                    // Roll back the transaction in case of failure
-                    await transaction.RollbackAsync();
-                    return false; // Handle the error as needed
-                }
-            }
-        }
+        //        catch (Exception)
+        //        {
+        //            // Roll back the transaction in case of failure
+        //            await transaction.RollbackAsync();
+        //            return false; // Handle the error as needed
+        //        }
+        //    }
+        //}
     }
 }
 
