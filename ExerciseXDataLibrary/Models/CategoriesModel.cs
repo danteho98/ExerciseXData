@@ -11,7 +11,7 @@ namespace ExerciseXData.Models
         public int C_Id { get; set; }
 
         [DisplayName ("Category Image")]
-        public string ? C_Image { get; set; }
+        public byte[] ? C_Image { get; set; }
 
         //[Required]
         [DisplayName("Category Name")]

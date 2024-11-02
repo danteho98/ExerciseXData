@@ -17,7 +17,7 @@ namespace ExerciseXDataLibrary.Repositories
             _context = context; 
         }
 
-        public Task<List<DietsFoods>> GetByDietId(int dietId) =>
+        public Task<List<DietsFoodsModel>> GetByDietId(int dietId) =>
             _context.DietsFoods.Where(df => df.D_Id == dietId).ToListAsync();
     }
 }

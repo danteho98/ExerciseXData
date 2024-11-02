@@ -1,50 +1,49 @@
 ﻿using ExerciseXData.Data;
 using ExerciseXData.Interfaces;
 using ExerciseXData.Models;
+using ExerciseXDataLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Services
 {
     public class ExercisesService
-
     {
+        private readonly ExerciseDbContext _exerciseDbContext;
 
-        private readonly AppDbContext _context;
-
-        public ExercisesService(AppDbContext context) 
+        public ExercisesService(ExerciseDbContext exerciseDbContext) 
         {
-            _context = context;
+            _exerciseDbContext = exerciseDbContext;
         }
 
         public async Task AddAsync(ExercisesModel exercise)
         {
-            await _context.Exercises.AddAsync(exercise);
-            await _context.SaveChangesAsync();
+            await _exerciseDbContext.Exercises.AddAsync(exercise);
+            await _exerciseDbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var result = await _context.Exercises.FirstOrDefaultAsync(n => n.E_Id == id);
-            _context.Exercises.Remove(result);
-            await _context.SaveChangesAsync();
+            var result = await _exerciseDbContext.Exercises.FirstOrDefaultAsync(n => n.E_Id == id);
+            _exerciseDbContext.Exercises.Remove(result);
+            await _exerciseDbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<ExercisesModel>> GetAllAsync()
         {
-            var result = await _context.Exercises.ToListAsync();
+            var result = await _exerciseDbContext.Exercises.ToListAsync();
             return result;
         }
 
         public async Task<ExercisesModel> GetByIdAsync(int id)
         {
-            var result = await _context.Exercises.FirstOrDefaultAsync(n => n.E_Id == id);
+            var result = await _exerciseDbContext.Exercises.FirstOrDefaultAsync(n => n.E_Id == id);
             return result;
         }
 
         public async Task<ExercisesModel> UpdateAsync(int id, ExercisesModel newExercises)
         {
-            _context.Update(newExercises);
-            await _context.SaveChangesAsync();
+            _exerciseDbContext.Update(newExercises);
+            await _exerciseDbContext.SaveChangesAsync();
             return newExercises;
         }
 

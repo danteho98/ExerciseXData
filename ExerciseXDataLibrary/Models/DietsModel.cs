@@ -19,7 +19,7 @@ namespace ExerciseXData.Models
         public string ? D_Serving_Size { get; set; }
 
         [DisplayName("Recommended Servings")]
-        public int ? D_Recommended_Servings { get; set; }
+        public string ? D_Recommended_Servings { get; set; }
 
         [DisplayName("Frequency")]
         public string ? D_Frequency { get; set; }
@@ -49,7 +49,7 @@ namespace ExerciseXData.Models
 
 
         //Relationships
-        public List<DietsFoods> DietsFoods { get; set; }
+        public List<DietsFoodsModel> DietsFoods { get; set; }
         public List<UsersDietsModel> UsersDiets { get; set; }
         
     }

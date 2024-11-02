@@ -1,0 +1,72 @@
+﻿@model UsersDietsModel
+
+<form method="post" asp-action="DeletePOST">
+    @*DeletePOST here can change name with the CategoryController POST method*@
+    <input asp-for="UD_Id" hidden />
+    <div class=" border p-3 mt-4">
+        <div class=" row pb-2">
+            <h1 class="text-primary">Delete Food</h1>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
+
+        <div class="mb-3">
+            <label asp-for="UD_Id"></label>
+            <input asp-for="UD_Id" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="U_Id"></label>
+            <input asp-for="U_Id" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="D_Id"></label>
+            <input asp-for="D_Id" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Custom_Diet_Name"></label>
+            <input asp-for="Custom_Diet_Name" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="UD_Serving_Size"></label>
+            <input asp-for="UD_Serving_Size" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="UD_Frequency"></label>
+            <input asp-for="UD_Frequency" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="UD_Total_Calaroies"></label>
+            <input asp-for="UD_Total_Calaroies" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="UD_Modified_Date"></label>
+            <input asp-for="UD_Modified_Date" disabled class="form-control" />
+
+        </div>
+
+
+        <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+        <a asp-controller="UsersDiets" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </div>
+</form>
+
+@section Scripts {
+    @*this part is responsible for the client side*@
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

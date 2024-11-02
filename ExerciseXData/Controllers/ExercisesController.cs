@@ -4,27 +4,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Linq;
+using ExerciseXDataLibrary.Data;
 
 public class ExercisesController : Controller
 {
-    private readonly AppDbContext _context;
+    private readonly ExerciseDbContext _exerciseDbContext;
 
-    public ExercisesController(AppDbContext context)
+    public ExercisesController(ExerciseDbContext context)
     {
-        _context = context;
+        _exerciseDbContext = context;
     }
 
     // READ (GET): List all exercises
     public async Task<IActionResult> Index()
     {
-        var exercises = _context.Exercises.Include(e => e.Categories);
+        var exercises = _exerciseDbContext.Exercises.Include(e => e.Categories);
         return View(await exercises.ToListAsync());
     }
 
     // CREATE (GET): Show the form to create a new exercise
     public IActionResult Create()
     {
-        ViewBag.Categories = _context.Categories.ToList();
+        ViewBag.Categories = _exerciseDbContext.Categories.ToList();
         return View();
     }
 
@@ -36,11 +37,11 @@ public class ExercisesController : Controller
     {
         if (ModelState.IsValid)
         {
-            _context.Add(exercise);
-            await _context.SaveChangesAsync();
+            _exerciseDbContext.Add(exercise);
+            await _exerciseDbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        ViewBag.Categories = _context.Categories.ToList();
+        ViewBag.Categories = _exerciseDbContext.Categories.ToList();
         return View(exercise);
     }
 
@@ -52,12 +53,12 @@ public class ExercisesController : Controller
             return NotFound();
         }
 
-        var exercise = await _context.Exercises.FindAsync(id);
+        var exercise = await _exerciseDbContext.Exercises.FindAsync(id);
         if (exercise == null)
         {
             return NotFound();
         }
-        ViewBag.Categories = _context.Categories.ToList();
+        ViewBag.Categories = _exerciseDbContext.Categories.ToList();
         return View(exercise);
     }
 
@@ -76,8 +77,8 @@ public class ExercisesController : Controller
         {
             try
             {
-                _context.Update(exercise);
-                await _context.SaveChangesAsync();
+                _exerciseDbContext.Update(exercise);
+                await _exerciseDbContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -92,7 +93,7 @@ public class ExercisesController : Controller
             }
             return RedirectToAction(nameof(Index));
         }
-        ViewBag.Categories = _context.Categories.ToList();
+        ViewBag.Categories = _exerciseDbContext.Categories.ToList();
         return View(exercise);
     }
 
@@ -104,7 +105,7 @@ public class ExercisesController : Controller
             return NotFound();
         }
 
-        var exercise = await _context.Exercises
+        var exercise = await _exerciseDbContext.Exercises
             .Include(e => e.Categories)
             .FirstOrDefaultAsync(m => m.C_Id == id);
         if (exercise == null)
@@ -120,14 +121,14 @@ public class ExercisesController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-        var exercise = await _context.Exercises.FindAsync(id);
-        _context.Exercises.Remove(exercise);
-        await _context.SaveChangesAsync();
+        var exercise = await _exerciseDbContext.Exercises.FindAsync(id);
+        _exerciseDbContext.Exercises.Remove(exercise);
+        await _exerciseDbContext.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
 
     private bool ExerciseExists(int id)
     {
-        return _context.Exercises.Any(e => e.E_Id == id);
+        return _exerciseDbContext.Exercises.Any(e => e.E_Id == id);
     }
 }

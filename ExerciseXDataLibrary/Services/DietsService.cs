@@ -1,48 +1,49 @@
 ﻿using ExerciseXData.Data;
 using ExerciseXData.Interfaces;
 using ExerciseXData.Models;
+using ExerciseXDataLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Services
 {
     public class DietsService
     {
-        private readonly AppDbContext _context;
+        private readonly DietDbContext _dietDbContext;
 
-        public DietsService(AppDbContext context)
+        public DietsService(DietDbContext dietDbContext)
         {
-            _context = context;
+            _dietDbContext = dietDbContext;
         }
 
         public async Task AddAsync(DietsModel diet)
         {
-            await _context.Diets.AddAsync(diet);
-            await _context.SaveChangesAsync();
+            await _dietDbContext.Diets.AddAsync(diet);
+            await _dietDbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var result = await _context.Diets.FirstOrDefaultAsync(n => n.D_Id == id);
-            _context.Diets.Remove(result);
-            await _context.SaveChangesAsync();
+            var result = await _dietDbContext.Diets.FirstOrDefaultAsync(n => n.D_Id == id);
+            _dietDbContext.Diets.Remove(result);
+            await _dietDbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<DietsModel>> GetAllAsync()
         {
-            var result = await _context.Diets.ToListAsync();
+            var result = await _dietDbContext.Diets.ToListAsync();
             return result;
         }
 
         public async Task<DietsModel> GetByIdAsync(int id)
         {
-            var result = await _context.Diets.FirstOrDefaultAsync(n => n.D_Id == id);
+            var result = await _dietDbContext.Diets.FirstOrDefaultAsync(n => n.D_Id == id);
             return result;
         }
 
         public async Task<DietsModel> UpdateAsync(int id, DietsModel newDiets)
         {
-            _context.Update(newDiets);
-            await _context.SaveChangesAsync();
+            _dietDbContext.Update(newDiets);
+            await _dietDbContext.SaveChangesAsync();
             return newDiets;
         }
 

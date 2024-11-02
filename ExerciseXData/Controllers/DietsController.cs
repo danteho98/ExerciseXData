@@ -3,22 +3,23 @@ using Microsoft.EntityFrameworkCore;
 using ExerciseXData.Data;
 using ExerciseXData.Models;
 using System.Threading.Tasks;
+using ExerciseXDataLibrary.Data;
 
 namespace ExerciseXData.Controllers
 {
     public class DietsController : Controller
     {
 
-        private readonly AppDbContext _context;
-        public DietsController(AppDbContext context)
+        private readonly DietDbContext _dietDbContext;
+        public DietsController(DietDbContext context)
         {
-            _context = context;
+            _dietDbContext = context;
         }
 
         // Get a user's diet
         //public IActionResult GetUserDiets(int userId)
         //{
-        //    var diets = _context.Diets
+        //    var diets = _dietDbContext.Diets
         //                        .Where(d => d.D_Id == userId)
         //                        .Include(d => d.UsersDiets)
         //                        .ThenInclude(df => df.Diets)
@@ -35,8 +36,8 @@ namespace ExerciseXData.Controllers
         //        D_Id = dietId,
         //        U_Id = userId
         //    };
-        //    _context.UsersDiets.Add(UsersDiets);
-        //    _context.SaveChanges();
+        //    _dietDbContext.UsersDiets.Add(UsersDiets);
+        //    _dietDbContext.SaveChanges();
         //    return RedirectToAction("GetUserDiets", new { userId = /* Get the current userId */ });
         //}
 
@@ -44,20 +45,20 @@ namespace ExerciseXData.Controllers
         //[HttpPost]
         //public IActionResult RemoveFoodFromDiet(int dietId, int userId)
         //{
-        //    var dietFoodItem = _context.DietFood
+        //    var dietFoodItem = _dietDbContext.DietFood
         //                               .FirstOrDefault(df => df.D_Id == dietId && df.U_Id == userId);
         //    if (dietFoodItem != null)
         //    {
-        //        _context.DietFood.Remove(dietFoodItem);
-        //        _context.SaveChanges();
+        //        _dietDbContext.DietFood.Remove(dietFoodItem);
+        //        _dietDbContext.SaveChanges();
         //    }
         //    return RedirectToAction("GetUserDiets", new { userId = /* Get the current userId */ });
         //}
     
     public IActionResult Index()
         {
-            IEnumerable<DietsModel> objDietsList = _context.Diets;
-            /*Select statement is not needed here as _context.Diets will get all the categories from table*/
+            IEnumerable<DietsModel> objDietsList = _dietDbContext.Diets;
+            /*Select statement is not needed here as _dietDbContext.Diets will get all the categories from table*/
 
             return View(objDietsList);
         }
@@ -72,8 +73,8 @@ namespace ExerciseXData.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Diets.Add(obj); //items input from user
-                _context.SaveChanges(); //Save the items to the database
+                _dietDbContext.Diets.Add(obj); //items input from user
+                _dietDbContext.SaveChanges(); //Save the items to the database
                 TempData["success"] = "Diets created successfully";
                 return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
             }
@@ -86,7 +87,7 @@ namespace ExerciseXData.Controllers
             {
                 return NotFound();
             }
-            var categories = _context.Diets.Find(id);
+            var categories = _dietDbContext.Diets.Find(id);
             if (categories == null)
             {
                 return NotFound();
@@ -102,8 +103,8 @@ namespace ExerciseXData.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Diets.Update(obj); //items input from user
-                _context.SaveChanges(); //Save the items to the database
+                _dietDbContext.Diets.Update(obj); //items input from user
+                _dietDbContext.SaveChanges(); //Save the items to the database
                 TempData["success"] = "Diets updated successfully";
                 return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
             }
@@ -117,9 +118,9 @@ namespace ExerciseXData.Controllers
             {
                 return NotFound();
             }
-            var categories = _context.Diets.Find(id); //find if used for finding the primary key of the table
-            //var categoriesFirst= _context.Diets.FirstOrDefault(u=>u.Id==id);
-            //var categoriesSingle = _context.Diets.SingleOrDefault(u => u.Id == id);
+            var categories = _dietDbContext.Diets.Find(id); //find if used for finding the primary key of the table
+            //var categoriesFirst= _dietDbContext.Diets.FirstOrDefault(u=>u.Id==id);
+            //var categoriesSingle = _dietDbContext.Diets.SingleOrDefault(u => u.Id == id);
 
             if (categories == null)
             {
@@ -134,13 +135,13 @@ namespace ExerciseXData.Controllers
         [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
         public IActionResult DeletePOST(int ? id)
         {
-            var obj = _context.Diets.Find(id);
+            var obj = _dietDbContext.Diets.Find(id);
             if (obj == null)
             {
                 return NotFound();
             }
-            _context.Diets.Remove(obj); //items input from user
-            _context.SaveChanges(); //Save the items to the database
+            _dietDbContext.Diets.Remove(obj); //items input from user
+            _dietDbContext.SaveChanges(); //Save the items to the database
             TempData["success"] = "Category deleted successfully";
             return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
         }

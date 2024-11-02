@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExerciseXData.Models
 {
-    public class DietsFoods
+    public class DietsFoodsModel
     {
         [Key]
         public int DF_Id {  get; set; }

@@ -1,5 +1,6 @@
 ﻿using ExerciseXData.Data;
 using ExerciseXData.Models;
+using ExerciseXDataLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,17 +12,13 @@ namespace ExerciseXDataLibrary.Repositories
 {
     public class ExercisesRepository
     {
-        private readonly AppDbContext _context;
-        public async Task AddUserExerciseAsync(int userId, int exerciseId)
-        {
-            var userExercise = new UsersExercisesModel
-            {
-                U_Id = userId,
-                E_Id = exerciseId
-            };
+        private readonly ExerciseDbContext _exerciseDbContext;
 
-            _context.UsersExercises.Add(userExercise);
-            await _context.SaveChangesAsync();
+        public ExercisesRepository(ExerciseDbContext exerciseDbContext)
+        {
+            _exerciseDbContext = exerciseDbContext;
         }
+
+        
     }
 }

@@ -29,7 +29,7 @@ namespace ExerciseXData.Models
         public string ? UD_Frequency { get; set; }
 
         [DisplayName("Total Calories")]
-        public int ? Total_Calaroies { get; set; }
+        public int ? UD_Total_Calaroies { get; set; }
 
         [DisplayName("Date Modified")]
         public DateTime UD_Modified_Date { get; set; } = DateTime.Now;

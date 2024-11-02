@@ -14,7 +14,7 @@ namespace ExerciseXData.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<DietsFoods> objDietsFoodsList = _context.DietsFoods;
+            IEnumerable<DietsFoodsModel> objDietsFoodsList = _context.DietsFoods;
             /*Select statement is not needed here as _context.DietsFoods will get all the categories from table*/
 
             return View(objDietsFoodsList);
@@ -26,7 +26,7 @@ namespace ExerciseXData.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(DietsFoods obj)
+        public IActionResult Create(DietsFoodsModel obj)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace ExerciseXData.Controllers
         //post
         [HttpPost]
         [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
-        public IActionResult Edit(DietsFoods obj)
+        public IActionResult Edit(DietsFoodsModel obj)
         {
             if (ModelState.IsValid)
             {

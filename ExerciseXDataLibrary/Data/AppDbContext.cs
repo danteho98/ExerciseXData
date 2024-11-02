@@ -9,9 +9,7 @@ namespace ExerciseXData.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions options) : base(options) 
-        {
-        }
+        public AppDbContext(DbContextOptions options) : base(options) {}
         public DbSet<CategoriesModel> Categories { get; set; }
         public DbSet<DietsModel> Diets { get; set; }
         public DbSet<ExercisesModel> Exercises { get; set; }
@@ -21,7 +19,7 @@ namespace ExerciseXData.Data
 
         //Many to many tables
         public DbSet<UsersDietsModel> UsersDiets { get; set; }
-        public DbSet<DietsFoods> DietsFoods { get; set; }
+        public DbSet<DietsFoodsModel> DietsFoods { get; set; }
         public DbSet<UsersExercisesModel> UsersExercises { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -66,15 +64,15 @@ namespace ExerciseXData.Data
                 .HasForeignKey(ud => ud.D_Id);
 
             //DietsFoods junction table
-            modelBuilder.Entity<DietsFoods>()
+            modelBuilder.Entity<DietsFoodsModel>()
                 .HasKey(df => df.DF_Id );
             
-            modelBuilder.Entity<DietsFoods>()
+            modelBuilder.Entity<DietsFoodsModel>()
                 .HasOne(df => df.Diets)
                 .WithMany(d => d.DietsFoods)
                 .HasForeignKey(df => df.D_Id);
 
-            modelBuilder.Entity<DietsFoods>()
+            modelBuilder.Entity<DietsFoodsModel>()
                 .HasOne(df => df.Foods)
                 .WithMany(f => f.DietsFoods)
                 .HasForeignKey(df => df.F_Id);

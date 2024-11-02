@@ -15,7 +15,7 @@ namespace ExerciseXData.Models
         public CategoriesModel Categories { get; set; }
 
         [DisplayName ("Exercises Image")]
-        public string ? E_Image { get; set; }
+        public byte[] ? E_Image { get; set; }
 
         //[Required(ErrorMessage = "Exercises name cannot be empty.")]
         [DisplayName("Exercises Name")] /*This part allows programmer to put any name*/

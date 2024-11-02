@@ -1,5 +1,6 @@
 ﻿using ExerciseXData.Data;
 using ExerciseXData.Models;
+using ExerciseXDataLibrary.Data;
 using ExerciseXDataLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,17 +15,23 @@ namespace ExerciseXDataLibrary.Repositories
 {
     public class UsersRepository
     {
-        private readonly AppDbContext _context;
-        public UsersRepository(AppDbContext context)
+        private readonly UserDbContext _userDbContext;
+        public UsersRepository(UserDbContext userDbContext)
         {
-            _context = context;
+            _userDbContext = userDbContext;
         }
 
-        
+        //public async Task AddUserAsync(UserDbContext users)
+        //{
+        //    _userDbContext.Users.Add(users);
+        //    await _userDbContext.SaveChangesAsync();
+        //}
+
+
         public async Task<bool> RegisterUserAsync(string email, string userName, string password, string gender, int age, 
             double height, double weight, string goal)
         {
-            using (var transaction = await _context.Database.BeginTransactionAsync())
+            using (var transaction = await _userDbContext.Database.BeginTransactionAsync())
             {
                 try
                 {
@@ -49,8 +56,8 @@ namespace ExerciseXDataLibrary.Repositories
                         throw new UnauthorizedAccessException("Role assignment is restricted.");
                     }
 
-                    await _context.Users.AddAsync(newUser);
-                    await _context.SaveChangesAsync();
+                    await _userDbContext.Users.AddAsync(newUser);
+                    await _userDbContext.SaveChangesAsync();
 
                     // Step 2: Generate Salt and Hash for Password
                     var salt = GenerateSalt();
@@ -66,8 +73,8 @@ namespace ExerciseXDataLibrary.Repositories
                         Last_Updated = DateTime.UtcNow
                     };
 
-                    await _context.UsersCredentials.AddAsync(userCredentials);
-                    await _context.SaveChangesAsync();
+                    await _userDbContext.UsersCredentials.AddAsync(userCredentials);
+                    await _userDbContext.SaveChangesAsync();
 
                     // Commit the transaction if everything is successful
                     await transaction.CommitAsync();
@@ -102,54 +109,54 @@ namespace ExerciseXDataLibrary.Repositories
                 return Convert.ToBase64String(hashBytes);
             }
         }
-        //public async Task<bool> AddUserWithExercisesAndDietAsync(int userId, int exerciseId, int dietId)
-        //{
+        public async Task<bool> AddUserWithExercisesAndDietAsync(int userId, int exerciseId, int dietId)
+        {
 
-        //using (var transaction = await _context.Database.BeginTransactionAsync())
-        //    {
-        //        try
-        //        {
-        //            // Add a new exercise for a user
-        //            var userExercise = new UsersExercisesModel
-        //            {
-        //                U_Id = userId,
-        //                E_Id = exerciseId
-        //            };
-                    
-        //            _context.UsersExercises.Add(userExercise);
+            using (var transaction = await _userDbContext.Database.BeginTransactionAsync())
+            {
+                try
+                {
+                    // Add a new exercise for a user
+                    var userExercise = new UsersExercisesModel
+                    {
+                        U_Id = userId,
+                        E_Id = exerciseId
+                    };
 
-        //            // Add a new diet for a user
-        //            var userDiet = new UsersDietsModel
-        //            {
-        //                U_Id = userId,
-        //                D_Id = dietId
-        //            };
-                    
-        //            _context.UsersDiets.Add(userDiet);
-                    
-        //            await _context.SaveChangesAsync();
-                    
-        //            // Commit the transaction if everything is successful
-        //            await transaction.CommitAsync();
-        //            return true;
-                    
-        //        }
-                
-        //        catch (Exception)
-        //        {
-        //            // Roll back the transaction in case of failure
-        //            await transaction.RollbackAsync();
-        //            return false; // Handle the error as needed
-        //        }
-        //    }
-        //}
+                    _userDbContext.UsersExercises.Add(userExercise);
+
+                    // Add a new diet for a user
+                    var userDiet = new UsersDietsModel
+                    {
+                        U_Id = userId,
+                        D_Id = dietId
+                    };
+
+                    _userDbContext.UsersDiets.Add(userDiet);
+
+                    await _userDbContext.SaveChangesAsync();
+
+                    // Commit the transaction if everything is successful
+                    await transaction.CommitAsync();
+                    return true;
+
+                }
+
+                catch (Exception)
+                {
+                    // Roll back the transaction in case of failure
+                    await transaction.RollbackAsync();
+                    return false; // Handle the error as needed
+                }
+            }
+        }
     }
 }
 
 // Method to update a user's specific diet information
 //public async Task UpdateUserDietAsync(int userId, int dietId, string foodName, int foodQuantity, int foodCalories, int totalCalories)
 //{
-//    var userDiet = await _context.UsersDiets.FirstOrDefaultAsync(ud => ud.U_Id == userId && ud.D_Id == dietId);
+//    var userDiet = await _userDbContext.UsersDiets.FirstOrDefaultAsync(ud => ud.U_Id == userId && ud.D_Id == dietId);
 
 //    // If the record exists, update it
 //    if (userDiet != null)
@@ -162,7 +169,7 @@ namespace ExerciseXDataLibrary.Repositories
 
 
 //        // Save the changes
-//        await _context.SaveChangesAsync();
+//        await _userDbContext.SaveChangesAsync();
 //    }
 //    else
 //    {
