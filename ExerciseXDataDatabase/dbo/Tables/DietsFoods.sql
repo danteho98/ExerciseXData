@@ -5,6 +5,11 @@ CREATE TABLE [dbo].[DietsFoods]
     [DF_Id] INT NOT NULL PRIMARY KEY, 
     [D_Id] INT NOT NULL, 
     [F_Id] INT NOT NULL,
+    [DF_Serving_Size] VARCHAR(50) NULL, 
+    [DF_Recommended_Servings] VARCHAR(50) NULL, 
+    [DF_Frequency] VARCHAR(20) NULL,
+    [DF_Total_Calories] INT NULL,
+
     [DF_Date_Modified] DATETIME NULL DEFAULT GETUTCDATE() 
 
     CONSTRAINT FK_DietsFoods_Diets FOREIGN KEY (D_Id) REFERENCES [dbo].Diets(D_Id) ON DELETE CASCADE,

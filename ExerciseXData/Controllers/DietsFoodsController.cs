@@ -15,7 +15,7 @@ namespace ExerciseXData.Controllers
         public IActionResult Index()
         {
             IEnumerable<DietsFoodsModel> objDietsFoodsList = _context.DietsFoods;
-            /*Select statement is not needed here as _context.DietsFoods will get all the categories from table*/
+            /*Select statement is not needed here as _context.DietsFoods will get all the dietsFoods from table*/
 
             return View(objDietsFoodsList);
         }
@@ -44,13 +44,13 @@ namespace ExerciseXData.Controllers
             {
                 return NotFound();
             }
-            var categories = _context.DietsFoods.Find(id);
-            if (categories == null)
+            var dietsFoods = _context.DietsFoods.Find(id);
+            if (dietsFoods == null)
             {
                 return NotFound();
             }
 
-            return View(categories);
+            return View(dietsFoods);
         }
 
         //post
@@ -75,16 +75,16 @@ namespace ExerciseXData.Controllers
             {
                 return NotFound();
             }
-            var categories = _context.DietsFoods.Find(id); //find if used for finding the primary key of the table
-            //var categoriesFirst= _context.DietsFoods.FirstOrDefault(u=>u.Id==id);
-            //var categoriesSingle = _context.DietsFoods.SingleOrDefault(u => u.Id == id);
+            var dietsFoods = _context.DietsFoods.Find(id); //find if used for finding the primary key of the table
+            //var dietsFoodsFirst= _context.DietsFoods.FirstOrDefault(u=>u.Id==id);
+            //var dietsFoodsSingle = _context.DietsFoods.SingleOrDefault(u => u.Id == id);
 
-            if (categories == null)
+            if (dietsFoods == null)
             {
                 return NotFound();
             }
 
-            return View(categories);
+            return View(dietsFoods);
         }
 
         //POST

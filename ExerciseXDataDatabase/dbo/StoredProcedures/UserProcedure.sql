@@ -2,7 +2,8 @@
 AS
 BEGIN
 SELECT
-	[U_Id], [U_Email], [U_Password],
+	[U_Id],
+    [U_Email],
     [U_Name],
     [Gender],
     [Age],

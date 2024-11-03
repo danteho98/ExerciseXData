@@ -21,13 +21,6 @@ namespace ExerciseXDataLibrary.Repositories
             _userDbContext = userDbContext;
         }
 
-        //public async Task AddUserAsync(UserDbContext users)
-        //{
-        //    _userDbContext.Users.Add(users);
-        //    await _userDbContext.SaveChangesAsync();
-        //}
-
-
         public async Task<bool> RegisterUserAsync(string email, string userName, string password, string gender, int age, 
             double height, double weight, string goal)
         {
@@ -152,29 +145,4 @@ namespace ExerciseXDataLibrary.Repositories
         }
     }
 }
-
-// Method to update a user's specific diet information
-//public async Task UpdateUserDietAsync(int userId, int dietId, string foodName, int foodQuantity, int foodCalories, int totalCalories)
-//{
-//    var userDiet = await _userDbContext.UsersDiets.FirstOrDefaultAsync(ud => ud.U_Id == userId && ud.D_Id == dietId);
-
-//    // If the record exists, update it
-//    if (userDiet != null)
-//    {
-//        // Update specific fields of the user's diet
-//        userDiet.Food_Name = foodName;
-//        userDiet.Food_Quantity = foodQuantity;
-//        userDiet.Food_Calories = foodCalories;
-//        userDiet.Total_Calaroies = totalCalories;
-
-
-//        // Save the changes
-//        await _userDbContext.SaveChangesAsync();
-//    }
-//    else
-//    {
-//        // Handle case where the user-diet relationship doesn't exist
-//        throw new Exception("UserDiet record not found");
-//    }
-//}
 

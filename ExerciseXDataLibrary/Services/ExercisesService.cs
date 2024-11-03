@@ -2,50 +2,35 @@
 using ExerciseXData.Interfaces;
 using ExerciseXData.Models;
 using ExerciseXDataLibrary.Data;
+using ExerciseXDataLibrary.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Services
 {
     public class ExercisesService
     {
-        private readonly ExerciseDbContext _exerciseDbContext;
+        private readonly ExercisesRepository _exercisesRepository;
 
-        public ExercisesService(ExerciseDbContext exerciseDbContext) 
+        public ExercisesService(ExercisesRepository exercisesRepository)
         {
-            _exerciseDbContext = exerciseDbContext;
+            _exercisesRepository = exercisesRepository;
         }
 
-        public async Task AddAsync(ExercisesModel exercise)
+        public async Task<IEnumerable<ExercisesModel>> GetAllExercisesAsync() =>
+            await _exercisesRepository.GetAllExercisesAsync();
+
+        public async Task<ExercisesModel> GetExerciseByIdAsync(int id) =>
+            await _exercisesRepository.GetExerciseByIdAsync(id);
+
+        public async Task AddExerciseAsync(ExercisesModel exercise) =>
+            await _exercisesRepository.AddExerciseAsync(exercise);
+
+        public async Task<bool> UpdateExerciseAsync(int id, ExercisesModel updatedExercise)
         {
-            await _exerciseDbContext.Exercises.AddAsync(exercise);
-            await _exerciseDbContext.SaveChangesAsync();
+            return await _exercisesRepository.UpdateExerciseAsync(id, updatedExercise);
         }
 
-        public async Task DeleteAsync(int id)
-        {
-            var result = await _exerciseDbContext.Exercises.FirstOrDefaultAsync(n => n.E_Id == id);
-            _exerciseDbContext.Exercises.Remove(result);
-            await _exerciseDbContext.SaveChangesAsync();
-        }
-
-        public async Task<IEnumerable<ExercisesModel>> GetAllAsync()
-        {
-            var result = await _exerciseDbContext.Exercises.ToListAsync();
-            return result;
-        }
-
-        public async Task<ExercisesModel> GetByIdAsync(int id)
-        {
-            var result = await _exerciseDbContext.Exercises.FirstOrDefaultAsync(n => n.E_Id == id);
-            return result;
-        }
-
-        public async Task<ExercisesModel> UpdateAsync(int id, ExercisesModel newExercises)
-        {
-            _exerciseDbContext.Update(newExercises);
-            await _exerciseDbContext.SaveChangesAsync();
-            return newExercises;
-        }
-
+        public async Task<bool> DeleteExerciseAsync(int id) =>
+            await _exercisesRepository.DeleteExerciseAsync(id);
     }
 }

@@ -3,7 +3,7 @@ CREATE TABLE [dbo].[Users]
 (
     U_Id INT NOT NULL PRIMARY KEY IDENTITY(1, 1), 
     U_Email NVARCHAR(128) NULL,
-    U_Password NVARCHAR(128) NULL,
+    
     U_Name VARCHAR(255) NULL,
     Gender VARCHAR(20) NULL,
     [Role] VARCHAR(10) NULL,

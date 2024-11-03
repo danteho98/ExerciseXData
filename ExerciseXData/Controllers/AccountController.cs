@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using ExerciseXData.Services;
+using ExerciseXDataLibrary.DataTransferObject;
 
 namespace ExerciseXData.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UsersService _userService;
 
-        public AccountController(UserManager<IdentityUser> userManager)
+        public AccountController(UsersService userService) // Injected UsersService
         {
-            _userManager = userManager;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -18,28 +20,17 @@ namespace ExerciseXData.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Register(RegisterModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-        //        var result = await _userManager.CreateAsync(user, model.Password);
 
-        //        if (result.Succeeded)
-        //        {
-        //            // Log the user in or redirect them to a login page
-        //            return RedirectToAction("Index", "Home");
-        //        }
 
-        //        foreach (var error in result.Errors)
-        //        {
-        //            ModelState.AddModelError("", error.Description);
-        //        }
-        //    }
-
-        //    return View(model);
-        //}
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterUserDto dto)
+        {
+            var result = await _userService.RegisterUserAsync(dto.Email, dto.UserName, dto.Password, dto.Gender, dto.Age,
+                dto.Height, dto.Weight, dto.Goal);
+            if (result)
+                return Ok("User registered successfully.");
+            return BadRequest("Registration failed.");
+        }
     }
 
 }
