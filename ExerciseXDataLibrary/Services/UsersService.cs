@@ -16,13 +16,9 @@ namespace ExerciseXData.Services
         private readonly UserDbContext _userDbContext;
         private readonly UsersRepository _usersRepository;
 
-        private readonly AppDbContext _context;
-
-        public UsersService(AppDbContext context, UserDbContext userDbContext)
+        public UsersService( UserDbContext userDbContext)
         {
-            _context = context;
             _userDbContext = userDbContext;
-
         }
 
         

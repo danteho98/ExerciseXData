@@ -3,22 +3,23 @@ using Microsoft.EntityFrameworkCore;
 using ExerciseXData.Data;
 using ExerciseXData.Models;
 using System.Threading.Tasks;
+using ExerciseXDataLibrary.Data;
 
 namespace ExerciseXData.Controllers
 {
     public class CategoriesController : Controller
     {
 
-        private readonly AppDbContext _context;
-        public CategoriesController(AppDbContext context)
+        private readonly ExerciseDbContext _exerciseContext;
+        public CategoriesController(ExerciseDbContext exerciseContext)
         {
-            _context = context;
+            _exerciseContext = exerciseContext;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<CategoriesModel> objCategoriesList = _context.Categories;
-            /*Select statement is not needed here as _context.Categories will get all the categories from table*/
+            IEnumerable<CategoriesModel> objCategoriesList = _exerciseContext.Categories;
+            /*Select statement is not needed here as _exerciseContext.Categories will get all the categories from table*/
 
             return View(objCategoriesList);
         }
@@ -34,8 +35,8 @@ namespace ExerciseXData.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
-                await _context.SaveChangesAsync();
+                _exerciseContext.Add(category);
+                await _exerciseContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -49,7 +50,7 @@ namespace ExerciseXData.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories.FindAsync(id);
+            var category = await _exerciseContext.Categories.FindAsync(id);
             if (category == null)
             {
                 return NotFound();
@@ -71,8 +72,8 @@ namespace ExerciseXData.Controllers
             {
                 try
                 {
-                    _context.Update(category);
-                    await _context.SaveChangesAsync();
+                    _exerciseContext.Update(category);
+                    await _exerciseContext.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -98,7 +99,7 @@ namespace ExerciseXData.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories
+            var category = await _exerciseContext.Categories
                 .FirstOrDefaultAsync(m => m.C_Id == id);
             if (category == null)
             {
@@ -113,15 +114,15 @@ namespace ExerciseXData.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
+            var category = await _exerciseContext.Categories.FindAsync(id);
+            _exerciseContext.Categories.Remove(category);
+            await _exerciseContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.C_Id == id);
+            return _exerciseContext.Categories.Any(e => e.C_Id == id);
         }
     }
 }

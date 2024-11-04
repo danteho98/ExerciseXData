@@ -1,6 +1,7 @@
 using ExerciseXData.Data;
 using ExerciseXData.Interfaces;
 using ExerciseXData.Services;
+using ExerciseXDataLibrary.Data;
 using ExerciseXDataLibrary.Repositories;
 using ExerciseXDataLibrary.Services;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 //DbContext configuration
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AlternateConnection")));
+
+builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ExerciseDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<DietDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllers();

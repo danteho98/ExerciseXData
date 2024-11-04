@@ -11,9 +11,7 @@ namespace ExerciseXDataLibrary.Data
 {
     public class UserDbContext: DbContext
     {
-        public UserDbContext(DbContextOptions options) : base(options)
-        {
-        }
+        public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) {}
         public DbSet<UsersModel> Users { get; set; }
         public DbSet<UsersCredentialsModel> UsersCredentials { get; set; }
         public DbSet<UsersDietsModel> UsersDiets { get; set; }
@@ -29,17 +27,17 @@ namespace ExerciseXDataLibrary.Data
 
             //UsersExercises junction table
             modelBuilder.Entity<UsersExercisesModel>()
-                    .HasKey(ue => ue.UE_Id);
+                .HasKey(ue => ue.UE_Id);
 
             modelBuilder.Entity<UsersExercisesModel>()
-                    .HasOne(ue => ue.Users)
-                    .WithMany(u => u.UsersExercises)
-                    .HasForeignKey(ue => ue.U_Id);
+                .HasOne(ue => ue.Users)
+                .WithMany(u => u.UsersExercises)
+                .HasForeignKey(ue => ue.U_Id);
 
             modelBuilder.Entity<UsersExercisesModel>()
-                    .HasOne(ue => ue.Exercises)
-                    .WithMany(e => e.UsersExercises)
-                    .HasForeignKey(ue => ue.E_Id);
+                .HasOne(ue => ue.Exercises)
+                .WithMany(e => e.UsersExercises)
+                .HasForeignKey(ue => ue.E_Id);
 
             //UsersDiets junction table
             modelBuilder.Entity<UsersDietsModel>()

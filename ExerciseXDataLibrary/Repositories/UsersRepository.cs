@@ -21,7 +21,7 @@ namespace ExerciseXDataLibrary.Repositories
             _userDbContext = userDbContext;
         }
 
-        public async Task<bool> RegisterUserAsync(string email, string userName, string password, string gender, int age, 
+        public async Task<bool> RegisterUserAsync(string email, string userName, string password, string gender, int age,
             double height, double weight, string goal)
         {
             using (var transaction = await _userDbContext.Database.BeginTransactionAsync())
@@ -102,47 +102,46 @@ namespace ExerciseXDataLibrary.Repositories
                 return Convert.ToBase64String(hashBytes);
             }
         }
-        public async Task<bool> AddUserWithExercisesAndDietAsync(int userId, int exerciseId, int dietId)
-        {
-
-            using (var transaction = await _userDbContext.Database.BeginTransactionAsync())
-            {
-                try
-                {
-                    // Add a new exercise for a user
-                    var userExercise = new UsersExercisesModel
-                    {
-                        U_Id = userId,
-                        E_Id = exerciseId
-                    };
-
-                    _userDbContext.UsersExercises.Add(userExercise);
-
-                    // Add a new diet for a user
-                    var userDiet = new UsersDietsModel
-                    {
-                        U_Id = userId,
-                        D_Id = dietId
-                    };
-
-                    _userDbContext.UsersDiets.Add(userDiet);
-
-                    await _userDbContext.SaveChangesAsync();
-
-                    // Commit the transaction if everything is successful
-                    await transaction.CommitAsync();
-                    return true;
-
-                }
-
-                catch (Exception)
-                {
-                    // Roll back the transaction in case of failure
-                    await transaction.RollbackAsync();
-                    return false; // Handle the error as needed
-                }
-            }
-        }
     }
 }
+        //public async Task<bool> AddUserWithExercisesAndDietAsync(int userId, int exerciseId, int dietId)
+        //{
 
+        //    using (var transaction = await _userDbContext.Database.BeginTransactionAsync())
+        //    {
+        //        try
+        //        {
+        //            // Add a new exercise for a user
+        //            var userExercise = new UsersExercisesModel
+        //            {
+        //                U_Id = userId,
+        //                E_Id = exerciseId
+        //            };
+
+        //            _userDbContext.UsersExercises.Add(userExercise);
+
+        //            // Add a new diet for a user
+        //            var userDiet = new UsersDietsModel
+        //            {
+        //                U_Id = userId,
+        //                D_Id = dietId
+        //            };
+
+        //            _userDbContext.UsersDiets.Add(userDiet);
+
+        //            await _userDbContext.SaveChangesAsync();
+
+        //            // Commit the transaction if everything is successful
+        //            await transaction.CommitAsync();
+        //            return true;
+
+        //        }
+
+        //        catch (Exception)
+        //        {
+        //            // Roll back the transaction in case of failure
+        //            await transaction.RollbackAsync();
+        //            return false; // Handle the error as needed
+        //        }
+        //    }
+        //}

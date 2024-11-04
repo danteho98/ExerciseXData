@@ -1,5 +1,6 @@
 ﻿using ExerciseXData.Data;
 using ExerciseXData.Models;
+using ExerciseXDataLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,13 @@ namespace ExerciseXDataLibrary.Repositories
 {
     public class UsersDietsRepository
     {
-        private readonly AppDbContext _context;
-        public UsersDietsRepository(AppDbContext context)
+        private readonly UserDbContext _userContext;
+        public UsersDietsRepository(UserDbContext userContext)
         {
-            _context = context; 
+            _userContext = userContext; 
         }
 
         public Task<List<UsersDietsModel>> GetByDietId(int userId) =>
-            _context.UsersDiets.Where(ud => ud.U_Id == userId).ToListAsync();
+            _userContext.UsersDiets.Where(ud => ud.U_Id == userId).ToListAsync();
     }
 }

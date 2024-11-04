@@ -10,12 +10,11 @@ namespace ExerciseXDataLibrary.Data
 {
     public class DietDbContext : DbContext
     {
-        public DietDbContext(DbContextOptions options) : base(options)
-        {
-        }
+        public DietDbContext(DbContextOptions<DietDbContext> options) : base(options) {}
 
         public DbSet<DietsModel> Diets { get; set; }
         public DbSet<FoodsModel> Foods { get; set; }
+        public DbSet<DietsFoodsModel> DietsFoods { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,5 +1,6 @@
 ﻿using ExerciseXData.Data;
 using ExerciseXData.Models;
+using ExerciseXDataLibrary.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace ExerciseXDataLibrary.Repositories
 {
     public class CategoriesRepository 
     {
-        private readonly AppDbContext _context;
+        private readonly UserDbContext _userContext;
 
-        public CategoriesRepository(AppDbContext context)
+        public CategoriesRepository(UserDbContext userContext)
         {
-            _context = context;
+            _userContext = userContext;
         }
     }
 

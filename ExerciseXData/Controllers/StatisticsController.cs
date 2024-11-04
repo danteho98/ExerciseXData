@@ -7,11 +7,11 @@ namespace ExerciseXData.Controllers
 {
     public class StatisticsController : Controller
     {
-        private readonly AppDbContext _context;
-        public StatisticsController(AppDbContext context)
-        {
-            _context = context;
-        }
+        //private readonly AppDbContext _context;
+        //public StatisticsController(AppDbContext context)
+        //{
+        //    _context = context;
+        //}
 
 
         public IActionResult Diets() 

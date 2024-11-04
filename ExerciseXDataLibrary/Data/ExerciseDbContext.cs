@@ -10,7 +10,7 @@ namespace ExerciseXDataLibrary.Data
 {
     public class ExerciseDbContext : DbContext
     {
-        public ExerciseDbContext(DbContextOptions options) : base(options) {}
+        public ExerciseDbContext(DbContextOptions<ExerciseDbContext> options) : base(options) {}
         public DbSet<CategoriesModel> Categories { get; set; }
         public DbSet<ExercisesModel> Exercises { get; set; }
 
