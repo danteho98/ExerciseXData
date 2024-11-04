@@ -5,7 +5,7 @@
     [E_Id] INT NOT NULL, 
     [Repetition] INT NULL,
     [Sets] Int NULL,
-    [Time(sec)] INT NULL, 
+    [Duration(sec)] INT NULL, 
     [UE_Modified_Date] DATE NULL DEFAULT GETUTCDATE(),
 
     CONSTRAINT FK_UsersExercises_Users FOREIGN KEY (U_Id) REFERENCES [dbo].[Users](U_Id) ON DELETE CASCADE,

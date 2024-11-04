@@ -20,17 +20,34 @@ namespace ExerciseXData.Controllers
             return View();
         }
 
-
-
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserDto dto)
+        [HttpPost]
+        [ValidateAntiForgeryToken] // Prevents CSRF attacks
+        public async Task<IActionResult> Register(RegisterUserDto dto)
         {
-            var result = await _userService.RegisterUserAsync(dto.Email, dto.UserName, dto.Password, dto.Gender, dto.Age,
-                dto.Height, dto.Weight, dto.Goal);
+            if (!ModelState.IsValid)
+            {
+                return View(dto); // Return the view with validation errors if model state is invalid
+            }
+
+            var result = await _userService.RegisterUserAsync(
+                dto.Email,
+                dto.UserName,
+                dto.Password,
+                dto.Gender,
+                dto.Age,
+                dto.Height,
+                dto.Weight,
+                dto.Goal
+            );
+
             if (result)
-                return Ok("User registered successfully.");
-            return BadRequest("Registration failed.");
+            {
+                // Redirect to a confirmation page or login page after successful registration
+                return RedirectToAction("Login", "Account");
+            }
+
+            ModelState.AddModelError("", "Registration failed. Please try again.");
+            return View(dto); // Return to the view with an error message if registration fails
         }
     }
-
 }

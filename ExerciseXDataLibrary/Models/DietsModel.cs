@@ -15,15 +15,6 @@ namespace ExerciseXData.Models
         [DisplayName("Description")]/*This part allows programmer to put any name*/
         public string ? D_Description { get; set; }
 
-        [DisplayName("Serving Size")]
-        public string ? D_Serving_Size { get; set; }
-
-        [DisplayName("Recommended Servings")]
-        public string ? D_Recommended_Servings { get; set; }
-
-        [DisplayName("Frequency")]
-        public string ? D_Frequency { get; set; }
-
         //[Required]
         [DisplayName("Pros 1")]
         public string ? D_Pros_1 { get; set; }

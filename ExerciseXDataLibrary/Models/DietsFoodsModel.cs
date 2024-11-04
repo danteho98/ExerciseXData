@@ -19,6 +19,15 @@ namespace ExerciseXData.Models
         public int ? F_Id { get; set; }
         public FoodsModel Foods { get; set; }
 
+        [DisplayName("Serving Size")]
+        public string? DF_Serving_Size { get; set; }
+
+        [DisplayName("Recommended Servings")]
+        public string? DF_Recommended_Servings { get; set; }
+
+        [DisplayName("Frequency")]
+        public string? DF_Frequency { get; set; }
+
         [DisplayName("Modified Date")]
         public DateTime DF_Modified_Date { get; set; } = DateTime.Now;
 

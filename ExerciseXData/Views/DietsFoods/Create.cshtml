@@ -1,9 +1,10 @@
-﻿@model DietsFoodsModel
+﻿@using ExerciseXData.Models
+@model DietsFoodsModel
 
 <form method="post">
     <div class=" border p-3 mt-4">
         <div class=" row pb-2">
-            <h1 class="text-primary">Create Diets</h1>
+            <h1 class="text-primary">Create DietsFoods</h1>
             <hr />
         </div>
         <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
@@ -26,6 +27,23 @@
             <span asp-validation-for="F_Id" class="text-danger"></span>
         </div>
       
+        <div class="mb-3">
+            <label asp-for="DF_Serving_Size"></label>
+            <input asp-for="DF_Serving_Size" class="form-control" />
+            <span asp-validation-for="DF_Serving_Size" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Frequency"></label>
+            <input asp-for="Frequency" class="form-control" />
+            <span asp-validation-for="Frequency" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DF_Total_Calories"></label>
+            <input asp-for="DF_Total_Calories" class="form-control" />
+            <span asp-validation-for="DF_Total_Calories" class="text-danger"></span>
+        </div>
 
         <div class="mb-3">
             <label asp-for="DF_Modified_Date"></label>

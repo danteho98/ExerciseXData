@@ -27,6 +27,6 @@ namespace ExerciseXData.Models
         public int ? Duration { get; set; }
 
         [DisplayName("Modified Date")]
-        public DateTime UE_Modify_Date { get; set; } = DateTime.Now;
+        public DateTime UE_Modified_Date { get; set; } = DateTime.Now;
     }
 }
