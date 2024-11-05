@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using ExerciseXDataLibrary.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace ExerciseXData.Models
+namespace ExerciseXDataLibrary.Models
 {
     public class CategoriesModel
     {

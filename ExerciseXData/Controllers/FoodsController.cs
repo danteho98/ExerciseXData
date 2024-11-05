@@ -1,7 +1,7 @@
 ﻿using ExerciseXData.Data;
-using ExerciseXData.Interfaces;
 using ExerciseXData.Models;
 using ExerciseXDataLibrary.Data;
+using ExerciseXDataLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

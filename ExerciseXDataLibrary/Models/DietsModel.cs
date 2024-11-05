@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using ExerciseXData.Models;
 
-namespace ExerciseXData.Models
+namespace ExerciseXDataLibrary.Models
 {
     public class DietsModel
     {

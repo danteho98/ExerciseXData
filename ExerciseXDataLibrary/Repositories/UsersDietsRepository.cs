@@ -1,6 +1,7 @@
 ﻿using ExerciseXData.Data;
 using ExerciseXData.Models;
 using ExerciseXDataLibrary.Data;
+using ExerciseXDataLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

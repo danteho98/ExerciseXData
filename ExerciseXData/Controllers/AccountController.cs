@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using ExerciseXData.Services;
 using ExerciseXDataLibrary.DataTransferObject;
+using ExerciseXDataLibrary.Services;
 
 namespace ExerciseXData.Controllers
 {

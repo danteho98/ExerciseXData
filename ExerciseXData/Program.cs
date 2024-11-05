@@ -1,6 +1,4 @@
 using ExerciseXData.Data;
-using ExerciseXData.Interfaces;
-using ExerciseXData.Services;
 using ExerciseXDataLibrary.Data;
 using ExerciseXDataLibrary.Repositories;
 using ExerciseXDataLibrary.Services;

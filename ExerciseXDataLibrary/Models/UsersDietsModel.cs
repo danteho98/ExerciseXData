@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using ExerciseXDataLibrary.Models;
+using ExerciseXData.Models;
 
-namespace ExerciseXData.Models
+namespace ExerciseXDataLibrary.Models
 {
     public class UsersDietsModel
     {

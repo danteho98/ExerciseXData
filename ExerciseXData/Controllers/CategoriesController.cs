@@ -4,6 +4,7 @@ using ExerciseXData.Data;
 using ExerciseXData.Models;
 using System.Threading.Tasks;
 using ExerciseXDataLibrary.Data;
+using ExerciseXDataLibrary.Models;
 
 namespace ExerciseXData.Controllers
 {

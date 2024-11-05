@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using ExerciseXDataLibrary.Models;
 
-namespace ExerciseXData.Models
+namespace ExerciseXDataLibrary.Models
 {
     public class UsersModel
     {

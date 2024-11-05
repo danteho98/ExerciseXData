@@ -1,4 +1,5 @@
-﻿@model DietsFoodsModel
+﻿@using ExerciseXDataLibrary.Models;
+@model DietsFoodsModel
 
 <form method="post" asp-action="DeletePOST">
     @*DeletePOST here can change name with the CategoryController POST method*@
@@ -13,19 +14,43 @@
 
         <div class="mb-3">
             <label asp-for="DF_Id"></label>
-            <input asp-for="DF_Id" disabled disabled class="form-control" />
+            <input asp-for="DF_Id" disabled class="form-control" />
 
         </div>
 
         <div class="mb-3">
             <label asp-for="D_Id"></label>
-            <input asp-for="D_Id" disabled disabled class="form-control" />
+            <input asp-for="D_Id" disabled  class="form-control" />
 
         </div>
 
         <div class="mb-3">
             <label asp-for="F_Id"></label>
-            <input asp-for="F_Id" disabled disabled class="form-control" />
+            <input asp-for="F_Id" disabled  class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DF_Serving_Size"></label>
+            <input asp-for="DF_Serving_Size" disabled  class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DF_Recommended_Servings"></label>
+            <input asp-for="DF_Recommended_Servings" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DF_Frequency"></label>
+            <input asp-for="DF_Frequency" disabled class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DF_Total_Calories"></label>
+            <input asp-for="DF_Total_Calories" disabled class="form-control" />
 
         </div>
 

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Linq;
 using ExerciseXDataLibrary.Data;
+using ExerciseXDataLibrary.Models;
 
 public class ExercisesController : Controller
 {

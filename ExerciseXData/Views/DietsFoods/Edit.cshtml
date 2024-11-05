@@ -1,4 +1,5 @@
-﻿@model DietsFoodsModel
+﻿@using ExerciseXDataLibrary.Models;
+@model DietsFoodsModel
 
 <form method="post">
     <div class=" border p-3 mt-4">
@@ -26,6 +27,32 @@
             <input asp-for="F_Id" class="form-control" />
             <span asp-validation-for="F_Id" class="text-danger"></span>
         </div>
+
+        <div class="mb-3">
+            <label asp-for="DF_Serving_Size"></label>
+            <input asp-for="DF_Serving_Size" class="form-control" />
+            <span asp-validation-for="DF_Serving_Size" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DF_Recommended_Servings"></label>
+            <input asp-for="DF_Recommended_Servings" class="form-control" />
+            <span asp-validation-for="DF_Recommended_Servings" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DF_Frequency"></label>
+            <input asp-for="DF_Frequency" class="form-control" />
+            <span asp-validation-for="DF_Frequency" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DF_Total_Calories"></label>
+            <input asp-for="DF_Total_Calories" class="form-control" />
+            <span asp-validation-for="DF_Total_Calories" class="text-danger"></span>
+        </div>
+
+        
 
 
         <div class="mb-3">

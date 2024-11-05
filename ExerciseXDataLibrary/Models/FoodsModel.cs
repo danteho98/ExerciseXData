@@ -1,8 +1,9 @@
-﻿using System.ComponentModel;
+﻿using ExerciseXData.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ExerciseXData.Models
+namespace ExerciseXDataLibrary.Models
 {
     public class FoodsModel
     {

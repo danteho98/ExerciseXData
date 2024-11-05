@@ -1,8 +1,9 @@
-﻿using System.ComponentModel;
+﻿using ExerciseXData.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ExerciseXData.Models
+namespace ExerciseXDataLibrary.Models
 {
     public class DietsFoodsModel
     {
@@ -27,6 +28,9 @@ namespace ExerciseXData.Models
 
         [DisplayName("Frequency")]
         public string? DF_Frequency { get; set; }
+
+        [DisplayName("Total Colories")]
+        public string ? DF_Total_Calories { get; set; }
 
         [DisplayName("Modified Date")]
         public DateTime DF_Modified_Date { get; set; } = DateTime.Now;

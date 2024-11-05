@@ -1,10 +1,10 @@
 ﻿using ExerciseXData.Data;
-using ExerciseXData.Interfaces;
 using ExerciseXData.Models;
 using ExerciseXDataLibrary.Data;
+using ExerciseXDataLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExerciseXData.Services
+namespace ExerciseXDataLibrary.Services
 {
     public class DietsService
     {

@@ -1,4 +1,4 @@
-﻿@using ExerciseXData.Models;
+﻿@using ExerciseXDataLibrary.Models;
 @model IEnumerable<DietsFoodsModel>
 @{
     ViewData["Title"] = "List of Diets";
@@ -12,7 +12,7 @@
             <h1>Diet Lists</h1>
         </div>
         <div class=" col-6 text-end">
-            <a asp-controller="Diets" asp-action="Create" class="btn btn-primary">Create New Diet</a>
+            <a asp-controller="DietsFoods" asp-action="Create" class="btn btn-primary">Create New Diet</a>
         </div>
     </div>
 
@@ -22,6 +22,10 @@
                 <th> Diet Food Id</th>
                 <th> Diet Id</th>
                 <th> Food Id</th>
+                <th> Serving Size</th>
+                <th> Recommended Servings</th>
+                <th> Frequency</th>
+                <th> Total Calories</th>
                 <th> Modified Date</th>
             </tr>
         </thead>
@@ -33,6 +37,10 @@
                     <td> @obj.DF_Id</td>
                     <td> @obj.D_Id </td>
                     <td> @obj.F_Id </td>
+                    <td> @obj.DF_Serving_Size </td>
+                    <td> @obj.DF_Recommended_Servings </td>
+                    <td> @obj.DF_Frequency </td>
+                    <td> @obj.DF_Total_Calories </td>
                     <td> @obj.DF_Modified_Date</td>
 
                     <td>

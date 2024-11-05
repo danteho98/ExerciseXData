@@ -1,27 +1,19 @@
-﻿using ExerciseXData.Models;
-using Microsoft.EntityFrameworkCore;
-using ExerciseXData.Interfaces;
-using ExerciseXData.Data;
-using ExerciseXDataLibrary.Repositories;
-using ExerciseXDataLibrary.Models;
-using System.Security.Cryptography;
-using System.Text;
-using Microsoft.AspNetCore.Mvc;
+﻿using ExerciseXDataLibrary.Repositories;
 using ExerciseXDataLibrary.Data;
 
-namespace ExerciseXData.Services
+namespace ExerciseXDataLibrary.Services
 {
     public class UsersService
     {
         private readonly UserDbContext _userDbContext;
         private readonly UsersRepository _usersRepository;
 
-        public UsersService( UserDbContext userDbContext)
+        public UsersService( UserDbContext userDbContext, UsersRepository usersRepository)
         {
             _userDbContext = userDbContext;
+            _usersRepository = usersRepository;
         }
 
-        
         public async Task<bool> RegisterUserAsync(string email, string userName, string password, string gender, 
             int age, double height, double weight, string goal)
         {

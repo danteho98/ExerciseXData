@@ -10,7 +10,7 @@ CREATE TABLE [dbo].[DietsFoods]
     [DF_Frequency] VARCHAR(20) NULL,
     [DF_Total_Calories] INT NULL,
 
-    [DF_Date_Modified] DATETIME NULL DEFAULT GETUTCDATE() 
+    [DF_Modified_Date] DATETIME NULL DEFAULT GETUTCDATE() 
 
     CONSTRAINT FK_DietsFoods_Diets FOREIGN KEY (D_Id) REFERENCES [dbo].Diets(D_Id) ON DELETE CASCADE,
     CONSTRAINT  FK_DietsFoods_Foods FOREIGN KEY (F_ID) REFERENCES [dbo].Foods(F_Id) ON DELETE CASCADE

@@ -1,4 +1,5 @@
 ﻿using ExerciseXData.Models;
+using ExerciseXDataLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

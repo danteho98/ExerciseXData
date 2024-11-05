@@ -60,7 +60,7 @@ namespace ExerciseXDataLibrary.Repositories
                     var userCredentials = new UsersCredentialsModel
                     {
                         U_Id = newUser.U_Id,
-                        Password = null,  // Do not store plain password
+                        //Password = null,  // Do not store plain password
                         Password_Hush = hash,
                         Password_Salt = salt,
                         Last_Updated = DateTime.UtcNow
@@ -81,7 +81,6 @@ namespace ExerciseXDataLibrary.Repositories
                 }
             }
         }
-
         private string GenerateSalt()
         {
             byte[] saltBytes = new byte[16];
@@ -102,6 +101,7 @@ namespace ExerciseXDataLibrary.Repositories
                 return Convert.ToBase64String(hashBytes);
             }
         }
+
     }
 }
         //public async Task<bool> AddUserWithExercisesAndDietAsync(int userId, int exerciseId, int dietId)
