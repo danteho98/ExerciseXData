@@ -14,8 +14,8 @@ namespace ExerciseXDataLibrary.Services
             _usersRepository = usersRepository;
         }
 
-        public async Task<bool> RegisterUserAsync(string email, string userName, string password, string gender, 
-            int age, double height, double weight, string goal)
+        public async Task<bool> RegisterUserAsync(string email, string userName, string password, string gender, int age, 
+            double height, double weight, string goal, string lifeStyle1, string lifeStyle2, string lifeStyle3, string lifeStyle4, string lifeStyle5)
         {
             // Example: additional validation, or orchestration between repositories
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
@@ -24,7 +24,8 @@ namespace ExerciseXDataLibrary.Services
             }
 
             // Register user through repository (with additional business logic as needed)
-            return await _usersRepository.RegisterUserAsync(email, userName, password, gender, age, height, weight, goal);
+            return await _usersRepository.RegisterUserAsync(email, userName, password, gender, age, height, weight, 
+                goal, lifeStyle1,  lifeStyle2, lifeStyle3, lifeStyle4, lifeStyle5);
         } 
     }
 }

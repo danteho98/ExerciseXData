@@ -10,19 +10,23 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace ExerciseXDataLibrary.Repositories
 {
     public class UsersRepository
     {
         private readonly UserDbContext _userDbContext;
-        public UsersRepository(UserDbContext userDbContext)
+        private readonly ILogger<UsersRepository> _logger;
+
+        public UsersRepository(UserDbContext userDbContext, ILogger<UsersRepository> logger)
         {
             _userDbContext = userDbContext;
+            _logger = logger;
         }
 
-        public async Task<bool> RegisterUserAsync(string email, string userName, string password, string gender, int age,
-            double height, double weight, string goal)
+        public async Task<bool> RegisterUserAsync(string email, string userName, string password, string gender, int age, double height, 
+            double weight, string goal, string lifeStyle1, string lifeStyle2, string lifeStyle3, string lifeStyle4, string lifeStyle5)
         {
             using (var transaction = await _userDbContext.Database.BeginTransactionAsync())
             {
@@ -35,10 +39,15 @@ namespace ExerciseXDataLibrary.Repositories
                         U_Name = userName,
                         Gender = gender,
                         Age = age,
-                        Role = "Normal User", //Default role
-                        Height = height,
-                        Weight = weight,
+                        Role = "NormalUser", //Default role
+                        Height_CM = height,
+                        Weight_KG = weight,
                         Goal = goal,
+                        Lifestyle_Condition_1 = lifeStyle1,
+                        Lifestyle_Condition_2 = lifeStyle2,
+                        Lifestyle_Condition_3 = lifeStyle3,
+                        Lifestyle_Condition_4 = lifeStyle4,
+                        Lifestyle_Condition_5 = lifeStyle5,
                         U_Created_Date = DateTime.UtcNow,
                         U_Last_Login = DateTime.UtcNow
                     };
@@ -51,6 +60,9 @@ namespace ExerciseXDataLibrary.Repositories
 
                     await _userDbContext.Users.AddAsync(newUser);
                     await _userDbContext.SaveChangesAsync();
+
+                    _logger.LogInformation("User added to Users table with ID: {UserId}", newUser.U_Id);
+
 
                     // Step 2: Generate Salt and Hash for Password
                     var salt = GenerateSalt();
@@ -69,12 +81,19 @@ namespace ExerciseXDataLibrary.Repositories
                     await _userDbContext.UsersCredentials.AddAsync(userCredentials);
                     await _userDbContext.SaveChangesAsync();
 
+                    _logger.LogInformation("User credentials added for UserId: {UserId}", newUser.U_Id);
+
+                    
                     // Commit the transaction if everything is successful
                     await transaction.CommitAsync();
+                    _logger.LogInformation("User registration transaction committed successfully for UserId: {UserId}", newUser.U_Id);
+
                     return true;
+
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    _logger.LogError(ex, "Error during user registration for email: {Email}", email);
                     // Roll back the transaction in case of failure
                     await transaction.RollbackAsync();
                     return false; // Handle the error as needed

@@ -19,6 +19,11 @@ namespace ExerciseXDataLibrary.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
+
+            modelBuilder.Entity<UsersCredentialsModel>()
+                .Property(u => u.Cre_Id)
+                .ValueGeneratedOnAdd();
+
             //1 to many relationship to UsersCredentials
             modelBuilder.Entity<UsersModel>()
                 .HasMany(u => u.UsersCredentials)
@@ -41,17 +46,17 @@ namespace ExerciseXDataLibrary.Data
 
             //UsersDiets junction table
             modelBuilder.Entity<UsersDietsModel>()
-                   .HasKey(ud => ud.UD_Id);
+                .HasKey(ud => ud.UD_Id);
 
             modelBuilder.Entity<UsersDietsModel>()
-                    .HasOne(ud => ud.Users)
-                    .WithMany(u => u.UsersDiets)
-                    .HasForeignKey(ud => ud.U_Id);
+                .HasOne(ud => ud.Users)
+                .WithMany(u => u.UsersDiets)
+                .HasForeignKey(ud => ud.U_Id);
 
             modelBuilder.Entity<UsersDietsModel>()
-                    .HasOne(ud => ud.Diets)
-                    .WithMany(d => d.UsersDiets)
-                    .HasForeignKey(ud => ud.D_Id);
+                .HasOne(ud => ud.Diets)
+                .WithMany(d => d.UsersDiets)
+                .HasForeignKey(ud => ud.D_Id);
         }
     }
 }

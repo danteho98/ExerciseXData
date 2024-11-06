@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,9 +43,6 @@ builder.Services.AddScoped<UsersRepository>();
 builder.Services.AddScoped<DietsRepository>();
 builder.Services.AddScoped<ExercisesRepository>();
 
-
-
-
 // Add authentication services and configure JWT Bearer.
 //builder.Services.AddAuthentication(options =>
 //{
@@ -61,6 +62,9 @@ builder.Services.AddScoped<ExercisesRepository>();
 //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
 //   };
 //});
+// Configure logging
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 var app = builder.Build();
 

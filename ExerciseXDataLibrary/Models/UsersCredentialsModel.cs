@@ -21,8 +21,8 @@ namespace ExerciseXDataLibrary.Models
         public int U_Id { get; set; }
         public UsersModel Users { get; set; }
 
-        [DisplayName ("Password")]
-        public string? Password { get; set; }
+        //[DisplayName ("Password")]
+        //public string? Password { get; set; }
 
         [DisplayName("Password Hush")]
         public string Password_Hush { get; set; }
@@ -31,6 +31,6 @@ namespace ExerciseXDataLibrary.Models
         public string Password_Salt { get; set; }
 
         [DisplayName("Last Updated")]
-        public DateTime? Last_Updated { get; set; }
+        public DateTime Last_Updated { get; set; }
     }
 }

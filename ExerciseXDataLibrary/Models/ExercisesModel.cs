@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using ExerciseXData.Models;
 
 namespace ExerciseXDataLibrary.Models
 {
@@ -49,6 +47,6 @@ namespace ExerciseXDataLibrary.Models
         [DisplayName("Modified Date")]
         public DateTime E_Modified_Date { get; set; } = DateTime.Now;
 
-        public List<UsersExercisesModel> UsersExercises { get; set; }
+        public ICollection<UsersExercisesModel> UsersExercises { get; set; }
     }
 }

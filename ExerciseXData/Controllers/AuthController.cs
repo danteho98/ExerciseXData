@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExerciseXData.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    //[Route("api/[controller]")]
+    //[ApiController]
     public class AuthController : ControllerBase
     {
         //private readonly AuthService _authService;
@@ -42,11 +42,5 @@ namespace ExerciseXData.Controllers
 
         //    return Unauthorized("Unknown role");
         //}
-    }
-
-    public class LoginModel
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
     }
 }

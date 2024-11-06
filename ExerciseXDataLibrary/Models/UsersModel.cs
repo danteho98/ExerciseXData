@@ -24,10 +24,10 @@ namespace ExerciseXDataLibrary.Models
         public string ? Role { get; set; }
 
         [DisplayName("Height (cm)")]
-        public double ? Height { get; set; }
+        public double ? Height_CM { get; set; }
 
         [DisplayName("Weight (kg)")]
-        public double ? Weight { get; set; }
+        public double ? Weight_KG { get; set; }
 
         [DisplayName("Goal")]
         public string ? Goal { get; set; }
@@ -51,12 +51,12 @@ namespace ExerciseXDataLibrary.Models
         public DateTime U_Created_Date { get; set; } = DateTime.UtcNow;
 
         [DisplayName("Last Login")]
-        public DateTime U_Last_Login {  get; set; }
+        public DateTime U_Last_Login {  get; set; } = DateTime.UtcNow;
 
         //Relationships
-        public List<UsersCredentialsModel> UsersCredentials { get; set; }
-        public List<UsersDietsModel> UsersDiets { get; set; }
-        public List<UsersExercisesModel> UsersExercises { get; set; }
+        public ICollection<UsersCredentialsModel> UsersCredentials { get; set; }
+        public ICollection<UsersDietsModel> UsersDiets { get; set; }
+        public ICollection<UsersExercisesModel> UsersExercises { get; set; }
 
 
     }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace ExerciseXDataLibrary.DataTransferObject
 {
@@ -21,5 +15,20 @@ namespace ExerciseXDataLibrary.DataTransferObject
         public double Height { get; set; }
         public double Weight { get; set; }
         public string Goal { get; set; }
+
+        [DisplayName("Lifestyle Condition 1")]
+        public string? Lifestyle_Condition_1 { get; set; }
+
+        [DisplayName("Lifestyle Condition 2")]
+        public string? Lifestyle_Condition_2 { get; set; }
+
+        [DisplayName("Lifestyle Condition 3")]
+        public string? Lifestyle_Condition_3 { get; set; }
+
+        [DisplayName("Lifestyle Condition 4")]
+        public string? Lifestyle_Condition_4 { get; set; }
+
+        [DisplayName("Lifestyle Condition 5")]
+        public string? Lifestyle_Condition_5 { get; set; }
     }
 }
