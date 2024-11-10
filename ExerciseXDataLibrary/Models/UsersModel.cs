@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using static ExerciseXDataLibrary.Models.UserGender;
 
 namespace ExerciseXDataLibrary.Models
 {
@@ -14,10 +15,9 @@ namespace ExerciseXDataLibrary.Models
         
         [DisplayName ("User Name")]
         public string ? U_Name { get; set; }
-
-        [DisplayName ("Gender")]
-        public string ? Gender { get; set; }
-
+        
+        public Gender Gender { get; set; }
+       
         [DisplayName ("Age")]
         public int ? Age { get; set; }
 

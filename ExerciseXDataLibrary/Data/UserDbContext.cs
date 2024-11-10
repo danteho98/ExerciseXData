@@ -24,6 +24,14 @@ namespace ExerciseXDataLibrary.Data
                 .Property(u => u.Cre_Id)
                 .ValueGeneratedOnAdd();
 
+            modelBuilder.Entity<UsersModel>()
+                .Property(u => u.Gender)
+                .HasConversion<string>(); // Convert enum to string in DB
+
+            modelBuilder.Entity<UsersModel>()
+                .HasIndex(u => u.U_Email)
+                .IsUnique();
+
             //1 to many relationship to UsersCredentials
             modelBuilder.Entity<UsersModel>()
                 .HasMany(u => u.UsersCredentials)

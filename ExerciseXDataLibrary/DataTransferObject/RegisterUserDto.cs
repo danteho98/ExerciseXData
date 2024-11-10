@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using static ExerciseXDataLibrary.Models.UserGender;
+using static ExerciseXDataLibrary.Models.UsersModel;
 
 namespace ExerciseXDataLibrary.DataTransferObject
 {
