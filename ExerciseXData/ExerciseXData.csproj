@@ -24,4 +24,8 @@
     <ProjectReference Include="..\ExerciseXDataLibrary\ExerciseXDataLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Users\" />
+  </ItemGroup>
+
 </Project>

@@ -97,5 +97,15 @@ namespace ExerciseXData.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult Index() 
+        {
+            var model = new UserDashboardDto
+            {
+                Username = User.Identity.Name  // Assuming the user is logged in
+            };
+
+            return View(model);
+        }
     }
 }

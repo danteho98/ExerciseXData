@@ -1,0 +1,56 @@
+﻿@model ExerciseXDataLibrary.DataTransferObject.UserDashboardDto
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="dashboard-styles.css"> <!-- Link to your CSS file for styling -->
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Welcome, @Model.Username</h1>
+            <a href="/Account/Logout" class="logout-button">Logout</a>
+        </header>
+
+        <section class="dashboard-content">
+            <!-- User Profile Information -->
+            <div class="profile-info">
+                <h2>Your Profile</h2>
+                <p><strong>Username:</strong>@Model.Username</p> 
+                <p><strong>Email:</strong> @Model.Email</p>
+                <p><strong>Age:</strong> @Model.Age</p>
+                <p><strong>Height:</strong> @Model.Height_CM cm</p>
+                <p><strong>Weight:</strong> @Model.Weight_KG kg</p>
+                <p><strong>Goal:</strong> @Model.Goal</p>
+            </div>
+
+            <!-- Exercise Section -->
+            <div class="exercise-section">
+                <h2>Your Exercises</h2>
+                <ul>
+                    @foreach (var exercise in Model.Exercises)
+                    {
+                        <li>@exercise.Name - @exercise.Duration minutes</li>
+                    }
+                </ul>
+                <a href="/Exercise/Add" class="add-exercise">Add New Exercise</a>
+            </div>
+
+            <!-- Diet Section -->
+            <div class="diet-section">
+                <h2>Your Diet</h2>
+                <ul>
+                    @foreach (var diet in Model.DietPlans)
+                    {
+                        <li>@diet.Name - @diet.Calories kcal</li>
+                    }
+                </ul>
+                <a href="/Diet/Add" class="add-diet">Add New Diet Plan</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
