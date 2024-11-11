@@ -48,8 +48,8 @@ namespace ExerciseXData.Controllers
                 dto.Height,
                 dto.Weight,
                 dto.Goal,
-                dto.Lifestyle_Condition_1, 
-                dto.Lifestyle_Condition_2, 
+                dto.Lifestyle_Condition_1,
+                dto.Lifestyle_Condition_2,
                 dto.Lifestyle_Condition_3,
                 dto.Lifestyle_Condition_4,
                 dto.Lifestyle_Condition_5
@@ -98,14 +98,23 @@ namespace ExerciseXData.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index() 
+        public IActionResult Index()
         {
-            var model = new UserDashboardDto
-            {
-                Username = User.Identity.Name  // Assuming the user is logged in
-            };
+            //if (User.Identity.IsAuthenticated) 
+            //{ 
+            //    var model = new UserDashboardDto
+            //    {
+            //        Username = User.Identity.Name  // Assuming the user is logged in
+            //    };
 
-            return View(model);
+            //    return View(model);
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Login");
+            //}
+
+            return View();
         }
     }
 }

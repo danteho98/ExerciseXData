@@ -1,5 +1,10 @@
 ﻿@model ExerciseXDataLibrary.DataTransferObject.UserDashboardDto
 
+@* @{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+} *@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +16,7 @@
 <body>
     <div class="dashboard-container">
         <header class="dashboard-header">
-            <h1>Welcome, @Model.Username</h1>
+            <h1>Welcome, @(Model?.Username ?? "Guest")</h1>
             <a href="/Account/Logout" class="logout-button">Logout</a>
         </header>
 
@@ -54,3 +59,10 @@
     </div>
 </body>
 </html>
+
+@section Scripts {
+    @*this part is responsible for the client side*@
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
