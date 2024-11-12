@@ -37,24 +37,24 @@ namespace ExerciseXDataLibrary.Repositories
                 var newUser = new UsersModel
                 {
                     U_Email = email,
-                    U_Name = userName,
+                    U_Username = userName,
                     Gender = gender,
-                    Age = age,
-                    Role = "NormalUser", //Default role
-                    Height_CM = height,
-                    Weight_KG = weight,
-                    Goal = goal,
-                    Lifestyle_Condition_1 = lifeStyle1,
-                    Lifestyle_Condition_2 = lifeStyle2,
-                    Lifestyle_Condition_3 = lifeStyle3,
-                    Lifestyle_Condition_4 = lifeStyle4,
-                    Lifestyle_Condition_5 = lifeStyle5,
+                    U_Age = age,
+                    U_Role = "NormalUser", //Default role
+                    U_Height_CM = height,
+                    U_Weight_KG = weight,
+                    U_Goal = goal,
+                    U_Lifestyle_Condition_1 = lifeStyle1,
+                    U_Lifestyle_Condition_2 = lifeStyle2,
+                    U_Lifestyle_Condition_3 = lifeStyle3,
+                    U_Lifestyle_Condition_4 = lifeStyle4,
+                    U_Lifestyle_Condition_5 = lifeStyle5,
                     U_Created_Date = DateTime.UtcNow,
                     U_Last_Login = DateTime.UtcNow
                 };
 
                 // Role validation to ensure the role is always "NormalUser" at registration
-                if (newUser.Role != "NormalUser")
+                if (newUser.U_Role != "NormalUser")
                 {
                     throw new UnauthorizedAccessException("Role assignment is restricted.");
                 }
@@ -121,7 +121,7 @@ namespace ExerciseXDataLibrary.Repositories
 
         public async Task<bool> LoginUserAsync(string username, string password)
         {
-            var user = await _userDbContext.Users.SingleOrDefaultAsync(u => u.U_Name == username);
+            var user = await _userDbContext.Users.SingleOrDefaultAsync(u => u.U_Username == username);
 
             if (user == null)
             {
@@ -154,6 +154,32 @@ namespace ExerciseXDataLibrary.Repositories
                 // Invalid password
                 _logger.LogWarning("Login failed: Incorrect password for User ID {UserId}", user.U_Id);
                 return false;
+            }
+        }
+
+        public async Task<UsersModel?> GetUserByEmailOrUsernameAsync(string emailOrUsername)
+        {
+            try
+            {
+                // Retrieve the user by email or username
+                var user = await _userDbContext.Users
+                    .Include(u => u.UsersExercises)   // Load exercises if there's a relationship
+                    .Include(u => u.UsersDiets)   // Load diet plans if there's a relationship
+                    .FirstOrDefaultAsync(u => u.U_Email == emailOrUsername || u.U_Username == emailOrUsername);
+
+                if (user == null)
+                {
+                    _logger.LogWarning("User not found with email or username: {EmailOrUsername}", emailOrUsername);
+                    return null;
+                }
+
+                _logger.LogInformation("User found with ID: {UserId}", user.U_Id);
+                return user;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving user by email or username: {EmailOrUsername}", emailOrUsername);
+                return null;
             }
         }
     }

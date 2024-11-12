@@ -80,6 +80,15 @@ namespace ExerciseXData.Controllers
                 return View(loginDto);
             }
 
+            // Check if user exists
+            var user = await _userService.FindUserByEmailOrUsernameAsync(loginDto.Username); // Use loginDto.EmailOrUsername
+            if (user == null)
+            {
+                // User does not exist, pass message to ViewData
+                ViewData["ErrorMessage"] = "No account found with that email or username. Please register first.";
+                return View(loginDto);  // Pass loginDto instead of an undefined variable
+            }
+
             bool loginSuccess = await _usersRepository.LoginUserAsync(loginDto.Username, loginDto.Password);
 
             if (loginSuccess)
@@ -98,23 +107,23 @@ namespace ExerciseXData.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult UserDashboard()
         {
-            //if (User.Identity.IsAuthenticated) 
-            //{ 
-            //    var model = new UserDashboardDto
-            //    {
-            //        Username = User.Identity.Name  // Assuming the user is logged in
-            //    };
+            if (User.Identity.IsAuthenticated)
+            {
+                var model = new UserDashboardDto
+                {
+                    Username = User.Identity.Name  // Assuming the user is logged in
+                };
 
-            //    return View(model);
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Login");
-            //}
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
 
-            return View();
+            //return View();
         }
     }
 }

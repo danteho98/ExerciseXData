@@ -14,13 +14,14 @@ namespace ExerciseXDataLibrary.DataTransferObject
         public double Height_CM { get; set; }
         public double Weight_KG { get; set; }
         public string Goal { get; set; }
-        public List<ExerciseDto> Exercises { get; set; }
+        public List<ExerciseDto> ExercisePlans { get; set; }
         public List<DietDto> DietPlans { get; set; }
     }
 
     public class ExerciseDto
     {
         public string Name { get; set; }
+        public int Repetition { get; set; }
         public int Duration { get; set; } // in minutes
     }
 

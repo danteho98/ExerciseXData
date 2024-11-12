@@ -2,6 +2,7 @@
 using ExerciseXDataLibrary.Data;
 using static ExerciseXDataLibrary.Models.UsersModel;
 using static ExerciseXDataLibrary.Models.UserGender;
+using ExerciseXDataLibrary.DataTransferObject;
 
 namespace ExerciseXDataLibrary.Services
 {
@@ -53,6 +54,28 @@ namespace ExerciseXDataLibrary.Services
             }
 
             return await _usersRepository.LoginUserAsync(username, password);
+        }
+
+        public async Task<UserDashboardDto> FindUserByEmailOrUsernameAsync (string emailOrUsername)
+        {
+            var user = await _usersRepository.GetUserByEmailOrUsernameAsync(emailOrUsername);
+            if (user == null)
+            {
+                return null;
+            }
+
+            // Map the user entity to the DTO for dashboard or other views
+            return new UserDashboardDto
+            {
+                Username = user.U_Username,
+                Email = user.U_Email,
+                Age = user.U_Age,
+                Height_CM = user.U_Height_CM,
+                Weight_KG = user.U_Weight_KG,
+                Goal = user.U_Goal,
+                ExercisePlans = (List<ExerciseDto>)user.UsersExercises,
+                DietPlans = (List<DietDto>)user.UsersDiets
+            };
         }
     }
 }

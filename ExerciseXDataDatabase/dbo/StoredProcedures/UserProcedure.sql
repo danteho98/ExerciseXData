@@ -5,15 +5,15 @@ SELECT
 	[U_Id],
     [U_Email],
     [U_Name],
-    [Gender],
-    [Age],
-    [Height_CM],
-    [Weight_KG],
-    [Goal],
-    [Lifestyle_Condition_1],
-    [Lifestyle_Condition_2],
-    [Lifestyle_Condition_3],
-    [Lifestyle_Condition_4],
-    [Lifestyle_Condition_5]
+    [U_Gender],
+    [U_Age],
+    [U_Height_CM],
+    [U_Weight_KG],
+    [U_Goal],
+    [U_Lifestyle_Condition_1],
+    [U_Lifestyle_Condition_2],
+    [U_Lifestyle_Condition_3],
+    [U_Lifestyle_Condition_4],
+    [U_Lifestyle_Condition_5]
 FROM Users
 END

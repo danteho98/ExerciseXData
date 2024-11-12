@@ -490,4 +490,81 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="U_Created_Date" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="1fed78b6-ff01-4f09-a2fd-d47c47ddf38b" ChangeDateTime="11/12/2024 17:53:29">
+    <Property Name="ElementName" Value="[dbo].[Users].[Age]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="U_Age" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4a7b832a-faaa-4b7a-9d52-51eaa32ce839" ChangeDateTime="11/12/2024 17:53:36">
+    <Property Name="ElementName" Value="[dbo].[Users].[Height_CM]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="U_Height_CM" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b099b6a7-2dc2-4abb-a517-f3ae9c9d8675" ChangeDateTime="11/12/2024 17:53:39">
+    <Property Name="ElementName" Value="[dbo].[Users].[Weight_KG]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="U_Weight_KG" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5ab85fe8-1b01-4f55-9a67-6fa5df30b2b5" ChangeDateTime="11/12/2024 17:53:42">
+    <Property Name="ElementName" Value="[dbo].[Users].[Gender]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="U_Gender" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bced0e83-4ae6-4284-907d-15bb0ca67f7a" ChangeDateTime="11/12/2024 17:53:45">
+    <Property Name="ElementName" Value="[dbo].[Users].[Role]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="U_Role" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c078c659-1026-490b-a708-a1d6d3582b32" ChangeDateTime="11/12/2024 17:53:49">
+    <Property Name="ElementName" Value="[dbo].[Users].[Goal]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="U_Goal" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ecae6e64-1e1f-4e23-9012-2fa8d948fc8c" ChangeDateTime="11/12/2024 17:53:53">
+    <Property Name="ElementName" Value="[dbo].[Users].[Lifestyle_Condition_1]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="U_Lifestyle_Condition_1" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1b4a550a-d3b5-4bd5-b071-d2336426858a" ChangeDateTime="11/12/2024 17:53:57">
+    <Property Name="ElementName" Value="[dbo].[Users].[Lifestyle_Condition_2]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="U_Lifestyle_Condition_2" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="672bd8bf-0892-4443-92a8-75c7d5aa7e89" ChangeDateTime="11/12/2024 17:54:03">
+    <Property Name="ElementName" Value="[dbo].[Users].[Lifestyle_Condition_3]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="U_Lifestyle_Condition_3" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="924f6808-d680-4c24-9587-ee7a41c95870" ChangeDateTime="11/12/2024 17:54:08">
+    <Property Name="ElementName" Value="[dbo].[Users].[Lifestyle_Condition_5]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="U_Lifestyle_Condition_5" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e8cc7126-97a5-4f48-8690-e4c0bd28d942" ChangeDateTime="11/12/2024 17:54:12">
+    <Property Name="ElementName" Value="[dbo].[Users].[Lifestyle_Condition_4]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Users]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="U_Lifestyle_Condition_4" />
+  </Operation>
 </Operations>
