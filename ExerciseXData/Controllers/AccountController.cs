@@ -6,6 +6,7 @@ using System.ComponentModel;
 using static ExerciseXDataLibrary.Models.UsersModel;
 using static ExerciseXDataLibrary.Models.UserGender;
 using ExerciseXDataLibrary.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ExerciseXData.Controllers
 {
@@ -107,6 +108,7 @@ namespace ExerciseXData.Controllers
         }
 
         [HttpGet]
+        [Authorize (Roles = "NormalUser")]
         public IActionResult UserDashboard()
         {
             if (User.Identity.IsAuthenticated)
@@ -124,6 +126,13 @@ namespace ExerciseXData.Controllers
             }
 
             //return View();
+        }
+
+        [HttpGet]
+        [Authorize (Roles = "Admin")]
+        public IActionResult AdminDashboard()
+        {
+            return View();
         }
     }
 }

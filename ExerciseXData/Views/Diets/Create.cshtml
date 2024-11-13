@@ -1,73 +1,84 @@
 ﻿@using ExerciseXDataLibrary.Models;
-
 @model DietsModel
 
-<form method="post">
-    <div class=" border p-3 mt-4">
-        <div class=" row pb-2">
-            <h1 class="text-primary">Create Diets</h1>
-            <hr />
-        </div>
-        <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
+@* Check if the user is in the Admin role *@
+@if (User.IsInRole("Admin"))
+{
+    <form method="post">
+        <div class=" border p-3 mt-4">
+            <div class=" row pb-2">
+                <h1 class="text-primary">Create Diets</h1>
+                <hr />
+            </div>
+            <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
 
-        <div class="mb-3">
-            <label asp-for="D_Id"></label>
-            <input asp-for="D_Id" class="form-control" />
-            <span asp-validation-for="D_Id" class="text-danger"></span>
-        </div>
+            <div class="mb-3">
+                <label asp-for="D_Id"></label>
+                <input asp-for="D_Id" class="form-control" />
+                <span asp-validation-for="D_Id" class="text-danger"></span>
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="D_Name"></label>
-            <input asp-for="D_Name" class="form-control" />
-            <span asp-validation-for="D_Name" class="text-danger"></span>
-        </div>
+            <div class="mb-3">
+                <label asp-for="D_Name"></label>
+                <input asp-for="D_Name" class="form-control" />
+                <span asp-validation-for="D_Name" class="text-danger"></span>
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="D_Description"></label>
-            <input asp-for="D_Description" class="form-control" />
-            <span asp-validation-for="D_Description" class="text-danger"></span>
-        </div>
+            <div class="mb-3">
+                <label asp-for="D_Description"></label>
+                <input asp-for="D_Description" class="form-control" />
+                <span asp-validation-for="D_Description" class="text-danger"></span>
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="D_Pros_1"></label>
-            <input asp-for="D_Pros_1" class="form-control" />
-            <span asp-validation-for="D_Pros_1" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="D_Pros_2"></label>
-            <input asp-for="D_Pros_2" class="form-control" />
-            <span asp-validation-for="D_Pros_2" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="D_Pros_3"></label>
-            <input asp-for="D_Pros_3" class="form-control" />
-            <span asp-validation-for="D_Pros_3" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="D_Cons_1"></label>
-            <input asp-for="D_Cons_1" class="form-control" />
-            <span asp-validation-for="D_Cons_1" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="D_Cons_2"></label>
-            <input asp-for="D_Cons_2" class="form-control" />
-            <span asp-validation-for="D_Cons_2" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="D_Cons_3"></label>
-            <input asp-for="D_Cons_3" class="form-control" />
-            <span asp-validation-for="D_Cons_3" class="text-danger"></span>
-        </div>
+            <div class="mb-3">
+                <label asp-for="D_Pros_1"></label>
+                <input asp-for="D_Pros_1" class="form-control" />
+                <span asp-validation-for="D_Pros_1" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="D_Pros_2"></label>
+                <input asp-for="D_Pros_2" class="form-control" />
+                <span asp-validation-for="D_Pros_2" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="D_Pros_3"></label>
+                <input asp-for="D_Pros_3" class="form-control" />
+                <span asp-validation-for="D_Pros_3" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="D_Cons_1"></label>
+                <input asp-for="D_Cons_1" class="form-control" />
+                <span asp-validation-for="D_Cons_1" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="D_Cons_2"></label>
+                <input asp-for="D_Cons_2" class="form-control" />
+                <span asp-validation-for="D_Cons_2" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="D_Cons_3"></label>
+                <input asp-for="D_Cons_3" class="form-control" />
+                <span asp-validation-for="D_Cons_3" class="text-danger"></span>
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="D_Modified_Date"></label>
-            <input asp-for="D_Modified_Date" class="form-control" />
-            <span asp-validation-for="D_Modified_Date" class="text-danger"></span>
+            <div class="mb-3">
+                <label asp-for="D_Modified_Date"></label>
+                <input asp-for="D_Modified_Date" class="form-control" />
+                <span asp-validation-for="D_Modified_Date" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+            <a asp-controller="Diets" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
-        <a asp-controller="Diets" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </form>
+}
+
+else
+{
+    <div class="alert alert-danger mt-4">
+        <h4 class="alert-heading">Access Denied</h4>
+        <p>You do not have permission to access this page. Please contact an administrator if you believe this is an error.</p>
     </div>
-</form>
+}
 
 @section Scripts{
     @*this part is responsible for the client side*@

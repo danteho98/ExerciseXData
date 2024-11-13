@@ -1,43 +1,53 @@
 ﻿@using ExerciseXDataLibrary.Models;
 @model CategoriesModel
 
-<form method="post" asp-action="Delete">
-    @*DeletePOST here can change name with the CategoryController POST method*@
-    <input type="hidden" asp-for="C_Id" />
-    <div class=" border p-3 mt-4">
-        <div class=" row pb-2">
-            <h1 class="text-primary">Delete Category</h1>
-            <hr />
-        </div>
-        <div asp-validation-summary="ModelOnly"></div> @*Displays all the validation texts*@
+@* Check if the user is in the Admin role *@
+@if (User.IsInRole("Admin"))
+{
+    <form method="post" asp-action="Delete">
+        @*DeletePOST here can change name with the CategoryController POST method*@
+        <input type="hidden" asp-for="C_Id" />
+        <div class=" border p-3 mt-4">
+            <div class=" row pb-2">
+                <h1 class="text-primary">Delete Category</h1>
+                <hr />
+            </div>
+            <div asp-validation-summary="ModelOnly"></div> @*Displays all the validation texts*@
+            
+            <div class="mb-3">
+                <label asp-for="C_Id"></label>
+                <input asp-for="C_Id" disabled class="form-control" />
+            </div>
 
+            <div class="mb-3">
+                <label asp-for="C_Image"></label>
+                <input asp-for="C_Image" disabled class="form-control" />
+            </div>
 
-        </div>
-        <div class="mb-3">
-            <label asp-for="C_Id"></label>
-            <input asp-for="C_Id" disabled class="form-control" />
-        </div>
-        
-        <div class="mb-3">
-            <label asp-for="C_Image"></label>
-            <input asp-for="C_Image" disabled class="form-control" />
-        </div>
-        
-        <div class="mb-3">
-            <label asp-for="C_Name"></label>
-            <input asp-for="C_Name" disabled class="form-control" />
-        </div>
+            <div class="mb-3">
+                <label asp-for="C_Name"></label>
+                <input asp-for="C_Name" disabled class="form-control" />
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="C_Modified_Date"></label>
-            <input asp-for="C_Modified_Date" class="form-control" />
-            <span asp-validation-for="C_Modified_Date" class="text-danger"></span>
-        </div>
+            <div class="mb-3">
+                <label asp-for="C_Modified_Date"></label>
+                <input asp-for="C_Modified_Date" class="form-control" />
+                <span asp-validation-for="C_Modified_Date" class="text-danger"></span>
+            </div>
 
-        <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
-        <a asp-controller="Categories" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+            <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+            <a asp-controller="Categories" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+        </div>
+    </form>
+}
+
+else
+{
+    <div class="alert alert-danger mt-4">
+        <h4 class="alert-heading">Access Denied</h4>
+        <p>You do not have permission to access this page. Please contact an administrator if you believe this is an error.</p>
     </div>
-</form>
+}
 
 @section Scripts{
     @*this part is responsible for the client side*@

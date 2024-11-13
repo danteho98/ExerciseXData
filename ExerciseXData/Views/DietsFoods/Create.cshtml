@@ -1,59 +1,73 @@
 ﻿@using ExerciseXDataLibrary.Models
 @model DietsFoodsModel
 
-<form method="post">
-    <div class=" border p-3 mt-4">
-        <div class=" row pb-2">
-            <h1 class="text-primary">Create DietsFoods</h1>
-            <hr />
-        </div>
-        <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
+@* Check if the user is in the Admin role *@
+@if (User.IsInRole("Admin"))
+{
 
-        <div class="mb-3">
-            <label asp-for="DF_Id"></label>
-            <input asp-for="DF_Id" class="form-control" />
-            <span asp-validation-for="DF_Id" class="text-danger"></span>
-        </div>
+    <form method="post">
+        <div class=" border p-3 mt-4">
+            <div class=" row pb-2">
+                <h1 class="text-primary">Create DietsFoods</h1>
+                <hr />
+            </div>
+            <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
 
-        <div class="mb-3">
-            <label asp-for="D_Id"></label>
-            <input asp-for="D_Id" class="form-control" />
-            <span asp-validation-for="D_Id" class="text-danger"></span>
-        </div>
+            <div class="mb-3">
+                <label asp-for="DF_Id"></label>
+                <input asp-for="DF_Id" class="form-control" />
+                <span asp-validation-for="DF_Id" class="text-danger"></span>
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="F_Id"></label>
-            <input asp-for="F_Id" class="form-control" />
-            <span asp-validation-for="F_Id" class="text-danger"></span>
-        </div>
-      
-        <div class="mb-3">
-            <label asp-for="DF_Serving_Size"></label>
-            <input asp-for="DF_Serving_Size" class="form-control" />
-            <span asp-validation-for="DF_Serving_Size" class="text-danger"></span>
-        </div>
+            <div class="mb-3">
+                <label asp-for="D_Id"></label>
+                <input asp-for="D_Id" class="form-control" />
+                <span asp-validation-for="D_Id" class="text-danger"></span>
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="DF_Frequency"></label>
-            <input asp-for="DF_Frequency" class="form-control" />
-            <span asp-validation-for="DF_Frequency" class="text-danger"></span>
-        </div>
+            <div class="mb-3">
+                <label asp-for="F_Id"></label>
+                <input asp-for="F_Id" class="form-control" />
+                <span asp-validation-for="F_Id" class="text-danger"></span>
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="DF_Total_Calories"></label>
-            <input asp-for="DF_Total_Calories" class="form-control" />
-            <span asp-validation-for="DF_Total_Calories" class="text-danger"></span>
-        </div>
+            <div class="mb-3">
+                <label asp-for="DF_Serving_Size"></label>
+                <input asp-for="DF_Serving_Size" class="form-control" />
+                <span asp-validation-for="DF_Serving_Size" class="text-danger"></span>
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="DF_Modified_Date"></label>
-            <input asp-for="DF_Modified_Date" class="form-control" />
-            <span asp-validation-for="DF_Modified_Date" class="text-danger"></span>
+            <div class="mb-3">
+                <label asp-for="DF_Frequency"></label>
+                <input asp-for="DF_Frequency" class="form-control" />
+                <span asp-validation-for="DF_Frequency" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DF_Total_Calories"></label>
+                <input asp-for="DF_Total_Calories" class="form-control" />
+                <span asp-validation-for="DF_Total_Calories" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DF_Modified_Date"></label>
+                <input asp-for="DF_Modified_Date" class="form-control" />
+                <span asp-validation-for="DF_Modified_Date" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+            <a asp-controller="DietsFoods" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
-        <a asp-controller="DietsFoods" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </form>
+}
+
+
+else
+{
+    <div class="alert alert-danger mt-4">
+        <h4 class="alert-heading">Access Denied</h4>
+        <p>You do not have permission to access this page. Please contact an administrator if you believe this is an error.</p>
     </div>
-</form>
+}
 
 @section Scripts {
     @*this part is responsible for the client side*@
