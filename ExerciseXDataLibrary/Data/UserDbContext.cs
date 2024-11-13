@@ -3,11 +3,7 @@ using ExerciseXDataLibrary.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ExerciseXDataLibrary.Data
 {
@@ -21,6 +17,7 @@ namespace ExerciseXDataLibrary.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
+            base.OnModelCreating(modelBuilder); // Ensures the Identity configurations are applied
 
             modelBuilder.Entity<UsersCredentialsModel>()
                 .Property(u => u.Cre_Id)
