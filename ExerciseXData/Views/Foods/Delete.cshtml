@@ -1,52 +1,65 @@
 ﻿@using ExerciseXDataLibrary.Models;
 @model FoodsModel
 
-<form method="post" asp-action="DeletePOST">
-    @*DeletePOST here can change name with the CategoryController POST method*@
-    <input asp-for="F_Id" hidden />
-    <div class=" border p-3 mt-4">
-        <div class=" row pb-2">
-            <h1 class="text-primary">Delete Food</h1>
-            <hr />
+@* Check if the user is in the Admin role *@
+@if (User.IsInRole("Admin"))
+{
+
+
+    <form method="post" asp-action="DeletePOST">
+        @*DeletePOST here can change name with the CategoryController POST method*@
+        <input asp-for="F_Id" hidden />
+        <div class=" border p-3 mt-4">
+            <div class=" row pb-2">
+                <h1 class="text-primary">Delete Food</h1>
+                <hr />
+            </div>
+            <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
+
+            <div class="mb-3">
+                <label asp-for="F_Id"></label>
+                <input asp-for="F_Id" disabled class="form-control" />
+
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="F_Image"></label>
+                <input asp-for="F_Image" disabled class="form-control" />
+
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="F_Name"></label>
+                <input asp-for="F_Name" disabled class="form-control" />
+
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="F_Calories"></label>
+                <input asp-for="F_Calories" disabled class="form-control" />
+
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="F_Modified_Date"></label>
+                <input asp-for="F_Modified_Date" disabled class="form-control" />
+
+            </div>
+
+
+            <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+            <a asp-controller="Foods" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
         </div>
-        <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
+    </form>
+}
 
-        <div class="mb-3">
-            <label asp-for="F_Id"></label>
-            <input asp-for="F_Id" disabled class="form-control" />
-
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="F_Image"></label>
-            <input asp-for="F_Image" disabled class="form-control" />
-
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="F_Name"></label>
-            <input asp-for="F_Name" disabled class="form-control" />
-
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="F_Calories"></label>
-            <input asp-for="F_Calories" disabled class="form-control" />
-
-        </div>
-
-        <div class="mb-3">
-        <label asp-for="F_Modified_Date"></label>
-        <input asp-for="F_Modified_Date" disabled class="form-control" />
-
-        </div>
-
-       
-        <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
-        <a asp-controller="Foods" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+else
+{
+    <div class="alert alert-danger mt-4">
+        <h4 class="alert-heading">Access Denied</h4>
+        <p>You do not have permission to access this page. Please contact an administrator if you believe this is an error.</p>
     </div>
-</form>
-
+}
 @section Scripts{
     @*this part is responsible for the client side*@
     @{

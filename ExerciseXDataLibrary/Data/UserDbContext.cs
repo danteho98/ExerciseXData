@@ -1,5 +1,7 @@
 ﻿using ExerciseXData.Models;
 using ExerciseXDataLibrary.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ExerciseXDataLibrary.Data
 {
-    public class UserDbContext: DbContext
+    public class UserDbContext: IdentityDbContext<IdentityUser>
     {
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) {}
         public DbSet<UsersModel> Users { get; set; }

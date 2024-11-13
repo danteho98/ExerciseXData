@@ -1,5 +1,24 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Assuming your existing layout is called _Layout.cshtml
+}
+
+@* Check if the user is in the Admin role *@
+@if (User.IsInRole("Admin"))
+{
+    <p>Success!</p>
+}
+else
+{
+    <div class="alert alert-danger mt-4">
+        <h4 class="alert-heading">Access Denied</h4>
+        <p>You do not have permission to access this page. Please contact an administrator if you believe this is an error.</p>
+    </div>
+}
+
+
+@section Scripts {
+    @*this part is responsible for the client side*@
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
 }

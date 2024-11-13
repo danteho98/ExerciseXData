@@ -14,11 +14,13 @@ namespace ExerciseXData.Controllers
     {
         private readonly UsersService _userService;
         private readonly UsersRepository _usersRepository;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountController(UsersService userService, UsersRepository usersRepository) // Injected UsersService
+        public AccountController(UsersService userService, UsersRepository usersRepository, SignInManager<IdentityUser> signInManager) // Injected UsersService
         {
             _userService = userService;
             _usersRepository = usersRepository;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -72,8 +74,8 @@ namespace ExerciseXData.Controllers
             return View();
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginDto loginDto)
         {
             if (!ModelState.IsValid)
             {
@@ -81,27 +83,24 @@ namespace ExerciseXData.Controllers
                 return View(loginDto);
             }
 
-            // Check if user exists
-            var user = await _userService.FindUserByEmailOrUsernameAsync(loginDto.Username); // Use loginDto.EmailOrUsername
+            // Find user by email or username
+            var user = await _userService.FindUserByEmailOrUsernameAsync(loginDto.EmailOrUsername);
             if (user == null)
             {
-                // User does not exist, pass message to ViewData
                 ViewData["ErrorMessage"] = "No account found with that email or username. Please register first.";
-                return View(loginDto);  // Pass loginDto instead of an undefined variable
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(loginDto);
             }
 
-            bool loginSuccess = await _usersRepository.LoginUserAsync(loginDto.Username, loginDto.Password);
+            // Use SignInManager to authenticate user
+            var result = await _signInManager.PasswordSignInAsync(user.Username, loginDto.Password, isPersistent: false, lockoutOnFailure: false);
 
-            if (loginSuccess)
+            if (result.Succeeded)
             {
-                //return Ok(new { message = "Login successful." });
-                // Redirect to a secure page, e.g., dashboard
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("UserDashboard");
             }
             else
             {
-                //return Unauthorized(new { message = "Invalid email or password." });
-                // If login fails, display an error message
                 ViewData["ErrorMessage"] = "Username or password is incorrect.";
                 return View(loginDto);
             }
