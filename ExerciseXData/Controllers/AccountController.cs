@@ -57,14 +57,18 @@ namespace ExerciseXData.Controllers
                 dto.Lifestyle_Condition_4,
                 dto.Lifestyle_Condition_5
             );
-
-            if (result)
+            
+            if (result.Succeeded)
             {
                 // Redirect to a confirmation page or login page after successful registration
                 return RedirectToAction("Login", "Account");
             }
 
-            ModelState.AddModelError("", "Registration failed. Please try again.");
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
             return View(dto); // Return to the view with an error message if registration fails
         }
 
@@ -84,16 +88,16 @@ namespace ExerciseXData.Controllers
             }
 
             // Find user by email or username
-            var user = await _userService.FindUserByEmailOrUsernameAsync(loginDto.EmailOrUsername);
+            var user = await _userService.FindUserByEmailAsync(loginDto.Email);
             if (user == null)
             {
-                ViewData["ErrorMessage"] = "No account found with that email or username. Please register first.";
+                ViewData["ErrorMessage"] = "No account found with that email. Please register first.";
                 ModelState.AddModelError("", "Invalid login attempt.");
                 return View(loginDto);
             }
 
             // Use SignInManager to authenticate user
-            var result = await _signInManager.PasswordSignInAsync(user.Username, loginDto.Password, isPersistent: false, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(user.Email, loginDto.Password, isPersistent: false, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {

@@ -16,12 +16,13 @@ namespace ExerciseXDataLibrary.Models
         [DisplayName ("User Name")]
         public string U_Username { get; set; }
         
-        public Gender Gender { get; set; }
-       
+        public Gender U_Gender { get; set; }
+
+        [DisplayName("Role")]
+        public string U_Role { get; set; }
+
         [DisplayName ("Age")]
         public int U_Age { get; set; }
-
-        public string U_Role { get; set; }
 
         [DisplayName("Height (cm)")]
         public double U_Height_CM { get; set; }

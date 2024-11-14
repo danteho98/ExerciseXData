@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ExerciseXDataLibrary.DataTransferObject
 {
-    public class LoginDto
+    public class DietDto
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string Name { get; set; }
+        public int Calories { get; set; } // in kcal
     }
 }

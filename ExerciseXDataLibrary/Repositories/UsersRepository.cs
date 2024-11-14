@@ -38,9 +38,10 @@ namespace ExerciseXDataLibrary.Repositories
                 {
                     U_Email = email,
                     U_Username = userName,
-                    Gender = gender,
-                    U_Age = age,
+                    U_Gender = gender,
                     U_Role = "NormalUser", //Default role
+                    U_Age = age,
+                    
                     U_Height_CM = height,
                     U_Weight_KG = weight,
                     U_Goal = goal,
@@ -119,13 +120,13 @@ namespace ExerciseXDataLibrary.Repositories
             return Convert.ToBase64String(hashBytes);
         }
 
-        public async Task<bool> LoginUserAsync(string username, string password)
+        public async Task<bool> LoginUserAsync(string email, string password)
         {
-            var user = await _userDbContext.Users.SingleOrDefaultAsync(u => u.U_Username == username);
+            var user = await _userDbContext.Users.SingleOrDefaultAsync(u => u.U_Email == email);
 
             if (user == null)
             {
-                _logger.LogWarning("Login failed: User not found with username {Username}", username);
+                _logger.LogWarning("Login failed: User not found with email {Email}", email);
                 return false;
             }
 
@@ -157,7 +158,7 @@ namespace ExerciseXDataLibrary.Repositories
             }
         }
 
-        public async Task<UsersModel?> GetUserByEmailOrUsernameAsync(string emailOrUsername)
+        public async Task<UsersModel?> GetUserByEmailAsync(string email)
         {
             try
             {
@@ -165,11 +166,11 @@ namespace ExerciseXDataLibrary.Repositories
                 var user = await _userDbContext.Users
                     .Include(u => u.UsersExercises)   // Load exercises if there's a relationship
                     .Include(u => u.UsersDiets)   // Load diet plans if there's a relationship
-                    .FirstOrDefaultAsync(u => u.U_Email == emailOrUsername || u.U_Username == emailOrUsername);
+                    .FirstOrDefaultAsync(u => u.U_Email == email);
 
                 if (user == null)
                 {
-                    _logger.LogWarning("User not found with email or username: {EmailOrUsername}", emailOrUsername);
+                    _logger.LogWarning("User not found with email or username: {EmailOrUsername}", email);
                     return null;
                 }
 
@@ -178,7 +179,7 @@ namespace ExerciseXDataLibrary.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred while retrieving user by email or username: {EmailOrUsername}", emailOrUsername);
+                _logger.LogError(ex, "Error occurred while retrieving user by email or username: {EmailOrUsername}", email);
                 return null;
             }
         }
