@@ -12,15 +12,16 @@ namespace ExerciseXData.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UsersService _userService;
+        private readonly UsersService _usersService;
         private readonly UsersRepository _usersRepository;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<AccountController> _logger;
 
-        public AccountController(UsersService userService, UsersRepository usersRepository, SignInManager<IdentityUser> signInManager) // Injected UsersService
+
+        public AccountController(UsersService usersService, ILogger<AccountController> logger)
         {
-            _userService = userService;
-            _usersRepository = usersRepository;
-            _signInManager = signInManager;
+            _usersService = usersService;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -31,45 +32,38 @@ namespace ExerciseXData.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken] // Prevents CSRF attacks
-        public async Task<IActionResult> Register(RegisterUserDto dto)
+        public async Task<IActionResult> Register(RegisterUserDto registerDto)
         {
             if (!ModelState.IsValid)
             {
-                return View(dto); // Return the view with validation errors if model state is invalid
+                _logger.LogWarning("Invalid registration data received.");
+                return BadRequest(ModelState);
             }
 
-            // Convert dto.Gender string to Gender enum
-            var gender = Enum.TryParse<Gender>(dto.Gender, out var parsedGender) ? parsedGender : Gender.PreferNotToSay;
-
-
-            var result = await _userService.RegisterUserAsync(
-                dto.Email,
-                dto.UserName,
-                dto.Password,
-                dto.Gender,
-                dto.Age,
-                dto.Height,
-                dto.Weight,
-                dto.Goal,
-                dto.Lifestyle_Condition_1,
-                dto.Lifestyle_Condition_2,
-                dto.Lifestyle_Condition_3,
-                dto.Lifestyle_Condition_4,
-                dto.Lifestyle_Condition_5
+            var result = await _usersService.RegisterUserAsync(
+                registerDto.Email,
+                registerDto.UserName,
+                registerDto.Password,
+                registerDto.Gender,
+                registerDto.Age,
+                registerDto.Height,
+                registerDto.Weight,
+                registerDto.Goal,
+                registerDto.Lifestyle_Condition_1,
+                registerDto.Lifestyle_Condition_2,
+                registerDto.Lifestyle_Condition_3,
+                registerDto.Lifestyle_Condition_4,
+                registerDto.Lifestyle_Condition_5
             );
-            
-            if (result.Succeeded)
+
+            if (result)
             {
-                // Redirect to a confirmation page or login page after successful registration
-                return RedirectToAction("Login", "Account");
+                _logger.LogInformation("User registered successfully: {Email}", registerDto.Email);
+                return Ok(new { Message = "User registered successfully." });
             }
 
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error.Description);
-            }
-
-            return View(dto); // Return to the view with an error message if registration fails
+            _logger.LogError("User registration failed: {Email}", registerDto.Email);
+            return StatusCode(500, new { Message = "User registration failed." });
         }
 
         [HttpGet]
@@ -83,59 +77,63 @@ namespace ExerciseXData.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewData["ErrorMessage"] = "Invalid login attempt.";
-                return View(loginDto);
+                _logger.LogWarning("Invalid login data received.");
+                return BadRequest(ModelState);
             }
 
-            // Find user by email or username
-            var user = await _userService.FindUserByEmailAsync(loginDto.Email);
+            var result = await _usersService.LoginUserAsync(loginDto.Email, loginDto.Password);
+
+            if (result)
+            {
+                _logger.LogInformation("User login successful: {Email}", loginDto.Email);
+                return Ok(new { Message = "Login successful." });
+            }
+
+            _logger.LogWarning("User login failed: {Email}", loginDto.Email);
+            return Unauthorized(new { Message = "Invalid email or password." });
+
+        }
+
+        [HttpGet("user/{email}")]
+        public async Task<IActionResult> GetUserByEmail(string email)
+        {
+            var user = await _usersService.GetUserByEmailAsync(email);
+
             if (user == null)
             {
-                ViewData["ErrorMessage"] = "No account found with that email. Please register first.";
-                ModelState.AddModelError("", "Invalid login attempt.");
-                return View(loginDto);
+                _logger.LogWarning("User not found: {Email}", email);
+                return NotFound(new { Message = "User not found." });
             }
 
-            // Use SignInManager to authenticate user
-            var result = await _signInManager.PasswordSignInAsync(user.Email, loginDto.Password, isPersistent: false, lockoutOnFailure: false);
-
-            if (result.Succeeded)
-            {
-                return RedirectToAction("UserDashboard");
-            }
-            else
-            {
-                ViewData["ErrorMessage"] = "Username or password is incorrect.";
-                return View(loginDto);
-            }
+            _logger.LogInformation("User retrieved: {Email}", email);
+            return Ok(user);
         }
 
-        [HttpGet]
-        [Authorize (Roles = "NormalUser")]
-        public IActionResult UserDashboard()
+
+        [HttpGet("user-details/{email}")]
+        public async Task<IActionResult> GetUserAndIdentityDetails(string email)
         {
-            if (User.Identity.IsAuthenticated)
+            var (user, identityUser) = await _usersService.GetUserAndIdentityAsync(email);
+
+            if (user == null || identityUser == null)
             {
-                var model = new UserDashboardDto
+                _logger.LogWarning("User or Identity details not found: {Email}", email);
+                return NotFound(new { Message = "User or Identity details not found." });
+            }
+
+            _logger.LogInformation("User and Identity details retrieved: {Email}", email);
+
+            return Ok(new
+            {
+                User = user,
+                IdentityUser = new
                 {
-                    Username = User.Identity.Name  // Assuming the user is logged in
-                };
-
-                return View(model);
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
-
-            //return View();
+                    identityUser.Email,
+                    identityUser.UserName
+                }
+            });
         }
 
-        [HttpGet]
-        [Authorize (Roles = "Admin")]
-        public IActionResult AdminDashboard()
-        {
-            return View();
-        }
+           
     }
 }

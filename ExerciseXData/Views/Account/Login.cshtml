@@ -7,14 +7,18 @@
     <form asp-controller="Account" asp-action="Login" method="post" id="loginForm">
         <h2>Login</h2>
         <div class="form-group">
-            <label asp-for="Email">Username</label>
+            <label asp-for="Email">Email</label>
+            <br />
             <input asp-for="Email" type="text" required>
         </div>
+        <br />
         <div class="form-group">
             <label asp-for="Password">Password</label>
+            <br />
             <input asp-for="Password" type="password" required>
         </div>
-        <button type="submit">Login</button>
+        <br />
+        <button class="btn btn-primary" button type="submit"> Login</button>
         <p class="error-message" id="errorMessage"></p>
     </form>
 </div>

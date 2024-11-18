@@ -13,35 +13,77 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using static ExerciseXDataLibrary.Models.UsersModel;
 using static ExerciseXDataLibrary.Models.UserGender;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace ExerciseXDataLibrary.Repositories
 {
     public class UsersRepository
     {
-        private readonly UserDbContext _userDbContext;
+        private readonly UserDbContext _userDbContext; 
+        private readonly UserManager<IdentityUser> _userManager; // Using UserManager with IdentityUser
+        private readonly RoleManager<IdentityRole> _roleManager; // For role management
+
         private readonly ILogger<UsersRepository> _logger;
 
-        public UsersRepository(UserDbContext userDbContext, ILogger<UsersRepository> logger)
+        public UsersRepository(
+            UserDbContext userDbContext,
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            ILogger<UsersRepository> logger)
         {
             _userDbContext = userDbContext;
+            _userManager = userManager;
+            _roleManager = roleManager;
             _logger = logger;
         }
 
-        public async Task<bool> RegisterUserAsync(string email, string userName, string password, Gender gender, int age, double height, 
+        public async Task<bool> RegisterUserAsync(
+            string email, string userName, string password, Gender gender, int age, double height,
             double weight, string goal, string lifeStyle1, string lifeStyle2, string lifeStyle3, string lifeStyle4, string lifeStyle5)
         {
             using var transaction = await _userDbContext.Database.BeginTransactionAsync();
             try
             {
-                // Step 1: Create a new user entry
+                // Step 1: Check if the email is already registered
+                if (await _userManager.FindByEmailAsync(email) != null)
+                {
+                    _logger.LogWarning("Registration failed: Email already in use - {Email}", email);
+                    return false;
+                }
+
+                // Step 2: Create IdentityUser
+                var identityUser = new IdentityUser
+                {
+                    UserName = userName,
+                    Email = email
+                };
+
+                var createResult = await _userManager.CreateAsync(identityUser, password);
+                if (!createResult.Succeeded)
+                {
+                    foreach (var error in createResult.Errors)
+                    {
+                        _logger.LogError("UserManager error: {Error}", error.Description);
+                    }
+                    return false;
+                }
+
+                // Step 3: Assign "NormalUser" role
+                if (!await _roleManager.RoleExistsAsync("NormalUser"))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole("NormalUser"));
+                }
+                await _userManager.AddToRoleAsync(identityUser, "NormalUser");
+
+                // Step 4: Create custom user details entry
                 var newUser = new UsersModel
                 {
                     U_Email = email,
                     U_Username = userName,
                     U_Gender = gender,
-                    U_Role = "NormalUser", //Default role
+                    U_Role = "NormalUser",
                     U_Age = age,
-                    
                     U_Height_CM = height,
                     U_Weight_KG = weight,
                     U_Goal = goal,
@@ -54,106 +96,59 @@ namespace ExerciseXDataLibrary.Repositories
                     U_Last_Login = DateTime.UtcNow
                 };
 
-                // Role validation to ensure the role is always "NormalUser" at registration
-                if (newUser.U_Role != "NormalUser")
-                {
-                    throw new UnauthorizedAccessException("Role assignment is restricted.");
-                }
-
                 await _userDbContext.Users.AddAsync(newUser);
                 await _userDbContext.SaveChangesAsync();
 
-                _logger.LogInformation("User added to Users table with ID: {UserId}", newUser.U_Id);
-
-
-                // Step 2: Generate Salt and Hash for Password
-                var salt = GenerateSalt();
-                var hash = GenerateHash(password, salt);
-
-                // Step 3: Create user credentials entry
-                var userCredentials = new UsersCredentialsModel
-                {
-                    U_Id = newUser.U_Id,
-                    //Password = null,  // Do not store plain password
-                    Password_Hush = hash,
-                    Password_Salt = salt,
-                    Last_Updated = DateTime.UtcNow
-                };
-
-                await _userDbContext.UsersCredentials.AddAsync(userCredentials);
-                await _userDbContext.SaveChangesAsync();
-
-                _logger.LogInformation("User credentials added for UserId: {UserId}", newUser.U_Id);
-
-
-                // Commit the transaction if everything is successful
+                // Commit the transaction
                 await transaction.CommitAsync();
-                _logger.LogInformation("User registration transaction committed successfully for UserId: {UserId}", newUser.U_Id);
+                _logger.LogInformation("User registered successfully with ID: {UserId}", newUser.U_Id);
 
                 return true;
-
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error during user registration for email: {Email}", email);
-                // Roll back the transaction in case of failure
                 await transaction.RollbackAsync();
-                return false; // Handle the error as needed
+                return false;
             }
-        }
-        private string GenerateSalt()
-        {
-            byte[] saltBytes = new byte[16];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(saltBytes);
-            }
-            return Convert.ToBase64String(saltBytes);
-        }
 
-        private string GenerateHash(string password, string salt)
-        {
-            using var sha256 = SHA256.Create();
-            var saltedPassword = $"{salt}{password}";
-            var saltedPasswordBytes = Encoding.UTF8.GetBytes(saltedPassword);
-            var hashBytes = sha256.ComputeHash(saltedPasswordBytes);
-            return Convert.ToBase64String(hashBytes);
+
+
+
         }
+     
 
         public async Task<bool> LoginUserAsync(string email, string password)
         {
-            var user = await _userDbContext.Users.SingleOrDefaultAsync(u => u.U_Email == email);
-
-            if (user == null)
+            try
             {
-                _logger.LogWarning("Login failed: User not found with email {Email}", email);
-                return false;
-            }
+                var identityUser = await _userManager.FindByEmailAsync(email);
+                if (identityUser == null)
+                {
+                    _logger.LogWarning("Login failed: User not found with email {Email}", email);
+                    return false;
+                }
 
-            var userCredentials = await _userDbContext.UsersCredentials.SingleOrDefaultAsync(uc => uc.U_Id == user.U_Id);
+                var isPasswordValid = await _userManager.CheckPasswordAsync(identityUser, password);
+                if (!isPasswordValid)
+                {
+                    _logger.LogWarning("Login failed: Incorrect password for user {UserName}", identityUser.UserName);
+                    return false;
+                }
 
-            if (userCredentials == null)
-            {
-                _logger.LogWarning("Login failed: Credentials not found for User ID {UserId}", user.U_Id);
-                return false;
-            }
+                var user = await _userDbContext.Users.SingleOrDefaultAsync(u => u.U_Email == email);
+                if (user != null)
+                {
+                    user.U_Last_Login = DateTime.UtcNow;
+                    await _userDbContext.SaveChangesAsync();
+                }
 
-            // Generate hash of the provided password using the stored salt
-            string inputHash = GenerateHash(password, userCredentials.Password_Salt);
-
-            // Verify password by comparing the hash
-            if (inputHash == userCredentials.Password_Hush)
-            {
-                // Successful login
-                _logger.LogInformation("Login successful for User ID {UserId}", user.U_Id);
-                user.U_Last_Login = DateTime.UtcNow;
-                await _userDbContext.SaveChangesAsync();
+                _logger.LogInformation("Login successful for user {UserName}", identityUser.UserName);
                 return true;
             }
-            else
+            catch (Exception ex)
             {
-                // Invalid password
-                _logger.LogWarning("Login failed: Incorrect password for User ID {UserId}", user.U_Id);
+                _logger.LogError(ex, "Error during login for email: {Email}", email);
                 return false;
             }
         }
@@ -162,29 +157,49 @@ namespace ExerciseXDataLibrary.Repositories
         {
             try
             {
-                // Retrieve the user by email or username
                 var user = await _userDbContext.Users
-                    .Include(u => u.UsersExercises)   // Load exercises if there's a relationship
-                    .Include(u => u.UsersDiets)   // Load diet plans if there's a relationship
+                    .Include(u => u.UsersExercises)
+                    .Include(u => u.UsersDiets)
                     .FirstOrDefaultAsync(u => u.U_Email == email);
 
                 if (user == null)
                 {
-                    _logger.LogWarning("User not found with email or username: {EmailOrUsername}", email);
+                    _logger.LogWarning("User not found with email: {Email}", email);
                     return null;
                 }
 
-                _logger.LogInformation("User found with ID: {UserId}", user.U_Id);
+                _logger.LogInformation("User retrieved with ID: {UserId}", user.U_Id);
                 return user;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred while retrieving user by email or username: {EmailOrUsername}", email);
+                _logger.LogError(ex, "Error retrieving user by email: {Email}", email);
                 return null;
+            }
+
+        }
+
+        public async Task<(UsersModel?, IdentityUser?)> GetUserAndIdentityAsync(string email)
+        {
+            try
+            {
+                var user = await _userDbContext.Users
+                    .Include(u => u.UsersExercises)
+                    .Include(u => u.UsersDiets)
+                    .FirstOrDefaultAsync(u => u.U_Email == email);
+
+                var identityUser = await _userManager.FindByEmailAsync(email);
+
+                return (user, identityUser);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving user and identity by email: {Email}", email);
+                return (null, null);
             }
         }
     }
-
+}
     //public async Task<bool> AddUserWithExercisesAndDietAsync(int userId, int exerciseId, int dietId)
     //{
 
@@ -227,4 +242,4 @@ namespace ExerciseXDataLibrary.Repositories
     //    }
     //}
 
-}
+

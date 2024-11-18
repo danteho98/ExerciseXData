@@ -5,6 +5,8 @@ using static ExerciseXDataLibrary.Models.UserGender;
 using ExerciseXDataLibrary.DataTransferObject;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using ExerciseXDataLibrary.Models;
 
 namespace ExerciseXDataLibrary.Services
 {
@@ -14,89 +16,136 @@ namespace ExerciseXDataLibrary.Services
         private readonly UsersRepository _usersRepository;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<UsersRepository> _logger;
 
-        public UsersService(UserDbContext userDbContext, UsersRepository usersRepository, 
-            UserManager<IdentityUser> userManager, 
-            SignInManager<IdentityUser> signInManager)
+        public UsersService(
+            UserDbContext userDbContext,
+            UsersRepository usersRepository,
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            ILogger<UsersRepository> logger)
         {
             _userDbContext = userDbContext;
             _usersRepository = usersRepository;
             _userManager = userManager;
             _signInManager = signInManager;
+            _logger = logger;
         }
 
-        public async Task<IdentityResult> RegisterUserAsync(string email, string userName, string password, string gender, int age, 
+        public async Task<bool> RegisterUserAsync(
+            string email, string userName, string password, Gender gender, int age,
             double height, double weight, string goal, string lifeStyle1, string lifeStyle2, string lifeStyle3, string lifeStyle4, string lifeStyle5)
         {
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            try
             {
-                throw new ArgumentException("Email and Password are required");
-            }
+                // Validate inputs if needed
+                if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+                {
+                    _logger.LogWarning("Registration failed: Invalid email or password.");
+                    return false;
+                }
 
-            if (!Enum.TryParse<Gender>(gender, out var parsedGender))
+                // Check if the email is already in use
+                var existingUser = await _userManager.FindByEmailAsync(email);
+                if (existingUser != null)
+                {
+                    _logger.LogWarning("Registration failed: Email already in use - {Email}", email);
+                    return false;
+                }
+
+                // Delegate to the repository to handle registration
+                var result = await _usersRepository.RegisterUserAsync(
+                    email, userName, password, gender, age, height, weight,
+                    goal, lifeStyle1, lifeStyle2, lifeStyle3, lifeStyle4, lifeStyle5);
+
+                if (result)
+                {
+                    _logger.LogInformation("User successfully registered with email: {Email}", email);
+                }
+
+                return result;
+            }
+            catch (Exception ex)
             {
-                parsedGender = Gender.PreferNotToSay;
+                _logger.LogError(ex, "Error during user registration for email: {Email}", email);
+                return false;
             }
-
-            var user = new IdentityUser { UserName = userName, Email = email };
-            var result = await _userManager.CreateAsync(user, password);
-
-            if (result.Succeeded)
-            {
-                await _usersRepository.RegisterUserAsync(
-                    email,
-                    userName,
-                    password, // Store hashed password
-                    parsedGender,
-                    age,
-                    height,
-                    weight,
-                    goal,
-                    lifeStyle1,
-                    lifeStyle2,
-                    lifeStyle3,
-                    lifeStyle4,
-                    lifeStyle5);
-            }
-
-            return result;
         }
 
-
-        public async Task<SignInResult> LoginUserAsync(string email, string password)
+        public async Task<bool> LoginUserAsync(string email, string password)
         {
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            try
             {
-                throw new ArgumentException("Email and Password are required");
-            }
+                // Delegate to the repository to handle login
+                var result = await _usersRepository.LoginUserAsync(email, password);
 
-            return await _signInManager.PasswordSignInAsync(email, password, isPersistent: false, lockoutOnFailure: false);
+                if (result)
+                {
+                    _logger.LogInformation("User login successful for email: {Email}", email);
+                }
+                else
+                {
+                    _logger.LogWarning("User login failed for email: {Email}", email);
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during user login for email: {Email}", email);
+                return false;
+            }
         }
 
-
-        public async Task<UserDashboardDto> FindUserByEmailAsync(string email)
+        public async Task<UsersModel?> GetUserByEmailAsync(string email)
         {
-            var user = await _userDbContext.Users
-                .FirstOrDefaultAsync(u => u.U_Email == email);
-
-            if (user == null) return null;
-
-            return new UserDashboardDto
+            try
             {
-                Username = user.U_Username,
-                Email = user.U_Email,
-                Gender = user.U_Gender.ToString(),
-                Role = user.U_Role,
-                Age = user.U_Age,
-                Height_CM = user.U_Height_CM,
-                Weight_KG = user.U_Weight_KG,
-                Goal = user.U_Goal,
-                Lifestyle_Condition_1 = user.U_Lifestyle_Condition_1,
-                Lifestyle_Condition_2 = user.U_Lifestyle_Condition_2,
-                Lifestyle_Condition_3 = user.U_Lifestyle_Condition_3,
-                Lifestyle_Condition_4 = user.U_Lifestyle_Condition_4,
-                Lifestyle_Condition_5 = user.U_Lifestyle_Condition_5
-            };
+                // Delegate to the repository to retrieve user details
+                var user = await _usersRepository.GetUserByEmailAsync(email);
+
+                if (user != null)
+                {
+                    _logger.LogInformation("Retrieved user with email: {Email}", email);
+                }
+                else
+                {
+                    _logger.LogWarning("No user found with email: {Email}", email);
+                }
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving user by email: {Email}", email);
+                return null;
+            }
+        }
+
+        public async Task<(UsersModel?, IdentityUser?)> GetUserAndIdentityAsync(string email)
+        {
+            try
+            {
+                // Retrieve both the application user and identity user
+                var result = await _usersRepository.GetUserAndIdentityAsync(email);
+
+                if (result.Item1 != null && result.Item2 != null)
+                {
+                    _logger.LogInformation("Retrieved user and identity for email: {Email}", email);
+                }
+                else
+                {
+                    _logger.LogWarning("Could not retrieve user or identity for email: {Email}", email);
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving user and identity by email: {Email}", email);
+                return (null, null);
+            }
+
         }
     }
 }
