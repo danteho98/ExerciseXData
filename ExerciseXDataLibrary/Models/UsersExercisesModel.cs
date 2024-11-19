@@ -11,7 +11,7 @@ namespace ExerciseXDataLibrary.Models
         public int UE_Id {  get; set; }
         //Relationship
         //[ForeignKey("U_Id")]
-        public int U_Id { get; set; }
+        public string U_Id { get; set; }
         public UsersModel Users { get; set; }
 
         //[ForeignKey("E_Id")]

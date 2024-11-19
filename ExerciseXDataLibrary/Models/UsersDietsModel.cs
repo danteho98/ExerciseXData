@@ -11,9 +11,8 @@ namespace ExerciseXDataLibrary.Models
         [Key]
         public int UD_Id {  get; set; }
 
-        [ForeignKey("U_Id")]
         [DisplayName("User Id")]
-        public int U_Id { get; set; }
+        public string U_Id { get; set; }
         public UsersModel Users { get; set; }
 
         [ForeignKey("D_Id")]

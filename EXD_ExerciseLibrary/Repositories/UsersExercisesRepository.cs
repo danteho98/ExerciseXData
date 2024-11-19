@@ -18,7 +18,7 @@ namespace ExerciseXDataLibrary.Repositories
         {
             _userContext = userContext;
         }
-        public Task<List<UsersExercisesModel>> GetByUserId(int userId) =>
-            _userContext.UsersExercises.Where(ue => ue.U_Id == userId).ToListAsync();
+        //public Task<List<UsersExercisesModel>> GetByUserId(int userId) =>
+        //    _userContext.UsersExercises.Where(ue => ue.U_Id == userId).ToListAsync();
     }
 }

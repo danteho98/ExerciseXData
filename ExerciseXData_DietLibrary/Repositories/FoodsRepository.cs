@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExerciseXDataLibrary.Repositories
 {
-    internal class AuthRepository
+    internal class FoodsRepository
     {
     }
 }

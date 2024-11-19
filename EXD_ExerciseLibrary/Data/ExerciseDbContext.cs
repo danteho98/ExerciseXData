@@ -1,13 +1,9 @@
-﻿using ExerciseXData.Models;
+﻿
 using ExerciseXDataLibrary.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ExerciseXDataLibrary.Data
+
+namespace ExerciseXData_ExerciseLibrary.Data
 {
     public class ExerciseDbContext : DbContext
     {

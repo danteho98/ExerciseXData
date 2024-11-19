@@ -1,5 +1,5 @@
-﻿@using ExerciseXDataLibrary.Models;
-@model CategoriesModel
+﻿@* @using ExerciseXDataLibrary.Models;
+@model CategoriesModel *@
 
 @* Check if the user is in the Admin role *@
 @if (User.IsInRole("Admin"))
@@ -53,9 +53,9 @@ else
     </div>
 }
 
-@section Scripts{
+@section Scripts {
     @*this part is responsible for the client side*@
     @{
         <partial name="_ValidationScriptsPartial" />
     }
-}
+} 

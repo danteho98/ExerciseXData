@@ -38,166 +38,162 @@ namespace ExerciseXDataLibrary.Repositories
             _logger = logger;
         }
 
-        public async Task<bool> RegisterUserAsync(
-            string email, string userName, string password, Gender gender, int age, double height,
-            double weight, string goal, string lifeStyle1, string lifeStyle2, string lifeStyle3, string lifeStyle4, string lifeStyle5)
-        {
-            using var transaction = await _userDbContext.Database.BeginTransactionAsync();
-            try
-            {
-                // Step 1: Check if the email is already registered
-                if (await _userManager.FindByEmailAsync(email) != null)
-                {
-                    _logger.LogWarning("Registration failed: Email already in use - {Email}", email);
-                    return false;
-                }
+        //public async Task<bool> RegisterUserAsync(
+        //    string email, string userName, string password, Gender gender, int age, double height,
+        //    double weight, string goal, string lifeStyle1, string lifeStyle2, string lifeStyle3, string lifeStyle4, string lifeStyle5)
+        //{
+        //    using var transaction = await _userDbContext.Database.BeginTransactionAsync();
+        //    try
+        //    {
+        //        // Step 1: Check if the email is already registered
+        //        if (await _userManager.FindByEmailAsync(email) != null)
+        //        {
+        //            _logger.LogWarning("Registration failed: Email already in use - {Email}", email);
+        //            return false;
+        //        }
 
-                // Step 2: Create IdentityUser
-                var identityUser = new IdentityUser
-                {
-                    UserName = userName,
-                    Email = email
-                };
+        //        // Step 2: Create IdentityUser
+        //        var identityUser = new IdentityUser
+        //        {
+        //            UserName = userName,
+        //            Email = email
+        //        };
 
-                var createResult = await _userManager.CreateAsync(identityUser, password);
-                if (!createResult.Succeeded)
-                {
-                    foreach (var error in createResult.Errors)
-                    {
-                        _logger.LogError("UserManager error: {Error}", error.Description);
-                    }
-                    return false;
-                }
+        //        var createResult = await _userManager.CreateAsync(identityUser, password);
+        //        if (!createResult.Succeeded)
+        //        {
+        //            foreach (var error in createResult.Errors)
+        //            {
+        //                _logger.LogError("UserManager error: {Error}", error.Description);
+        //            }
+        //            return false;
+        //        }
 
-                // Step 3: Assign "NormalUser" role
-                if (!await _roleManager.RoleExistsAsync("NormalUser"))
-                {
-                    await _roleManager.CreateAsync(new IdentityRole("NormalUser"));
-                }
-                await _userManager.AddToRoleAsync(identityUser, "NormalUser");
+        //        // Step 3: Assign "NormalUser" role
+        //        if (!await _roleManager.RoleExistsAsync("NormalUser"))
+        //        {
+        //            await _roleManager.CreateAsync(new IdentityRole("NormalUser"));
+        //        }
+        //        await _userManager.AddToRoleAsync(identityUser, "NormalUser");
 
-                // Step 4: Create custom user details entry
-                var newUser = new UsersModel
-                {
-                    U_Email = email,
-                    U_Username = userName,
-                    U_Gender = gender,
-                    U_Role = "NormalUser",
-                    U_Age = age,
-                    U_Height_CM = height,
-                    U_Weight_KG = weight,
-                    U_Goal = goal,
-                    U_Lifestyle_Condition_1 = lifeStyle1,
-                    U_Lifestyle_Condition_2 = lifeStyle2,
-                    U_Lifestyle_Condition_3 = lifeStyle3,
-                    U_Lifestyle_Condition_4 = lifeStyle4,
-                    U_Lifestyle_Condition_5 = lifeStyle5,
-                    U_Created_Date = DateTime.UtcNow,
-                    U_Last_Login = DateTime.UtcNow
-                };
+        //        // Step 4: Create custom user details entry
+        //        var newUser = new UsersModel
+        //        {
+        //            U_Email = email,
+        //            U_Username = userName,
+        //            U_Gender = gender,
+        //            U_Role = "NormalUser",
+        //            U_Age = age,
+        //            U_Height_CM = height,
+        //            U_Weight_KG = weight,
+        //            U_Goal = goal,
+        //            U_Lifestyle_Condition_1 = lifeStyle1,
+        //            U_Lifestyle_Condition_2 = lifeStyle2,
+        //            U_Lifestyle_Condition_3 = lifeStyle3,
+        //            U_Lifestyle_Condition_4 = lifeStyle4,
+        //            U_Lifestyle_Condition_5 = lifeStyle5,
+        //            U_Created_Date = DateTime.UtcNow,
+        //            U_Last_Login = DateTime.UtcNow
+        //        };
 
-                await _userDbContext.Users.AddAsync(newUser);
-                await _userDbContext.SaveChangesAsync();
+        //        await _userDbContext.Users.AddAsync(newUser);
+        //        await _userDbContext.SaveChangesAsync();
 
-                // Commit the transaction
-                await transaction.CommitAsync();
-                _logger.LogInformation("User registered successfully with ID: {UserId}", newUser.U_Id);
+        //        // Commit the transaction
+        //        await transaction.CommitAsync();
+        //        _logger.LogInformation("User registered successfully with ID: {UserId}", newUser.U_Id);
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error during user registration for email: {Email}", email);
-                await transaction.RollbackAsync();
-                return false;
-            }
-
-
-
-
-        }
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error during user registration for email: {Email}", email);
+        //        await transaction.RollbackAsync();
+        //        return false;
+        //    }
+        //}
      
 
-        public async Task<bool> LoginUserAsync(string email, string password)
-        {
-            try
-            {
-                var identityUser = await _userManager.FindByEmailAsync(email);
-                if (identityUser == null)
-                {
-                    _logger.LogWarning("Login failed: User not found with email {Email}", email);
-                    return false;
-                }
+        //public async Task<bool> LoginUserAsync(string email, string password)
+        //{
+        //    try
+        //    {
+        //        var identityUser = await _userManager.FindByEmailAsync(email);
+        //        if (identityUser == null)
+        //        {
+        //            _logger.LogWarning("Login failed: User not found with email {Email}", email);
+        //            return false;
+        //        }
 
-                var isPasswordValid = await _userManager.CheckPasswordAsync(identityUser, password);
-                if (!isPasswordValid)
-                {
-                    _logger.LogWarning("Login failed: Incorrect password for user {UserName}", identityUser.UserName);
-                    return false;
-                }
+        //        var isPasswordValid = await _userManager.CheckPasswordAsync(identityUser, password);
+        //        if (!isPasswordValid)
+        //        {
+        //            _logger.LogWarning("Login failed: Incorrect password for user {UserName}", identityUser.UserName);
+        //            return false;
+        //        }
 
-                var user = await _userDbContext.Users.SingleOrDefaultAsync(u => u.U_Email == email);
-                if (user != null)
-                {
-                    user.U_Last_Login = DateTime.UtcNow;
-                    await _userDbContext.SaveChangesAsync();
-                }
+        //        var user = await _userDbContext.Users.SingleOrDefaultAsync(u => u.U_Email == email);
+        //        if (user != null)
+        //        {
+        //            user.U_Last_Login = DateTime.UtcNow;
+        //            await _userDbContext.SaveChangesAsync();
+        //        }
 
-                _logger.LogInformation("Login successful for user {UserName}", identityUser.UserName);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error during login for email: {Email}", email);
-                return false;
-            }
-        }
+        //        _logger.LogInformation("Login successful for user {UserName}", identityUser.UserName);
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error during login for email: {Email}", email);
+        //        return false;
+        //    }
+        //}
 
-        public async Task<UsersModel?> GetUserByEmailAsync(string email)
-        {
-            try
-            {
-                var user = await _userDbContext.Users
-                    .Include(u => u.UsersExercises)
-                    .Include(u => u.UsersDiets)
-                    .FirstOrDefaultAsync(u => u.U_Email == email);
+        //public async Task<UsersModel?> GetUserByEmailAsync(string email)
+        //{
+        //    try
+        //    {
+        //        var user = await _userDbContext.Users
+        //            .Include(u => u.UsersExercises)
+        //            .Include(u => u.UsersDiets)
+        //            .FirstOrDefaultAsync(u => u.U_Email == email);
 
-                if (user == null)
-                {
-                    _logger.LogWarning("User not found with email: {Email}", email);
-                    return null;
-                }
+        //        if (user == null)
+        //        {
+        //            _logger.LogWarning("User not found with email: {Email}", email);
+        //            return null;
+        //        }
 
-                _logger.LogInformation("User retrieved with ID: {UserId}", user.U_Id);
-                return user;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error retrieving user by email: {Email}", email);
-                return null;
-            }
+        //        _logger.LogInformation("User retrieved with ID: {UserId}", user.U_Id);
+        //        return user;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error retrieving user by email: {Email}", email);
+        //        return null;
+        //    }
 
-        }
+        //}
 
-        public async Task<(UsersModel?, IdentityUser?)> GetUserAndIdentityAsync(string email)
-        {
-            try
-            {
-                var user = await _userDbContext.Users
-                    .Include(u => u.UsersExercises)
-                    .Include(u => u.UsersDiets)
-                    .FirstOrDefaultAsync(u => u.U_Email == email);
+        //public async Task<(UsersModel?, IdentityUser?)> GetUserAndIdentityAsync(string email)
+        //{
+        //    try
+        //    {
+        //        var user = await _userDbContext.Users
+        //            .Include(u => u.UsersExercises)
+        //            .Include(u => u.UsersDiets)
+        //            .FirstOrDefaultAsync(u => u.U_Email == email);
 
-                var identityUser = await _userManager.FindByEmailAsync(email);
+        //        var identityUser = await _userManager.FindByEmailAsync(email);
 
-                return (user, identityUser);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error retrieving user and identity by email: {Email}", email);
-                return (null, null);
-            }
-        }
+        //        return (user, identityUser);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error retrieving user and identity by email: {Email}", email);
+        //        return (null, null);
+        //    }
+        //}
     }
 }
     //public async Task<bool> AddUserWithExercisesAndDietAsync(int userId, int exerciseId, int dietId)
