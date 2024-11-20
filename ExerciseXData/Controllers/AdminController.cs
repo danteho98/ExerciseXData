@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExerciseXData.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         public IActionResult AdminDashboard()

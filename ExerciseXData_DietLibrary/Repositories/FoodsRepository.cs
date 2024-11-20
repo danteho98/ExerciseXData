@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExerciseXDataLibrary.Repositories
+namespace ExerciseXData_DietLibrary.Repositories
 {
-    internal class FoodsRepository
+    public class FoodsRepository
     {
     }
 }

@@ -1,9 +1,9 @@
 ﻿
-using ExerciseXDataLibrary.Data;
-using ExerciseXDataLibrary.Models;
+using ExerciseXData_DietLibrary.Data;
+using ExerciseXData_DietLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExerciseXDataLibrary.Services
+namespace ExerciseXData_DietLibrary.Services
 {
     public class FoodsService
     {

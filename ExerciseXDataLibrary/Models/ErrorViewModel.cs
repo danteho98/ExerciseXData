@@ -1,4 +1,4 @@
-namespace ExerciseXData.Models
+namespace ExerciseXData_UserLibrary.Models
 {
     public class ErrorViewModel
     {

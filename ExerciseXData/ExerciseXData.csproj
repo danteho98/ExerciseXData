@@ -30,8 +30,4 @@
     <ProjectReference Include="..\ExerciseXData_DietLibrary\ExerciseXData_DietLibrary.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Users\" />
-  </ItemGroup>
-
 </Project>

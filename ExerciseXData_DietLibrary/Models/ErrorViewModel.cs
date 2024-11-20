@@ -1,4 +1,4 @@
-namespace ExerciseXData.Models
+namespace ExerciseXData_DietLibrary.Models
 {
     public class ErrorViewModel
     {

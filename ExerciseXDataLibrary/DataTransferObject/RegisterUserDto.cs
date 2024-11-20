@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
-using static ExerciseXDataLibrary.Models.UserGender;
-using static ExerciseXDataLibrary.Models.UsersModel;
+using static ExerciseXData_UserLibrary.Models.UserGender;
+using static ExerciseXData_UserLibrary.Models.UsersModel;
 
-namespace ExerciseXDataLibrary.DataTransferObject
+namespace ExerciseXData_UserLibrary.DataTransferObject
 {
     public class RegisterUserDto
     {

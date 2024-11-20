@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace ExerciseXDataLibrary.DataTransferObject
+namespace ExerciseXData_UserLibrary.DataTransferObject
 {
     public class ExerciseDto
     {

@@ -1,15 +1,17 @@
-using ExerciseXData.Data;
-using ExerciseXDataLibrary.Data;
-using ExerciseXDataLibrary.Repositories;
+
+
+
 using ExerciseXDataLibrary.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
+using ExerciseXData_UserLibrary.Data;
+using ExerciseXData_ExerciseLibrary.Data;
+using ExerciseXData_DietLibrary.Data;
+using ExerciseXData_DietLibrary.Repositories;
+using ExerciseXDataLibrary.Repositories;
+using ExerciseXData_DietLibrary.Services;
+using ExerciseXData_UserLibrary.Repositories;
+using ExerciseXData_ExerciseLibrary.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,12 +23,16 @@ builder.Services.AddControllersWithViews();
 //builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 //builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AlternateConnection")));
 
-builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-    b => b.MigrationsAssembly("ExerciseXData_UserLibrary")));
-builder.Services.AddDbContext<ExerciseDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-    b => b.MigrationsAssembly("ExerciseXData_ExerciseLibrary")));
-builder.Services.AddDbContext<DietDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-    b => b.MigrationsAssembly("ExerciseXData_DietLibrary")));
+
+builder.Services.AddDbContext<UserDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("UserConnection")));
+
+builder.Services.AddDbContext<ExerciseDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ExerciseConnection")));
+
+builder.Services.AddDbContext<DietDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DietConnection")));
+
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
        .AddEntityFrameworkStores<UserDbContext>()

@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
 using System.ComponentModel;
-using static ExerciseXDataLibrary.Models.UserGender;
+using static ExerciseXData_UserLibrary.Models.UserGender;
 using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ExerciseXDataLibrary.Models
+namespace ExerciseXData_UserLibrary.Models
 {
 
     public class UsersModel : IdentityUser
@@ -48,11 +47,6 @@ namespace ExerciseXDataLibrary.Models
         [DisplayName("Last Login")]
         public DateTime U_Last_Login {  get; set; } = DateTime.UtcNow;
 
-        //Relationships
-      
-        public ICollection<UsersDietsModel> UsersDiets { get; set; }
-        public ICollection<UsersExercisesModel> UsersExercises { get; set; }
-
-
+     
     }
 }

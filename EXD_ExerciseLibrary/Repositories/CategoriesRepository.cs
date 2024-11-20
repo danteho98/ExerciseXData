@@ -1,6 +1,5 @@
 ﻿using ExerciseXData.Data;
-using ExerciseXData.Models;
-using ExerciseXDataLibrary.Data;
+using ExerciseXData_UserLibrary.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
