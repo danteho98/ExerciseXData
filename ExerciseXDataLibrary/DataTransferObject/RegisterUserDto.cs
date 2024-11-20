@@ -4,33 +4,26 @@ using static ExerciseXData_UserLibrary.Models.UsersModel;
 
 namespace ExerciseXData_UserLibrary.DataTransferObject
 {
-    public class RegisterUserDto
+    namespace ExerciseXData_UserLibrary.DTOs
     {
-        //[Required, EmailAddress]
-        public string Email { get; set; }
-        public string UserName { get; set; }
-
-        //[Required, MinLength(6)]
-        public string Password { get; set; }
-        public Gender Gender { get; set; }
-        public int Age { get; set; }
-        public double Height { get; set; }
-        public double Weight { get; set; }
-        public string Goal { get; set; }
-
-        [DisplayName("Lifestyle Condition 1")]
-        public string? Lifestyle_Condition_1 { get; set; }
-
-        [DisplayName("Lifestyle Condition 2")]
-        public string? Lifestyle_Condition_2 { get; set; }
-
-        [DisplayName("Lifestyle Condition 3")]
-        public string? Lifestyle_Condition_3 { get; set; }
-
-        [DisplayName("Lifestyle Condition 4")]
-        public string? Lifestyle_Condition_4 { get; set; }
-
-        [DisplayName("Lifestyle Condition 5")]
-        public string? Lifestyle_Condition_5 { get; set; }
+        public class RegisterUserDto
+        {
+            public string Email { get; set; }
+            public string UserName { get; set; }
+            public string Password { get; set; }
+            public string ConfirmPassword { get; set; }
+            public string Gender { get; set; }
+            public int Age { get; set; }
+            public double Height { get; set; }
+            public double Weight { get; set; }
+            public string Goal { get; set; }
+            public string LifeStyle1 { get; set; }
+            public string LifeStyle2 { get; set; }
+            public string LifeStyle3 { get; set; }
+            public string LifeStyle4 { get; set; }
+            public string LifeStyle5 { get; set; }
+        }
     }
+
 }
+

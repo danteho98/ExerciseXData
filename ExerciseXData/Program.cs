@@ -10,7 +10,6 @@ using ExerciseXData_DietLibrary.Data;
 using ExerciseXData_DietLibrary.Repositories;
 using ExerciseXDataLibrary.Repositories;
 using ExerciseXData_DietLibrary.Services;
-using ExerciseXData_UserLibrary.Repositories;
 using ExerciseXData_ExerciseLibrary.Services;
 
 var builder = WebApplication.CreateBuilder(args);
