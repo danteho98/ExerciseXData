@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Account\" />
     <Folder Include="Views\Exercises\" />
     <Folder Include="Views\Foods\" />
     <Folder Include="Views\Diets\" />

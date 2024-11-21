@@ -1,6 +1,4 @@
 
-
-
 using ExerciseXDataLibrary.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
@@ -11,6 +9,9 @@ using ExerciseXData_DietLibrary.Repositories;
 using ExerciseXDataLibrary.Repositories;
 using ExerciseXData_DietLibrary.Services;
 using ExerciseXData_ExerciseLibrary.Services;
+using ExerciseXData_UserLibrary.Services;
+using ExerciseXData_UserLibrary.Repositories;
+using ExerciseXData_UserLibrary.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,14 +34,19 @@ builder.Services.AddDbContext<DietDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DietConnection")));
 
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-       .AddEntityFrameworkStores<UserDbContext>()
-       .AddDefaultTokenProviders();
+builder.Services.AddIdentity<UsersModel, IdentityRole>(options =>
+{
+    options.Lockout.MaxFailedAccessAttempts = 5;  // Lockout after 5 failed attempts
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);  // Lockout for 15 minutes
+    options.Lockout.AllowedForNewUsers = true;  // Enable lockout for new users
+})
+.AddEntityFrameworkStores<UserDbContext>()
+.AddDefaultTokenProviders();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-builder.Services.AddControllersWithViews(); // Add controllers with views
+
 
 //Service
 builder.Services.AddScoped<AuthService>(); 

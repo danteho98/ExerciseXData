@@ -1,6 +1,6 @@
 ﻿
 using System.ComponentModel;
-using static ExerciseXData_UserLibrary.Models.UserGender;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
 namespace ExerciseXData_UserLibrary.Models
@@ -9,7 +9,7 @@ namespace ExerciseXData_UserLibrary.Models
     public class UsersModel : IdentityUser
     {
         
-        public Gender U_Gender { get; set; }
+        public UserGender.Gender U_UserGender { get; set; }
 
         [DisplayName("Role")]
         public string U_Role { get; set; }
@@ -21,6 +21,7 @@ namespace ExerciseXData_UserLibrary.Models
         public double U_Height_CM { get; set; }
 
         [DisplayName("Weight (kg)")]
+        [Range(0, 500, ErrorMessage = "Weight must be between 0 and 500.")]
         public double U_Weight_KG { get; set; }
 
         [DisplayName("Goal")]

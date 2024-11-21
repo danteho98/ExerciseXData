@@ -5,16 +5,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
-
 namespace ExerciseXData_UserLibrary.Data
 {
-    public class UserDbContext : IdentityDbContext<IdentityUser>
+    public class UserDbContext : IdentityDbContext<UsersModel>
     {
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) {}
-        public DbSet<UsersModel> Users { get; set; }
-       
-        //public DbSet<UsersDietsModel> UsersDiets { get; set; }
-        //public DbSet<UsersExercisesModel> UsersExercises { get; set; }
+     
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
@@ -23,11 +19,14 @@ namespace ExerciseXData_UserLibrary.Data
 
             //UsersModel
             modelBuilder.Entity<UsersModel>()
-                .Property(u => u.U_Gender)
+                .Property(u => u.U_UserGender)
                 .HasConversion<string>(); // Convert enum to string in DB
 
+            // Configure IdentityUser mappings if required
+            modelBuilder.Entity<IdentityUser>()
+                .HasIndex(iu => iu.Email)
+                .IsUnique();
 
-           
         }
     }
 }
