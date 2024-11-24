@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ExerciseXData_UserLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialCreateUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,20 +30,18 @@ namespace ExerciseXData_UserLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
-                    U_Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    U_Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    U_Age = table.Column<int>(type: "int", nullable: true),
-                    U_Height_CM = table.Column<double>(type: "float", nullable: true),
-                    U_Weight_KG = table.Column<double>(type: "float", nullable: true),
-                    U_Goal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    U_UserGender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    U_Age = table.Column<int>(type: "int", nullable: false),
+                    U_Height_CM = table.Column<double>(type: "float", nullable: false),
+                    U_Weight_KG = table.Column<double>(type: "float", nullable: false),
+                    U_Goal = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     U_Lifestyle_Condition_1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     U_Lifestyle_Condition_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     U_Lifestyle_Condition_3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     U_Lifestyle_Condition_4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     U_Lifestyle_Condition_5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    U_Created_Date = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    U_Last_Login = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    U_Created_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    U_Last_Login = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -62,6 +60,31 @@ namespace ExerciseXData_UserLibrary.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IdentityUser",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityUser", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,6 +231,13 @@ namespace ExerciseXData_UserLibrary.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IdentityUser_Email",
+                table: "IdentityUser",
+                column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
         }
 
         /// <inheritdoc />
@@ -227,6 +257,9 @@ namespace ExerciseXData_UserLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "IdentityUser");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

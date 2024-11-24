@@ -11,9 +11,6 @@ namespace ExerciseXData_UserLibrary.Models
         
         public UserGender.Gender U_UserGender { get; set; }
 
-        [DisplayName("Role")]
-        public string U_Role { get; set; }
-
         [DisplayName ("Age")]
         public int U_Age { get; set; }
 

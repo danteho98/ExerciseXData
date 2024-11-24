@@ -52,8 +52,9 @@ namespace ExerciseXData_UserLibrary.Controllers
             {
                 var user = new UsersModel
                 {
-                    UserName = model.UserName,
                     Email = model.Email,
+                    UserName = model.UserName,
+                    
                     U_UserGender = model.Gender,
                     U_Age = model.Age,
                     U_Height_CM = model.Height,
@@ -69,14 +70,24 @@ namespace ExerciseXData_UserLibrary.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    // Assign "User" role by default
+                    var roleResult = await _userManager.AddToRoleAsync(user, "User");
+                    if (!roleResult.Succeeded)
+                    {
+                        AddErrors(roleResult);
+                        return View(model);
+                    }
 
+                    _logger.LogInformation("User created a new account with password.");
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("UserDashboard", "User");
                 }
                 AddErrors(result);
             }
-
+            else
+            {
+                _logger.LogWarning("Registration failed due to invalid model state.");
+            }
             return View(model);
         }
 
@@ -91,28 +102,45 @@ namespace ExerciseXData_UserLibrary.Controllers
         // POST: account/login
         [HttpPost("login")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginDto model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginDto model)
         {
-            returnUrl ??= Url.Content("~/");
-
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-                if (result.Succeeded)
+                var user = await _userManager.FindByEmailAsync(model.Email) ?? await _userManager.FindByNameAsync(model.Email);
+                if (user == null)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToAction(nameof(Lockout));
-                }
-                else
-                {
+                    _logger.LogWarning("Login failed. User not found: {Email}", model.Email);
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return View(model);
                 }
+
+                var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    var roles = await _userManager.GetRolesAsync(user);
+
+                    _logger.LogInformation("Login successful for user: {Email}", user.Email);
+
+                    if (roles.Contains("Admin"))
+                        return RedirectToAction("Dashboard", "Admin");
+                    if (roles.Contains("User"))
+                        return RedirectToAction("UserDashboard", "User");
+
+                    return RedirectToAction("AccessDenied", "Account");
+                }
+
+                if (result.IsLockedOut)
+                {
+                    _logger.LogWarning("User account locked out: {Email}", model.Email);
+                    return RedirectToAction("Lockout", "Account");
+                }
+
+                _logger.LogWarning("Invalid login attempt for user: {Email}", model.Email);
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            }
+            else
+            {
+                _logger.LogWarning("Login failed due to invalid model state.");
             }
 
             return View(model);
@@ -125,10 +153,24 @@ namespace ExerciseXData_UserLibrary.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(HomeController.About), "About");
         }
 
-        // This helper method adds model errors to the ViewData
+        // GET: account/accessdenied
+        [HttpGet("accessdenied")]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        // GET: account/lockout
+        [HttpGet("lockout")]
+        public IActionResult Lockout()
+        {
+            return View();
+        }
+
+        // Helper: Add identity errors to ModelState
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -136,25 +178,5 @@ namespace ExerciseXData_UserLibrary.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
-
-        // Helper method to redirect to local URL or fallback to home
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
-        }
-
-        // GET: /Account/Lockout
-        public IActionResult Lockout()
-        {
-            return View();  // This could display a message like "Your account is locked out. Please try again later."
-        }
-
     }
 }

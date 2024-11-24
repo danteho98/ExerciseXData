@@ -57,7 +57,7 @@ namespace ExerciseXData_UserLibrary.Services
                     Email = email,
                     UserName = userName,
                     U_UserGender = uGender,
-                    U_Role = "NormalUser", // Default role for new users
+              
                     U_Age = uAge,
                     U_Height_CM = uHeightCm,
                     U_Weight_KG = uWeightKg,

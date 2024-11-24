@@ -55,8 +55,8 @@ namespace ExerciseXData_UserLibrary.Repositories
                     U_Lifestyle_Condition_4 = uLifestyleCondition4,
                     U_Lifestyle_Condition_5 = uLifestyleCondition5,
                     U_Created_Date = DateTime.UtcNow,
-                    U_Last_Login = DateTime.UtcNow,
-                    U_Role = "User" // Default role
+                    U_Last_Login = DateTime.UtcNow
+                   
                 };
 
                 var result = await _userManager.CreateAsync(user, password);

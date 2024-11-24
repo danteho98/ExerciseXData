@@ -12,6 +12,7 @@ using ExerciseXData_ExerciseLibrary.Services;
 using ExerciseXData_UserLibrary.Services;
 using ExerciseXData_UserLibrary.Repositories;
 using ExerciseXData_UserLibrary.Models;
+using ExerciseXData.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,13 +26,16 @@ builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddDbContext<UserDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("UserConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("UserConnection"),
+    b => b.MigrationsAssembly("ExerciseXData_UserLibrary")));
 
 builder.Services.AddDbContext<ExerciseDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ExerciseConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ExerciseConnection"),
+    b => b.MigrationsAssembly("ExerciseXData_ExerciseLibrary")));
 
 builder.Services.AddDbContext<DietDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DietConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DietConnection"),
+    b => b.MigrationsAssembly("ExerciseXData_DietLibrary")));
 
 
 builder.Services.AddIdentity<UsersModel, IdentityRole>(options =>
@@ -64,6 +68,12 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await DataSeeder.SeedAdminAccount(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
