@@ -20,7 +20,7 @@ namespace ExerciseXData.Utilities
             }
         }
 
-        public static async Task SeedAdminAccount(IServiceProvider serviceProvider)
+        public static async Task SeedAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration)
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<UsersModel>>();
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();

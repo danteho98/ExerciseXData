@@ -13,8 +13,11 @@ namespace ExerciseXData_UserLibrary.DataTransferObject
         [Required]
         [DisplayName("Username")]
         public string UserName { get; set; }
-            
+
         [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$", 
+            ErrorMessage = "Password must contain at least one uppercase letter, one lowercase letter, and one number.")]
         public string Password { get; set; }
 
         [Required]
@@ -42,10 +45,20 @@ namespace ExerciseXData_UserLibrary.DataTransferObject
         [Required(ErrorMessage = "Please specify your goal.")]
         [MaxLength(200, ErrorMessage = "Goal cannot exceed 200 characters.")]
         public string Goal { get; set; }
+
+        [DisplayName("Lifestyle Condition 1 (e.g., Vegetarian, Diabetic)")]
         public string ? LifestyleCondition1 { get; set; }
+
+        [DisplayName("Lifestyle Condition 2 (optional)")]
         public string ? LifestyleCondition2 { get; set; }
+
+        [DisplayName("Lifestyle Condition 3 (optional)")]
         public string ? LifestyleCondition3 { get; set; }
+
+        [DisplayName("Lifestyle Condition 4 (optional)")]
         public string ? LifestyleCondition4 { get; set; }
+
+        [DisplayName("Lifestyle Condition 5 (optional)")]
         public string ? LifestyleCondition5 { get; set; }
     }
 }

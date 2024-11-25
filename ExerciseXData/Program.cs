@@ -40,9 +40,20 @@ builder.Services.AddDbContext<DietDbContext>(options =>
 
 builder.Services.AddIdentity<UsersModel, IdentityRole>(options =>
 {
+    // Password validation settings
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireNonAlphanumeric = false; // Allow alphanumeric-only passwords
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+
+    // Lockout settings
     options.Lockout.MaxFailedAccessAttempts = 5;  // Lockout after 5 failed attempts
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);  // Lockout for 15 minutes
     options.Lockout.AllowedForNewUsers = true;  // Enable lockout for new users
+
+    // User settings
+    options.User.RequireUniqueEmail = true;
 })
 .AddEntityFrameworkStores<UserDbContext>()
 .AddDefaultTokenProviders();
@@ -72,7 +83,10 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    await DataSeeder.SeedAdminAccount(services);
+    var configuration = services.GetRequiredService<IConfiguration>();
+
+    await DataSeeder.SeedRoles(services);
+    await DataSeeder.SeedAdminAccount(services, configuration);
 }
 
 // Configure the HTTP request pipeline.

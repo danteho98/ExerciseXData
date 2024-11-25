@@ -124,7 +124,7 @@ namespace ExerciseXData_UserLibrary.Controllers
                     if (roles.Contains("Admin"))
                         return RedirectToAction("Dashboard", "Admin");
                     if (roles.Contains("User"))
-                        return RedirectToAction("UserDashboard", "User");
+                        return RedirectToAction("UserDashboard", "Users");
 
                     return RedirectToAction("AccessDenied", "Account");
                 }
