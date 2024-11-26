@@ -1,6 +1,6 @@
 ﻿
 
-namespace ExerciseXData_DietLibrary.DataTransferObject
+namespace ExerciseXData_ExericseLibrary.DataTransferObject
 {
     public class ExerciseDto
     {
