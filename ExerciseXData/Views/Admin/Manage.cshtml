@@ -1,0 +1,25 @@
+﻿@model IEnumerable<CategoriesModel>
+
+<h2>Manage Categories</h2>
+<form asp-action="Add" method="post">
+    <input asp-for="C_Name" placeholder="Category Name" />
+    <button type="submit">Add Category</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Modified Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.C_Name</td>
+                <td>@category.C_Modified_Date</td>
+            </tr>
+        }
+    </tbody>
+</table>

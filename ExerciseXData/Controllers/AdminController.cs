@@ -1,4 +1,5 @@
 ﻿using ExerciseXData.Admin;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,10 +9,12 @@ namespace ExerciseXData.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
+        private readonly ILogger<AdminController> _logger;
 
-        public AdminController(IAdminService adminService)
+        public AdminController(IAdminService adminService, ILogger<AdminController> logger)
         {
             _adminService = adminService;
+            _logger = logger;
         }
 
         [HttpGet("admin/dashboard")]
@@ -24,5 +27,14 @@ namespace ExerciseXData.Controllers
             }
             return View(dashboardData);
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            _logger.LogInformation("Admin logged out successfully.");
+            return RedirectToAction("Login", "Account"); // Redirect to the admin login page or other appropriate page
+        }
+
+
     }
 }

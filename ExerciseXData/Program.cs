@@ -15,6 +15,8 @@ using ExerciseXData.Utilities;
 using ExerciseXData_ExerciseLibrary.Repositories;
 using ExerciseXData.Admin;
 using ExerciseXData_SharedContracts.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using ExerciseXData_ExerciseLibrary.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,6 +66,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login"; // Redirect to login page
+        options.LogoutPath = "/Admin/Logout"; // Logout endpoint
+    });
 
 //Service
 builder.Services.AddScoped<AuthService>(); 
@@ -74,6 +82,8 @@ builder.Services.AddScoped<UsersService>();
 
 //Interface
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<ICategoryService, CategoriesService>();
+
 builder.Services.AddScoped<IUserRepository, UsersRepository>();
 builder.Services.AddScoped<IExerciseRepository, ExercisesRepository>();
 builder.Services.AddScoped<IDietRepository, DietsRepository>();
