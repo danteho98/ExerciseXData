@@ -1,28 +1,25 @@
 ﻿
 
 using ExerciseXData_DietLibrary.Data;
+using ExerciseXData_DietLibrary.Models;
+using ExerciseXData_SharedContracts.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData_DietLibrary.Repositories
 {
-    public class DietsRepository
+    public class DietsRepository : IDietRepository
     {
-        private readonly DietDbContext _dietContext;
+        private readonly DietDbContext _dietDbContext;
 
-        public DietsRepository(DietDbContext dietContext)
+        public DietsRepository(DietDbContext dietDbContext)
         {
-            _dietContext = dietContext;
+            _dietDbContext = dietDbContext;
         }
-        //public async Task AddUserDietAsync(int userId, int dietId)
-        //{
-        //    var usersDiets = new UsersDietsModel
-        //    {
-        //        U_Id = userId,
-        //        D_Id = dietId,
-        //    };
 
-        //    _userContext.UsersDiets.Add(usersDiets);
-        //    await _userContext.SaveChangesAsync();
-        //}
 
+        public async Task<int> GetTotalDietsAsync()
+        {
+            return await _dietDbContext.Diets.CountAsync();
+        }
     }
 }

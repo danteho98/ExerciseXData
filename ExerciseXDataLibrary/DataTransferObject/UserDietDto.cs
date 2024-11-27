@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace ExerciseXData_UserLibrary.DataTransferObject
 {
-    public class DietDto
+    public class UserDietDto
     {
-        public string Name { get; set; }
-        public int Calories { get; set; } // in kcal
+        public string MealName { get; set; }
+        public DateTime MealDate { get; set; }
+        public bool IsAdhered { get; set; }
     }
+
 }

@@ -9,13 +9,12 @@ namespace ExerciseXData_DietLibrary.Repositories
 {
     public class DietsFoodsRepository
     {
-        private readonly DietDbContext _dietContext;
-        public DietsFoodsRepository(DietDbContext dietContext) 
+        private readonly DietDbContext _dietDbContext;
+        public DietsFoodsRepository(DietDbContext dietDbContext) 
         {
-            _dietContext = dietContext; 
+            _dietDbContext = dietDbContext; 
         }
 
-        //public Task<List<DietsFoodsModel>> GetByDietId(int dietId) =>
-        //    _dietContext.DietsFoods.Where(df => df.D_Id == dietId).ToListAsync();
+        
     }
 }

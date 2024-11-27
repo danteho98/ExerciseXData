@@ -1,4 +1,4 @@
-﻿namespace ExerciseXData_SharedContracts.DataTransferObjects
+﻿namespace ExerciseXData_SharedContracts.Interfaces
 {
     public class IUsersDiets
     {

@@ -1,197 +1,178 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ExerciseXData_SharedContracts.Interfaces;
+using ExerciseXData_UserLibrary.Data;
+using ExerciseXData_UserLibrary.DataTransferObject;
 using ExerciseXData_UserLibrary.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using static ExerciseXData_UserLibrary.Models.UserGender;
 
 namespace ExerciseXData_UserLibrary.Repositories
 {
-    public class UsersRepository
+    public class UsersRepository : IUserRepository
     {
+        private readonly UserDbContext _userDbContext;
         private readonly UserManager<UsersModel> _userManager;
+        private readonly SignInManager<UsersModel> _signInManager;
         private readonly ILogger<UsersRepository> _logger;
 
-        public UsersRepository(UserManager<UsersModel> userManager, ILogger<UsersRepository> logger)
+        public UsersRepository(
+            UserDbContext userDbContext,
+            UserManager<UsersModel> userManager,
+            SignInManager<UsersModel> signInManager,
+            ILogger<UsersRepository> logger)
         {
+            _userDbContext = userDbContext;
             _userManager = userManager;
+            _signInManager = signInManager;
             _logger = logger;
         }
 
-        /// <summary>
-        /// Registers a new user with custom fields.
-        /// </summary>
-        public async Task<bool> RegisterUserAsync(
-            string email,
-            string userName,
-            string password,
-            Gender uGender,
-            int uAge,
-            double uHeightCm,
-            double uWeightKg,
-            string uGoal,
-            string? uLifestyleCondition1 = null,
-            string? uLifestyleCondition2 = null,
-            string? uLifestyleCondition3 = null,
-            string? uLifestyleCondition4 = null,
-            string? uLifestyleCondition5 = null)
+        // Create a user in the database
+        public async Task<bool> CreateAsync(UsersModel user, string password)
         {
-            try
+            var result = await _userManager.CreateAsync(user, password);
+            if (result.Succeeded)
             {
-                var user = new UsersModel
-                {
-                    Email = email,
-                    UserName = userName,
-                    U_UserGender = uGender,
-                    U_Age = uAge,
-                    U_Height_CM = uHeightCm,
-                    U_Weight_KG = uWeightKg,
-                    U_Goal = uGoal,
-                    U_Lifestyle_Condition_1 = uLifestyleCondition1,
-                    U_Lifestyle_Condition_2 = uLifestyleCondition2,
-                    U_Lifestyle_Condition_3 = uLifestyleCondition3,
-                    U_Lifestyle_Condition_4 = uLifestyleCondition4,
-                    U_Lifestyle_Condition_5 = uLifestyleCondition5,
-                    U_Created_Date = DateTime.UtcNow,
-                    U_Last_Login = DateTime.UtcNow
-                   
-                };
-
-                var result = await _userManager.CreateAsync(user, password);
-
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User registered successfully: {Email}", email);
-                    return true;
-                }
-                else
-                {
-                    _logger.LogWarning("User registration failed: {Errors}", string.Join(", ", result.Errors.Select(e => e.Description)));
-                    return false;
-                }
+                _logger.LogInformation("User created successfully: {Email}", user.Email);
+                return true;
             }
-            catch (Exception ex)
+
+            _logger.LogWarning("User creation failed: {Errors}", string.Join(", ", result.Errors.Select(e => e.Description)));
+            return false;
+        }
+
+        // Authenticate user credentials
+        public async Task<bool> AuthenticateAsync(string email, string password)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
             {
-                _logger.LogError(ex, "An error occurred while registering a user.");
+                _logger.LogWarning("Authentication failed: User not found for email: {Email}", email);
                 return false;
             }
+
+            var result = await _signInManager.CheckPasswordSignInAsync(user, password, lockoutOnFailure: false);
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("Authentication succeeded for user: {Email}", email);
+                return true;
+            }
+
+            _logger.LogWarning("Authentication failed for user: {Email}", email);
+            return false;
         }
 
-        public async Task<UsersModel?> GetUserByEmailAsync(string email)
+        // Get user by ID
+        public async Task<UsersModel?> GetUserByIdAsync(string userId)
         {
-            try
-            {
-                // Query the database for a user with the specified email
-                var user = await _userManager.Users
-                    .FirstOrDefaultAsync(u => u.Email == email);
+            return await _userManager.FindByIdAsync(userId);
+        }
 
-                return user;
-            }
-            catch (Exception ex)
+        // Update user details
+        public async Task<bool> UpdateUserDetailsAsync(UsersModel updatedUser)
+        {
+            var result = await _userManager.UpdateAsync(updatedUser);
+            if (result.Succeeded)
             {
-                // Log exception if necessary
-                throw new Exception($"Error retrieving user by email: {ex.Message}", ex);
+                _logger.LogInformation("User updated successfully: {UserId}", updatedUser.Id);
+                return true;
             }
+
+            _logger.LogWarning("Failed to update user: {Errors}", string.Join(", ", result.Errors.Select(e => e.Description)));
+            return false;
+        }
+
+        // Sign out the user
+        public async Task SignOutAsync()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User signed out successfully.");
         }
 
         /// <summary>
-        /// Finds a user by email or username.
+        /// Checks if a user with the given email or username exists.
         /// </summary>
-        public async Task<UsersModel?> FindUserByEmailOrUsernameAsync(string identifier)
+        /// <param name="identifier">Email or Username to check.</param>
+        /// <returns>True if user exists; otherwise, false.</returns>
+        public async Task<bool> UserExistsAsync(string identifier)
         {
-            try
+            // Check for user by email
+            var userByEmail = await _userManager.FindByEmailAsync(identifier);
+            if (userByEmail != null)
             {
-                var user = await _userManager.FindByEmailAsync(identifier) ??
-                           await _userManager.FindByNameAsync(identifier);
+                return true;
+            }
 
-                return user;
-            }
-            catch (Exception ex)
+            // Check for user by username
+            var userByUsername = await _userManager.FindByNameAsync(identifier);
+            if (userByUsername != null)
             {
-                _logger.LogError(ex, "Error finding user by identifier: {Identifier}", identifier);
-                return null;
+                return true;
             }
+
+            return false;
         }
 
         /// <summary>
-        /// Updates the last login date for the user.
+        /// Resets a user's password using a reset token.
         /// </summary>
-        public async Task<bool> UpdateLastLoginAsync(string userId)
+        /// <param name="email">The user's email.</param>
+        /// <param name="newPassword">The new password to set.</param>
+        /// <param name="token">The password reset token.</param>
+        /// <returns>True if the password reset is successful; otherwise, false.</returns>
+        public async Task<bool> ResetPasswordAsync(string email, string newPassword, string token)
+        {
+            // Find the user by email
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return false; // User not found
+            }
+
+            // Reset the password
+            var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
+
+            return result.Succeeded;
+        }
+
+        /// <summary>
+        /// Change the user's password after validating the current one.
+        /// </summary>
+        public async Task<bool> ChangePasswordAsync(string userId, string currentPassword, string newPassword)
         {
             try
             {
+                // Find the user by ID
                 var user = await _userManager.FindByIdAsync(userId);
                 if (user == null)
                 {
-                    _logger.LogWarning("User not found: {UserId}", userId);
-                    return false;
+                    return false; // User not found
                 }
 
-                user.U_Last_Login = DateTime.UtcNow;
-                var result = await _userManager.UpdateAsync(user);
+                // Check if the current password is valid
+                var isPasswordValid = await _userManager.CheckPasswordAsync(user, currentPassword);
+                if (!isPasswordValid)
+                {
+                    return false; // Current password is incorrect
+                }
 
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User last login updated: {UserId}", userId);
-                    return true;
-                }
-                else
-                {
-                    _logger.LogWarning("Failed to update last login for user: {UserId}", userId);
-                    return false;
-                }
+                // Change the password
+                var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+                return result.Succeeded;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating last login for user: {UserId}", userId);
-                return false;
+                // Log any errors (you can also log more details if needed)
+                throw new Exception("Error occurred while changing the password.", ex);
             }
         }
 
-        /// <summary>
-        /// Updates custom user details.
-        /// </summary>
-        public async Task<bool> UpdateUserDetailsAsync(UsersModel updatedUser)
+        public async Task<int> GetTotalUsersAsync()
         {
-            try
-            {
-                var existingUser = await _userManager.FindByIdAsync(updatedUser.Id);
-                if (existingUser == null)
-                {
-                    _logger.LogWarning("User not found: {UserId}", updatedUser.Id);
-                    return false;
-                }
-
-                existingUser.U_Age = updatedUser.U_Age;
-                existingUser.U_Height_CM = updatedUser.U_Height_CM;
-                existingUser.U_Weight_KG = updatedUser.U_Weight_KG;
-                existingUser.U_Goal = updatedUser.U_Goal;
-                existingUser.U_Lifestyle_Condition_1 = updatedUser.U_Lifestyle_Condition_1;
-                existingUser.U_Lifestyle_Condition_2 = updatedUser.U_Lifestyle_Condition_2;
-                existingUser.U_Lifestyle_Condition_3 = updatedUser.U_Lifestyle_Condition_3;
-                existingUser.U_Lifestyle_Condition_4 = updatedUser.U_Lifestyle_Condition_4;
-                existingUser.U_Lifestyle_Condition_5 = updatedUser.U_Lifestyle_Condition_5;
-
-                var result = await _userManager.UpdateAsync(existingUser);
-
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User details updated successfully: {UserId}", updatedUser.Id);
-                    return true;
-                }
-                else
-                {
-                    _logger.LogWarning("Failed to update user details: {Errors}", string.Join(", ", result.Errors.Select(e => e.Description)));
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error updating user details: {UserId}", updatedUser.Id);
-                return false;
-            }
+            return await _userDbContext.Users.CountAsync();
         }
     }
 }

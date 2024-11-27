@@ -1,6 +1,4 @@
-﻿
-
-namespace ExerciseXData_ExericseLibrary.DataTransferObject
+﻿namespace ExerciseXData_ExerciseLibrary.DataTransferObject
 {
     public class ExercisePlanDto
     {

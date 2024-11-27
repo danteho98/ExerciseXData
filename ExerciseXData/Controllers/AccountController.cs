@@ -3,11 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using ExerciseXData_UserLibrary.Models;
 using ExerciseXData_UserLibrary.Services;
 using ExerciseXData_UserLibrary.Repositories;
-using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 using ExerciseXData.Controllers;
 using ExerciseXData_UserLibrary.DataTransferObject;
 

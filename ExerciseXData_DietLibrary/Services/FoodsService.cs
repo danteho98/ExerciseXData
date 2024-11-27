@@ -8,44 +8,14 @@ namespace ExerciseXData_DietLibrary.Services
     public class FoodsService
     {
 
-        private readonly DietDbContext _dietContext;
+        private readonly DietDbContext _dietDbContext;
 
-        public FoodsService(DietDbContext foodsContext)
+        public FoodsService(DietDbContext dietDbContext)
         {
-            _dietContext = foodsContext;
+            _dietDbContext = dietDbContext;
         }
 
-        public async Task AddAsync(FoodsModel foods)
-        {
-            await _dietContext.Foods.AddAsync(foods);
-            await _dietContext.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(int id)
-        {
-            var result = await _dietContext.Foods.FirstOrDefaultAsync(n => n.F_Id == id);
-            _dietContext.Foods.Remove(result);
-            await _dietContext.SaveChangesAsync();
-        }
-
-        public async Task<IEnumerable<FoodsModel>> GetAllAsync()
-        {
-            var result = await _dietContext.Foods.ToListAsync();
-            return result;
-        }
-
-        public async Task<FoodsModel> GetByIdAsync(int id)
-        {
-            var result = await _dietContext.Foods.FirstOrDefaultAsync(n => n.F_Id == id);
-            return result;
-        }
-
-        public async Task<FoodsModel> UpdateAsync(int id, FoodsModel newFoods)
-        {
-            _dietContext.Update(newFoods);
-            await _dietContext.SaveChangesAsync();
-            return newFoods;
-        }
+       
 
     }
 }

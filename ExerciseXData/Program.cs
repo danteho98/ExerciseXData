@@ -6,13 +6,15 @@ using ExerciseXData_UserLibrary.Data;
 using ExerciseXData_ExerciseLibrary.Data;
 using ExerciseXData_DietLibrary.Data;
 using ExerciseXData_DietLibrary.Repositories;
-using ExerciseXDataLibrary.Repositories;
 using ExerciseXData_DietLibrary.Services;
 using ExerciseXData_ExerciseLibrary.Services;
 using ExerciseXData_UserLibrary.Services;
 using ExerciseXData_UserLibrary.Repositories;
 using ExerciseXData_UserLibrary.Models;
 using ExerciseXData.Utilities;
+using ExerciseXData_ExerciseLibrary.Repositories;
+using ExerciseXData.Admin;
+using ExerciseXData_SharedContracts.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +71,12 @@ builder.Services.AddScoped<CategoriesService>();
 builder.Services.AddScoped<DietsService>();
 builder.Services.AddScoped<ExercisesService>();
 builder.Services.AddScoped<UsersService>();
+
+//Interface
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IUserRepository, UsersRepository>();
+builder.Services.AddScoped<IExerciseRepository, ExercisesRepository>();
+builder.Services.AddScoped<IDietRepository, DietsRepository>();
 
 //Repository
 builder.Services.AddScoped<UsersRepository>();

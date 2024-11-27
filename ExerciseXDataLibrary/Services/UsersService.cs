@@ -1,263 +1,182 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
-using ExerciseXData_UserLibrary.Repositories;
-using ExerciseXData_UserLibrary.Models;
-
-using static ExerciseXData_UserLibrary.Models.UsersModel;
-using static ExerciseXData_UserLibrary.Models.UserGender;
+﻿using System;
+using System.Threading.Tasks;
 using ExerciseXData_UserLibrary.DataTransferObject;
-
+using ExerciseXData_UserLibrary.Models;
+using ExerciseXData_UserLibrary.Repositories;
+using Microsoft.Extensions.Logging;
 
 namespace ExerciseXData_UserLibrary.Services
 {
     public class UsersService
     {
-        private readonly UsersRepository _usersRepository;
-        private readonly IDietRepository _dietRepository;
-        private readonly IExerciseRepository _exerciseRepository;
-        private readonly UserManager<UsersModel> _userManager;
-        private readonly SignInManager<UsersModel> _signInManager;
+        private readonly UsersRepository _userRepository;
         private readonly ILogger<UsersService> _logger;
 
-        public UsersService(
-            UsersRepository usersRepository,
-            IDietRepository dietRepository,
-            IExerciseRepository exerciseRepository,
-            UserManager<UsersModel> userManager,
-            SignInManager<UsersModel> signInManager,
-            ILogger<UsersService> logger)
+        public UsersService(UsersRepository userRepository, ILogger<UsersService> logger)
         {
-            _usersRepository = usersRepository;
-            _dietRepository = dietRepository;
-            _exerciseRepository = exerciseRepository;
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _userRepository = userRepository;
             _logger = logger;
         }
 
-        public async Task<bool> RegisterUserAsync(
-            string email,
-            string userName,
-            string password,
-            Gender uGender,
-            int uAge,
-            double uHeightCm,
-            double uWeightKg,
-            string uGoal,
-            string? uLifestyleCondition1 = null,
-            string? uLifestyleCondition2 = null,
-            string? uLifestyleCondition3 = null,
-            string? uLifestyleCondition4 = null,
-            string? uLifestyleCondition5 = null)
+        /// <summary>
+        /// Registers a new user with business logic validation.
+        /// </summary>
+        public async Task<bool> RegisterUserAsync(RegisterUserDto dto)
         {
             try
             {
-                // Check if the email is already in use
-                var existingUser = await _userManager.FindByEmailAsync(email);
-                if (existingUser != null)
+                // Validate email and username uniqueness
+                if (await _userRepository.UserExistsAsync(dto.Email))
                 {
-                    _logger.LogWarning("Registration failed: Email already in use - {Email}", email);
-                    return false;
+                    _logger.LogWarning("User registration failed: Email already exists.");
+                    throw new Exception("Email is already in use.");
                 }
 
-                // Create a new UsersModel instance
-                var newUser = new UsersModel
+                if (await _userRepository.UserExistsAsync(dto.UserName))
                 {
-                    Email = email,
-                    UserName = userName,
-                    U_UserGender = uGender,
-              
-                    U_Age = uAge,
-                    U_Height_CM = uHeightCm,
-                    U_Weight_KG = uWeightKg,
-                    U_Goal = uGoal,
-                    U_Lifestyle_Condition_1 = uLifestyleCondition1,
-                    U_Lifestyle_Condition_2 = uLifestyleCondition2,
-                    U_Lifestyle_Condition_3 = uLifestyleCondition3,
-                    U_Lifestyle_Condition_4 = uLifestyleCondition4,
-                    U_Lifestyle_Condition_5 = uLifestyleCondition5
+                    _logger.LogWarning("User registration failed: Username already exists.");
+                    throw new Exception("Username is already in use.");
+                }
+
+                // Validate required fields
+                if (dto.Age < 1)
+                {
+                    throw new Exception("Age must be greater than 0.");
+                }
+
+                if (dto.Height <= 0 || dto.Weight <= 0)
+                {
+                    throw new Exception("Height and Weight must be positive values.");
+                }
+
+                // Map DTO to domain model
+                var user = new UsersModel
+                {
+                    Email = dto.Email,
+                    UserName = dto.UserName,
+                    U_UserGender = dto.Gender,
+                    U_Age = dto.Age,
+                    U_Height_CM = dto.Height,
+                    U_Weight_KG = dto.Weight,
+                    U_Goal = dto.Goal,
+                    U_Lifestyle_Condition_1 = dto.LifestyleCondition1,
+                    U_Lifestyle_Condition_2 = dto.LifestyleCondition2,
+                    U_Lifestyle_Condition_3 = dto.LifestyleCondition3,
+                    U_Lifestyle_Condition_4 = dto.LifestyleCondition4,
+                    U_Lifestyle_Condition_5 = dto.LifestyleCondition5,
+                    U_Created_Date = DateTime.UtcNow
                 };
 
-                // Use Identity to create the user
-                var identityResult = await _userManager.CreateAsync(newUser, password);
+                // Delegate user creation to the repository
+                bool isCreated = await _userRepository.CreateAsync(user, dto.Password);
 
-                if (identityResult.Succeeded)
+                if (isCreated)
                 {
-                    _logger.LogInformation("User registered successfully with email: {Email}", email);
+                    _logger.LogInformation("User registered successfully: {Email}", dto.Email);
                     return true;
                 }
 
-                foreach (var error in identityResult.Errors)
-                {
-                    _logger.LogError("Registration error: {Error}", error.Description);
-                }
-
+                _logger.LogWarning("User registration failed for email: {Email}", dto.Email);
                 return false;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error during user registration for email: {Email}", email);
-                return false;
+                _logger.LogError(ex, "Error occurred during user registration.");
+                throw; // Re-throw exception to the controller
             }
         }
 
-        public async Task<bool> LoginUserAsync(string email, string password)
+        /// <summary>
+        /// Authenticates a user with their credentials.
+        /// </summary>
+        public async Task<bool> LoginAsync(string email, string password)
         {
             try
             {
-                // Attempt to find the user by email
-                var user = await _userManager.FindByEmailAsync(email);
-                if (user == null)
+                var isAuthenticated = await _userRepository.AuthenticateAsync(email, password);
+                if (isAuthenticated)
                 {
-                    _logger.LogWarning("Login failed: User not found with email: {Email}", email);
-                    return false;
-                }
-
-                // Use SignInManager to sign in the user
-                var signInResult = await _signInManager.PasswordSignInAsync(user, password, isPersistent: false, lockoutOnFailure: false);
-
-                if (signInResult.Succeeded)
-                {
-                    _logger.LogInformation("User logged in successfully with email: {Email}", email);
+                    _logger.LogInformation("User logged in successfully: {Email}", email);
                     return true;
                 }
 
-                _logger.LogWarning("Login failed for email: {Email}", email);
+                _logger.LogWarning("Invalid login attempt for email: {Email}", email);
                 return false;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error during user login for email: {Email}", email);
-                return false;
+                _logger.LogError(ex, "Error occurred during login for email: {Email}", email);
+                throw; // Re-throw to the controller
             }
         }
 
-        public async Task<UsersModel?> GetUserByEmailAsync(string email)
+        /// <summary>
+        /// Logs the user out of the application.
+        /// </summary>
+        public async Task SignOutAsync()
         {
             try
             {
-                var user = await _usersRepository.GetUserByEmailAsync(email);
-
-                if (user == null)
-                {
-                    _logger.LogWarning("User not found with email: {Email}", email);
-                }
-
-                return user;
+                await _userRepository.SignOutAsync();
+                _logger.LogInformation("User signed out successfully.");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error retrieving user with email: {Email}", email);
-                return null;
+                _logger.LogError(ex, "Error occurred during user sign out.");
+                throw; // Re-throw to the controller
             }
         }
 
-        public async Task<UserDashboardDto> GetUserDashboardDataAsync(string userId)
+        /// <summary>
+        /// Resets the password for a user.
+        /// </summary>
+        public async Task<bool> ResetPasswordAsync(string email, string newPassword, string token)
         {
-            var user = await _usersRepository.GetUserByIdAsync(userId);
-            if (user == null) return null;
-
-            var dietPlan = await _dietRepository.GetDietPlanByUserIdAsync(userId);
-            var exercisePlan = await _exerciseRepository.GetExercisePlanByUserIdAsync(userId);
-
-            return new UserDashboardDto
+            try
             {
-                UserName = user.UserName,
-                Email = user.Email,
-                Age = user.U_Age,
-                Height = user.U_Height_CM,
-                Weight = user.U_Weight_KG,
-                Goal = user.U_Goal,
-                LifestyleConditions = new List<string>
+                var result = await _userRepository.ResetPasswordAsync(email, newPassword, token);
+                if (result)
                 {
-                    user.U_Lifestyle_Condition_1,
-                    user.U_Lifestyle_Condition_2,
-                    user.U_Lifestyle_Condition_3,
-                    user.U_Lifestyle_Condition_4,
-                    user.U_Lifestyle_Condition_5
-                },
-                DietPlan = dietPlan,
-                ExercisePlan = exercisePlan
-            };
-        }
+                    _logger.LogInformation("Password reset successfully for email: {Email}", email);
+                    return true;
+                }
 
-        /// <summary>
-        /// Fetch user's current diet plan.
-        /// </summary>
-        public async Task<DietPlanDto> GetUserDietPlanAsync(string userId)
-        {
-            return await _dietRepository.GetDietPlanByUserIdAsync(userId);
-        }
-
-        /// <summary>
-        /// Update user's diet plan.
-        /// </summary>
-        public async Task<bool> UpdateUserDietPlanAsync(string userId, DietPlanDto model)
-        {
-            return await _dietRepository.UpdateDietPlanAsync(userId, model);
-        }
-
-        /// <summary>
-        /// Fetch user's current exercise plan.
-        /// </summary>
-        public async Task<ExercisePlanDto> GetUserExercisePlanAsync(string userId)
-        {
-            return await _exerciseRepository.GetExercisePlanByUserIdAsync(userId);
-        }
-
-        /// <summary>
-        /// Update user's exercise plan.
-        /// </summary>
-        public async Task<bool> UpdateUserExercisePlanAsync(string userId, ExercisePlanDto model)
-        {
-            return await _exerciseRepository.UpdateExercisePlanAsync(userId, model);
-        }
-
-        /// <summary>
-        /// Fetch user's profile information.
-        /// </summary>
-        public async Task<UpdateUserProfileDto> GetUserProfileAsync(string userId)
-        {
-            var user = await _usersRepository.GetUserByIdAsync(userId);
-            if (user == null) return null;
-
-            return new UpdateUserProfileDto
+                _logger.LogWarning("Password reset failed for email: {Email}", email);
+                return false;
+            }
+            catch (Exception ex)
             {
-                UserName = user.UserName,
-                Email = user.Email,
-                Gender = user.U_UserGender,
-                Age = user.U_Age,
-                Height = user.U_Height_CM,
-                Weight = user.U_Weight_KG,
-                Goal = user.U_Goal
-            };
+                _logger.LogError(ex, "Error occurred during password reset for email: {Email}", email);
+                throw; // Re-throw to the controller
+            }
         }
 
         /// <summary>
-        /// Update user's profile information.
+        /// Changes the password for a user.
         /// </summary>
-        public async Task<bool> UpdateUserProfileAsync(string userId, UpdateUserProfileDto model)
+        public async Task<bool> ChangePasswordAsync(string userId, string currentPassword, string newPassword)
         {
-            var user = await _usersRepository.GetUserByIdAsync(userId);
-            if (user == null) return false;
+            try
+            {
+                var result = await _userRepository.ChangePasswordAsync(userId, currentPassword, newPassword);
+                if (result)
+                {
+                    _logger.LogInformation("Password changed successfully for user ID: {UserId}", userId);
+                    return true;
+                }
 
-            user.UserName = model.UserName;
-            user.Email = model.Email;
-            user.U_UserGender = model.Gender;
-            user.U_Age = model.Age;
-            user.U_Height_CM = model.Height;
-            user.U_Weight_KG = model.Weight;
-            user.U_Goal = model.Goal;
-
-            return await _usersRepository.UpdateUserAsync(user);
+                _logger.LogWarning("Password change failed for user ID: {UserId}", userId);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred during password change for user ID: {UserId}", userId);
+                throw; // Re-throw to the controller
+            }
         }
 
-        /// <summary>
-        /// Fetch user's progress data.
-        /// </summary>
-        public async Task<UserProgressDto> GetUserProgressAsync(string userId)
-        {
-            return await _exerciseRepository.GetProgressByUserIdAsync(userId);
-        }
+
+
+
     }
 }

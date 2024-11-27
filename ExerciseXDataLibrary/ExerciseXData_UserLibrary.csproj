@@ -22,4 +22,8 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ExerciseXData_SharedContracts\ExerciseXData_SharedContracts.csproj" />
+  </ItemGroup>
+
 </Project>

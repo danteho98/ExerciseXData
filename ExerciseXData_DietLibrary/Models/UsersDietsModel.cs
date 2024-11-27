@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using ExerciseXData_UserLibrary.Models;
-using ExerciseXData_SharedContracts.DataTransferObjects;
+using ExerciseXData_SharedContracts.Interfaces;
 
 
 namespace ExerciseXData_DietLibrary.Models
