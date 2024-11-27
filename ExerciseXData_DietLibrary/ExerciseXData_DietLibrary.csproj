@@ -24,5 +24,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\ExerciseXDataLibrary\ExerciseXData_UserLibrary.csproj" />
+	  <ProjectReference Include="..\ExerciseXData_SharedContracts\ExerciseXData_SharedContracts.csproj" />
 	</ItemGroup>
 </Project>

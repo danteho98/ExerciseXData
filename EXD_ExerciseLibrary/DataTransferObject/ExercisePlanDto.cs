@@ -2,7 +2,7 @@
 
 namespace ExerciseXData_ExericseLibrary.DataTransferObject
 {
-    public class ExerciseDto
+    public class ExercisePlanDto
     {
         public string Name { get; set; }
         public int Repetition { get; set; }

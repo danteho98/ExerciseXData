@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ExerciseXData_DietLibrary.DataTransferObject
 {
-    public class DietDto
+    public class DietPlanDto
     {
         [Required]
         public string Name { get; set; }

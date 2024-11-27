@@ -2,25 +2,34 @@
 using Microsoft.Extensions.Logging;
 using ExerciseXData_UserLibrary.Repositories;
 using ExerciseXData_UserLibrary.Models;
+
 using static ExerciseXData_UserLibrary.Models.UsersModel;
 using static ExerciseXData_UserLibrary.Models.UserGender;
+using ExerciseXData_UserLibrary.DataTransferObject;
+
 
 namespace ExerciseXData_UserLibrary.Services
 {
     public class UsersService
     {
         private readonly UsersRepository _usersRepository;
+        private readonly IDietRepository _dietRepository;
+        private readonly IExerciseRepository _exerciseRepository;
         private readonly UserManager<UsersModel> _userManager;
         private readonly SignInManager<UsersModel> _signInManager;
         private readonly ILogger<UsersService> _logger;
 
         public UsersService(
             UsersRepository usersRepository,
+            IDietRepository dietRepository,
+            IExerciseRepository exerciseRepository,
             UserManager<UsersModel> userManager,
             SignInManager<UsersModel> signInManager,
             ILogger<UsersService> logger)
         {
             _usersRepository = usersRepository;
+            _dietRepository = dietRepository;
+            _exerciseRepository = exerciseRepository;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -141,6 +150,114 @@ namespace ExerciseXData_UserLibrary.Services
                 _logger.LogError(ex, "Error retrieving user with email: {Email}", email);
                 return null;
             }
+        }
+
+        public async Task<UserDashboardDto> GetUserDashboardDataAsync(string userId)
+        {
+            var user = await _usersRepository.GetUserByIdAsync(userId);
+            if (user == null) return null;
+
+            var dietPlan = await _dietRepository.GetDietPlanByUserIdAsync(userId);
+            var exercisePlan = await _exerciseRepository.GetExercisePlanByUserIdAsync(userId);
+
+            return new UserDashboardDto
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Age = user.U_Age,
+                Height = user.U_Height_CM,
+                Weight = user.U_Weight_KG,
+                Goal = user.U_Goal,
+                LifestyleConditions = new List<string>
+                {
+                    user.U_Lifestyle_Condition_1,
+                    user.U_Lifestyle_Condition_2,
+                    user.U_Lifestyle_Condition_3,
+                    user.U_Lifestyle_Condition_4,
+                    user.U_Lifestyle_Condition_5
+                },
+                DietPlan = dietPlan,
+                ExercisePlan = exercisePlan
+            };
+        }
+
+        /// <summary>
+        /// Fetch user's current diet plan.
+        /// </summary>
+        public async Task<DietPlanDto> GetUserDietPlanAsync(string userId)
+        {
+            return await _dietRepository.GetDietPlanByUserIdAsync(userId);
+        }
+
+        /// <summary>
+        /// Update user's diet plan.
+        /// </summary>
+        public async Task<bool> UpdateUserDietPlanAsync(string userId, DietPlanDto model)
+        {
+            return await _dietRepository.UpdateDietPlanAsync(userId, model);
+        }
+
+        /// <summary>
+        /// Fetch user's current exercise plan.
+        /// </summary>
+        public async Task<ExercisePlanDto> GetUserExercisePlanAsync(string userId)
+        {
+            return await _exerciseRepository.GetExercisePlanByUserIdAsync(userId);
+        }
+
+        /// <summary>
+        /// Update user's exercise plan.
+        /// </summary>
+        public async Task<bool> UpdateUserExercisePlanAsync(string userId, ExercisePlanDto model)
+        {
+            return await _exerciseRepository.UpdateExercisePlanAsync(userId, model);
+        }
+
+        /// <summary>
+        /// Fetch user's profile information.
+        /// </summary>
+        public async Task<UpdateUserProfileDto> GetUserProfileAsync(string userId)
+        {
+            var user = await _usersRepository.GetUserByIdAsync(userId);
+            if (user == null) return null;
+
+            return new UpdateUserProfileDto
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Gender = user.U_UserGender,
+                Age = user.U_Age,
+                Height = user.U_Height_CM,
+                Weight = user.U_Weight_KG,
+                Goal = user.U_Goal
+            };
+        }
+
+        /// <summary>
+        /// Update user's profile information.
+        /// </summary>
+        public async Task<bool> UpdateUserProfileAsync(string userId, UpdateUserProfileDto model)
+        {
+            var user = await _usersRepository.GetUserByIdAsync(userId);
+            if (user == null) return false;
+
+            user.UserName = model.UserName;
+            user.Email = model.Email;
+            user.U_UserGender = model.Gender;
+            user.U_Age = model.Age;
+            user.U_Height_CM = model.Height;
+            user.U_Weight_KG = model.Weight;
+            user.U_Goal = model.Goal;
+
+            return await _usersRepository.UpdateUserAsync(user);
+        }
+
+        /// <summary>
+        /// Fetch user's progress data.
+        /// </summary>
+        public async Task<UserProgressDto> GetUserProgressAsync(string userId)
+        {
+            return await _exerciseRepository.GetProgressByUserIdAsync(userId);
         }
     }
 }

@@ -2,11 +2,12 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using ExerciseXData_UserLibrary.Models;
+using ExerciseXData_SharedContracts.DataTransferObjects;
 
 
 namespace ExerciseXData_DietLibrary.Models
 {
-    public class UsersDietsModel
+    public class UsersDietsModel : IUsersDiets
     {
         [Key]
         public int UD_Id {  get; set; }
