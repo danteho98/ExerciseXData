@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ExerciseXData_DietLibrary.Migrations
 {
     /// <inheritdoc />
@@ -55,7 +57,6 @@ namespace ExerciseXData_DietLibrary.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     U_UserGender = table.Column<int>(type: "int", nullable: false),
-                    U_Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     U_Age = table.Column<int>(type: "int", nullable: false),
                     U_Height_CM = table.Column<double>(type: "float", nullable: false),
                     U_Weight_KG = table.Column<double>(type: "float", nullable: false),
@@ -91,12 +92,9 @@ namespace ExerciseXData_DietLibrary.Migrations
                 name: "DietsFoodsModel",
                 columns: table => new
                 {
-                    DF_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    D_Id = table.Column<int>(type: "int", nullable: false),
                     DietsD_Id = table.Column<int>(type: "int", nullable: false),
-                    F_Id = table.Column<int>(type: "int", nullable: true),
                     FoodsF_Id = table.Column<int>(type: "int", nullable: false),
+                    DF_Id = table.Column<int>(type: "int", nullable: false),
                     DF_Serving_Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DF_Recommended_Servings = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DF_Frequency = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -105,7 +103,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DietsFoodsModel", x => x.DF_Id);
+                    table.PrimaryKey("PK_DietsFoodsModel", x => new { x.DietsD_Id, x.FoodsF_Id });
                     table.ForeignKey(
                         name: "FK_DietsFoodsModel_Diets_DietsD_Id",
                         column: x => x.DietsD_Id,
@@ -133,7 +131,11 @@ namespace ExerciseXData_DietLibrary.Migrations
                     UD_Frequency = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UD_Total_Calaroies = table.Column<int>(type: "int", nullable: true),
                     UD_Modified_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FoodsModelF_Id = table.Column<int>(type: "int", nullable: true)
+                    FoodsModelF_Id = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    DietId = table.Column<int>(type: "int", nullable: false),
+                    DietName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DietDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -157,10 +159,23 @@ namespace ExerciseXData_DietLibrary.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_DietsFoodsModel_DietsD_Id",
-                table: "DietsFoodsModel",
-                column: "DietsD_Id");
+            migrationBuilder.InsertData(
+                table: "Diets",
+                columns: new[] { "D_Id", "D_Cons_1", "D_Cons_2", "D_Cons_3", "D_Description", "D_Modified_Date", "D_Name", "D_Pros_1", "D_Pros_2", "D_Pros_3" },
+                values: new object[,]
+                {
+                    { 1, null, null, null, null, new DateTime(2024, 11, 28, 5, 54, 34, 163, DateTimeKind.Local).AddTicks(9378), "Keto Diet", null, null, null },
+                    { 2, null, null, null, null, new DateTime(2024, 11, 28, 5, 54, 34, 163, DateTimeKind.Local).AddTicks(9388), "Mediterranean Diet", null, null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Foods",
+                columns: new[] { "F_Id", "F_Calories", "F_Group", "F_Image", "F_Modified_Date", "F_Name" },
+                values: new object[,]
+                {
+                    { 1, 160, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Avocado" },
+                    { 2, 208, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Salmon" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_DietsFoodsModel_FoodsF_Id",

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ExerciseXData_ExerciseLibrary.Migrations
 {
     /// <inheritdoc />
@@ -32,7 +34,6 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     U_UserGender = table.Column<int>(type: "int", nullable: false),
-                    U_Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     U_Age = table.Column<int>(type: "int", nullable: false),
                     U_Height_CM = table.Column<double>(type: "float", nullable: false),
                     U_Weight_KG = table.Column<double>(type: "float", nullable: false),
@@ -70,7 +71,6 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                 {
                     E_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    C_Id = table.Column<int>(type: "int", nullable: false),
                     CategoriesC_Id = table.Column<int>(type: "int", nullable: false),
                     E_Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     E_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -122,6 +122,24 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                         principalTable: "UsersModel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "CategoriesModel",
+                columns: new[] { "C_Id", "C_Image", "C_Modified_Date", "C_Name" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(30), "Cardio" },
+                    { 2, null, new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(31), "Strength" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Exercises",
+                columns: new[] { "E_Id", "CategoriesC_Id", "E_Cons_1", "E_Cons_2", "E_Cons_3", "E_Description", "E_Image", "E_Modified_Date", "E_Name", "E_Pros_1", "E_Pros_2", "E_Pros_3" },
+                values: new object[,]
+                {
+                    { 1, 1, null, null, null, null, null, new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(125), "Running", null, null, null },
+                    { 2, 2, null, null, null, null, null, new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(155), "Push-ups", null, null, null }
                 });
 
             migrationBuilder.CreateIndex(

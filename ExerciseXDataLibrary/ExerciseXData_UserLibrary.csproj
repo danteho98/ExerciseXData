@@ -26,4 +26,8 @@
     <ProjectReference Include="..\ExerciseXData_SharedContracts\ExerciseXData_SharedContracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>

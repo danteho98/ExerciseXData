@@ -1,4 +1,5 @@
 ﻿using ExerciseXData_ExerciseLibrary.Models;
+using ExerciseXData_ExerciseLibrary.Utilities;
 using ExerciseXData_UserLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ namespace ExerciseXData_ExerciseLibrary.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            ExerciseDataSeeder.SeedData(modelBuilder);
 
             // Configure UsersExercisesModel
             modelBuilder.Entity<UsersExercisesModel>()

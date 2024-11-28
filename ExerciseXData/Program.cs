@@ -1,5 +1,3 @@
-
-using ExerciseXDataLibrary.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using ExerciseXData_UserLibrary.Data;
@@ -17,6 +15,8 @@ using ExerciseXData.Admin;
 using ExerciseXData_SharedContracts.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ExerciseXData_ExerciseLibrary.Interface;
+using ExerciseXData_ExerciseLibrary.Utilities;
+using ExerciseXData_DietLibrary.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,6 +62,10 @@ builder.Services.AddIdentity<UsersModel, IdentityRole>(options =>
 .AddEntityFrameworkStores<UserDbContext>()
 .AddDefaultTokenProviders();
 
+builder.Services.AddScoped<UserManager<UsersModel>>();
+builder.Services.AddScoped<SignInManager<UsersModel>>();
+builder.Services.AddScoped<ILogger<UsersRepository>, Logger<UsersRepository>>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -75,20 +79,21 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 //Service
 builder.Services.AddScoped<AuthService>(); 
-builder.Services.AddScoped<CategoriesService>();
+builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<DietsService>();
 builder.Services.AddScoped<ExercisesService>();
 builder.Services.AddScoped<UsersService>();
 
 //Interface
 builder.Services.AddScoped<IAdminService, AdminService>();
-builder.Services.AddScoped<ICategoryService, CategoriesService>();
-
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUserRepository, UsersRepository>();
 builder.Services.AddScoped<IExerciseRepository, ExercisesRepository>();
 builder.Services.AddScoped<IDietRepository, DietsRepository>();
 
 //Repository
+builder.Services.AddScoped<CategoryRepository>();
 builder.Services.AddScoped<UsersRepository>();
 builder.Services.AddScoped<DietsRepository>();
 builder.Services.AddScoped<ExercisesRepository>();
@@ -101,10 +106,24 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var configuration = services.GetRequiredService<IConfiguration>();
+    //var configuration = services.GetRequiredService<IConfiguration>();
 
-    await DataSeeder.SeedRoles(services);
-    await DataSeeder.SeedAdminAccount(services, configuration);
+    var userDbContext = services.GetRequiredService<UserDbContext>();
+    await userDbContext.Database.MigrateAsync(); // Apply migrations for UserDbContext
+    // Optionally call a seeding method if needed, e.g. SeedUserData(userDbContext);
+
+    // Seed data for ExerciseDbContext
+    var exerciseDbContext = services.GetRequiredService<ExerciseDbContext>();
+    await exerciseDbContext.Database.MigrateAsync(); // Apply migrations for ExerciseDbContext
+    // Optionally call a seeding method if needed, e.g. SeedExerciseData(exerciseDbContext);
+
+    // Seed data for DietDbContext
+    var dietDbContext = services.GetRequiredService<DietDbContext>();
+    await dietDbContext.Database.MigrateAsync();  // Ensures migrations are applied
+                                                  // Seeder will automatically run if migrations are applied
+                                                  //await DataSeeder.SeedRoles(services);
+                                                  //await DataSeeder.SeedAdminAccount(services, configuration);
+
 }
 
 // Configure the HTTP request pipeline.

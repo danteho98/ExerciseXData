@@ -12,12 +12,12 @@ namespace ExerciseXData_DietLibrary.Models
 
         [DisplayName("Diet Id")]
         //[ForeignKey("D_Id")]
-        public int D_Id { get; set; }
+        public int DietsD_Id { get; set; }
         public DietsModel Diets { get; set; }
 
         [DisplayName("Food Id")]
         //[ForeignKey("F_Id")]
-        public int ? F_Id { get; set; }
+        public int ? FoodsF_Id { get; set; }
         public FoodsModel Foods { get; set; }
 
         [DisplayName("Serving Size")]

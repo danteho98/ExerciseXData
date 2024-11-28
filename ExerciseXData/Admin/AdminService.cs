@@ -8,15 +8,15 @@ namespace ExerciseXData.Admin
 {
     public class AdminService : IAdminService
     {
-        private readonly ExerciseDbContext _exerciseDbContext;
+        
         private readonly IUserRepository _userRepository;
         private readonly IExerciseRepository _exerciseRepository;
         private readonly IDietRepository _dietRepository;
 
-        public AdminService(ExerciseDbContext exerciseDbContext,
+        public AdminService(
             IUserRepository userRepository, IExerciseRepository exerciseRepository, IDietRepository dietRepository)
         {
-            _exerciseDbContext = exerciseDbContext;
+            
             _userRepository = userRepository;
             _exerciseRepository = exerciseRepository;
             _dietRepository = dietRepository;

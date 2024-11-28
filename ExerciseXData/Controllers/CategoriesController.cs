@@ -1,7 +1,9 @@
 ﻿using ExerciseXData_ExerciseLibrary.Interface;
 using ExerciseXData_ExerciseLibrary.Models;
+using ExerciseXData_ExerciseLibrary.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 
 
@@ -11,50 +13,123 @@ namespace ExerciseXData.Controllers
 
     public class CategoriesController : Controller
     {
-        private readonly ICategoryService _categoryService;
-        public CategoriesController(ICategoryService categoryService)
+        private readonly ICategoryRepository _categoryRepository;
+
+        // Constructor injecting the category repository
+        public CategoriesController(ICategoryRepository categoryRepository)
         {
-            _categoryService = categoryService;
+            _categoryRepository = categoryRepository;
         }
 
-        public async Task<IActionResult> Manage()
+        // GET: Categories
+        public async Task<IActionResult> Index()
         {
-            var categories = await _categoryService.GetAllCategoriesAsync();
-            return View(categories);
+            // Retrieve all categories from the repository
+            var categories = await _categoryRepository.GetAllAsync();
+            return View(categories); // Pass categories to the view
         }
 
+        // GET: Categories/Add
+        public IActionResult Add()
+        {
+            return View(); // Render the Add view
+        }
+
+        // POST: Categories/Add
         [HttpPost]
-        public async Task<IActionResult> Add(CategoriesModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(CategoriesModel model, IFormFile C_Image)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View("Manage", await _categoryService.GetAllCategoriesAsync());
+                // Handle file upload (optional)
+                if (C_Image != null && C_Image.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await C_Image.CopyToAsync(memoryStream);
+                        model.C_Image = memoryStream.ToArray();
+                    }
+                }
+
+                // Save the new category
+                await _categoryRepository.AddAsync(model);
+                await _categoryRepository.SaveChangesAsync();
+
+                return RedirectToAction("Index"); // Redirect to the category list
             }
 
-            await _categoryService.AddCategoryAsync(model);
-            return RedirectToAction("Manage");
+            return View(model); // If model is invalid, show the form with validation errors
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Update(CategoriesModel model)
+        // GET: Categories/Edit/{id}
+        public async Task<IActionResult> Edit(int id)
         {
-            if (!ModelState.IsValid)
+            var category = await _categoryRepository.GetByIdAsync(id);
+            if (category == null)
             {
-                return View("Manage", await _categoryService.GetAllCategoriesAsync());
+                return NotFound(); // If category not found, return 404
             }
-
-            return RedirectToAction("Manage");
+            return View(category); // Pass the category to the Edit view
         }
 
+        // POST: Categories/Edit/{id}
         [HttpPost]
-        public async Task<IActionResult> Delete(CategoriesModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, CategoriesModel model, IFormFile C_Image)
         {
-            if (!ModelState.IsValid)
+            if (id != model.C_Id)
             {
-                return View("Manage", await _categoryService.GetAllCategoriesAsync());
+                return BadRequest(); // If the ID doesn't match, return a bad request
             }
 
-            return RedirectToAction("Manage");
+            if (ModelState.IsValid)
+            {
+                // Handle file upload if a new image is provided
+                if (C_Image != null && C_Image.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await C_Image.CopyToAsync(memoryStream);
+                        model.C_Image = memoryStream.ToArray();
+                    }
+                }
+
+                // Update the category
+                 _categoryRepository.UpdateAsync(model);
+                await _categoryRepository.SaveChangesAsync();
+
+                return RedirectToAction("Index"); // Redirect back to the category list
+            }
+
+            return View(model); // If model is invalid, show the form with validation errors
+        }
+
+        // GET: Categories/Delete/{id}
+        public async Task<IActionResult> Delete(int id)
+        {
+            var category = await _categoryRepository.GetByIdAsync(id);
+            if (category == null)
+            {
+                return NotFound(); // If category not found, return 404
+            }
+            return View(category); // Pass the category to the Delete confirmation view
+        }
+
+        // POST: Categories/Delete/{id}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var category = await _categoryRepository.GetByIdAsync(id);
+            if (category != null)
+            {
+                // Delete the category
+                _categoryRepository.DeleteAsync(category);
+                await _categoryRepository.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index"); // Redirect back to the category list
         }
     }
 }

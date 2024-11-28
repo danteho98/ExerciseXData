@@ -1,0 +1,15 @@
+﻿@using ExerciseXData_ExerciseLibrary.Models
+@model CategoriesModel
+
+<form asp-action="Add" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="C_Name" class="control-label">Category Name</label>
+        <input asp-for="C_Name" class="form-control" placeholder="Category Name" />
+        <span asp-validation-for="C_Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="C_Image" class="control-label">Category Image</label>
+        <input type="file" name="C_Image" accept="image/*" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Add Category</button>
+</form>
