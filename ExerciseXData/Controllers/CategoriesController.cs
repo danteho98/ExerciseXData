@@ -1,135 +1,129 @@
-﻿using ExerciseXData_ExerciseLibrary.Interface;
+﻿using ExerciseXData_ExerciseLibrary.Data;
+using ExerciseXData_ExerciseLibrary.Interface;
 using ExerciseXData_ExerciseLibrary.Models;
 using ExerciseXData_ExerciseLibrary.Repositories;
+using ExerciseXData_ExerciseLibrary.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-
-
 
 namespace ExerciseXData.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
 
+    [Route("admin/exercise-categories")]
     public class CategoriesController : Controller
     {
-        private readonly ICategoryRepository _categoryRepository;
+        //private readonly ICategoryRepository _categoryRepository;
+        //private readonly CategoryService _categoryService;
+        private readonly ExerciseDbContext _exerciseDbContext;
 
         // Constructor injecting the category repository
-        public CategoriesController(ICategoryRepository categoryRepository)
+        public CategoriesController(/*ICategoryRepository categoryRepository, CategoryService categoryService,*/ ExerciseDbContext exerciseDbContext)
         {
-            _categoryRepository = categoryRepository;
+            //_categoryRepository = categoryRepository;
+            //_categoryService = categoryService;
+            _exerciseDbContext = exerciseDbContext;
         }
 
         // GET: Categories
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            // Retrieve all categories from the repository
-            var categories = await _categoryRepository.GetAllAsync();
-            return View(categories); // Pass categories to the view
+            IEnumerable<CategoriesModel> objCategoryList = _exerciseDbContext.Categories;
+            /*Select statement is not needed here as _db.Category will get all the categories from table*/
+
+            return View(objCategoryList);
         }
 
-        // GET: Categories/Add
-        public IActionResult Add()
+        //GET
+        public IActionResult Create()
         {
-            return View(); // Render the Add view
+            return View();
         }
 
-        // POST: Categories/Add
+        //POST
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(CategoriesModel model, IFormFile C_Image)
+        [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
+        public IActionResult Create(CategoriesModel obj)
         {
-            if (ModelState.IsValid)
-            {
-                // Handle file upload (optional)
-                if (C_Image != null && C_Image.Length > 0)
-                {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await C_Image.CopyToAsync(memoryStream);
-                        model.C_Image = memoryStream.ToArray();
-                    }
-                }
-
-                // Save the new category
-                await _categoryRepository.AddAsync(model);
-                await _categoryRepository.SaveChangesAsync();
-
-                return RedirectToAction("Index"); // Redirect to the category list
-            }
-
-            return View(model); // If model is invalid, show the form with validation errors
-        }
-
-        // GET: Categories/Edit/{id}
-        public async Task<IActionResult> Edit(int id)
-        {
-            var category = await _categoryRepository.GetByIdAsync(id);
-            if (category == null)
-            {
-                return NotFound(); // If category not found, return 404
-            }
-            return View(category); // Pass the category to the Edit view
-        }
-
-        // POST: Categories/Edit/{id}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, CategoriesModel model, IFormFile C_Image)
-        {
-            if (id != model.C_Id)
-            {
-                return BadRequest(); // If the ID doesn't match, return a bad request
-            }
 
             if (ModelState.IsValid)
             {
-                // Handle file upload if a new image is provided
-                if (C_Image != null && C_Image.Length > 0)
-                {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await C_Image.CopyToAsync(memoryStream);
-                        model.C_Image = memoryStream.ToArray();
-                    }
-                }
-
-                // Update the category
-                 _categoryRepository.UpdateAsync(model);
-                await _categoryRepository.SaveChangesAsync();
-
-                return RedirectToAction("Index"); // Redirect back to the category list
+                _exerciseDbContext.Categories.Add(obj); //items input from user
+                _exerciseDbContext.SaveChanges(); //Save the items to the database
+                TempData["success"] = "Category created successfully";
+                return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
             }
-
-            return View(model); // If model is invalid, show the form with validation errors
+            return View(obj);
         }
 
-        // GET: Categories/Delete/{id}
-        public async Task<IActionResult> Delete(int id)
+        //get
+        public IActionResult Edit(int? id)
         {
-            var category = await _categoryRepository.GetByIdAsync(id);
-            if (category == null)
+            if (id == null || id == 0)
             {
-                return NotFound(); // If category not found, return 404
+                return NotFound();
             }
-            return View(category); // Pass the category to the Delete confirmation view
+            var categoryFromDb = _exerciseDbContext.Categories.Find(id); //find if used for finding the primary key of the table
+            //var categoryFromDbFirst= _db.Category.FirstOrDefault(u=>u.Id==id);
+            //var categoryFromDbSingle = _db.Category.SingleOrDefault(u => u.Id == id);
+
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(categoryFromDb);
         }
 
-        // POST: Categories/Delete/{id}
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        //post
+        [HttpPost]
+        [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
+        public IActionResult Edit(CategoriesModel obj)
         {
-            var category = await _categoryRepository.GetByIdAsync(id);
-            if (category != null)
+          
+            if (ModelState.IsValid)
             {
-                // Delete the category
-                _categoryRepository.DeleteAsync(category);
-                await _categoryRepository.SaveChangesAsync();
+                _exerciseDbContext.Categories.Update(obj); //items input from user
+                _exerciseDbContext.SaveChanges(); //Save the items to the database
+                TempData["success"] = "Category updated successfully";
+                return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
+            }
+            return View(obj);
+        }
+
+        //Get
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var categoryFromDb = _exerciseDbContext.Categories.Find(id); //find if used for finding the primary key of the table
+            //var categoryFromDbFirst= _db.Category.FirstOrDefault(u=>u.Id==id);
+            //var categoryFromDbSingle = _db.Category.SingleOrDefault(u => u.Id == id);
+
+            if (categoryFromDb == null)
+            {
+                return NotFound();
             }
 
-            return RedirectToAction("Index"); // Redirect back to the category list
+            return View(categoryFromDb);
+        }
+
+        //POST
+        [HttpPost] //ActionName can be used to name explicitly for the delete page
+        [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
+        public IActionResult DeletePOST(int? id)
+        {
+            var obj = _exerciseDbContext.Categories.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _exerciseDbContext.Categories.Remove(obj); //items input from user
+            _exerciseDbContext.SaveChanges(); //Save the items to the database
+            TempData["success"] = "Category deleted successfully";
+            return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
         }
     }
 }

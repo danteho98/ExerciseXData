@@ -23,31 +23,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">Home</a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Create">Manage Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Diets" asp-action="Index">Diets</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Exercises" asp-action="Manage">Manage Exercises</a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Exercises" asp-action="Index">Exercises</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Diets" asp-action="Manage">Manage Diets</a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Foods" asp-action="Index">Food</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UsersExercises" asp-action="Index">UsersExercises</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UsersDiets" asp-action="Index">UsersDiets</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DietsFoods" asp-action="Index">DietsFoods</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Foods" asp-action="Manage">Manage Foods</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -62,12 +49,8 @@
 
                             </div>
                         </li>
-
-
-                        @* <li class="nav-item">
-                            <a class="nav-link text-dark"  asp-controller="Home" asp-action="LogOut">Log Out</a>
-                        </li> *@
                     </ul>
+
                     <div class="ms-auto">
                         <a class="btn btn-primary" asp-controller="Account" asp-action="Register">Sign In</a>
                     </div>
@@ -76,29 +59,9 @@
                         <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Log In</a>
                     </div>
 
-                    @*  <div class="ms-auto">
-                        <a class="btn btn-primary" asp-controller="Account" asp-action="UserDashboard">UserDashboard</a>
-                    </div> *@
-
-                    <ul class="navbar-nav" flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Manage">Manage Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Exercises" asp-action="Manage">Manage Exercises</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Diets" asp-action="Manage">Manage Diets</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Foods" asp-action="Manage">Manage Foods</a>
-                        </li>
-                        </ul>
-
                     <div class="ms-auto">
                         <a class="btn btn-primary" asp-controller="Admin" asp-action="Logout">Log Out</a>
                     </div>
-
                 </div>
             </div>
         </nav>

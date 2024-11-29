@@ -8,7 +8,6 @@ namespace ExerciseXData.Utilities
 {
     public static class DataSeeder
     {
-        
         public static async Task SeedRoles(IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -45,7 +44,6 @@ namespace ExerciseXData.Utilities
                     Email = "admin@example.com",
                     U_UserGender = UserGender.Gender.PreferNotToSay, // Or as applicable
                     U_Age = 30,
-                    
                     U_Goal = "Maintain system"
                 };
 
