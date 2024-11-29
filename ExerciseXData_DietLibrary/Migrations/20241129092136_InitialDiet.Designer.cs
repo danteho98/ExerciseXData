@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExerciseXData_DietLibrary.Migrations
 {
     [DbContext(typeof(DietDbContext))]
-<<<<<<<< HEAD:ExerciseXData_DietLibrary/Migrations/20241128223657_InitialDiet.Designer.cs
-    [Migration("20241128223657_InitialDiet")]
+    [Migration("20241129092136_InitialDiet")]
     partial class InitialDiet
-========
-    [Migration("20241127215434_InitialCreateDiet")]
-    partial class InitialCreateDiet
->>>>>>>> 79c83d3928418593363551f5dfa36e72b00d4799:ExerciseXData_DietLibrary/Migrations/20241127215434_InitialCreateDiet.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,13 +101,13 @@ namespace ExerciseXData_DietLibrary.Migrations
                         new
                         {
                             D_Id = 1,
-                            D_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 34, 163, DateTimeKind.Local).AddTicks(9378),
+                            D_Modified_Date = new DateTime(2024, 11, 29, 17, 21, 36, 189, DateTimeKind.Local).AddTicks(1398),
                             D_Name = "Keto Diet"
                         },
                         new
                         {
                             D_Id = 2,
-                            D_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 34, 163, DateTimeKind.Local).AddTicks(9388),
+                            D_Modified_Date = new DateTime(2024, 11, 29, 17, 21, 36, 189, DateTimeKind.Local).AddTicks(1407),
                             D_Name = "Mediterranean Diet"
                         });
                 });

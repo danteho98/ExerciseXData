@@ -49,7 +49,6 @@ namespace ExerciseXData_UserLibrary.Controllers
                 {
                     Email = model.Email,
                     UserName = model.UserName,
-                    
                     U_UserGender = model.Gender,
                     U_Age = model.Age,
                     U_Height_CM = model.Height,
@@ -97,7 +96,7 @@ namespace ExerciseXData_UserLibrary.Controllers
         // POST: account/login
         [HttpPost("login")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginDto model)
+        public async Task<IActionResult> Login(LoginDto model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -116,8 +115,13 @@ namespace ExerciseXData_UserLibrary.Controllers
 
                     _logger.LogInformation("Login successful for user: {Email}", user.Email);
 
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+
                     if (roles.Contains("Admin"))
-                        return RedirectToAction("Dashboard", "Admin");
+                        return RedirectToAction("AdminDashboard", "Admin");
                     if (roles.Contains("User"))
                         return RedirectToAction("UserDashboard", "Users");
 

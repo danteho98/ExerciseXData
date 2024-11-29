@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExerciseXData_ExerciseLibrary.Migrations
 {
     [DbContext(typeof(ExerciseDbContext))]
-    [Migration("20241128223720_InitialExercise")]
+    [Migration("20241129092115_InitialExercise")]
     partial class InitialExercise
     {
         /// <inheritdoc />
@@ -45,6 +45,20 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                     b.HasKey("C_Id");
 
                     b.ToTable("CategoriesModel");
+
+                    b.HasData(
+                        new
+                        {
+                            C_Id = 1,
+                            C_Modified_Date = new DateTime(2024, 11, 29, 17, 21, 14, 775, DateTimeKind.Local).AddTicks(114),
+                            C_Name = "Cardio"
+                        },
+                        new
+                        {
+                            C_Id = 2,
+                            C_Modified_Date = new DateTime(2024, 11, 29, 17, 21, 14, 775, DateTimeKind.Local).AddTicks(116),
+                            C_Name = "Strength"
+                        });
                 });
 
             modelBuilder.Entity("ExerciseXData_ExerciseLibrary.Models.ExercisesModel", b =>
@@ -54,9 +68,6 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("E_Id"));
-
-                    b.Property<int>("C_Id")
-                        .HasColumnType("int");
 
                     b.Property<int>("CategoriesC_Id")
                         .HasColumnType("int");
@@ -96,6 +107,22 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                     b.HasIndex("CategoriesC_Id");
 
                     b.ToTable("Exercises");
+
+                    b.HasData(
+                        new
+                        {
+                            E_Id = 1,
+                            CategoriesC_Id = 1,
+                            E_Modified_Date = new DateTime(2024, 11, 29, 17, 21, 14, 775, DateTimeKind.Local).AddTicks(196),
+                            E_Name = "Running"
+                        },
+                        new
+                        {
+                            E_Id = 2,
+                            CategoriesC_Id = 2,
+                            E_Modified_Date = new DateTime(2024, 11, 29, 17, 21, 14, 775, DateTimeKind.Local).AddTicks(197),
+                            E_Name = "Push-ups"
+                        });
                 });
 
             modelBuilder.Entity("ExerciseXData_UserLibrary.Models.UsersExercisesModel", b =>

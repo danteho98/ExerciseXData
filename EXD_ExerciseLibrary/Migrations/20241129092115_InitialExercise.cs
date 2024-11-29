@@ -129,8 +129,8 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                 columns: new[] { "C_Id", "C_Image", "C_Modified_Date", "C_Name" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(30), "Cardio" },
-                    { 2, null, new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(31), "Strength" }
+                    { 1, null, new DateTime(2024, 11, 29, 17, 21, 14, 775, DateTimeKind.Local).AddTicks(114), "Cardio" },
+                    { 2, null, new DateTime(2024, 11, 29, 17, 21, 14, 775, DateTimeKind.Local).AddTicks(116), "Strength" }
                 });
 
             migrationBuilder.InsertData(
@@ -138,8 +138,8 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                 columns: new[] { "E_Id", "CategoriesC_Id", "E_Cons_1", "E_Cons_2", "E_Cons_3", "E_Description", "E_Image", "E_Modified_Date", "E_Name", "E_Pros_1", "E_Pros_2", "E_Pros_3" },
                 values: new object[,]
                 {
-                    { 1, 1, null, null, null, null, null, new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(125), "Running", null, null, null },
-                    { 2, 2, null, null, null, null, null, new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(155), "Push-ups", null, null, null }
+                    { 1, 1, null, null, null, null, null, new DateTime(2024, 11, 29, 17, 21, 14, 775, DateTimeKind.Local).AddTicks(196), "Running", null, null, null },
+                    { 2, 2, null, null, null, null, null, new DateTime(2024, 11, 29, 17, 21, 14, 775, DateTimeKind.Local).AddTicks(197), "Push-ups", null, null, null }
                 });
 
             migrationBuilder.CreateIndex(

@@ -78,7 +78,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 //Service
-builder.Services.AddScoped<AuthService>(); 
+//builder.Services.AddScoped<AuthService>(); 
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<DietsService>();
 builder.Services.AddScoped<ExercisesService>();
@@ -103,27 +103,36 @@ builder.Logging.AddConsole();
 
 var app = builder.Build();
 
+// Apply migrations and seed data
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    //var configuration = services.GetRequiredService<IConfiguration>();
+    var logger = services.GetRequiredService<ILogger<Program>>();
 
-    var userDbContext = services.GetRequiredService<UserDbContext>();
-    await userDbContext.Database.MigrateAsync(); // Apply migrations for UserDbContext
-    // Optionally call a seeding method if needed, e.g. SeedUserData(userDbContext);
+    try
+    {
+        // Apply migrations for UserDbContext
+        var userDbContext = services.GetRequiredService<UserDbContext>();
+        await userDbContext.Database.MigrateAsync();
 
-    // Seed data for ExerciseDbContext
-    var exerciseDbContext = services.GetRequiredService<ExerciseDbContext>();
-    await exerciseDbContext.Database.MigrateAsync(); // Apply migrations for ExerciseDbContext
-    // Optionally call a seeding method if needed, e.g. SeedExerciseData(exerciseDbContext);
+        // Apply migrations for ExerciseDbContext
+        var exerciseDbContext = services.GetRequiredService<ExerciseDbContext>();
+        await exerciseDbContext.Database.MigrateAsync();
 
-    // Seed data for DietDbContext
-    var dietDbContext = services.GetRequiredService<DietDbContext>();
-    await dietDbContext.Database.MigrateAsync();  // Ensures migrations are applied
-                                                  // Seeder will automatically run if migrations are applied
-                                                  //await DataSeeder.SeedRoles(services);
-                                                  //await DataSeeder.SeedAdminAccount(services, configuration);
+        // Apply migrations for DietDbContext
+        var dietDbContext = services.GetRequiredService<DietDbContext>();
+        await dietDbContext.Database.MigrateAsync();
 
+        // Seed roles and admin account
+        await DataSeeder.SeedRoles(services);
+        await DataSeeder.SeedAdminAccount(services, builder.Configuration);
+
+        logger.LogInformation("Database seeding completed successfully.");
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "An error occurred during database seeding.");
+    }
 }
 
 // Configure the HTTP request pipeline.

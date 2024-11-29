@@ -98,13 +98,13 @@ namespace ExerciseXData_DietLibrary.Migrations
                         new
                         {
                             D_Id = 1,
-                            D_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 34, 163, DateTimeKind.Local).AddTicks(9378),
+                            D_Modified_Date = new DateTime(2024, 11, 29, 17, 21, 36, 189, DateTimeKind.Local).AddTicks(1398),
                             D_Name = "Keto Diet"
                         },
                         new
                         {
                             D_Id = 2,
-                            D_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 34, 163, DateTimeKind.Local).AddTicks(9388),
+                            D_Modified_Date = new DateTime(2024, 11, 29, 17, 21, 36, 189, DateTimeKind.Local).AddTicks(1407),
                             D_Name = "Mediterranean Diet"
                         });
                 });

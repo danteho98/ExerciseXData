@@ -47,13 +47,13 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                         new
                         {
                             C_Id = 1,
-                            C_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(30),
+                            C_Modified_Date = new DateTime(2024, 11, 29, 17, 21, 14, 775, DateTimeKind.Local).AddTicks(114),
                             C_Name = "Cardio"
                         },
                         new
                         {
                             C_Id = 2,
-                            C_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(31),
+                            C_Modified_Date = new DateTime(2024, 11, 29, 17, 21, 14, 775, DateTimeKind.Local).AddTicks(116),
                             C_Name = "Strength"
                         });
                 });
@@ -110,14 +110,14 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                         {
                             E_Id = 1,
                             CategoriesC_Id = 1,
-                            E_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(125),
+                            E_Modified_Date = new DateTime(2024, 11, 29, 17, 21, 14, 775, DateTimeKind.Local).AddTicks(196),
                             E_Name = "Running"
                         },
                         new
                         {
                             E_Id = 2,
                             CategoriesC_Id = 2,
-                            E_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(155),
+                            E_Modified_Date = new DateTime(2024, 11, 29, 17, 21, 14, 775, DateTimeKind.Local).AddTicks(197),
                             E_Name = "Push-ups"
                         });
                 });

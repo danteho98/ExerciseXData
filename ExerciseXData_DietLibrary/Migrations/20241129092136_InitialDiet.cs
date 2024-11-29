@@ -164,8 +164,8 @@ namespace ExerciseXData_DietLibrary.Migrations
                 columns: new[] { "D_Id", "D_Cons_1", "D_Cons_2", "D_Cons_3", "D_Description", "D_Modified_Date", "D_Name", "D_Pros_1", "D_Pros_2", "D_Pros_3" },
                 values: new object[,]
                 {
-                    { 1, null, null, null, null, new DateTime(2024, 11, 28, 5, 54, 34, 163, DateTimeKind.Local).AddTicks(9378), "Keto Diet", null, null, null },
-                    { 2, null, null, null, null, new DateTime(2024, 11, 28, 5, 54, 34, 163, DateTimeKind.Local).AddTicks(9388), "Mediterranean Diet", null, null, null }
+                    { 1, null, null, null, null, new DateTime(2024, 11, 29, 17, 21, 36, 189, DateTimeKind.Local).AddTicks(1398), "Keto Diet", null, null, null },
+                    { 2, null, null, null, null, new DateTime(2024, 11, 29, 17, 21, 36, 189, DateTimeKind.Local).AddTicks(1407), "Mediterranean Diet", null, null, null }
                 });
 
             migrationBuilder.InsertData(

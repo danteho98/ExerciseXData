@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExerciseXData_UserLibrary.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20241128223629_InitialUser")]
+    [Migration("20241129092156_InitialUser")]
     partial class InitialUser
     {
         /// <inheritdoc />
