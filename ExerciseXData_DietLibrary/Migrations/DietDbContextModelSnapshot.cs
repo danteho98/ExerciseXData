@@ -24,14 +24,17 @@ namespace ExerciseXData_DietLibrary.Migrations
 
             modelBuilder.Entity("ExerciseXData_DietLibrary.Models.DietsFoodsModel", b =>
                 {
-                    b.Property<int>("DF_Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("DietsD_Id")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DF_Id"));
+                    b.Property<int?>("FoodsF_Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("DF_Frequency")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DF_Id")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DF_Modified_Date")
                         .HasColumnType("datetime2");
@@ -45,21 +48,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                     b.Property<string>("DF_Total_Calories")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("D_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DietsD_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("F_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FoodsF_Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("DF_Id");
-
-                    b.HasIndex("DietsD_Id");
+                    b.HasKey("DietsD_Id", "FoodsF_Id");
 
                     b.HasIndex("FoodsF_Id");
 
@@ -104,6 +93,20 @@ namespace ExerciseXData_DietLibrary.Migrations
                     b.HasKey("D_Id");
 
                     b.ToTable("Diets");
+
+                    b.HasData(
+                        new
+                        {
+                            D_Id = 1,
+                            D_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 34, 163, DateTimeKind.Local).AddTicks(9378),
+                            D_Name = "Keto Diet"
+                        },
+                        new
+                        {
+                            D_Id = 2,
+                            D_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 34, 163, DateTimeKind.Local).AddTicks(9388),
+                            D_Name = "Mediterranean Diet"
+                        });
                 });
 
             modelBuilder.Entity("ExerciseXData_DietLibrary.Models.FoodsModel", b =>
@@ -132,6 +135,22 @@ namespace ExerciseXData_DietLibrary.Migrations
                     b.HasKey("F_Id");
 
                     b.ToTable("Foods");
+
+                    b.HasData(
+                        new
+                        {
+                            F_Id = 1,
+                            F_Calories = 160,
+                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Name = "Avocado"
+                        },
+                        new
+                        {
+                            F_Id = 2,
+                            F_Calories = 208,
+                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Name = "Salmon"
+                        });
                 });
 
             modelBuilder.Entity("ExerciseXData_DietLibrary.Models.UsersDietsModel", b =>

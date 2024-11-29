@@ -1,11 +1,14 @@
-﻿using ExerciseXData_UserLibrary.Models;
+﻿using ExerciseXData_DietLibrary.Models;
+using ExerciseXData_ExerciseLibrary.Models;
+using ExerciseXData_UserLibrary.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Utilities
 {
     public static class DataSeeder
     {
-
+        
         public static async Task SeedRoles(IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();

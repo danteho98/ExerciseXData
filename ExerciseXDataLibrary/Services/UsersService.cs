@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ExerciseXData_UserLibrary.Services
 {
-    public class UsersService
+    public class UsersService 
     {
         private readonly UsersRepository _userRepository;
         private readonly ILogger<UsersService> _logger;

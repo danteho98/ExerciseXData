@@ -1,0 +1,35 @@
+﻿@using ExerciseXData_ExerciseLibrary.Models
+@model IEnumerable<CategoriesModel>
+
+<h2>Manage Categories</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Modified Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                @* Convert the byte[] image to a base64 string *@
+                <td>
+                    @if (category.C_Image != null && category.C_Image.Length > 0)
+                    {
+                        <img src="data:image/png;base64,@Convert.ToBase64String(category.C_Image)" alt="Category Image" width="100" height="100" />
+                    }
+                    else
+                    {
+                        <span>No Image</span>
+                    }
+                </td>
+                <td>@category.C_Name</td>
+                <td>@category.C_Modified_Date.ToString("yyyy-MM-dd HH:mm")</td>
+            </tr>
+        }
+    </tbody>
+</table>

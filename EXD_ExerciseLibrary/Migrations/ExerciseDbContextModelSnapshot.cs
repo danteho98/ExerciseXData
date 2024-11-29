@@ -42,6 +42,20 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                     b.HasKey("C_Id");
 
                     b.ToTable("CategoriesModel");
+
+                    b.HasData(
+                        new
+                        {
+                            C_Id = 1,
+                            C_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(30),
+                            C_Name = "Cardio"
+                        },
+                        new
+                        {
+                            C_Id = 2,
+                            C_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(31),
+                            C_Name = "Strength"
+                        });
                 });
 
             modelBuilder.Entity("ExerciseXData_ExerciseLibrary.Models.ExercisesModel", b =>
@@ -51,9 +65,6 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("E_Id"));
-
-                    b.Property<int>("C_Id")
-                        .HasColumnType("int");
 
                     b.Property<int>("CategoriesC_Id")
                         .HasColumnType("int");
@@ -93,6 +104,22 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                     b.HasIndex("CategoriesC_Id");
 
                     b.ToTable("Exercises");
+
+                    b.HasData(
+                        new
+                        {
+                            E_Id = 1,
+                            CategoriesC_Id = 1,
+                            E_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(125),
+                            E_Name = "Running"
+                        },
+                        new
+                        {
+                            E_Id = 2,
+                            CategoriesC_Id = 2,
+                            E_Modified_Date = new DateTime(2024, 11, 28, 5, 54, 59, 634, DateTimeKind.Local).AddTicks(155),
+                            E_Name = "Push-ups"
+                        });
                 });
 
             modelBuilder.Entity("ExerciseXData_UserLibrary.Models.UsersExercisesModel", b =>

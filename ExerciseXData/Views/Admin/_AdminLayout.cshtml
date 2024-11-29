@@ -19,6 +19,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+<<<<<<< HEAD
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">Home</a>
@@ -79,10 +80,31 @@
                     @*  <div class="ms-auto">
                         <a class="btn btn-primary" asp-controller="Account" asp-action="UserDashboard">UserDashboard</a>
                     </div> *@
+=======
+                    <ul class="navbar-nav" flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Manage">Manage Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Exercises" asp-action="Manage">Manage Exercises</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Diets" asp-action="Manage">Manage Diets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Foods" asp-action="Manage">Manage Foods</a>
+                        </li>
+                        </ul>
+
+                    <div class="ms-auto">
+                        <a class="btn btn-primary" asp-controller="Admin" asp-action="Logout">Log Out</a>
+                    </div>
+>>>>>>> 79c83d3928418593363551f5dfa36e72b00d4799
                 </div>
             </div>
         </nav>
     </header>
+<<<<<<< HEAD
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -101,3 +123,23 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+=======
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2023 - ExercisesXData - <a asp-area="" asp-controller="" asp-action=""></a>
+    </div>
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+>>>>>>> 79c83d3928418593363551f5dfa36e72b00d4799

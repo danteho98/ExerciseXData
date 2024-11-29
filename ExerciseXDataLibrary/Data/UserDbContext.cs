@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
+
 namespace ExerciseXData_UserLibrary.Data
 {
     public class UserDbContext : IdentityDbContext<UsersModel>
@@ -15,7 +16,7 @@ namespace ExerciseXData_UserLibrary.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
             base.OnModelCreating(modelBuilder); // Ensures the Identity configurations are applied
-
+            
 
             //UsersModel
             modelBuilder.Entity<UsersModel>()

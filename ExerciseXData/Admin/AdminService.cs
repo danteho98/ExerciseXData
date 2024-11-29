@@ -1,16 +1,22 @@
-﻿using ExerciseXData_SharedContracts.Interfaces;
+﻿using ExerciseXData_ExerciseLibrary.Data;
+using ExerciseXData_ExerciseLibrary.Models;
+using ExerciseXData_SharedContracts.Interfaces;
 using ExerciseXData_UserLibrary.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData.Admin
 {
     public class AdminService : IAdminService
     {
+        
         private readonly IUserRepository _userRepository;
         private readonly IExerciseRepository _exerciseRepository;
         private readonly IDietRepository _dietRepository;
 
-        public AdminService(IUserRepository userRepository, IExerciseRepository exerciseRepository, IDietRepository dietRepository)
+        public AdminService(
+            IUserRepository userRepository, IExerciseRepository exerciseRepository, IDietRepository dietRepository)
         {
+            
             _userRepository = userRepository;
             _exerciseRepository = exerciseRepository;
             _dietRepository = dietRepository;
@@ -29,5 +35,21 @@ namespace ExerciseXData.Admin
                 TotalDiets = totalDiets
             };
         }
+
+        //public async Task<bool> AddExerciseCategoryAsync(CategoriesModel category)
+        //{
+        //    try
+        //    {
+        //        category.C_Modified_Date = DateTime.UtcNow;
+        //        await _exerciseDbContext.Categories.AddAsync(category); // Assuming your DbSet is named `Categories`
+        //        await _context.SaveChangesAsync();
+        //        return true;
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+        //}
+
     }
 }
