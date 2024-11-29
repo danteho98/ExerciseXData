@@ -18,6 +18,9 @@ namespace ExerciseXData_ExerciseLibrary.Data
             base.OnModelCreating(modelBuilder);
             ExerciseDataSeeder.SeedData(modelBuilder);
 
+            modelBuilder.Entity<CategoriesModel>()
+                .ToTable("Categories");
+
             // Configure UsersExercisesModel
             modelBuilder.Entity<UsersExercisesModel>()
                 .HasKey(ue => ue.UE_Id);
