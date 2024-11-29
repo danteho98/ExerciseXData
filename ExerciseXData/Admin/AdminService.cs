@@ -1,8 +1,7 @@
-﻿using ExerciseXData_ExerciseLibrary.Data;
-using ExerciseXData_ExerciseLibrary.Models;
+﻿
+using ExerciseXData_ExerciseLibrary.Interface;
 using ExerciseXData_SharedContracts.Interfaces;
-using ExerciseXData_UserLibrary.Repositories;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace ExerciseXData.Admin
 {

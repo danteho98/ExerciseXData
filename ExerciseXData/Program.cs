@@ -15,8 +15,7 @@ using ExerciseXData.Admin;
 using ExerciseXData_SharedContracts.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ExerciseXData_ExerciseLibrary.Interface;
-using ExerciseXData_ExerciseLibrary.Utilities;
-using ExerciseXData_DietLibrary.Utilities;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
