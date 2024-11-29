@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ExerciseXData_DietLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateDiet : Migration
+    public partial class InitialDiet : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -55,7 +55,6 @@ namespace ExerciseXData_DietLibrary.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     U_UserGender = table.Column<int>(type: "int", nullable: false),
-                    U_Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     U_Age = table.Column<int>(type: "int", nullable: false),
                     U_Height_CM = table.Column<double>(type: "float", nullable: false),
                     U_Weight_KG = table.Column<double>(type: "float", nullable: false),
@@ -133,7 +132,11 @@ namespace ExerciseXData_DietLibrary.Migrations
                     UD_Frequency = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UD_Total_Calaroies = table.Column<int>(type: "int", nullable: true),
                     UD_Modified_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FoodsModelF_Id = table.Column<int>(type: "int", nullable: true)
+                    FoodsModelF_Id = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    DietId = table.Column<int>(type: "int", nullable: false),
+                    DietName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DietDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExerciseXData_UserLibrary.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20241124174721_InitialCreateUser")]
-    partial class InitialCreateUser
+    [Migration("20241128223629_InitialUser")]
+    partial class InitialUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

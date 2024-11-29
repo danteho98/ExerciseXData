@@ -206,10 +206,6 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                     b.Property<string>("U_Lifestyle_Condition_5")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("U_Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("U_UserGender")
                         .HasColumnType("int");
 

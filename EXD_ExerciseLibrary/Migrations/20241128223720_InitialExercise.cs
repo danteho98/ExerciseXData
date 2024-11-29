@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ExerciseXData_ExerciseLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateExercise : Migration
+    public partial class InitialExercise : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,6 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     U_UserGender = table.Column<int>(type: "int", nullable: false),
-                    U_Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     U_Age = table.Column<int>(type: "int", nullable: false),
                     U_Height_CM = table.Column<double>(type: "float", nullable: false),
                     U_Weight_KG = table.Column<double>(type: "float", nullable: false),
