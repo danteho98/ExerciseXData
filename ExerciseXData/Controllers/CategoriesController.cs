@@ -26,6 +26,7 @@ namespace ExerciseXData.Controllers
         }
 
         // GET: Categories
+        [HttpGet("")]
         public IActionResult Index()
         {
             IEnumerable<CategoriesModel> objCategoryList = _exerciseDbContext.Categories;
@@ -35,13 +36,14 @@ namespace ExerciseXData.Controllers
         }
 
         //GET
+        [HttpGet("Create")]
         public IActionResult Create()
         {
             return View();
         }
 
         //POST
-        [HttpPost]
+        [HttpPost("Create")]
         [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
         public IActionResult Create(CategoriesModel obj)
         {
@@ -57,6 +59,7 @@ namespace ExerciseXData.Controllers
         }
 
         //get
+        [HttpGet("Edit/{id:int}")]
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -76,7 +79,7 @@ namespace ExerciseXData.Controllers
         }
 
         //post
-        [HttpPost]
+        [HttpPost("Edit/{id:int}")]
         [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
         public IActionResult Edit(CategoriesModel obj)
         {
@@ -92,6 +95,7 @@ namespace ExerciseXData.Controllers
         }
 
         //Get
+        [HttpGet("Delete/{id:int}")]
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -111,7 +115,7 @@ namespace ExerciseXData.Controllers
         }
 
         //POST
-        [HttpPost] //ActionName can be used to name explicitly for the delete page
+        [HttpPost("Delete/{id:int}")] //ActionName can be used to name explicitly for the delete page
         [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
         public IActionResult DeletePOST(int? id)
         {
