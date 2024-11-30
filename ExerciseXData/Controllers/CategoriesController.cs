@@ -1,9 +1,5 @@
 ﻿using ExerciseXData_ExerciseLibrary.Data;
-using ExerciseXData_ExerciseLibrary.Interface;
 using ExerciseXData_ExerciseLibrary.Models;
-using ExerciseXData_ExerciseLibrary.Repositories;
-using ExerciseXData_ExerciseLibrary.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExerciseXData.Controllers
@@ -13,15 +9,11 @@ namespace ExerciseXData.Controllers
     [Route("admin/exercise-categories")]
     public class CategoriesController : Controller
     {
-        //private readonly ICategoryRepository _categoryRepository;
-        //private readonly CategoryService _categoryService;
         private readonly ExerciseDbContext _exerciseDbContext;
 
-        // Constructor injecting the category repository
-        public CategoriesController(/*ICategoryRepository categoryRepository, CategoryService categoryService,*/ ExerciseDbContext exerciseDbContext)
+        public CategoriesController( ExerciseDbContext exerciseDbContext)
         {
-            //_categoryRepository = categoryRepository;
-            //_categoryService = categoryService;
+            
             _exerciseDbContext = exerciseDbContext;
         }
 

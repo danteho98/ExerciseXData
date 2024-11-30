@@ -156,4 +156,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=About}/{id?}");
 
+app.MapControllerRoute(
+    name: "admin_exercise",
+    pattern: "admin/exercise/{categoryId:int}", 
+    defaults: new { controller = "Exercises", action = "Index" });
+
 app.Run();
