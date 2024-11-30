@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExerciseXData_SharedContracts.Interfaces
+namespace ExerciseXData_UserLibrary.Interfaces
 {
     public interface IDietRepository
     {

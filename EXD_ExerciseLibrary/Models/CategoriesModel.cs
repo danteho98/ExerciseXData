@@ -25,6 +25,6 @@ namespace ExerciseXData_ExerciseLibrary.Models
         //Relationships
         // Mark this as non-validated to prevent validation issues
         [ValidateNever] // Prevent validation from trying to enforce exercises during category creation
-        public List<ExercisesModel> Exercises { get; set; }
+        public ICollection<ExercisesModel> Exercises { get; set; }
     }
 }

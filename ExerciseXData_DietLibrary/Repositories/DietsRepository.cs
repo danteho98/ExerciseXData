@@ -2,8 +2,8 @@
 
 using ExerciseXData_DietLibrary.Data;
 using ExerciseXData_DietLibrary.Models;
-using ExerciseXData_SharedContracts.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using ExerciseXData_DietLibrary.Interface;
 
 namespace ExerciseXData_DietLibrary.Repositories
 {

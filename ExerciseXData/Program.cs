@@ -12,10 +12,10 @@ using ExerciseXData_UserLibrary.Models;
 using ExerciseXData.Utilities;
 using ExerciseXData_ExerciseLibrary.Repositories;
 using ExerciseXData.Admin;
-using ExerciseXData_SharedContracts.Interfaces;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using ExerciseXData_ExerciseLibrary.Interface;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
+using ExerciseXData_SharedContracts.Interfaces;
+using ExerciseXData_DietLibrary.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 

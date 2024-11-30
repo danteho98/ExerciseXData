@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ExerciseXData_SharedContracts.Interfaces
 {
-    public class IUsersExercisesRepository
+    public interface IUserRepository
     {
+        Task<int> GetTotalUsersAsync();
     }
 }

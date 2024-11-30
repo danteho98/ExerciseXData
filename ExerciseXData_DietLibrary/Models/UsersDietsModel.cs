@@ -7,7 +7,7 @@ using ExerciseXData_SharedContracts.Interfaces;
 
 namespace ExerciseXData_DietLibrary.Models
 {
-    public class UsersDietsModel : IUsersDiets
+    public class UsersDietsModel 
     {
         [Key]
         public int UD_Id {  get; set; }

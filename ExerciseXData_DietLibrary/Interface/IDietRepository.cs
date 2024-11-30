@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExerciseXData_SharedContracts.Interfaces
+namespace ExerciseXData_DietLibrary.Interface
 {
-    public class IUsersExercises
+    public interface IDietRepository
     {
+        Task<int> GetTotalDietsAsync();
     }
+
 }

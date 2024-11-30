@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExerciseXData_ExerciseLibra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExerciseXData_DietLibrary", "ExerciseXData_DietLibrary\ExerciseXData_DietLibrary.csproj", "{997910EC-155A-4234-925E-C3E01913A6DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExerciseXData_SharedContracts", "ExerciseXData_SharedContracts\ExerciseXData_SharedContracts.csproj", "{64830570-9700-4E6E-B9D6-795AF0064A5B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,10 +42,6 @@ Global
 		{997910EC-155A-4234-925E-C3E01913A6DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{997910EC-155A-4234-925E-C3E01913A6DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{997910EC-155A-4234-925E-C3E01913A6DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64830570-9700-4E6E-B9D6-795AF0064A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64830570-9700-4E6E-B9D6-795AF0064A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64830570-9700-4E6E-B9D6-795AF0064A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64830570-9700-4E6E-B9D6-795AF0064A5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,7 @@
 ﻿
 using ExerciseXData_ExerciseLibrary.Interface;
 using ExerciseXData_SharedContracts.Interfaces;
-
+using ExerciseXData_DietLibrary.Interface;
 
 namespace ExerciseXData.Admin
 {

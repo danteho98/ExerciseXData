@@ -9,7 +9,7 @@ namespace ExerciseXData_ExerciseLibrary.Data
     {
         public ExerciseDbContext(DbContextOptions<ExerciseDbContext> options) : base(options) { }
 
-        public DbSet<UsersExercisesModel> UsersExercises { get; set; }
+        //public DbSet<UsersExercisesModel> UsersExercises { get; set; }
         public DbSet<ExercisesModel> Exercises { get; set; }
         public DbSet<CategoriesModel> Categories { get; set; }
 
@@ -21,19 +21,24 @@ namespace ExerciseXData_ExerciseLibrary.Data
             modelBuilder.Entity<CategoriesModel>()
                 .ToTable("Categories");
 
-            // Configure UsersExercisesModel
-            modelBuilder.Entity<UsersExercisesModel>()
-                .HasKey(ue => ue.UE_Id);
+            // Configure ExercisesModel
+            modelBuilder.Entity<ExercisesModel>()
+                .HasKey(e => e.E_Id); // Primary key for Exercises
 
-            modelBuilder.Entity<UsersExercisesModel>()
-                .HasOne(ue => ue.Users)
-                .WithMany() // Avoid navigation properties in UsersModel
-                .HasForeignKey(ue => ue.U_Id);
+            modelBuilder.Entity<ExercisesModel>()
+                .HasOne(e => e.Categories) // Navigation property
+                .WithMany(c => c.Exercises) // Many Exercises belong to one Category
+                .HasForeignKey(e => e.CategoriesC_Id) // Foreign key in Exercises table
+                .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
 
-            modelBuilder.Entity<UsersExercisesModel>()
-                .HasOne(ue => ue.Exercises)
-                .WithMany(e => e.UsersExercises)
-                .HasForeignKey(ue => ue.E_Id);
+            // Configure CategoriesModel
+            modelBuilder.Entity<CategoriesModel>()
+                .HasKey(c => c.C_Id); // Primary key for Categories
+
+            modelBuilder.Entity<CategoriesModel>()
+                .HasMany(c => c.Exercises) // Navigation property
+                .WithOne(e => e.Categories) // One Category has many Exercises
+                .HasForeignKey(e => e.CategoriesC_Id); // Foreign key in Exercises table
         }
     }
 }
