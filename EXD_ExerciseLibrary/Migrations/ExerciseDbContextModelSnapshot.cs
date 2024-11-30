@@ -37,6 +37,7 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("C_Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("C_Id");
@@ -47,13 +48,13 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                         new
                         {
                             C_Id = 1,
-                            C_Modified_Date = new DateTime(2024, 11, 30, 11, 43, 21, 924, DateTimeKind.Local).AddTicks(4353),
+                            C_Modified_Date = new DateTime(2024, 11, 30, 17, 21, 42, 729, DateTimeKind.Local).AddTicks(3884),
                             C_Name = "Cardio"
                         },
                         new
                         {
                             C_Id = 2,
-                            C_Modified_Date = new DateTime(2024, 11, 30, 11, 43, 21, 924, DateTimeKind.Local).AddTicks(4355),
+                            C_Modified_Date = new DateTime(2024, 11, 30, 17, 21, 42, 729, DateTimeKind.Local).AddTicks(3886),
                             C_Name = "Strength"
                         });
                 });
@@ -88,6 +89,7 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("E_Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("E_Pros_1")
@@ -110,14 +112,14 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                         {
                             E_Id = 1,
                             CategoriesC_Id = 1,
-                            E_Modified_Date = new DateTime(2024, 11, 30, 11, 43, 21, 924, DateTimeKind.Local).AddTicks(4457),
+                            E_Modified_Date = new DateTime(2024, 11, 30, 17, 21, 42, 729, DateTimeKind.Local).AddTicks(3999),
                             E_Name = "Running"
                         },
                         new
                         {
                             E_Id = 2,
                             CategoriesC_Id = 2,
-                            E_Modified_Date = new DateTime(2024, 11, 30, 11, 43, 21, 924, DateTimeKind.Local).AddTicks(4459),
+                            E_Modified_Date = new DateTime(2024, 11, 30, 17, 21, 42, 729, DateTimeKind.Local).AddTicks(4000),
                             E_Name = "Push-ups"
                         });
                 });
@@ -127,7 +129,7 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                     b.HasOne("ExerciseXData_ExerciseLibrary.Models.CategoriesModel", "Categories")
                         .WithMany("Exercises")
                         .HasForeignKey("CategoriesC_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Categories");

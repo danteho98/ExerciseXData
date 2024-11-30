@@ -1,5 +1,7 @@
-﻿@model List<ExerciseXData_ExerciseLibrary.Models.ExercisesModel>
-
+﻿@* @model List<ExerciseXData_ExerciseLibrary.Models.ExercisesModel>
+ *@
+@using ExerciseXData_ExerciseLibrary.DataTransferObject
+@model ExerciseIndexViewModel
 @{
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
 }
@@ -16,6 +18,8 @@
 
 <a asp-action="Create" asp-route-categoryId="@ViewData["CategoryId"]" class="btn btn-primary">Create New Exercise</a>
 
+@if (Model.Exercises != null && Model.Exercises.Any())
+{
 <table class="table">
     <thead>
         <tr>
@@ -33,8 +37,10 @@
             <th>Modified Date</th>
         </tr>
     </thead>
+  @*   @if (Model != null && Model.Any())*@
     <tbody>
-        @foreach (var exercises in Model)
+
+        @foreach (var exercises in Model.Exercises)
         {
             <tr>
                 <td>@exercises.E_Id</td>
@@ -76,4 +82,10 @@
             </tr>
         }
     </tbody>
-</table>
+
+    </table>
+}
+else
+{
+    <tr><td colspan="12">No exercises found</td></tr>
+}

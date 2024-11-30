@@ -11,8 +11,8 @@ namespace ExerciseXData_ExerciseLibrary.Models
 
         // Category Relationship
         //[ForeignKey("Category Id")]
-        public int ? CategoriesC_Id { get; set; }
-        public CategoriesModel Categories { get; set; }
+        public int CategoriesC_Id { get; set; }
+        public CategoriesModel ? Categories { get; set; } = null;
 
         [DisplayName ("Exercises Image")]
         public byte[] ? E_Image { get; set; }
