@@ -5,6 +5,15 @@
 }
 
 <h1>Exercise Categories</h1>
+
+<!-- Display TempData message if it's set -->
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["success"]
+    </div>
+}
+
 <a asp-action="Create" class="btn btn-primary">Create New</a>
 <table class="table">
     <thead>

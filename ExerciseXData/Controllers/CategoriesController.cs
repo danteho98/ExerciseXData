@@ -108,8 +108,6 @@ namespace ExerciseXData.Controllers
                 return NotFound();
             }
             var categoryFromDb = _exerciseDbContext.Categories.Find(id); //find if used for finding the primary key of the table
-            //var categoryFromDbFirst= _db.Category.FirstOrDefault(u=>u.Id==id);
-            //var categoryFromDbSingle = _db.Category.SingleOrDefault(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -122,8 +120,13 @@ namespace ExerciseXData.Controllers
         //POST
         [HttpPost("Delete/{id:int}")] //ActionName can be used to name explicitly for the delete page
         [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
-        public IActionResult DeletePOST(int? id)
+        public IActionResult DeleteSuccess(int? id)
         {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
             var category = _exerciseDbContext.Categories.Find(id);
             if (category == null)
             {
@@ -131,6 +134,7 @@ namespace ExerciseXData.Controllers
             }
             _exerciseDbContext.Categories.Remove(category); //items input from user
             _exerciseDbContext.SaveChanges(); //Save the items to the database
+
             TempData["success"] = "Category deleted successfully";
             return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
         }

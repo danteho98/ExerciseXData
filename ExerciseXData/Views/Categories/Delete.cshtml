@@ -4,7 +4,7 @@
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
 }
 
-<form method="post" asp-action="DeletePOST">
+<form method="post" asp-action="DeleteSuccess" asp-route-id="@Model.C_Id">
     @*DeletePOST here can change name with the CategoryController POST method*@
     <input asp-for="C_Id" hidden />
     <div class=" border p-3 mt-4">
