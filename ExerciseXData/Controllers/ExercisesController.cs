@@ -54,18 +54,22 @@ public class ExercisesController : Controller
     // GET: Exercise/Create for a specific Category
 
     [HttpGet("Create")]
-    public IActionResult Create(int categoryId = 0)
+    public IActionResult Create(/*int categoryId = 0*/)
     {
-        if (categoryId == 0)
-        {
-            ModelState.AddModelError("", "Invalid category ID.");
-            return RedirectToAction(nameof(Index)); // Redirect to index if no categoryId is provided
-        }
-
-        //ViewBag.Categories = new SelectList(_exerciseDbContext.Categories, "Id", "Name");
-        ViewBag.Categories = new SelectList(_exerciseDbContext.Categories, "Id", "Name", categoryId);
-
-        return View();
+        //var model = new CreateExerciseViewModel();
+        //if (categoryId == 0)
+        //{
+        //    ModelState.AddModelError("", "Invalid category ID.");
+        //    return RedirectToAction(nameof(Index)); // Redirect to index if no categoryId is provided
+        //}
+        // Retrieve categories for the dropdown
+        var categories = _exerciseDbContext.Categories.ToList();
+        ViewBag.Categories = new SelectList(categories, "C_Id", "C_Name");
+        //ViewBag.Categories = new SelectList(_exerciseDbContext.Categories, "C_Id", "C_Name");
+        //ViewBag.Categories = new SelectList(_exerciseDbContext.Categories, "C_Id", "C_Name", categoryId);
+        // Return the Create view with an empty model
+        var model = new CreateExerciseViewModel();
+        return View(model);
     }
 
 
@@ -94,11 +98,12 @@ public class ExercisesController : Controller
             _exerciseDbContext.Exercises.Add(exercise);
             await _exerciseDbContext.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));  // Redirect to exercise list or other action
+            TempData["success"] = "Exercise added successfully!";
+            return RedirectToAction("Index");/*(nameof(Index)); */ // Redirect to exercise list or other action
         }
 
         // If model validation fails, re-populate the categories dropdown and return the form
-        ViewBag.Categories = new SelectList(_exerciseDbContext.Categories, "Id", "Name", exercises.CategoriesC_Id);
+        //ViewBag.Categories = new SelectList(_exerciseDbContext.Categories, "Id", "Name", exercises.CategoriesC_Id);
         return View(exercises); 
     }
 
