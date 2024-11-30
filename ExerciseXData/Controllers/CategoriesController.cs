@@ -29,10 +29,10 @@ namespace ExerciseXData.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            IEnumerable<CategoriesModel> objCategoryList = _exerciseDbContext.Categories;
+            List<CategoriesModel> categoryCategoryList = _exerciseDbContext.Categories.ToList();
             /*Select statement is not needed here as _db.Category will get all the categories from table*/
 
-            return View(objCategoryList);
+            return View(categoryCategoryList);
         }
 
         //GET
@@ -45,17 +45,17 @@ namespace ExerciseXData.Controllers
         //POST
         [HttpPost("Create")]
         [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
-        public IActionResult Create(CategoriesModel obj)
+        public IActionResult Create(CategoriesModel category)
         {
 
             if (ModelState.IsValid)
             {
-                _exerciseDbContext.Categories.Add(obj); //items input from user
+                _exerciseDbContext.Categories.Add(category); //items input from user
                 _exerciseDbContext.SaveChanges(); //Save the items to the database
                 TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
             }
-            return View(obj);
+            return View(category);
         }
 
         //get
@@ -81,17 +81,22 @@ namespace ExerciseXData.Controllers
         //post
         [HttpPost("Edit/{id:int}")]
         [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
-        public IActionResult Edit(CategoriesModel obj)
+        public IActionResult Edit(CategoriesModel category)
         {
-          
+            if (!_exerciseDbContext.Categories.Any(c => c.C_Id == category.C_Id))
+            {
+                ModelState.AddModelError("", "Invalid Category ID.");
+                return View(category);
+            }
+
             if (ModelState.IsValid)
             {
-                _exerciseDbContext.Categories.Update(obj); //items input from user
+                _exerciseDbContext.Categories.Update(category); //items input from user
                 _exerciseDbContext.SaveChanges(); //Save the items to the database
                 TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
             }
-            return View(obj);
+            return View(category);
         }
 
         //Get
@@ -119,12 +124,12 @@ namespace ExerciseXData.Controllers
         [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
         public IActionResult DeletePOST(int? id)
         {
-            var obj = _exerciseDbContext.Categories.Find(id);
-            if (obj == null)
+            var category = _exerciseDbContext.Categories.Find(id);
+            if (category == null)
             {
                 return NotFound();
             }
-            _exerciseDbContext.Categories.Remove(obj); //items input from user
+            _exerciseDbContext.Categories.Remove(category); //items input from user
             _exerciseDbContext.SaveChanges(); //Save the items to the database
             TempData["success"] = "Category deleted successfully";
             return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")

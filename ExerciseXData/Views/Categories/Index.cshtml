@@ -9,6 +9,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th>Category ID</th>
             <th>Image</th>
             <th>Name</th>
             <th>Modified Date</th>
@@ -18,6 +19,7 @@
         @foreach (var category in Model)
         {
             <tr>
+                <td>@category.C_Id</td>
                 <td>@category.C_Image</td>
                 <td>@category.C_Name</td>
                 <td>@category.C_Modified_Date</td>
