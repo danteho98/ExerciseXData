@@ -1,1 +1,21 @@
-﻿
+﻿@using ExerciseXData_UserLibrary.DataTransferObject
+@model UserDashboardDto
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Welcome, @Model.Username</h1>
+<p>Email: @Model.Email</p>
+<p>Age: @Model.Age</p>
+<p>Height: @Model.Height_CM cm</p>
+<p>Weight: @Model.Weight_KG kg</p>
+<p>Goal: @Model.Goal</p>
+
+<ul>
+    <li>Lifestyle Condition 1: @Model.Lifestyle_Condition_1</li>
+    <li>Lifestyle Condition 2: @Model.Lifestyle_Condition_2</li>
+    <li>Lifestyle Condition 3: @Model.Lifestyle_Condition_3</li>
+    <li>Lifestyle Condition 4: @Model.Lifestyle_Condition_4</li>
+    <li>Lifestyle Condition 5: @Model.Lifestyle_Condition_5</li>
+</ul>

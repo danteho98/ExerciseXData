@@ -4,7 +4,6 @@ using ExerciseXData_ExerciseLibrary.Interface;
 using ExerciseXData_ExerciseLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace ExerciseXData_ExerciseLibrary.Repositories
 {
     public class ExercisesRepository : IExerciseRepository
@@ -55,6 +54,11 @@ namespace ExerciseXData_ExerciseLibrary.Repositories
         public async Task<int> GetTotalExercisesAsync()
         {
             return await _exerciseDbContext.Exercises.CountAsync();
+        }
+
+        public Task<List<UsersExercisesModel>> GetUserExercisePlansAsync(string userId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

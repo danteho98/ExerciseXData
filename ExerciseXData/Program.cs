@@ -81,7 +81,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 //Service
-//builder.Services.AddScoped<AuthService>(); 
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<DietsService>();
 builder.Services.AddScoped<ExercisesService>();

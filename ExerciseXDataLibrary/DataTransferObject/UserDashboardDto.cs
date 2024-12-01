@@ -18,8 +18,9 @@ namespace ExerciseXData_UserLibrary.DataTransferObject
         public string Lifestyle_Condition_3 { get; set; }
         public string Lifestyle_Condition_4 { get; set; }
         public string Lifestyle_Condition_5 { get; set; }
-        //public List<ExerciseDto> ExercisePlans { get; set; }
-        //public List<DietDto> DietPlans { get; set; }
+        public List<ExercisePlanDto> ExercisePlans { get; set; }
+        public List<DietPlanDto> DietPlans { get; set; }
+        
     }  
 }
 

@@ -109,6 +109,7 @@ namespace ExerciseXData_UserLibrary.Controllers
                 }
 
                 var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
+                
                 if (result.Succeeded)
                 {
                     var roles = await _userManager.GetRolesAsync(user);
@@ -120,10 +121,16 @@ namespace ExerciseXData_UserLibrary.Controllers
                         return Redirect(returnUrl);
                     }
 
-                    if (roles.Contains("Admin"))
-                        return RedirectToAction("AdminDashboard", "Admin");
-                    if (roles.Contains("User"))
-                        return RedirectToAction("UserDashboard", "Users");
+                    if (roles.Contains("Admin")) 
+                    {
+                        return RedirectToAction("AdminDashboard", "Admin"); 
+                    }
+                        
+                    if (roles.Contains("User")) 
+                    { 
+                        return RedirectToAction("UserDashboard", "Users"); 
+                    }
+                        
 
                     return RedirectToAction("AccessDenied", "Account");
                 }
@@ -144,6 +151,31 @@ namespace ExerciseXData_UserLibrary.Controllers
 
             return View(model);
         }
+
+        // GET: account/forgotpassword
+        [HttpGet("forgotpassword")]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        // POST: account/forgotpassword
+        [HttpPost("forgotpassword")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "No account found with this email.");
+                return View();
+            }
+
+            // Fetch security questions from the database
+            var questions = await _usersRepository.GetSecurityQuestionsForUserAsync(user.Id); // You need to implement this method
+            return View("SecurityQuestions", new SecurityQuestionsDto { SecurityQuestions = questions, Email = email });
+        }
+
 
         // POST: account/logout
         [HttpPost("logout")]

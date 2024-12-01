@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ExerciseXData_SharedContracts.Interfaces;
 using ExerciseXData_UserLibrary.DataTransferObject;
 using ExerciseXData_UserLibrary.Models;
 using ExerciseXData_UserLibrary.Repositories;
@@ -175,6 +176,48 @@ namespace ExerciseXData_UserLibrary.Services
             }
         }
 
+        public async Task<UserDashboardDto> FindUserByEmailOrUsernameAsync(string emailOrUsername)
+        {
+            // Find user by email or username
+            var user = await _userRepository.FindByEmailOrUsernameAsync(emailOrUsername);
+            if (user == null)
+            {
+                _logger.LogError("User not found.");
+                throw new Exception("User not found.");
+            }
+
+            // Fetch associated exercise plans
+            //var exercisePlans = user.UsersExercises.Select(ue => new ExercisePlanDto
+            //{
+            //    Name = ue.ExercisePlan.Name, // Correct reference to ExercisePlan
+            //    StartDate = ue.ExercisePlan.StartDate, // Corrected the reference to ExercisePlan
+            //    EndDate = ue.ExercisePlan.EndDate // Corrected the reference to ExercisePlan
+            //}).ToList();
+
+            // Fetch associated diet plans
+            //var dietPlans = user.UserDiets.Select(ud => new DietPlanDto
+            //{
+            //    Name = ud.DietPlan.Name,
+            //    Calories = ud.DietPlan.Calories,
+            //    StartDate = ud.DietPlan.StartDate,
+            //    EndDate = ud.DietPlan.EndDate
+            //}).ToList();
+
+            // Map user data into the DTO
+            var userDashboardDto = new UserDashboardDto
+            {
+                Username = user.UserName,
+                Email = user.Email,
+                Age = user.U_Age,
+                Height_CM = user.U_Height_CM,
+                Weight_KG = user.U_Weight_KG,
+                Goal = user.U_Goal,
+                //ExercisePlans = exercisePlans,
+                //DietPlans = dietPlans
+            };
+
+            return userDashboardDto;
+        }
 
 
 

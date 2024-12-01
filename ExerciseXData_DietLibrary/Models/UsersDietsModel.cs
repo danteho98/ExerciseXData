@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using ExerciseXData_UserLibrary.Models;
+
 
 namespace ExerciseXData_DietLibrary.Models
 {
@@ -10,7 +10,7 @@ namespace ExerciseXData_DietLibrary.Models
 
         [DisplayName("User Id")]
         public string U_Id { get; set; }
-        public UsersModel Users { get; set; }
+       // public UsersModel Users { get; set; }
 
         [ForeignKey("D_Id")]
         [DisplayName("Diet Id")]
@@ -32,7 +32,7 @@ namespace ExerciseXData_DietLibrary.Models
         [DisplayName("Date Modified")]
         public DateTime UD_Modified_Date { get; set; } = DateTime.Now;
 
-   
+  
 
     }
 }

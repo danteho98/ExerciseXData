@@ -15,5 +15,7 @@ namespace ExerciseXData_ExerciseLibrary.Interface
         Task UpdateExerciseAsync(ExercisesModel exercise);
         Task DeleteExerciseAsync(int id);
         Task<int> GetTotalExercisesAsync();
+        Task<List<UsersExercisesModel>> GetUserExercisePlansAsync(string userId);  // Modify according to your db schema
     }
 }
+

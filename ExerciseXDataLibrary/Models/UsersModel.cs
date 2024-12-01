@@ -1,6 +1,8 @@
 ﻿
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using ExerciseXData_DietLibrary.Models;
+using ExerciseXData_ExerciseLibrary.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace ExerciseXData_UserLibrary.Models
@@ -43,7 +45,11 @@ namespace ExerciseXData_UserLibrary.Models
 
         [DisplayName("Last Login")]
         public DateTime U_Last_Login {  get; set; } = DateTime.UtcNow;
+        public ICollection<UserSecurityQuestionModel> UserSecurityQuestions { get; set; }
+      
+        //public ICollection<UsersExercisesModel> UsersExercises { get; set; }
+        //public ICollection<UsersDietsModel> UserDiets { get; set; }
 
-     
+
     }
 }

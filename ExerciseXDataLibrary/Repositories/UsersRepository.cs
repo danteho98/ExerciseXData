@@ -170,9 +170,35 @@ namespace ExerciseXData_UserLibrary.Repositories
             }
         }
 
+
+        public async Task<List<SecurityQuestionModel>> GetSecurityQuestionsForUserAsync(string userId)
+        {
+            // Ensure the method queries the UserSecurityQuestions table to find the user's associated security questions
+            var userQuestions = await _userDbContext.UserSecurityQuestions
+                .Where(usc => usc.U_Id == userId)
+                .Include(usc => usc.UserSecurityQuestions) // Include the related SecurityQuestion entity
+                .Select(usc => usc.UserSecurityQuestions)  // Select only the SecurityQuestion part
+                .ToListAsync();
+
+            return userQuestions;
+        }
+
+
         public async Task<int> GetTotalUsersAsync()
         {
             return await _userDbContext.Users.CountAsync();
         }
+
+        public async Task<UsersModel> FindByEmailOrUsernameAsync(string emailOrUsername)
+        {
+            return await _userDbContext.Users
+            //    .Include(u => u.UserExercises)
+            //        .ThenInclude(ue => ue.ExercisePlan) // Assuming UserExercises has ExercisePlan navigation property
+            //    .Include(u => u.UserDiets)
+            //        .ThenInclude(ud => ud.DietPlan) // Assuming UserDiets has DietPlan navigation property
+                .FirstOrDefaultAsync(u => u.Email == emailOrUsername || u.UserName == emailOrUsername);
+        }
     }
+
+
 }

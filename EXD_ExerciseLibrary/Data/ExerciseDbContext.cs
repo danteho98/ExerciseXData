@@ -40,6 +40,8 @@ namespace ExerciseXData_ExerciseLibrary.Data
                 .HasMany(c => c.Exercises) // Navigation property
                 .WithOne(e => e.Categories) // One Category has many Exercises
                 .HasForeignKey(e => e.CategoriesC_Id); // Foreign key in Exercises table
+
+
         }
     }
 }

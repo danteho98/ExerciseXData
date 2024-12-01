@@ -1,6 +1,5 @@
 ﻿using ExerciseXData_ExerciseLibrary.Interface;
 using ExerciseXData_ExerciseLibrary.Models;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData_ExerciseLibrary.Services
@@ -38,6 +37,19 @@ namespace ExerciseXData_ExerciseLibrary.Services
         {
             await _repository.DeleteExerciseAsync(id);
         }
+
+        //public async Task<List<ExercisePlanDto>> GetUserExercisePlansAsync(string userId)
+        //{
+        //    var userExercisePlans = await _repository.GetUserExercisePlansAsync(userId);
+
+        //    // Mapping data from UsersExercisesModel to ExercisePlanDto
+        //    return userExercisePlans.Select(ue => new ExercisePlanDto
+        //    {
+        //        Name = ue.ExercisePlanDto.Name,
+        //        StartDate = ue.ExercisePlan.StartDate,
+        //        EndDate = ue.ExercisePlan.EndDate
+        //    }).ToList();
+        //}
 
     }
 }

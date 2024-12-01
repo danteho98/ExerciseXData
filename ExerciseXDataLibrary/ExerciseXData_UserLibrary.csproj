@@ -22,4 +22,9 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EXD_ExerciseLibrary\ExerciseXData_ExerciseLibrary.csproj" />
+    <ProjectReference Include="..\ExerciseXData_DietLibrary\ExerciseXData_DietLibrary.csproj" />
+  </ItemGroup>
+
 </Project>
