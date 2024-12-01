@@ -1,6 +1,7 @@
 ﻿
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExerciseXData_DietLibrary.Models
 {
@@ -25,6 +26,7 @@ namespace ExerciseXData_DietLibrary.Models
         public DateTime F_Modified_Date { get; set; } = DateTime.Now;
 
         //Relationship
+        [NotMapped]
         public List<DietsFoodsModel>DietsFoods { get; set; }
         
 

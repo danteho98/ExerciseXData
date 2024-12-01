@@ -7,16 +7,14 @@ namespace ExerciseXData_DietLibrary.Models
 {
     public class DietsFoodsModel
     {
-        [Key]
-        public int DF_Id {  get; set; }
+        //[Key]
+        //public int DF_Id {  get; set; }
 
         [DisplayName("Diet Id")]
-        //[ForeignKey("D_Id")]
         public int DietsD_Id { get; set; }
-        public DietsModel Diets { get; set; }
+        public DietsModel Diets { get; set; }   
 
         [DisplayName("Food Id")]
-        //[ForeignKey("F_Id")]
         public int ? FoodsF_Id { get; set; }
         public FoodsModel Foods { get; set; }
 
@@ -30,7 +28,7 @@ namespace ExerciseXData_DietLibrary.Models
         public string? DF_Frequency { get; set; }
 
         [DisplayName("Total Colories")]
-        public string ? DF_Total_Calories { get; set; }
+        public int ? DF_Total_Calories { get; set; }
 
         [DisplayName("Modified Date")]
         public DateTime DF_Modified_Date { get; set; } = DateTime.Now;

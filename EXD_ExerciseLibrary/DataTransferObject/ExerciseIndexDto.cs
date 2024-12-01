@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ExerciseXData_ExerciseLibrary.DataTransferObject
 {
-    public class ExerciseIndexViewModel
+    public class ExerciseIndexDto
     {
         public List<ExercisesModel> Exercises { get; set; }
         public List<CategoriesModel> Categories { get; set; }

@@ -24,7 +24,8 @@ namespace ExerciseXData_DietLibrary.Data
             modelBuilder.Entity<DietsFoodsModel>()
                 .HasOne(df => df.Diets)
                 .WithMany(d => d.DietsFoods)
-                .HasForeignKey(df => df.DietsD_Id);
+                .HasForeignKey(df => df.DietsD_Id)
+                .OnDelete(DeleteBehavior.Cascade); // Optional, configure delete behavior
 
             modelBuilder.Entity<DietsFoodsModel>()
                 .HasOne(df => df.Foods)

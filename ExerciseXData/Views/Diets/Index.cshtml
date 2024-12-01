@@ -1,4 +1,4 @@
-﻿@model List<ExerciseXData_DietLibrary.Models.DietsModel>
+﻿@model ExerciseXData_DietLibrary.DataTransferObject.DietIndexDto
 
 @{
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
@@ -31,7 +31,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var diets in Model)
+        @foreach (var diets in Model.Diets)
         {
             <tr>
                 <td>@diets.D_Id</td>
@@ -48,7 +48,7 @@
                     <div class="w-75 btn-group" role="group">
                         <a asp-controller="Diets" asp-action="Edit" asp-route-id="@diets.D_Id"
                            class="btn btn-primary mx-2">
-                            <i class="bi bi-pencil-square"></i>Edit
+                            <i class="bi bi-pe  ncil-square"></i>Edit
                         </a>
 
                         <a asp-controller="Diets" asp-action="Delete" asp-route-id="@diets.D_Id"

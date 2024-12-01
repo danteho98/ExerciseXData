@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace ExerciseXData_DietLibrary.DataTransferObject
 {
-    public class FoodIndexViewModel
+    public class DietIndexDto
     {
-        public List<FoodsModel> Foods { get; set; }
+        public List<DietsModel> ? Diets { get; set; }
+        public List<DietsFoodsModel> ? DietsFoods { get; set; }
     }
 }

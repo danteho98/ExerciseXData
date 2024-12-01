@@ -26,10 +26,10 @@ public class ExercisesController : Controller
         var categories = await _exerciseDbContext.Categories.ToListAsync();  
         // Retrieve all exercises
         var exercises = await _exerciseDbContext.Exercises
-       .Include(e => e.Categories) // Assuming you have a relationship with Categories
-       .ToListAsync();
+            .Include(e => e.Categories) // Assuming you have a relationship with Categories
+            .ToListAsync();
 
-        var model = new ExerciseIndexViewModel
+        var model = new ExerciseIndexDto
         {
             Exercises = exercises,
             Categories = categories

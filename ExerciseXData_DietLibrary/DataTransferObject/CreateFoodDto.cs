@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ExerciseXData_DietLibrary.DataTransferObject
 {
-    public class CreateFoodVM
+    public class CreateFoodDto
     {
         [DisplayName("Food Image")]
         public byte[]? F_Image { get; set; }
