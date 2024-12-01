@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace ExerciseXData_DietLibrary.Models
 {
     public class FoodsModel
@@ -23,7 +22,7 @@ namespace ExerciseXData_DietLibrary.Models
         public int ? F_Calories { get; set; }
 
         [DisplayName("Date Modified")]
-        public DateTime F_Modified_Date { get; set; }
+        public DateTime F_Modified_Date { get; set; } = DateTime.Now;
 
         //Relationship
         public List<DietsFoodsModel>DietsFoods { get; set; }

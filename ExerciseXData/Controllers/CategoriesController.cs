@@ -13,7 +13,6 @@ namespace ExerciseXData.Controllers
 
         public CategoriesController( ExerciseDbContext exerciseDbContext)
         {
-            
             _exerciseDbContext = exerciseDbContext;
         }
 
@@ -21,10 +20,10 @@ namespace ExerciseXData.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            List<CategoriesModel> categoryCategoryList = _exerciseDbContext.Categories.ToList();
+            List<CategoriesModel> categoryList = _exerciseDbContext.Categories.ToList();
             /*Select statement is not needed here as _db.Category will get all the categories from table*/
 
-            return View(categoryCategoryList);
+            return View(categoryList);
         }
 
         //GET

@@ -1,11 +1,10 @@
-﻿using ExerciseXData.Data;
-using ExerciseXData_DietLibrary.Data;
+﻿using ExerciseXData_DietLibrary.Data;
 using ExerciseXData_DietLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace foodXData.Controllers
+namespace ExerciseXData.Controllers
 {
+    [Route("admin/foods")]
     public class FoodsController : Controller
     {
         private readonly DietDbContext _dietDbContext;
@@ -17,10 +16,13 @@ namespace foodXData.Controllers
 
         // GET: admin/foods
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var foods = await _dietDbContext.Foods.ToListAsync();
-            return View(foods); // Ensure you have an Index view for listing foods
+            List<FoodsModel> foodsList = _dietDbContext.Foods.ToList();
+            /*Select statement is not needed here as _db.Category will get all the categories from table*/
+
+            return View(foodsList);
+
         }
 
         // GET: admin/foods/create
@@ -31,7 +33,7 @@ namespace foodXData.Controllers
         }
 
         // POST: admin/foods/create
-        [HttpPost("create")]
+        [HttpPost("Create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(FoodsModel food)
         {
@@ -42,77 +44,90 @@ namespace foodXData.Controllers
                 TempData["success"] = "Food created successfully!";
                 return RedirectToAction(nameof(Index));
             }
+
             return View(food);
         }
 
         // GET: admin/foods/edit/{id}
-        [HttpGet("edit/{id}")]
-        public async Task<IActionResult> Edit(int id)
+        [HttpGet("Edit/{id:int}")]
+        public IActionResult Edit(int? id)
         {
-            var food = await _dietDbContext.Foods.FindAsync(id);
-            if (food == null)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
-            return View(food); // Ensure you have an Edit view
+            var foodsFromDb = _dietDbContext.Foods.Find(id); //find if used for finding the primary key of the table
+            //var categoryFromDbFirst= _db.Category.FirstOrDefault(u=>u.Id==id);
+            //var categoryFromDbSingle = _db.Category.SingleOrDefault(u => u.Id == id);
+
+            if (foodsFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(foodsFromDb);
         }
 
         // POST: admin/foods/edit/{id}
-        [HttpPost("edit/{id}")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, FoodsModel food)
+        [HttpPost("Edit/{id:int}")]
+        [ValidateAntiForgeryToken] //helps to prevent cross site request forgery attacks
+        public IActionResult Edit(FoodsModel food)
         {
-            if (id != food.F_Id)
+            if (!_dietDbContext.Foods.Any(f => f.F_Id == food.F_Id))
             {
-                return NotFound();
+                ModelState.AddModelError("", "Invalid Foods ID.");
+                return View(food);
             }
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _dietDbContext.Update(food);
-                    await _dietDbContext.SaveChangesAsync();
-                    TempData["success"] = "Food updated successfully!";
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!_dietDbContext.Foods.Any(f => f.F_Id == id))
-                    {
-                        return NotFound();
-                    }
-                    throw;
-                }
+                _dietDbContext.Foods.Update(food); //items input from user
+                _dietDbContext.SaveChanges(); //Save the items to the database
+                TempData["success"] = "Food updated successfully";
+                return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
             }
             return View(food);
         }
 
         // GET: admin/foods/delete/{id}
-        [HttpGet("delete/{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpGet("Delete/{id}")]
+        public IActionResult Delete(int? id)
         {
-            var food = await _dietDbContext.Foods.FindAsync(id);
-            if (food == null)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
-            return View(food); // Ensure you have a Delete confirmation view
+            var foodsFromDb = _dietDbContext.Foods.Find(id); //find if used for finding the primary key of the table
+
+            if (foodsFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(foodsFromDb);
         }
 
         // POST: admin/foods/delete/{id}
-        [HttpPost("delete/{id}")]
+        [HttpPost("Delete/{id:int}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteSuccess(int? id)
         {
-            var food = await _dietDbContext.Foods.FindAsync(id);
-            if (food != null)
+            if (id == null || id == 0)
             {
-                _dietDbContext.Foods.Remove(food);
-                await _dietDbContext.SaveChangesAsync();
-                TempData["success"] = "Food deleted successfully!";
+                return NotFound();
             }
-            return RedirectToAction(nameof(Index));
+
+            var foods = _dietDbContext.Foods.Find(id);
+            if (foods == null)
+            {
+                return NotFound();
+            }
+            _dietDbContext.Foods.Remove(foods); //items input from user
+            _dietDbContext.SaveChanges(); //Save the items to the database
+
+            TempData["success"] = "Food deleted successfully";
+            return RedirectToAction("Index"); //redirect to the Index(), can also be used to redirect to other controllers such as ("Index", "Create")
+
         }
     }
 

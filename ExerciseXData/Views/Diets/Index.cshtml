@@ -1,1 +1,65 @@
-﻿
+﻿@model List<ExerciseXData_DietLibrary.Models.DietsModel>
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<h1>Diets</h1>
+
+<!-- Display TempData message if it's set -->
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["success"]
+    </div>
+}
+
+<a asp-action="Create" class="btn btn-primary">Create New</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Diet ID</th>
+            <th>Diet Name</th>
+            <th>Diet Description</th>
+            <th>Pros 1</th>
+            <th>Pros 2</th>
+            <th>Pros 3</th>
+            <th>Cons 1</th>
+            <th>Cons 2</th>
+            <th>Cons 3</th>
+            <th>Modified Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var diets in Model)
+        {
+            <tr>
+                <td>@diets.D_Id</td>
+                <td>@diets.D_Name</td>
+                <td>@diets.D_Description</td>
+                <td>@diets.D_Pros_1</td>
+                <td>@diets.D_Pros_2</td>
+                <td>@diets.D_Pros_3</td>
+                <td>@diets.D_Cons_1</td>
+                <td>@diets.D_Cons_2</td>
+                <td>@diets.D_Cons_3</td>
+                <td>@diets.D_Modified_Date</td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Diets" asp-action="Edit" asp-route-id="@diets.D_Id"
+                           class="btn btn-primary mx-2">
+                            <i class="bi bi-pencil-square"></i>Edit
+                        </a>
+
+                        <a asp-controller="Diets" asp-action="Delete" asp-route-id="@diets.D_Id"
+                           class="btn btn-primary mx-2">
+                            <i class="bi bi-trash-fill"></i>Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

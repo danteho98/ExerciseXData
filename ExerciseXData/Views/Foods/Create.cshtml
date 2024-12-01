@@ -1,5 +1,5 @@
-﻿@using ExerciseXData_DietLibrary.DataTransferObject
-@model CreateFoodVM
+﻿@using ExerciseXData_DietLibrary.Models
+@model FoodsModel
 
 @{
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
@@ -13,18 +13,6 @@
         </div>
 
 
-        <!-- Category Dropdown -->
-       @* <div class="mb-3">
-            <label for="CategoriesC_Id">Category</label>
-            <select asp-for="CategoriesC_Id" class="form-control">
-                <option value="">Select Category</option>
-                @foreach (var category in (SelectList)ViewBag.Categories ?? new SelectList(new List<SelectListItem>()))
-                {
-                    <option value="@category.Value">@category.Text</option>
-                }
-            </select>
-            <span asp-validation-for="CategoriesC_Id" class="text-danger"></span>
-        </div>*@
 
         <div class="mb-3">
             <label asp-for="F_Name"></label>

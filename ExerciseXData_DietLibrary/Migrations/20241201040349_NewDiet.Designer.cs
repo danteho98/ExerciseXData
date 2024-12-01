@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExerciseXData_DietLibrary.Migrations
 {
     [DbContext(typeof(DietDbContext))]
-    [Migration("20241130235036_NewDiet")]
+    [Migration("20241201040349_NewDiet")]
     partial class NewDiet
     {
         /// <inheritdoc />
@@ -101,19 +101,19 @@ namespace ExerciseXData_DietLibrary.Migrations
                         new
                         {
                             D_Id = 1,
-                            D_Modified_Date = new DateTime(2024, 12, 1, 7, 50, 36, 638, DateTimeKind.Local).AddTicks(4409),
+                            D_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9189),
                             D_Name = "Keto Diet"
                         },
                         new
                         {
                             D_Id = 2,
-                            D_Modified_Date = new DateTime(2024, 12, 1, 7, 50, 36, 638, DateTimeKind.Local).AddTicks(4417),
+                            D_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9197),
                             D_Name = "Mediterranean Diet"
                         },
                         new
                         {
                             D_Id = 3,
-                            D_Modified_Date = new DateTime(2024, 12, 1, 7, 50, 36, 638, DateTimeKind.Local).AddTicks(4418),
+                            D_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9197),
                             D_Name = "Vegetarian Diet"
                         });
                 });
@@ -150,84 +150,84 @@ namespace ExerciseXData_DietLibrary.Migrations
                         {
                             F_Id = 1,
                             F_Calories = 160,
-                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9302),
                             F_Name = "Avocado"
                         },
                         new
                         {
                             F_Id = 2,
                             F_Calories = 208,
-                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9303),
                             F_Name = "Salmon"
                         },
                         new
                         {
                             F_Id = 3,
                             F_Calories = 208,
-                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9304),
                             F_Name = "Broccoli "
                         },
                         new
                         {
                             F_Id = 4,
                             F_Calories = 161,
-                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9305),
                             F_Name = "Potato "
                         },
                         new
                         {
                             F_Id = 5,
                             F_Calories = 216,
-                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9306),
                             F_Name = "Brown rice"
                         },
                         new
                         {
                             F_Id = 6,
                             F_Calories = 205,
-                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9307),
                             F_Name = "White rice"
                         },
                         new
                         {
                             F_Id = 7,
                             F_Calories = 76,
-                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9308),
                             F_Name = "Tofu "
                         },
                         new
                         {
                             F_Id = 8,
                             F_Calories = 72,
-                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9309),
                             F_Name = "Egg"
                         },
                         new
                         {
                             F_Id = 9,
                             F_Calories = 271,
-                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9310),
                             F_Name = "Beef steak "
                         },
                         new
                         {
                             F_Id = 10,
                             F_Calories = 165,
-                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9311),
                             F_Name = "Chicken breast "
                         },
                         new
                         {
                             F_Id = 11,
                             F_Calories = 271,
-                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9312),
                             F_Name = "Beef steak "
                         },
                         new
                         {
                             F_Id = 12,
                             F_Calories = 95,
-                            F_Modified_Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            F_Modified_Date = new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9313),
                             F_Name = "Yogurt  "
                         });
                 });

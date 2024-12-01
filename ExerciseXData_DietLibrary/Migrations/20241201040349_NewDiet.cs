@@ -86,9 +86,9 @@ namespace ExerciseXData_DietLibrary.Migrations
                 columns: new[] { "D_Id", "D_Cons_1", "D_Cons_2", "D_Cons_3", "D_Description", "D_Modified_Date", "D_Name", "D_Pros_1", "D_Pros_2", "D_Pros_3" },
                 values: new object[,]
                 {
-                    { 1, null, null, null, null, new DateTime(2024, 12, 1, 7, 50, 36, 638, DateTimeKind.Local).AddTicks(4409), "Keto Diet", null, null, null },
-                    { 2, null, null, null, null, new DateTime(2024, 12, 1, 7, 50, 36, 638, DateTimeKind.Local).AddTicks(4417), "Mediterranean Diet", null, null, null },
-                    { 3, null, null, null, null, new DateTime(2024, 12, 1, 7, 50, 36, 638, DateTimeKind.Local).AddTicks(4418), "Vegetarian Diet", null, null, null }
+                    { 1, null, null, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9189), "Keto Diet", null, null, null },
+                    { 2, null, null, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9197), "Mediterranean Diet", null, null, null },
+                    { 3, null, null, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9197), "Vegetarian Diet", null, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -96,18 +96,18 @@ namespace ExerciseXData_DietLibrary.Migrations
                 columns: new[] { "F_Id", "F_Calories", "F_Group", "F_Image", "F_Modified_Date", "F_Name" },
                 values: new object[,]
                 {
-                    { 1, 160, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Avocado" },
-                    { 2, 208, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Salmon" },
-                    { 3, 208, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Broccoli " },
-                    { 4, 161, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Potato " },
-                    { 5, 216, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brown rice" },
-                    { 6, 205, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "White rice" },
-                    { 7, 76, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tofu " },
-                    { 8, 72, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Egg" },
-                    { 9, 271, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Beef steak " },
-                    { 10, 165, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Chicken breast " },
-                    { 11, 271, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Beef steak " },
-                    { 12, 95, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Yogurt  " }
+                    { 1, 160, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9302), "Avocado" },
+                    { 2, 208, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9303), "Salmon" },
+                    { 3, 208, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9304), "Broccoli " },
+                    { 4, 161, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9305), "Potato " },
+                    { 5, 216, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9306), "Brown rice" },
+                    { 6, 205, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9307), "White rice" },
+                    { 7, 76, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9308), "Tofu " },
+                    { 8, 72, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9309), "Egg" },
+                    { 9, 271, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9310), "Beef steak " },
+                    { 10, 165, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9311), "Chicken breast " },
+                    { 11, 271, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9312), "Beef steak " },
+                    { 12, 95, null, null, new DateTime(2024, 12, 1, 12, 3, 49, 409, DateTimeKind.Local).AddTicks(9313), "Yogurt  " }
                 });
 
             migrationBuilder.CreateIndex(

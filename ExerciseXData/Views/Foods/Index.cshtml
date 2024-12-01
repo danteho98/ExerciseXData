@@ -1,6 +1,5 @@
 ﻿
-@using ExerciseXData_DietLibrary.DataTransferObject
-@model FoodIndexViewModel
+@model List< ExerciseXData_DietLibrary.Models.FoodsModel>
 @{
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
 }
@@ -15,31 +14,24 @@
     </div>
 }
 
-<a asp-action="Create" asp-route-categoryId="@ViewData["CategoryId"]" class="btn btn-primary">Create New Exercise</a>
-
-@if (Model.Foods != null && Model.Foods.Any())
-{
-    <table class="table">
+<a asp-action="Create" class="btn btn-primary">Create New Food</a>
+<table class="table">
         <thead>
             <tr>
                 <th>Food ID</th>
-             
                 <th>Image</th>
                 <th>Food Name</th>
                 <th>Food Group</th>
                 <th>Food Calories</th>
-
                 <th>Modified Date</th>
             </tr>
         </thead>
-        @*   @if (Model != null && Model.Any())*@
         <tbody>
-
-            @foreach (var foods in Model.Foods)
+            @foreach (var foods in Model)
             {
                 <tr>
                     <td>@foods.F_Id</td>
-                    @* <td>@foods.CategoriesC_Id</td>
+                     
                     <td>
                         @if (foods.F_Image != null && foods.F_Image.Length > 0)
                         {
@@ -49,7 +41,7 @@
                         {
                             <span>No Image</span>
                         }
-                    </td> *@
+                    </td> 
                     <td>@foods.F_Name</td>
                     <td>@foods.F_Group</td>
                     <td>@foods.F_Calories</td>
@@ -72,10 +64,4 @@
                 </tr>
             }
         </tbody>
-
     </table>
-}
-else
-{
-    <tr><td colspan="12">No foods found</td></tr>
-}

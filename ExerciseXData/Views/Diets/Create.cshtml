@@ -1,5 +1,4 @@
-﻿@* @using ExerciseXData_DietLibrary.Models
-@Model.DietsFoodsModel
+﻿@model ExerciseXData_DietLibrary.Models.DietsModel
 @{
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
 }
@@ -18,18 +17,44 @@
         </div>
 
         <div class="mb-3">
-            <label for="FoodSelection">Select Foods</label>
-            <select asp-for="DietsFoods" class="form-control" multiple>
-                @foreach (var food in ViewBag.Foods)
-                {
-                    <option value="@food.F_Id">@food.F_Name</option>
-                }
-            </select>
-            <span asp-validation-for="DietsFoods" class="text-danger"></span>
+            <label asp-for="D_Description"></label>
+            <input asp-for="D_Description" class="form-control" />
+            <span asp-validation-for="D_Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="D_Pros_1"></label>
+            <input asp-for="D_Pros_1" class="form-control" />
+            <span asp-validation-for="D_Pros_1" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="D_Pros_2"></label>
+            <input asp-for="D_Pros_2" class="form-control" />
+            <span asp-validation-for="D_Pros_2" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="D_Pros_3"></label>
+            <input asp-for="D_Pros_3" class="form-control" />
+            <span asp-validation-for="D_Pros_3" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="D_Cons_1"></label>
+            <input asp-for="D_Cons_1" class="form-control" />
+            <span asp-validation-for="D_Cons_1" class="text-danger"></span>
         </div>
 
+        <div class="mb-3">
+            <label asp-for="D_Cons_2"></label>
+            <input asp-for="D_Cons_2" class="form-control" />
+            <span asp-validation-for="D_Cons_2" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="D_Cons_3"></label>
+            <input asp-for="D_Cons_3" class="form-control" />
+            <span asp-validation-for="D_Cons_3" class="text-danger"></span>
+        </div>
+       
         <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
         <a asp-controller="Diets" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
     </div>
 </form>
- *@
