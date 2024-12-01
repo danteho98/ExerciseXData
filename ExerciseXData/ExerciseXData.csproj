@@ -29,6 +29,7 @@
     <ProjectReference Include="..\EXD_ExerciseLibrary\ExerciseXData_ExerciseLibrary.csproj" />
     <ProjectReference Include="..\ExerciseXDataLibrary\ExerciseXData_UserLibrary.csproj" />
     <ProjectReference Include="..\ExerciseXData_DietLibrary\ExerciseXData_DietLibrary.csproj" />
+    <ProjectReference Include="..\SharedClassLibrary\ExerciseXData_SharedLibrary.csproj" />
   </ItemGroup>
 
 </Project>

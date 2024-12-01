@@ -1,1 +1,35 @@
-﻿
+﻿@* @using ExerciseXData_DietLibrary.Models
+@Model.DietsFoodsModel
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h1 class="text-primary">Create Diet</h1>
+            <hr />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="D_Name"></label>
+            <input asp-for="D_Name" class="form-control" />
+            <span asp-validation-for="D_Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="FoodSelection">Select Foods</label>
+            <select asp-for="DietsFoods" class="form-control" multiple>
+                @foreach (var food in ViewBag.Foods)
+                {
+                    <option value="@food.F_Id">@food.F_Name</option>
+                }
+            </select>
+            <span asp-validation-for="DietsFoods" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="Diets" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </div>
+</form>
+ *@

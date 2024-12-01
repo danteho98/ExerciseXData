@@ -1,5 +1,4 @@
-﻿using ExerciseXData.Data;
-using ExerciseXData_ExerciseLibrary.Interface;
+﻿using ExerciseXData_ExerciseLibrary.Interface;
 using ExerciseXData_ExerciseLibrary.Models;
 
 using Microsoft.EntityFrameworkCore;

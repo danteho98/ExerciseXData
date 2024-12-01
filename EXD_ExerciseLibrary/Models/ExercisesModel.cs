@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using ExerciseXData_UserLibrary.Models;
 
 namespace ExerciseXData_ExerciseLibrary.Models
 {

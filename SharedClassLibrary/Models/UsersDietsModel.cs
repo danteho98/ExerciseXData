@@ -2,15 +2,12 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using ExerciseXData_UserLibrary.Models;
-using ExerciseXData_SharedContracts.Interfaces;
+using ExerciseXData_DietLibrary.Models;
 
-
-namespace ExerciseXData_DietLibrary.Models
+namespace ExerciseXData_SharedLibrary.Models
 {
-    public class UsersDietsModel 
+    public class UsersDietsModel
     {
-        [Key]
-        public int UD_Id {  get; set; }
 
         [DisplayName("User Id")]
         public string U_Id { get; set; }
@@ -22,16 +19,16 @@ namespace ExerciseXData_DietLibrary.Models
         public DietsModel Diets { get; set; }
 
         [DisplayName("Custom Diet name")]
-        public string ? Custom_Diet_Name { get; set; }
+        public string? Custom_Diet_Name { get; set; }
 
         [DisplayName("Serving Size")]
-        public int ? UD_Serving_Size { get; set; }
+        public int? UD_Serving_Size { get; set; }
 
         [DisplayName("Frequency (Day/week/month)")]
-        public string ? UD_Frequency { get; set; }
+        public string? UD_Frequency { get; set; }
 
         [DisplayName("Total Calories")]
-        public int ? UD_Total_Calaroies { get; set; }
+        public int? UD_Total_Calaroies { get; set; }
 
         [DisplayName("Date Modified")]
         public DateTime UD_Modified_Date { get; set; } = DateTime.Now;

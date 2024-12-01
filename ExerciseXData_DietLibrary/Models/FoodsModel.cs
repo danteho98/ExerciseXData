@@ -27,7 +27,7 @@ namespace ExerciseXData_DietLibrary.Models
 
         //Relationship
         public List<DietsFoodsModel>DietsFoods { get; set; }
-        public List<UsersDietsModel> UsersDiets { get; set; }
+        
 
     }
 }

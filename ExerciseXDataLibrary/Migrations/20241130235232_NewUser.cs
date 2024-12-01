@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ExerciseXData_UserLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialUser : Migration
+    public partial class NewUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -16,6 +16,7 @@ using ExerciseXData_ExerciseLibrary.Interface;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ExerciseXData_SharedContracts.Interfaces;
 using ExerciseXData_DietLibrary.Interface;
+using ExerciseXData_SharedLibrary.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,9 @@ builder.Services.AddDbContext<DietDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DietConnection"),
     b => b.MigrationsAssembly("ExerciseXData_DietLibrary")));
 
+builder.Services.AddDbContext<SharedDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SharedConnection"),
+    b => b.MigrationsAssembly("ExerciseXData_SharedLibrary")));
 
 builder.Services.AddIdentity<UsersModel, IdentityRole>(options =>
 {
@@ -121,6 +125,10 @@ using (var scope = app.Services.CreateScope())
         // Apply migrations for DietDbContext
         var dietDbContext = services.GetRequiredService<DietDbContext>();
         await dietDbContext.Database.MigrateAsync();
+
+        // Apply migrations for SharedDbContext
+        var sharedDbContext = services.GetRequiredService<SharedDbContext>();
+        await sharedDbContext.Database.MigrateAsync();
 
         // Seed roles and admin account
         await DataSeeder.SeedRoles(services);

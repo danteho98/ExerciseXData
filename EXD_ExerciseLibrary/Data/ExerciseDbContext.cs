@@ -1,6 +1,5 @@
 ﻿using ExerciseXData_ExerciseLibrary.Models;
 using ExerciseXData_ExerciseLibrary.Utilities;
-using ExerciseXData_UserLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExerciseXData_ExerciseLibrary.Data

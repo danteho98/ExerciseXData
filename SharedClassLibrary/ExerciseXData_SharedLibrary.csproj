@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EXD_ExerciseLibrary\ExerciseXData_ExerciseLibrary.csproj" />
+    <ProjectReference Include="..\ExerciseXDataLibrary\ExerciseXData_UserLibrary.csproj" />
+    <ProjectReference Include="..\ExerciseXData_DietLibrary\ExerciseXData_DietLibrary.csproj" />
+  </ItemGroup>
+
+</Project>

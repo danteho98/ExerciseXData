@@ -1,1 +1,62 @@
-﻿
+﻿@using ExerciseXData_DietLibrary.DataTransferObject
+@model CreateFoodVM
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <div class=" border p-3 mt-4">
+        <div class=" row pb-2">
+            <h1 class="text-primary">Create Food</h1>
+            <hr />
+        </div>
+
+
+        <!-- Category Dropdown -->
+       @* <div class="mb-3">
+            <label for="CategoriesC_Id">Category</label>
+            <select asp-for="CategoriesC_Id" class="form-control">
+                <option value="">Select Category</option>
+                @foreach (var category in (SelectList)ViewBag.Categories ?? new SelectList(new List<SelectListItem>()))
+                {
+                    <option value="@category.Value">@category.Text</option>
+                }
+            </select>
+            <span asp-validation-for="CategoriesC_Id" class="text-danger"></span>
+        </div>*@
+
+        <div class="mb-3">
+            <label asp-for="F_Name"></label>
+            <input asp-for="F_Name" class="form-control" />
+            <span asp-validation-for="F_Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="F_Image"></label>
+            <input asp-for="F_Image" class="form-control" />
+            <span asp-validation-for="F_Image" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="F_Group"></label>
+            <input asp-for="F_Group" class="form-control" />
+            <span asp-validation-for="F_Group" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="F_Calories"></label>
+            <input asp-for="F_Calories" class="form-control" />
+            <span asp-validation-for="F_Calories" class="text-danger"></span>
+        </div>
+    
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="Foods" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+    </div>
+</form>
+
+@section Scripts {
+    @*this part is responsible for the client side*@
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

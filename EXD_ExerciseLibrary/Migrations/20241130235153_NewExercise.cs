@@ -20,7 +20,7 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                     C_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     C_Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    C_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    C_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     C_Modified_Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -36,7 +36,7 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoriesC_Id = table.Column<int>(type: "int", nullable: false),
                     E_Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    E_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    E_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     E_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     E_Pros_1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     E_Pros_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -62,8 +62,8 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                 columns: new[] { "C_Id", "C_Image", "C_Modified_Date", "C_Name" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 11, 30, 17, 21, 42, 729, DateTimeKind.Local).AddTicks(3884), "Cardio" },
-                    { 2, null, new DateTime(2024, 11, 30, 17, 21, 42, 729, DateTimeKind.Local).AddTicks(3886), "Strength" }
+                    { 1, null, new DateTime(2024, 12, 1, 7, 51, 53, 139, DateTimeKind.Local).AddTicks(1498), "Cardio" },
+                    { 2, null, new DateTime(2024, 12, 1, 7, 51, 53, 139, DateTimeKind.Local).AddTicks(1499), "Strength" }
                 });
 
             migrationBuilder.InsertData(
@@ -71,8 +71,8 @@ namespace ExerciseXData_ExerciseLibrary.Migrations
                 columns: new[] { "E_Id", "CategoriesC_Id", "E_Cons_1", "E_Cons_2", "E_Cons_3", "E_Description", "E_Image", "E_Modified_Date", "E_Name", "E_Pros_1", "E_Pros_2", "E_Pros_3" },
                 values: new object[,]
                 {
-                    { 1, 1, null, null, null, null, null, new DateTime(2024, 11, 30, 17, 21, 42, 729, DateTimeKind.Local).AddTicks(3999), "Running", null, null, null },
-                    { 2, 2, null, null, null, null, null, new DateTime(2024, 11, 30, 17, 21, 42, 729, DateTimeKind.Local).AddTicks(4000), "Push-ups", null, null, null }
+                    { 1, 1, null, null, null, null, null, new DateTime(2024, 12, 1, 7, 51, 53, 139, DateTimeKind.Local).AddTicks(1627), "Running", null, null, null },
+                    { 2, 2, null, null, null, null, null, new DateTime(2024, 12, 1, 7, 51, 53, 139, DateTimeKind.Local).AddTicks(1629), "Push-ups", null, null, null }
                 });
 
             migrationBuilder.CreateIndex(

@@ -3,18 +3,31 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
-namespace ExerciseXData_DietLibrary.Migrations
+namespace ExerciseXData_SharedLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDiet : Migration
+    public partial class NewShared : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Diets",
+                name: "Categories",
+                columns: table => new
+                {
+                    C_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    C_Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    C_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    C_Modified_Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.C_Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DietsModel",
                 columns: table => new
                 {
                     D_Id = table.Column<int>(type: "int", nullable: false)
@@ -31,11 +44,11 @@ namespace ExerciseXData_DietLibrary.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Diets", x => x.D_Id);
+                    table.PrimaryKey("PK_DietsModel", x => x.D_Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Foods",
+                name: "FoodsModel",
                 columns: table => new
                 {
                     F_Id = table.Column<int>(type: "int", nullable: false)
@@ -48,7 +61,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Foods", x => x.F_Id);
+                    table.PrimaryKey("PK_FoodsModel", x => x.F_Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,12 +102,42 @@ namespace ExerciseXData_DietLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ExercisesModel",
+                columns: table => new
+                {
+                    E_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoriesC_Id = table.Column<int>(type: "int", nullable: false),
+                    E_Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    E_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    E_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    E_Pros_1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    E_Pros_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    E_Pros_3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    E_Cons_1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    E_Cons_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    E_Cons_3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    E_Modified_Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExercisesModel", x => x.E_Id);
+                    table.ForeignKey(
+                        name: "FK_ExercisesModel_Categories_CategoriesC_Id",
+                        column: x => x.CategoriesC_Id,
+                        principalTable: "Categories",
+                        principalColumn: "C_Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DietsFoodsModel",
                 columns: table => new
                 {
+                    DF_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     DietsD_Id = table.Column<int>(type: "int", nullable: false),
                     FoodsF_Id = table.Column<int>(type: "int", nullable: false),
-                    DF_Id = table.Column<int>(type: "int", nullable: false),
                     DF_Serving_Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DF_Recommended_Servings = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DF_Frequency = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -103,17 +146,17 @@ namespace ExerciseXData_DietLibrary.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DietsFoodsModel", x => new { x.DietsD_Id, x.FoodsF_Id });
+                    table.PrimaryKey("PK_DietsFoodsModel", x => x.DF_Id);
                     table.ForeignKey(
-                        name: "FK_DietsFoodsModel_Diets_DietsD_Id",
+                        name: "FK_DietsFoodsModel_DietsModel_DietsD_Id",
                         column: x => x.DietsD_Id,
-                        principalTable: "Diets",
+                        principalTable: "DietsModel",
                         principalColumn: "D_Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DietsFoodsModel_Foods_FoodsF_Id",
+                        name: "FK_DietsFoodsModel_FoodsModel_FoodsF_Id",
                         column: x => x.FoodsF_Id,
-                        principalTable: "Foods",
+                        principalTable: "FoodsModel",
                         principalColumn: "F_Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -122,60 +165,67 @@ namespace ExerciseXData_DietLibrary.Migrations
                 name: "UsersDiets",
                 columns: table => new
                 {
-                    UD_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     U_Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     D_Id = table.Column<int>(type: "int", nullable: false),
+                    UsersId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    DietsD_Id = table.Column<int>(type: "int", nullable: false),
                     Custom_Diet_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UD_Serving_Size = table.Column<int>(type: "int", nullable: true),
                     UD_Frequency = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UD_Total_Calaroies = table.Column<int>(type: "int", nullable: true),
-                    UD_Modified_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FoodsModelF_Id = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    DietId = table.Column<int>(type: "int", nullable: false),
-                    DietName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DietDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    UD_Modified_Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersDiets", x => x.UD_Id);
+                    table.PrimaryKey("PK_UsersDiets", x => new { x.U_Id, x.D_Id });
                     table.ForeignKey(
-                        name: "FK_UsersDiets_Diets_D_Id",
-                        column: x => x.D_Id,
-                        principalTable: "Diets",
+                        name: "FK_UsersDiets_DietsModel_DietsD_Id",
+                        column: x => x.DietsD_Id,
+                        principalTable: "DietsModel",
                         principalColumn: "D_Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsersDiets_Foods_FoodsModelF_Id",
-                        column: x => x.FoodsModelF_Id,
-                        principalTable: "Foods",
-                        principalColumn: "F_Id");
-                    table.ForeignKey(
-                        name: "FK_UsersDiets_UsersModel_U_Id",
-                        column: x => x.U_Id,
+                        name: "FK_UsersDiets_UsersModel_UsersId",
+                        column: x => x.UsersId,
                         principalTable: "UsersModel",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
-            migrationBuilder.InsertData(
-                table: "Diets",
-                columns: new[] { "D_Id", "D_Cons_1", "D_Cons_2", "D_Cons_3", "D_Description", "D_Modified_Date", "D_Name", "D_Pros_1", "D_Pros_2", "D_Pros_3" },
-                values: new object[,]
+            migrationBuilder.CreateTable(
+                name: "UsersExercises",
+                columns: table => new
                 {
-                    { 1, null, null, null, null, new DateTime(2024, 11, 29, 17, 21, 36, 189, DateTimeKind.Local).AddTicks(1398), "Keto Diet", null, null, null },
-                    { 2, null, null, null, null, new DateTime(2024, 11, 29, 17, 21, 36, 189, DateTimeKind.Local).AddTicks(1407), "Mediterranean Diet", null, null, null }
+                    UE_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    U_Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    E_Id = table.Column<int>(type: "int", nullable: false),
+                    Repetition = table.Column<int>(type: "int", nullable: false),
+                    Sets = table.Column<int>(type: "int", nullable: false),
+                    Duration_sec = table.Column<int>(type: "int", nullable: false),
+                    UE_Modified_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UsersId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ExercisesE_Id = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersExercises", x => x.UE_Id);
+                    table.ForeignKey(
+                        name: "FK_UsersExercises_ExercisesModel_ExercisesE_Id",
+                        column: x => x.ExercisesE_Id,
+                        principalTable: "ExercisesModel",
+                        principalColumn: "E_Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UsersExercises_UsersModel_UsersId",
+                        column: x => x.UsersId,
+                        principalTable: "UsersModel",
+                        principalColumn: "Id");
                 });
 
-            migrationBuilder.InsertData(
-                table: "Foods",
-                columns: new[] { "F_Id", "F_Calories", "F_Group", "F_Image", "F_Modified_Date", "F_Name" },
-                values: new object[,]
-                {
-                    { 1, 160, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Avocado" },
-                    { 2, 208, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Salmon" }
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_DietsFoodsModel_DietsD_Id",
+                table: "DietsFoodsModel",
+                column: "DietsD_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DietsFoodsModel_FoodsF_Id",
@@ -183,19 +233,29 @@ namespace ExerciseXData_DietLibrary.Migrations
                 column: "FoodsF_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersDiets_D_Id",
-                table: "UsersDiets",
-                column: "D_Id");
+                name: "IX_ExercisesModel_CategoriesC_Id",
+                table: "ExercisesModel",
+                column: "CategoriesC_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersDiets_FoodsModelF_Id",
+                name: "IX_UsersDiets_DietsD_Id",
                 table: "UsersDiets",
-                column: "FoodsModelF_Id");
+                column: "DietsD_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersDiets_U_Id",
+                name: "IX_UsersDiets_UsersId",
                 table: "UsersDiets",
-                column: "U_Id");
+                column: "UsersId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersExercises_ExercisesE_Id",
+                table: "UsersExercises",
+                column: "ExercisesE_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersExercises_UsersId",
+                table: "UsersExercises",
+                column: "UsersId");
         }
 
         /// <inheritdoc />
@@ -208,13 +268,22 @@ namespace ExerciseXData_DietLibrary.Migrations
                 name: "UsersDiets");
 
             migrationBuilder.DropTable(
-                name: "Diets");
+                name: "UsersExercises");
 
             migrationBuilder.DropTable(
-                name: "Foods");
+                name: "FoodsModel");
+
+            migrationBuilder.DropTable(
+                name: "DietsModel");
+
+            migrationBuilder.DropTable(
+                name: "ExercisesModel");
 
             migrationBuilder.DropTable(
                 name: "UsersModel");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

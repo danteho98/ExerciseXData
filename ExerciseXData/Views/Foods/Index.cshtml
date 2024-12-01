@@ -1,1 +1,81 @@
 ﻿
+@using ExerciseXData_DietLibrary.DataTransferObject
+@model FoodIndexViewModel
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<h1>Foods</h1>
+
+<!-- Display TempData message if it's set -->
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["success"]
+    </div>
+}
+
+<a asp-action="Create" asp-route-categoryId="@ViewData["CategoryId"]" class="btn btn-primary">Create New Exercise</a>
+
+@if (Model.Foods != null && Model.Foods.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Food ID</th>
+             
+                <th>Image</th>
+                <th>Food Name</th>
+                <th>Food Group</th>
+                <th>Food Calories</th>
+
+                <th>Modified Date</th>
+            </tr>
+        </thead>
+        @*   @if (Model != null && Model.Any())*@
+        <tbody>
+
+            @foreach (var foods in Model.Foods)
+            {
+                <tr>
+                    <td>@foods.F_Id</td>
+                    @* <td>@foods.CategoriesC_Id</td>
+                    <td>
+                        @if (foods.F_Image != null && foods.F_Image.Length > 0)
+                        {
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(foods.F_Image)" alt="Image" style="max-height: 50px;" />
+                        }
+                        else
+                        {
+                            <span>No Image</span>
+                        }
+                    </td> *@
+                    <td>@foods.F_Name</td>
+                    <td>@foods.F_Group</td>
+                    <td>@foods.F_Calories</td>
+                    <td>@foods.F_Modified_Date</td>
+
+              
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Foods" asp-action="Edit" asp-route-id="@foods.F_Id"
+                               class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i>Edit
+                            </a>
+
+                            <a asp-controller="Foods" asp-action="Delete" asp-route-id="@foods.F_Id"
+                               class="btn btn-primary mx-2">
+                                <i class="bi bi-trash-fill"></i>Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+else
+{
+    <tr><td colspan="12">No foods found</td></tr>
+}

@@ -2,7 +2,6 @@
 using ExerciseXData_ExerciseLibrary.Data;
 using ExerciseXData_ExerciseLibrary.Interface;
 using ExerciseXData_ExerciseLibrary.Models;
-using ExerciseXData_SharedContracts.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 
