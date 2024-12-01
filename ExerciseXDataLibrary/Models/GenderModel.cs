@@ -2,7 +2,7 @@
 
 namespace ExerciseXData_UserLibrary.Models
 {
-    public class UserGender
+    public class UserGenderModel
     {
         public enum Gender
         {

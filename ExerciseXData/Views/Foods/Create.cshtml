@@ -1,5 +1,4 @@
-﻿@using ExerciseXData_DietLibrary.Models
-@model FoodsModel
+﻿@model ExerciseXData_DietLibrary.DataTransferObject.CreateFoodDto
 
 @{
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
@@ -11,8 +10,6 @@
             <h1 class="text-primary">Create Food</h1>
             <hr />
         </div>
-
-
 
         <div class="mb-3">
             <label asp-for="F_Name"></label>

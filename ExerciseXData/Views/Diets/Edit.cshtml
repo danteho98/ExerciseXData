@@ -12,7 +12,8 @@
         </div>
 
         @Html.HiddenFor(model => model.D_Id)
-        <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
+        @*Displays all the validation texts*@
+        @* <div asp-validation-summary="All"></div>  *@
         <div class="mb-3">
             <label asp-for="D_Name"></label>
             <input asp-for="D_Name" class="form-control" />

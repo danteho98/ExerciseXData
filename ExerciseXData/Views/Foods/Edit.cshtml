@@ -1,4 +1,4 @@
-﻿ @model ExerciseXData_DietLibrary.Models.FoodsModel
+﻿ @model ExerciseXData_DietLibrary.DataTransferObject.EditFoodDto
 
 @{
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
@@ -7,12 +7,13 @@
 <form method="post">
     <div class=" border p-3 mt-4">
         <div class=" row pb-2">
-            <h1 class="text-primary">Edit Category</h1>
+            <h1 class="text-primary">Edit Food</h1>
             <hr />
         </div>
 
         @Html.HiddenFor(model => model.F_Id)
-        <div asp-validation-summary="All"></div> @*Displays all the validation texts*@
+        @*Displays all the validation texts*@
+       @*  <div asp-validation-summary="All"></div> *@ 
         <div class="mb-3">
             <label asp-for="F_Image"></label>
             <input asp-for="F_Image" class="form-control" />

@@ -8,8 +8,7 @@ namespace ExerciseXData_UserLibrary.Models
 
     public class UsersModel : IdentityUser
     {
-        
-        public UserGender.Gender U_UserGender { get; set; }
+        public UserGenderModel.Gender U_UserGender { get; set; }
 
         [DisplayName ("Age")]
         public int U_Age { get; set; }

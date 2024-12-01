@@ -10,5 +10,6 @@ namespace ExerciseXData_DietLibrary.DataTransferObject
     public class FoodIndexDto
     {
         public List<FoodsModel> Foods { get; set; }
+        public List<DietsFoodsModel>? DietsFoods { get; set; }
     }
 }

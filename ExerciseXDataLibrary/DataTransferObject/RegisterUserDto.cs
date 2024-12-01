@@ -26,7 +26,7 @@ namespace ExerciseXData_UserLibrary.DataTransferObject
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Gender is required.")]
-        public UserGender.Gender Gender { get; set; }
+        public UserGenderModel.Gender Gender { get; set; }
 
         [Required]
         [Range(13, 120, ErrorMessage = "Age must be between 13 and 120.")]

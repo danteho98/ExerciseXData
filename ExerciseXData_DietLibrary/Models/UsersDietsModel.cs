@@ -2,9 +2,8 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using ExerciseXData_UserLibrary.Models;
-using ExerciseXData_DietLibrary.Models;
 
-namespace ExerciseXData_SharedLibrary.Models
+namespace ExerciseXData_DietLibrary.Models
 {
     public class UsersDietsModel
     {
@@ -32,6 +31,8 @@ namespace ExerciseXData_SharedLibrary.Models
 
         [DisplayName("Date Modified")]
         public DateTime UD_Modified_Date { get; set; } = DateTime.Now;
+
+   
 
     }
 }

@@ -1,5 +1,4 @@
-﻿
-@model List< ExerciseXData_DietLibrary.Models.FoodsModel>
+﻿@model  ExerciseXData_DietLibrary.DataTransferObject.FoodIndexDto
 @{
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
 }
@@ -27,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var foods in Model)
+            @foreach (var foods in Model.Foods)
             {
                 <tr>
                     <td>@foods.F_Id</td>

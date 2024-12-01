@@ -42,7 +42,7 @@ namespace ExerciseXData.Utilities
                 {
                     UserName = "Admin",
                     Email = "admin@example.com",
-                    U_UserGender = UserGender.Gender.PreferNotToSay, // Or as applicable
+                    U_UserGender = UserGenderModel.Gender.PreferNotToSay, // Or as applicable
                     U_Age = 30,
                     U_Goal = "Maintain system"
                 };

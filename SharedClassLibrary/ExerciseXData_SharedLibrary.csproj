@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EXD_ExerciseLibrary\ExerciseXData_ExerciseLibrary.csproj" />
-    <ProjectReference Include="..\ExerciseXDataLibrary\ExerciseXData_UserLibrary.csproj" />
-    <ProjectReference Include="..\ExerciseXData_DietLibrary\ExerciseXData_DietLibrary.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
   </ItemGroup>
 
 </Project>
