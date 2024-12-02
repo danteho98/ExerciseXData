@@ -24,14 +24,13 @@ namespace ExerciseXData_ExerciseLibrary.Models
 
         public ExercisesModel Exercise { get; set; }
 
-        [DisplayName("Order")]
-        public int? Order { get; set; }
-
         [DisplayName("Sets")]
         public int Sets { get; set; }
 
         [DisplayName("Reps")]
         public int Reps { get; set; }
+
+        public int Duration { get; set; }
 
         [DisplayName("Rest Time")]
         public string? RestTime { get; set; } // e.g., "30 seconds"

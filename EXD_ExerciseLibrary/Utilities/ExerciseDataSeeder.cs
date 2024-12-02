@@ -64,7 +64,9 @@ namespace ExerciseXData_ExerciseLibrary.Utilities
                     E_Id = 5,
                     E_Name = "Push-ups",
                     CategoriesC_Id = 2,
-                    E_Description = "A bodyweight exercise targeting the chest, shoulders, and triceps.",
+                    E_Description = "A bodyweight exercise targeting the chest, shoulders, and triceps." +
+                    "\r\nPerform a plank position and lower your body to the ground, then push back up" +
+                    "\r\nWide push-ups or diamond push-ups for targeting different muscles.",
                     E_Pros_1 = "Builds upper body strength without equipment",
                     E_Cons_1 = "Can strain wrists if not performed correctly",
                     E_Modified_Date = DateTime.Now
@@ -72,29 +74,33 @@ namespace ExerciseXData_ExerciseLibrary.Utilities
                 new ExercisesModel
                 {
                     E_Id = 6,
-                    E_Name = "Squats",
+                    E_Name = "Wall Push-ups",
                     CategoriesC_Id = 2,
-                    E_Description = "A compound exercise that strengthens the lower body and core.",
-                    E_Pros_1 = "Builds leg strength and improves balance",
-                    E_Cons_1 = "May cause knee pain if done incorrectly",
+                    E_Description = "A beginner-friendly exercise to build strength in the chest, shoulders, and triceps." +
+                    "\r\nHow: Stand facing a wall, place your hands shoulder-width apart on the wall, and perform push-ups by bending your elbows and leaning toward the wall, then pushing back to the starting position." +
+                    "\r\nVariation: Adjust the angle by stepping closer or farther from the wall to make it easier or harder.",
+                    E_Pros_1 = "Builds arm strength",
+                    E_Cons_1 = "May cause elbow pain if done incorrectly",
                     E_Modified_Date = DateTime.Now
                 },
                 new ExercisesModel
                 {
                     E_Id = 7,
-                    E_Name = "Lunges",
+                    E_Name = "Plank-to-Shoulder Taps",
                     CategoriesC_Id = 2,
-                    E_Description = "A lower body exercise that improves flexibility and balance.",
-                    E_Pros_1 = "Great for strengthening legs and glutes",
-                    E_Cons_1 = "Can cause knee strain if form is improper",
+                    E_Description = "Builds core stability and strengthens shoulders and chest." +
+                    "\r\nHow: Start in a plank position and tap one shoulder at a time with the opposite hand while maintaining balance.",
+                    E_Pros_1 = "Great for strengthening upper body, legs and glutes",
+                    E_Cons_1 = "Can cause joint strain if form is improper",
                     E_Modified_Date = DateTime.Now
                 },
                 new ExercisesModel
                 {
                     E_Id = 8,
-                    E_Name = "Push-ups",
+                    E_Name = "Dips",
                     CategoriesC_Id = 2,
-                    E_Description = "A bodyweight exercise targeting the chest, shoulders, and triceps.",
+                    E_Description = "Focuses on the triceps, chest, and shoulders." +
+                    "\r\nHow: Use a sturdy surface like a chair or perform parallel bar dips to push yourself up and down.",
                     E_Pros_1 = "Builds upper body strength without equipment",
                     E_Cons_1 = "Can strain wrists if not performed correctly",
                     E_Modified_Date = DateTime.Now
