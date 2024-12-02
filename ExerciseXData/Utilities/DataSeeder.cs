@@ -1,5 +1,4 @@
-﻿using ExerciseXData_DietLibrary.Models;
-using ExerciseXData_ExerciseLibrary.Models;
+﻿
 using ExerciseXData_UserLibrary.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,29 +24,24 @@ namespace ExerciseXData.Utilities
         public static async Task SeedAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration)
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<UsersModel>>();
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            //var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var adminEmail = "admin@example.com";
 
             // Ensure the Admin role exists
-            if (!await roleManager.RoleExistsAsync("Admin"))
-            {
-                await roleManager.CreateAsync(new IdentityRole("Admin"));
-            }
-
-            // Check if the admin user exists
-            var adminUser = await userManager.FindByEmailAsync("admin@example.com");
+            var adminUser = await userManager.FindByEmailAsync(adminEmail);
             if (adminUser == null)
             {
                 // Create the admin user
-                var newAdmin = new UsersModel
-                {
+                var newAdmin = new UsersModel 
+                { 
                     UserName = "Admin",
-                    Email = "admin@example.com",
+                    Email = adminEmail,
                     U_UserGender = UserGenderModel.Gender.PreferNotToSay, // Or as applicable
                     U_Age = 30,
                     U_Goal = "Maintain system"
                 };
 
-                var createResult = await userManager.CreateAsync(newAdmin, "Admin@12345"); // Default password
+                var createResult = await userManager.CreateAsync(newAdmin, "Admin12345"); // Default password
                 if (createResult.Succeeded)
                 {
                     await userManager.AddToRoleAsync(newAdmin, "Admin");

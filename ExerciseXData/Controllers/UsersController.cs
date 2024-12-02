@@ -51,6 +51,7 @@ namespace ExerciseXData.Controllers
         }
 
         [HttpPost("logout")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             // Sign out the user and clear authentication cookies
@@ -59,7 +60,7 @@ namespace ExerciseXData.Controllers
             // Clear session data if you're using session storage
             HttpContext.Session.Clear();
 
-            _logger.LogInformation("Admin logged out successfully.");
+            _logger.LogInformation("Users logged out successfully.");
 
             return RedirectToAction("About", "Home"); // Redirect to the admin login page or other appropriate page
         }

@@ -41,9 +41,8 @@ builder.Services.AddDbContext<DietDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DietConnection"),
     b => b.MigrationsAssembly("ExerciseXData_DietLibrary")));
 
-builder.Services.AddDbContext<SharedDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SharedConnection"),
-    b => b.MigrationsAssembly("ExerciseXData_SharedLibrary")));
+
+builder.Services.AddDistributedMemoryCache();  // Add memory cache for session
 
 builder.Services.AddIdentity<UsersModel, IdentityRole>(options =>
 {
@@ -65,10 +64,6 @@ builder.Services.AddIdentity<UsersModel, IdentityRole>(options =>
 .AddEntityFrameworkStores<UserDbContext>()
 .AddDefaultTokenProviders();
 
-builder.Services.AddScoped<UserManager<UsersModel>>();
-builder.Services.AddScoped<SignInManager<UsersModel>>();
-builder.Services.AddScoped<ILogger<UsersRepository>, Logger<UsersRepository>>();
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -80,6 +75,12 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
     options.MinimumSameSitePolicy = SameSiteMode.None;
 });
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -97,6 +98,10 @@ builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<DietsService>();
 builder.Services.AddScoped<ExercisesService>();
 builder.Services.AddScoped<UsersService>();
+
+builder.Services.AddScoped<UserManager<UsersModel>>();
+builder.Services.AddScoped<SignInManager<UsersModel>>();
+builder.Services.AddScoped<ILogger<UsersRepository>, Logger<UsersRepository>>();
 
 //Interface
 builder.Services.AddScoped<IAdminService, AdminService>();
@@ -121,6 +126,11 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+
+    // Seed roles and admin account
+    await DataSeeder.SeedRoles(services);
+    await DataSeeder.SeedAdminAccount(services, builder.Configuration);
+
     var logger = services.GetRequiredService<ILogger<Program>>();
 
     try
@@ -137,13 +147,6 @@ using (var scope = app.Services.CreateScope())
         var dietDbContext = services.GetRequiredService<DietDbContext>();
         await dietDbContext.Database.MigrateAsync();
 
-        // Apply migrations for SharedDbContext
-        var sharedDbContext = services.GetRequiredService<SharedDbContext>();
-        await sharedDbContext.Database.MigrateAsync();
-
-        // Seed roles and admin account
-        await DataSeeder.SeedRoles(services);
-        await DataSeeder.SeedAdminAccount(services, builder.Configuration);
 
         logger.LogInformation("Database seeding completed successfully.");
     }
@@ -165,6 +168,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 // Authentication & Authorization
 app.UseAuthentication();

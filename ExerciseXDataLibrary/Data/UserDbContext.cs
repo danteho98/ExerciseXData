@@ -27,8 +27,6 @@ namespace ExerciseXData_UserLibrary.Data
                 .Property(u => u.U_UserGender)
                 .HasConversion<string>(); // Convert enum to string in DB
 
-           
-
             // Configure IdentityUser mappings if required
             modelBuilder.Entity<IdentityUser>()
                 .HasIndex(iu => iu.Email)

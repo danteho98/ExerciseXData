@@ -16,19 +16,22 @@ namespace ExerciseXData_UserLibrary.Controllers
         private readonly UserManager<UsersModel> _userManager;
         private readonly SignInManager<UsersModel> _signInManager;
         private readonly ILogger<AccountController> _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AccountController(
             UsersService usersService,
             UsersRepository usersRepository,
             UserManager<UsersModel> userManager,
             SignInManager<UsersModel> signInManager,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            RoleManager<IdentityRole> roleManager)
         {
             _usersService = usersService;
             _usersRepository = usersRepository;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _roleManager = roleManager;
         }
 
         // GET: account/register
@@ -64,16 +67,32 @@ namespace ExerciseXData_UserLibrary.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    // Assign "User" role by default
-                    var roleResult = await _userManager.AddToRoleAsync(user, "User");
-                    if (!roleResult.Succeeded)
+                    // Ensure the "User" role exists
+                    var roleExist = await _roleManager.RoleExistsAsync("User");
+                    if (!roleExist)
                     {
-                        AddErrors(roleResult);
+                        // Create the role if it doesn't exist
+                        var role = new IdentityRole("User");
+                        var roleResult = await _roleManager.CreateAsync(role);
+                        if (!roleResult.Succeeded)
+                        {
+                            AddErrors(roleResult);
+                            return View(model);
+                        }
+                    }
+
+                    // Assign "User" role by default
+                    var roleAddResult = await _userManager.AddToRoleAsync(user, "User");
+                    if (!roleAddResult.Succeeded)
+                    {
+                        AddErrors(roleAddResult);
                         return View(model);
                     }
 
                     _logger.LogInformation("User created a new account with password.");
+
                     await _signInManager.SignInAsync(user, isPersistent: false);
+
                     return RedirectToAction("UserDashboard", "Users");
                 }
                 AddErrors(result);
