@@ -32,7 +32,11 @@ namespace ExerciseXData_DietLibrary.Models
         [DisplayName("Date Modified")]
         public DateTime UD_Modified_Date { get; set; } = DateTime.Now;
 
-  
+        public DateTime UD_Start_Date { get; set; }
+
+        public DateTime UD_End_Date { get; set; }
+
+        public bool UD_Completed { get; set; }  
 
     }
 }
