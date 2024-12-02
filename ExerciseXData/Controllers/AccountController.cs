@@ -74,7 +74,7 @@ namespace ExerciseXData_UserLibrary.Controllers
 
                     _logger.LogInformation("User created a new account with password.");
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("UserDashboard", "User");
+                    return RedirectToAction("UserDashboard", "Users");
                 }
                 AddErrors(result);
             }
