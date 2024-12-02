@@ -60,8 +60,10 @@
                     </div>
 
                     <div class="ms-auto">
-                        <a class="btn btn-primary" asp-controller="Admin" asp-action="Logout">Log Out</a>
-                    </div>
+                        <form method="post" asp-controller="Admin" asp-action="Logout" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-primary">Log Out</button>
+                        </form>
                 </div>
             </div>
         </nav>

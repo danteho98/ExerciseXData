@@ -182,8 +182,16 @@ namespace ExerciseXData_UserLibrary.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
+            // Sign out the user and clear authentication cookies
             await _signInManager.SignOutAsync();
+
+            // Optionally clear session data if any
+            HttpContext.Session.Clear();
+
+            // Log the logout event
             _logger.LogInformation("User logged out.");
+
+            // Redirect to a specific page after logout
             return RedirectToAction(nameof(HomeController.About), "About");
         }
 

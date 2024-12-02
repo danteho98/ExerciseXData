@@ -1,6 +1,8 @@
 ﻿using ExerciseXData_UserLibrary.DataTransferObject;
+using ExerciseXData_UserLibrary.Models;
 using ExerciseXData_UserLibrary.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -11,20 +13,24 @@ namespace ExerciseXData.Controllers
     public class UsersController : Controller
     {
         private readonly UsersService _usersService;
+        private readonly ILogger<UsersController> _logger;
+        private readonly SignInManager<UsersModel> _signInManager;
 
-        public UsersController(UsersService usersService)
+        public UsersController(UsersService usersService, ILogger<UsersController> logger, SignInManager<UsersModel> signInManager)
         {
             _usersService = usersService;
+            _logger = logger;
+            _signInManager = signInManager;
         }
 
 
         [Authorize(Roles = "User")]
         public async Task<IActionResult> UserDashboard()
         {
-            var emailOrUsername = User.Identity.Name; // Ensure this is correct
+            var emailOrUsername = User.Identity.Name; 
             var user = await _usersService.FindUserByEmailOrUsernameAsync(emailOrUsername);
 
-            //var user = await _usersService.FindUserByEmailOrUsernameAsync(User.Identity.Name);
+            
             var model = new UserDashboardDto
             {
                 Username = user.Username,
@@ -38,24 +44,26 @@ namespace ExerciseXData.Controllers
                 Lifestyle_Condition_3 = user.Lifestyle_Condition_3,
                 Lifestyle_Condition_4 = user.Lifestyle_Condition_4,
                 Lifestyle_Condition_5 = user.Lifestyle_Condition_5
-                //ExercisePlans = user.ExercisePlans.Select(ep => new ExercisePlanDto
-                //{
-                //    Name = ep.Name,
-
-                //    StartDate = ep.StartDate,
-                //    EndDate = ep.EndDate
-                //}).ToList(),
-                //DietPlans = user.DietPlans.Select(dp => new DietPlanDto
-                //{
-                //    Name = dp.Name,
-                //    Calories = dp.Calories,
-                //    StartDate = dp.StartDate,
-                //    EndDate = dp.EndDate
-                //}).ToList()
+               
             };
 
             return View(model);
         }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            // Sign out the user and clear authentication cookies
+            await _signInManager.SignOutAsync();
+
+            // Clear session data if you're using session storage
+            HttpContext.Session.Clear();
+
+            _logger.LogInformation("Admin logged out successfully.");
+
+            return RedirectToAction("About", "Home"); // Redirect to the admin login page or other appropriate page
+        }
+
 
     }
 }
