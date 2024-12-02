@@ -1,5 +1,6 @@
 ﻿using ExerciseXData_UserLibrary.DataTransferObject;
 using ExerciseXData_UserLibrary.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,14 +12,16 @@ namespace ExerciseXData.Controllers
     public class UsersController : Controller
     {
         private readonly UsersService _usersService;
-
-        public UsersController(UsersService usersService)
+        private readonly ILogger<AdminController> _logger;
+        public UsersController(UsersService usersService, ILogger<AdminController> logger)
         {
             _usersService = usersService;
+            _logger = logger;
         }
 
 
         [Authorize(Roles = "User")]
+        [HttpGet("user/dashboard")]
         public async Task<IActionResult> UserDashboard()
         {
             var emailOrUsername = User.Identity.Name; // Ensure this is correct
@@ -55,6 +58,14 @@ namespace ExerciseXData.Controllers
             };
 
             return View(model);
+        }
+
+        
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            _logger.LogInformation("User logged out successfully.");
+            return RedirectToAction("About", "Home"); // Redirect to the admin login page or other appropriate page
         }
 
     }

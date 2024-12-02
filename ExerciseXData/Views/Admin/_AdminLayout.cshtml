@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="About">ExercisesXData</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="About">ExerciseXData</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                         aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -21,6 +21,70 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">Home</a>
+                        </li>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <!-- Admin-only links -->
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Manage Categories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Exercises" asp-action="Index">Manage Exercises</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Diets" asp-action="Index">Manage Diets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Foods" asp-action="Index">Manage Foods</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Manage Users</a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole("User"))
+                        {
+                            <!-- User-only links -->
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Diets" asp-action="MyPlans">My Diet Plans</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Exercises" asp-action="MyPlans">My Exercise Plans</a>
+                            </li>
+                        }
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Statistics
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Statistics" asp-action="Diets">Diets</a>
+                                <a class="dropdown-item" asp-controller="Statistics" asp-action="Exercises">Exercises</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="ms-auto">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <span class="navbar-text me-3">Welcome, @User.Identity.Name!</span>
+                            <a class="btn btn-primary" asp-controller="Account" asp-action="Logout">Log Out</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-primary me-2" asp-controller="Account" asp-action="Register">Sign In</a>
+                            <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Log In</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+                        @* <li class="nav-item">
+
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">Home</a>
                         </li>
                         
@@ -35,6 +99,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Foods" asp-action="Index">Manage Foods</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Manage Users</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -65,7 +132,7 @@
                 </div>
             </div>
         </nav>
-    </header>
+    </header> *@
 
 <div class="container">
     <main role="main" class="pb-3">

@@ -22,6 +22,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 /*DefaultConnection is set from appsettings.json*/
 //DbContext configuration
@@ -57,7 +60,7 @@ builder.Services.AddIdentity<UsersModel, IdentityRole>(options =>
     // Lockout settings
     options.Lockout.MaxFailedAccessAttempts = 5;  // Lockout after 5 failed attempts
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);  // Lockout for 15 minutes
-    options.Lockout.AllowedForNewUsers = true;  // Enable lockout for new users
+    //options.Lockout.AllowedForNewUsers = true;  // Enable lockout for new users
 
     // User settings
     options.User.RequireUniqueEmail = true;
@@ -65,22 +68,21 @@ builder.Services.AddIdentity<UsersModel, IdentityRole>(options =>
 .AddEntityFrameworkStores<UserDbContext>()
 .AddDefaultTokenProviders();
 
-builder.Services.AddScoped<UserManager<UsersModel>>();
-builder.Services.AddScoped<SignInManager<UsersModel>>();
-builder.Services.AddScoped<ILogger<UsersRepository>, Logger<UsersRepository>>();
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
         options.LoginPath = "/Account/Login"; // Redirect to login page
         options.LogoutPath = "/Admin/Logout"; // Logout endpoint
+        options.ExpireTimeSpan = TimeSpan.FromHours(12); // Session timeout duration
+        options.SlidingExpiration = true; // Extend session on activity
+        options.Cookie.HttpOnly = true; // Protect cookies from client-side access
+        options.Cookie.IsEssential = true; // Ensure compliance with regulations (e.g., GDPR)
     });
 
 //Service
+builder.Services.AddScoped<UserManager<UsersModel>>();
+builder.Services.AddScoped<SignInManager<UsersModel>>();
+builder.Services.AddScoped<ILogger<UsersRepository>, Logger<UsersRepository>>();
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<DietsService>();
 builder.Services.AddScoped<ExercisesService>();
@@ -93,6 +95,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUserRepository, UsersRepository>();
 builder.Services.AddScoped<IExerciseRepository, ExercisesRepository>();
 builder.Services.AddScoped<IDietRepository, DietsRepository>();
+
 
 //Repository
 builder.Services.AddScoped<CategoryRepository>();

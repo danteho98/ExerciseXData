@@ -5,6 +5,7 @@ using ExerciseXData_UserLibrary.Services;
 using ExerciseXData_UserLibrary.Repositories;
 using ExerciseXData.Controllers;
 using ExerciseXData_UserLibrary.DataTransferObject;
+using System.Security.Claims;
 
 namespace ExerciseXData_UserLibrary.Controllers
 {
@@ -87,9 +88,32 @@ namespace ExerciseXData_UserLibrary.Controllers
 
         // GET: account/login
         [HttpGet("login")]
-        public IActionResult Login(string returnUrl = null)
+        public IActionResult Login()
         {
-            ViewData["ReturnUrl"] = returnUrl;
+            // Redirect authenticated users to their appropriate dashboard
+            if (User.Identity.IsAuthenticated)
+            {
+                var roles = HttpContext.User.Claims
+                    .Where(c => c.Type == ClaimTypes.Role)
+                    .Select(c => c.Value)
+                    .ToList();
+
+                if (roles.Contains("Admin"))
+                {
+                    return RedirectToAction("AdminDashboard", "Admin");
+                }
+
+                if (roles.Contains("User"))
+                {
+                    return RedirectToAction("UserDashboard", "Users");
+                }
+            }
+
+            // Set cache control headers to prevent caching of the login page
+            Response.Headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0";
+            Response.Headers["Pragma"] = "no-cache";
+            Response.Headers["Expires"] = "0";
+
             return View();
         }
 
@@ -101,6 +125,7 @@ namespace ExerciseXData_UserLibrary.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email) ?? await _userManager.FindByNameAsync(model.Email);
+
                 if (user == null)
                 {
                     _logger.LogWarning("Login failed. User not found: {Email}", model.Email);
@@ -112,9 +137,10 @@ namespace ExerciseXData_UserLibrary.Controllers
                 
                 if (result.Succeeded)
                 {
-                    var roles = await _userManager.GetRolesAsync(user);
-
                     _logger.LogInformation("Login successful for user: {Email}", user.Email);
+
+                    // Redirect based on role
+                    var roles = await _userManager.GetRolesAsync(user);
 
                     if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
@@ -131,7 +157,6 @@ namespace ExerciseXData_UserLibrary.Controllers
                         return RedirectToAction("UserDashboard", "Users"); 
                     }
                         
-
                     return RedirectToAction("AccessDenied", "Account");
                 }
 
@@ -184,8 +209,24 @@ namespace ExerciseXData_UserLibrary.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.About), "About");
+
+            return RedirectToAction("About", "Home");
         }
+
+        //private IActionResult RedirectToLocal(string returnUrl, IdentityUser user)
+        //{
+        //    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+        //    {
+        //        return Redirect(returnUrl);
+        //    }
+
+        //    if (User.IsInRole("Admin"))
+        //    {
+        //        return RedirectToAction("AdminDashboard", "Admin");
+        //    }
+
+        //    return RedirectToAction("UserDashboard", "Users");
+        //}
 
         // GET: account/accessdenied
         [HttpGet("accessdenied")]
