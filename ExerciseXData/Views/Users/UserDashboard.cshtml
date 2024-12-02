@@ -6,16 +6,62 @@
 }
 
 <h1>Welcome, @Model.Username</h1>
-<p>Email: @Model.Email</p>
-<p>Age: @Model.Age</p>
-<p>Height: @Model.Height_CM cm</p>
-<p>Weight: @Model.Weight_KG kg</p>
-<p>Goal: @Model.Goal</p>
+<p><strong>Email:</strong> @Model.Email</p>
+<p><strong>Gender:</strong> @Model.Gender</p>
+<p><strong>Role:</strong> @Model.Role</p>
+<p><strong>Age:</strong> @Model.Age</p>
+<p><strong>Height:</strong> @Model.Height_CM cm</p>
+<p><strong>Weight:</strong> @Model.Weight_KG kg</p>
+<p><strong>Fitness Goal:</strong> @Model.FitnessGoal</p>
+<p><strong>Activity Level:</strong> @Model.ActivityLevel</p>
+<p><strong>Dietary Preferences:</strong> @Model.DietaryPreferences</p>
 
-<ul>
-    <li>Lifestyle Condition 1: @Model.Lifestyle_Condition_1</li>
-    <li>Lifestyle Condition 2: @Model.Lifestyle_Condition_2</li>
-    <li>Lifestyle Condition 3: @Model.Lifestyle_Condition_3</li>
-    <li>Lifestyle Condition 4: @Model.Lifestyle_Condition_4</li>
-    <li>Lifestyle Condition 5: @Model.Lifestyle_Condition_5</li>
-</ul>
+<h3>Health Conditions</h3>
+@if (Model.HealthConditions != null && Model.HealthConditions.Any())
+{
+    <ul>
+        @foreach (var condition in Model.HealthConditions)
+        {
+            <li>@condition</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No health conditions listed.</p>
+}
+
+<p><strong>Sleep Patterns:</strong> @Model.SleepPatterns</p>
+<p><strong>Account Created:</strong> @Model.CreatedDate.ToString("f")</p>
+<p><strong>Last Login:</strong> @Model.LastLogin.ToString("f")</p>
+<p><strong>Consent to Data Collection:</strong> @(Model.ConsentToDataCollection ? "Yes" : "No")</p>
+
+<h3>Exercise Plans</h3>
+@if (Model.ExercisePlans != null && Model.ExercisePlans.Any())
+{
+    <ul>
+        @foreach (var plan in Model.ExercisePlans)
+        {
+            <li>@plan</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No exercise plans assigned.</p>
+}
+
+<h3>Diet Plans</h3>
+@if (Model.DietPlans != null && Model.DietPlans.Any())
+{
+    <ul>
+        @foreach (var plan in Model.DietPlans)
+        {
+            <li>@plan</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No diet plans assigned.</p>
+}

@@ -1,4 +1,5 @@
-﻿using ExerciseXData_UserLibrary.Models;
+﻿using ExerciseXData_SharedLibrary.Enum;
+using ExerciseXData_UserLibrary.Models;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -26,7 +27,7 @@ namespace ExerciseXData_UserLibrary.DataTransferObject
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Gender is required.")]
-        public UserGenderModel.Gender Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Required]
         [Range(13, 120, ErrorMessage = "Age must be between 13 and 120.")]
@@ -42,24 +43,23 @@ namespace ExerciseXData_UserLibrary.DataTransferObject
         [Range(20, 500, ErrorMessage = "Weight must be between 20 kg and 500 kg.")]
         public double Weight { get; set; }
 
+        [DisplayName("Fitness Goal")]
         [Required(ErrorMessage = "Please specify your goal.")]
-        [MaxLength(200, ErrorMessage = "Goal cannot exceed 200 characters.")]
-        public string Goal { get; set; }
+        public FitnessGoal FitnessGoal { get; set; } 
 
-        [DisplayName("Lifestyle Condition 1 (e.g., Vegetarian, Diabetic)")]
-        public string ? LifestyleCondition1 { get; set; }
+        [DisplayName("Activity Level")]
+        public ActivityLevel U_ActivityLevel { get; set; } 
+        
+        [DisplayName("Dietary Preferences")]
+        public string DietaryPreferences { get; set; }
 
-        [DisplayName("Lifestyle Condition 2 (optional)")]
-        public string ? LifestyleCondition2 { get; set; }
+        [DisplayName("Health Conditions")]
+        public List<string> HealthConditions { get; set; }
 
-        [DisplayName("Lifestyle Condition 3 (optional)")]
-        public string ? LifestyleCondition3 { get; set; }
+        [DisplayName("Sleep Patterns")]
+        public SleepPattern SleepPatterns { get; set; }
 
-        [DisplayName("Lifestyle Condition 4 (optional)")]
-        public string ? LifestyleCondition4 { get; set; }
-
-        [DisplayName("Lifestyle Condition 5 (optional)")]
-        public string ? LifestyleCondition5 { get; set; }
+        public bool ConsentToDataCollection { get; set; }
     }
 }
 

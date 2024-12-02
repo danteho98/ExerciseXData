@@ -16,6 +16,9 @@ namespace ExerciseXData_ExerciseLibrary.Models
         [StringLength(255)]
         public string EP_Name { get; set; }
 
+        [DisplayName("Difficulty")]
+        public string? EP_Difficulty { get; set; }
+
         [DisplayName("Description")]
         public string? EP_Description { get; set; }
 

@@ -1,9 +1,7 @@
-﻿using ExerciseXData_DietLibrary.Models;
-using ExerciseXData_ExerciseLibrary.Models;
+﻿
+using ExerciseXData_SharedLibrary.Enum;
 using ExerciseXData_UserLibrary.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
 namespace ExerciseXData.Utilities
 {
     public static class DataSeeder
@@ -42,15 +40,64 @@ namespace ExerciseXData.Utilities
                 {
                     UserName = "Admin",
                     Email = "admin@example.com",
-                    U_UserGender = UserGenderModel.Gender.PreferNotToSay, // Or as applicable
+                    U_UserGender = Gender.PreferNotToSay, // Or as applicable
                     U_Age = 30,
-                    U_Goal = "Maintain system"
+                    FitnessGoal = FitnessGoal.Maintenance,
+                    U_ActivityLevel = ActivityLevel.Active, // Example activity level
+                    DietaryPreferences = "Vegetarian", // Example dietary preference
+                    HealthConditions = new List<HealthCondition>
+                    {
+                        HealthCondition.None // Example condition
+                    }, // Example health condition
+                    SleepPatterns = SleepPattern.NinePlus, // Example sleep pattern
+                    ConsentToDataCollection = true, // Example consent
+                    U_Created_Date = DateTime.UtcNow,
+                    U_Last_Login = DateTime.UtcNow
                 };
 
-                var createResult = await userManager.CreateAsync(newAdmin, "Admin@12345"); // Default password
+                var createResult = await userManager.CreateAsync(newAdmin, "Admin12345"); // Default password
                 if (createResult.Succeeded)
                 {
                     await userManager.AddToRoleAsync(newAdmin, "Admin");
+                }
+            }
+        }
+
+        public static async Task SeedUserAccount(IServiceProvider serviceProvider, IConfiguration configuration)
+        {
+            var userManager = serviceProvider.GetRequiredService<UserManager<UsersModel>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            // Check if the user exists
+            var regularUser = await userManager.FindByEmailAsync("user@example.com");
+            if (regularUser == null)
+            {
+                // Create the regular user
+                var newUser = new UsersModel
+                {
+                    UserName = "User",
+                    Email = "user@example.com",
+                    U_UserGender = Gender.Male,
+                    U_Age = 25,
+                    U_Height_CM = 175,  // Example height
+                    U_Weight_KG = 68,    // Example weight
+                    FitnessGoal = FitnessGoal.GeneralHealth,
+                    U_ActivityLevel = ActivityLevel.Active, // Example activity level
+                    DietaryPreferences = "Non-Vegetarian", // Example dietary preference
+                    HealthConditions = new List<HealthCondition>
+                    {
+                        HealthCondition.Diabetes // Example condition
+                    }, // Example health condition
+                    SleepPatterns = SleepPattern.NinePlus, // Example sleep pattern
+                    ConsentToDataCollection = true, // Example consent
+                    U_Created_Date = DateTime.UtcNow,
+                    U_Last_Login = DateTime.UtcNow
+                };
+
+                var createResult = await userManager.CreateAsync(newUser, "User@12345"); // Default password
+                if (createResult.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(newUser, "User");
                 }
             }
         }

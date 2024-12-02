@@ -2,8 +2,7 @@
 
 namespace ExerciseXData_UserLibrary.Models
 {
-    public class UserGenderModel
-    {
+    
         public enum Gender
         {
             Male,
@@ -11,4 +10,4 @@ namespace ExerciseXData_UserLibrary.Models
             PreferNotToSay
         }
     }
-}
+

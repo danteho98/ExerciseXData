@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using ExerciseXData_SharedContracts.Interfaces;
+using ExerciseXData_SharedLibrary.Enum;
 using ExerciseXData_UserLibrary.DataTransferObject;
 using ExerciseXData_UserLibrary.Models;
 using ExerciseXData_UserLibrary.Repositories;
@@ -50,6 +51,28 @@ namespace ExerciseXData_UserLibrary.Services
                     throw new Exception("Height and Weight must be positive values.");
                 }
 
+
+                // Ensure HealthConditions is not null or empty
+                if (dto.HealthConditions == null || !dto.HealthConditions.Any())
+                {
+                    throw new Exception("At least one health condition must be selected.");
+                }
+
+                // Convert string list of health conditions to enum list
+                List<HealthCondition> healthConditionsList = new List<HealthCondition>();
+
+                foreach (var healthConditionString in dto.HealthConditions)
+                {
+                    if (Enum.TryParse<HealthCondition>(healthConditionString, ignoreCase: true, out var healthCondition))
+                    {
+                        healthConditionsList.Add(healthCondition);
+                    }
+                    else
+                    {
+                        _logger.LogWarning("Invalid health condition: {HealthConditionString}", healthConditionString);
+                    }
+                }
+
                 // Map DTO to domain model
                 var user = new UsersModel
                 {
@@ -59,12 +82,14 @@ namespace ExerciseXData_UserLibrary.Services
                     U_Age = dto.Age,
                     U_Height_CM = dto.Height,
                     U_Weight_KG = dto.Weight,
-                    U_Goal = dto.Goal,
-                    U_Lifestyle_Condition_1 = dto.LifestyleCondition1,
-                    U_Lifestyle_Condition_2 = dto.LifestyleCondition2,
-                    U_Lifestyle_Condition_3 = dto.LifestyleCondition3,
-                    U_Lifestyle_Condition_4 = dto.LifestyleCondition4,
-                    U_Lifestyle_Condition_5 = dto.LifestyleCondition5,
+                    FitnessGoal = dto.FitnessGoal,  
+                    U_ActivityLevel = dto.U_ActivityLevel, 
+                    DietaryPreferences = dto.DietaryPreferences,  
+                    HealthConditions = dto.HealthConditions
+                        .Select(condition => Enum.Parse<HealthCondition>(condition))
+                        .ToList(), // Convert strings to HealthCondition enum
+                    SleepPatterns = dto.SleepPatterns, 
+                    ConsentToDataCollection = dto.ConsentToDataCollection,
                     U_Created_Date = DateTime.UtcNow
                 };
 
@@ -186,23 +211,6 @@ namespace ExerciseXData_UserLibrary.Services
                 throw new Exception("User not found.");
             }
 
-            // Fetch associated exercise plans
-            //var exercisePlans = user.UsersExercises.Select(ue => new ExercisePlanDto
-            //{
-            //    Name = ue.ExercisePlan.Name, // Correct reference to ExercisePlan
-            //    StartDate = ue.ExercisePlan.StartDate, // Corrected the reference to ExercisePlan
-            //    EndDate = ue.ExercisePlan.EndDate // Corrected the reference to ExercisePlan
-            //}).ToList();
-
-            // Fetch associated diet plans
-            //var dietPlans = user.UserDiets.Select(ud => new DietPlanDto
-            //{
-            //    Name = ud.DietPlan.Name,
-            //    Calories = ud.DietPlan.Calories,
-            //    StartDate = ud.DietPlan.StartDate,
-            //    EndDate = ud.DietPlan.EndDate
-            //}).ToList();
-
             // Map user data into the DTO
             var userDashboardDto = new UserDashboardDto
             {
@@ -210,16 +218,13 @@ namespace ExerciseXData_UserLibrary.Services
                 Email = user.Email,
                 Age = user.U_Age,
                 Height_CM = user.U_Height_CM,
-                Weight_KG = user.U_Weight_KG,
-                Goal = user.U_Goal,
-                //ExercisePlans = exercisePlans,
-                //DietPlans = dietPlans
+                Weight_KG = user.U_Weight_KG
+                
+              
             };
 
             return userDashboardDto;
         }
-
-
 
     }
 }

@@ -1,8 +1,11 @@
 ﻿using ExerciseXData_UserLibrary.DataTransferObject;
+using ExerciseXData_UserLibrary.Models;
 using ExerciseXData_UserLibrary.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace ExerciseXData.Controllers
@@ -12,11 +15,36 @@ namespace ExerciseXData.Controllers
     public class UsersController : Controller
     {
         private readonly UsersService _usersService;
+        private readonly UserManager<UsersModel> _userManager;
         private readonly ILogger<AdminController> _logger;
-        public UsersController(UsersService usersService, ILogger<AdminController> logger)
+        public UsersController(UsersService usersService, UserManager<UsersModel> userManager, ILogger<AdminController> logger)
         {
             _usersService = usersService;
+            _userManager = userManager;
             _logger = logger;
+        }
+
+        // Admin: View all registered users
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Index()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            return View(users); // View will list all users
+        }
+
+        // Admin: Delete a user
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await _userManager.DeleteAsync(user);
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -34,31 +62,14 @@ namespace ExerciseXData.Controllers
                 Email = user.Email,
                 Age = user.Age,
                 Height_CM = user.Height_CM,
-                Weight_KG = user.Weight_KG,
-                Goal = user.Goal,
-                Lifestyle_Condition_1 = user.Lifestyle_Condition_1,
-                Lifestyle_Condition_2 = user.Lifestyle_Condition_2,
-                Lifestyle_Condition_3 = user.Lifestyle_Condition_3,
-                Lifestyle_Condition_4 = user.Lifestyle_Condition_4,
-                Lifestyle_Condition_5 = user.Lifestyle_Condition_5
-                //ExercisePlans = user.ExercisePlans.Select(ep => new ExercisePlanDto
-                //{
-                //    Name = ep.Name,
-
-                //    StartDate = ep.StartDate,
-                //    EndDate = ep.EndDate
-                //}).ToList(),
-                //DietPlans = user.DietPlans.Select(dp => new DietPlanDto
-                //{
-                //    Name = dp.Name,
-                //    Calories = dp.Calories,
-                //    StartDate = dp.StartDate,
-                //    EndDate = dp.EndDate
-                //}).ToList()
+                Weight_KG = user.Weight_KG
+                
+              
             };
 
             return View(model);
         }
+
 
         
         public async Task<IActionResult> Logout()

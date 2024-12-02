@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using ExerciseXData_UserLibrary.Models;
 using ExerciseXData_UserLibrary.Services;
 using ExerciseXData_UserLibrary.Repositories;
-using ExerciseXData.Controllers;
 using ExerciseXData_UserLibrary.DataTransferObject;
 using System.Security.Claims;
+using ExerciseXData_SharedLibrary.Enum;
 
 namespace ExerciseXData_UserLibrary.Controllers
 {
@@ -46,38 +46,58 @@ namespace ExerciseXData_UserLibrary.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new UsersModel
+                try
                 {
-                    Email = model.Email,
-                    UserName = model.UserName,
-                    U_UserGender = model.Gender,
-                    U_Age = model.Age,
-                    U_Height_CM = model.Height,
-                    U_Weight_KG = model.Weight,
-                    U_Goal = model.Goal,
-                    U_Lifestyle_Condition_1 = model.LifestyleCondition1,
-                    U_Lifestyle_Condition_2 = model.LifestyleCondition2,
-                    U_Lifestyle_Condition_3 = model.LifestyleCondition3,
-                    U_Lifestyle_Condition_4 = model.LifestyleCondition4,
-                    U_Lifestyle_Condition_5 = model.LifestyleCondition5
-                };
+                    // Convert HealthConditions from List<string> to List<HealthCondition>
+                    var healthConditions = model.HealthConditions?
+                        .Select(condition => Enum.Parse<HealthCondition>(condition))
+                        .ToList();
 
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    // Assign "User" role by default
-                    var roleResult = await _userManager.AddToRoleAsync(user, "User");
-                    if (!roleResult.Succeeded)
+                 
+
+                    var user = new UsersModel
                     {
-                        AddErrors(roleResult);
-                        return View(model);
-                    }
+                        Email = model.Email,
+                        UserName = model.UserName,
+                        U_UserGender = model.Gender,
+                        U_Age = model.Age,
+                        U_Height_CM = model.Height,
+                        U_Weight_KG = model.Weight,
+                        FitnessGoal = model.FitnessGoal,
+                        DietaryPreferences = model.DietaryPreferences,
+                        U_ActivityLevel = model.U_ActivityLevel,  
+                        HealthConditions = healthConditions,
+                        SleepPatterns = model.SleepPatterns, 
+                        ConsentToDataCollection = model.ConsentToDataCollection,
+                        U_Created_Date = DateTime.UtcNow,
+                        U_Last_Login = DateTime.UtcNow
+                    };
 
-                    _logger.LogInformation("User created a new account with password.");
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("UserDashboard", "User");
+                    var result = await _userManager.CreateAsync(user, model.Password);
+
+                    if (result.Succeeded)
+                    {
+                        // Assign "User" role by default
+                        var roleResult = await _userManager.AddToRoleAsync(user, "User");
+
+                        if (!roleResult.Succeeded)
+                        {
+                            AddErrors(roleResult);
+                            return View(model);
+                        }
+
+                        _logger.LogInformation("User created a new account with password.");
+
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("UserDashboard", "User");
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error occurred during registration.");
+                    ModelState.AddModelError(string.Empty, "An error occurred during registration. Please try again.");
+                }
             }
             else
             {
