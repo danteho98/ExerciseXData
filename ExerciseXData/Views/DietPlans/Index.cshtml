@@ -1,0 +1,53 @@
+﻿@model List<ExerciseXData_ExerciseLibrary.Models.CategoriesModel>
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<h1>Exercise Categories</h1>
+
+<!-- Display TempData message if it's set -->
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["success"]
+    </div>
+}
+
+<a asp-action="Create" class="btn btn-primary">Create New</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category ID</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Modified Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.C_Id</td>
+                <td>@category.C_Image</td>
+                <td>@category.C_Name</td>
+                <td>@category.C_Modified_Date</td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Categories" asp-action="Edit" asp-route-id="@category.C_Id"
+                           class="btn btn-primary mx-2">
+                            <i class="bi bi-pencil-square"></i>Edit
+                        </a>
+
+                        <a asp-controller="Categories" asp-action="Delete" asp-route-id="@category.C_Id"
+                           class="btn btn-primary mx-2">
+                            <i class="bi bi-trash-fill"></i>Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
