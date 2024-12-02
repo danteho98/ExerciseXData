@@ -7,7 +7,6 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-using ExerciseXData_SharedLibrary.Enum;
 
 namespace ExerciseXData_ExerciseLibrary.Utilities
 {
@@ -179,34 +178,6 @@ namespace ExerciseXData_ExerciseLibrary.Utilities
                     E_Cons_1 = "May cause injury to knees",
                     E_Modified_Date = DateTime.Now
                 }  
-            );
-
-            modelBuilder.Entity<ExercisePlansModel>().HasData(
-                new ExercisePlansModel
-                {
-                    EP_Id = 1,
-                    EP_Name = "Upper Body focus",
-                    EP_Difficulty = (ExercisePlanDifficulty)1,
-                    EP_Description = "Exercises that taregets the upper body.",
-                    EP_CreatedDate = DateTime.Now
-                },
-                new ExercisePlansModel
-                {
-                    EP_Id = 2,
-                    EP_Name = "Lower Body focus",
-                    EP_Difficulty = (ExercisePlanDifficulty)2,
-                    EP_Description = "Exercises that taregets the lower body.",
-                    EP_CreatedDate = DateTime.Now
-                },
-                new ExercisePlansModel
-                {
-                    EP_Id = 3,
-                    EP_Name = "Full Body focus",
-                    EP_Difficulty = (ExercisePlanDifficulty)3,
-                    EP_Description = "Exercises that taregets the full body.",
-                    EP_CreatedDate = DateTime.Now
-                }
-
             );
         }
     }

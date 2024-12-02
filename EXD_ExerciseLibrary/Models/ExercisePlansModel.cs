@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using ExerciseXData_SharedLibrary.Enum;
 
 
 namespace ExerciseXData_ExerciseLibrary.Models
@@ -16,11 +17,14 @@ namespace ExerciseXData_ExerciseLibrary.Models
         [StringLength(255)]
         public string EP_Name { get; set; }
 
+        [Required]
+        public ExercisePlanDifficulty EP_Difficulty { get; set; }
+
         [DisplayName("Description")]
         public string? EP_Description { get; set; }
 
         [DisplayName("Created Date")]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime EP_CreatedDate { get; set; } = DateTime.Now;
 
         // Navigation property for related exercises
         public ICollection<ExercisePlanExercisesModel> ExercisePlanExercises { get; set; }
