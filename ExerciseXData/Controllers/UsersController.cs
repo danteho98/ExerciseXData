@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ExerciseXData.Controllers
 {
     [Authorize(Roles = "User")]
-    [Route("user/dashboard")]
+    
     public class UsersController : Controller
     {
         private readonly UsersService _usersService;
@@ -25,6 +25,7 @@ namespace ExerciseXData.Controllers
 
 
         [Authorize(Roles = "User")]
+        [Route("user/dashboard")]
         public async Task<IActionResult> UserDashboard()
         {
             var emailOrUsername = User.Identity.Name; 
@@ -50,9 +51,9 @@ namespace ExerciseXData.Controllers
             return View(model);
         }
 
-        [HttpPost("logout")]
+        [HttpPost("user/logout")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> UserLogout()
         {
             // Sign out the user and clear authentication cookies
             await _signInManager.SignOutAsync();

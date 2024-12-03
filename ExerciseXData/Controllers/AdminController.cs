@@ -21,6 +21,7 @@ namespace ExerciseXData.Controllers
             _signInManager = signInManager;
         }
 
+        [Authorize]
         [HttpGet("admin/dashboard")]
         public async Task<IActionResult> AdminDashboard()
         {
@@ -34,9 +35,9 @@ namespace ExerciseXData.Controllers
 
 
         // POST: admin/logout
-        [HttpPost("logout")]
+        [HttpPost("admin/logout")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> AdminLogout()
         {
             // Sign out the admin user
             await _signInManager.SignOutAsync();

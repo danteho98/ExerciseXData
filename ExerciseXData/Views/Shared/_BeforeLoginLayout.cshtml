@@ -13,8 +13,8 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="About">ExercisesXData</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" 
-                aria-controls="navbarSupportedContent"
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -23,69 +23,35 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">Home</a>
                         </li>
-                      @*   <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Diets" asp-action="Index">Diets</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Exercises" asp-action="Index">Exercises</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Foods" asp-action="Index">Food</a>
-                        </li> *@
-
-                        @* <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UsersExercises" asp-action="Index">UsersExercises</a>
-                        </li> *@
-
-                        @* <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="UsersDiets" asp-action="Index">UsersDiets</a>
-                        </li> *@
-
-                        @* <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DietsFoods" asp-action="Index">DietsFoods</a>
-                        </li> *@
+                        
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Statistics
+                               aria-expanded="false">
+                                Statistics
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" asp-controller="Statistics" asp-action="Diets">Diets</a>
                                 <a class="dropdown-item" asp-controller="Statistics" asp-action="Exercises"> Exercises</a>
-                                
+
                             </div>
                         </li>
 
+
                        
-                        @* <li class="nav-item">
-                            <a class="nav-link text-dark"  asp-controller="Home" asp-action="LogOut">Log Out</a>
-                        </li> *@
                     </ul>
                     <div class="ms-auto">
-                        <a class="btn btn-primary"  asp-controller="Account" asp-action="Register">Sign In</a>
+                        <a class="btn btn-primary" asp-controller="Account" asp-action="Register">Sign In</a>
                     </div>
-                    
-                    <div class="ms-auto">
-                        <a class="btn btn-primary"  asp-controller="Account" asp-action="Login">Log In</a>
-                    </div>
-
 
                     <div class="ms-auto">
-                        <form method="post" asp-controller="Users" asp-action="UserLogout" style="display:inline;">
-                            @Html.AntiForgeryToken()
-                            <button type="submit" class="btn btn-primary">Log Out</button>
-                        </form>
+                        <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Log In</a>
                     </div>
-                    @* <div class="ms-auto">
 
-                        <a class="btn btn-primary" asp-controller="Account" asp-action="UserDashboard">UserDashboard</a>
-                    </div> *@
+
+                  
+                 
                 </div>
             </div>
         </nav>
