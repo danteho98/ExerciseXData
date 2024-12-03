@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ExerciseXData_SharedContracts.Interfaces;
 using ExerciseXData_UserLibrary.DataTransferObject;
 using ExerciseXData_UserLibrary.Models;
 using ExerciseXData_UserLibrary.Repositories;

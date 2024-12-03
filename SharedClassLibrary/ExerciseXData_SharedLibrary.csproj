@@ -11,7 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DataTransferObject\" />
     <Folder Include="Interface\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

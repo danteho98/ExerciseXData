@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using ExerciseXData_SharedContracts.Interfaces;
 using ExerciseXData_UserLibrary.Data;
 using ExerciseXData_UserLibrary.DataTransferObject;
+using ExerciseXData_UserLibrary.Interface;
 using ExerciseXData_UserLibrary.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

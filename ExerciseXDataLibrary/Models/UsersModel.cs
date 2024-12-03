@@ -1,8 +1,6 @@
 ﻿
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using ExerciseXData_DietLibrary.Models;
-using ExerciseXData_ExerciseLibrary.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace ExerciseXData_UserLibrary.Models

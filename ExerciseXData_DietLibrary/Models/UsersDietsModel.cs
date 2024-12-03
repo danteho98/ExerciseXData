@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-
-
+using ExerciseXData_UserLibrary.Models;
 namespace ExerciseXData_DietLibrary.Models
 {
     public class UsersDietsModel
@@ -10,7 +8,7 @@ namespace ExerciseXData_DietLibrary.Models
 
         [DisplayName("User Id")]
         public string U_Id { get; set; }
-       // public UsersModel Users { get; set; }
+        public UsersModel Users { get; set; }
 
         [ForeignKey("D_Id")]
         [DisplayName("Diet Id")]
