@@ -12,6 +12,7 @@ namespace ExerciseXData_DietLibrary.Data
         public DbSet<DietsModel> Diets { get; set; }
         public DbSet<FoodsModel> Foods { get; set; }
         public DbSet<DietsFoodsModel> DietsFoods { get; set; }
+        public DbSet<UsersDietsModel> UsersDiets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,7 +33,8 @@ namespace ExerciseXData_DietLibrary.Data
                 .WithMany(f => f.DietsFoods)
                 .HasForeignKey(df => df.FoodsF_Id);
 
-            
+
+
         }
     }
 }
