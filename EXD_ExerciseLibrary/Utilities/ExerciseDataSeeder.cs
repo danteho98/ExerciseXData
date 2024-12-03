@@ -204,26 +204,34 @@ namespace ExerciseXData_ExerciseLibrary.Utilities
                     EP_Difficulty = (ExercisePlanDifficulty)3,
                     EP_Description = "Exercises that taregets the full body.",
                     EP_CreatedDate = DateTime.Now
-                }
+                },
+                 new ExercisePlansModel // Add this record
+                 {
+                     EP_Id = 4,
+                     EP_Name = "Flexibility focus",
+                     EP_Difficulty = (ExercisePlanDifficulty)1,
+                     EP_Description = "Exercises that target flexibility.",
+                     EP_CreatedDate = DateTime.Now
+                 }
 
             );
 
             modelBuilder.Entity<ExercisePlanExercisesModel>().HasData(
-   new ExercisePlanExercisesModel { Id = 1, EP_Id = 1, E_Id = 1, Sets = 1, Reps = 0, Duration = 600, RestTime = "2 minutes" }, // Running: 10 minutes
-   new ExercisePlanExercisesModel { Id = 2, EP_Id = 1, E_Id = 2, Sets = 1, Reps = 0, Duration = 600, RestTime = "2 minutes" }, // Cycling: 10 minutes
-   new ExercisePlanExercisesModel { Id = 3, EP_Id = 1, E_Id = 3, Sets = 1, Reps = 0, Duration = 600, RestTime = "2 minutes" }, // Swimming: 10 minutes
-   new ExercisePlanExercisesModel { Id = 4, EP_Id = 2, E_Id = 5, Sets = 3, Reps = 12, Duration = 0, RestTime = "30 seconds" },  // Push-ups
-   new ExercisePlanExercisesModel { Id = 5, EP_Id = 2, E_Id = 6, Sets = 3, Reps = 15, Duration = 0, RestTime = "30 seconds" },  // Wall Push-ups
-   new ExercisePlanExercisesModel { Id = 6, EP_Id = 2, E_Id = 7, Sets = 3, Reps = 10, Duration = 0, RestTime = "30 seconds" },  // Plank-to-Shoulder Taps
-   new ExercisePlanExercisesModel { Id = 7, EP_Id = 2, E_Id = 8, Sets = 3, Reps = 8, Duration = 0, RestTime = "45 seconds" },  // Dips
-   new ExercisePlanExercisesModel { Id = 8, EP_Id = 3, E_Id = 9, Sets = 3, Reps = 0, Duration = 60, RestTime = "30 seconds" },  // Planks: 1 minute hold
-   new ExercisePlanExercisesModel { Id = 9, EP_Id = 3, E_Id = 10, Sets = 3, Reps = 20, Duration = 0, RestTime = "30 seconds" }, // Crunches
-   new ExercisePlanExercisesModel { Id = 10, EP_Id = 3, E_Id = 11, Sets = 3, Reps = 15, Duration = 0, RestTime = "30 seconds" }, // Leg Raises
-   new ExercisePlanExercisesModel { Id = 11, EP_Id = 3, E_Id = 12, Sets = 3, Reps = 20, Duration = 0, RestTime = "30 seconds" }, // Mountain Climbers
-   new ExercisePlanExercisesModel { Id = 12, EP_Id = 4, E_Id = 13, Sets = 1, Reps = 0, Duration = 30, RestTime = "15 seconds" }, // Hamstring Stretch: 30 seconds
-   new ExercisePlanExercisesModel { Id = 13, EP_Id = 4, E_Id = 14, Sets = 1, Reps = 0, Duration = 30, RestTime = "15 seconds" }, // Shoulder Stretch: 30 seconds
-   new ExercisePlanExercisesModel { Id = 14, EP_Id = 4, E_Id = 15, Sets = 1, Reps = 0, Duration = 30, RestTime = "15 seconds" }, // Neck Stretch: 30 seconds
-   new ExercisePlanExercisesModel { Id = 15, EP_Id = 4, E_Id = 16, Sets = 1, Reps = 0, Duration = 30, RestTime = "15 seconds" }  // Lunge Stretch: 30 seconds
+   new ExercisePlanExercisesModel { /*Id = 1,*/ ExercisePlanEP_Id = 1, ExercisesE_Id = 1, Sets = 1, Reps = 0, Duration = 600, RestTime = "2 minutes" }, // Running: 10 minutes
+   new ExercisePlanExercisesModel { /*Id = 2,*/ ExercisePlanEP_Id = 1, ExercisesE_Id = 2, Sets = 1, Reps = 0, Duration = 600, RestTime = "2 minutes" }, // Cycling: 10 minutes
+   new ExercisePlanExercisesModel { /*Id = 3,*/ ExercisePlanEP_Id = 1, ExercisesE_Id = 3, Sets = 1, Reps = 0, Duration = 600, RestTime = "2 minutes" }, // Swimming: 10 minutes
+   new ExercisePlanExercisesModel { /*Id = 4,*/ ExercisePlanEP_Id = 2, ExercisesE_Id = 5, Sets = 3, Reps = 12, Duration = 0, RestTime = "30 seconds" },  // Push-ups
+   new ExercisePlanExercisesModel { /*Id = 5,*/ ExercisePlanEP_Id = 2, ExercisesE_Id = 6, Sets = 3, Reps = 15, Duration = 0, RestTime = "30 seconds" },  // Wall Push-ups
+   new ExercisePlanExercisesModel { /*Id = 6,*/ ExercisePlanEP_Id = 2, ExercisesE_Id = 7, Sets = 3, Reps = 10, Duration = 0, RestTime = "30 seconds" },  // Plank-to-Shoulder Taps
+   new ExercisePlanExercisesModel { /*Id = 7,*/ ExercisePlanEP_Id = 2, ExercisesE_Id = 8, Sets = 3, Reps = 8, Duration = 0, RestTime = "45 seconds" },  // Dips
+   new ExercisePlanExercisesModel { /*Id = 8,*/ ExercisePlanEP_Id = 3, ExercisesE_Id = 9, Sets = 3, Reps = 0, Duration = 60, RestTime = "30 seconds" },  // Planks: 1 minute hold
+   new ExercisePlanExercisesModel { /*Id = 9,*/ ExercisePlanEP_Id = 3, ExercisesE_Id = 10, Sets = 3, Reps = 20, Duration = 0, RestTime = "30 seconds" }, // Crunches
+   new ExercisePlanExercisesModel { /*Id = 10,*/ ExercisePlanEP_Id = 3, ExercisesE_Id = 11, Sets = 3, Reps = 15, Duration = 0, RestTime = "30 seconds" }, // Leg Raises
+   new ExercisePlanExercisesModel {/* Id = 11,*/ ExercisePlanEP_Id = 3, ExercisesE_Id = 12, Sets = 3, Reps = 20, Duration = 0, RestTime = "30 seconds" }, // Mountain Climbers
+   new ExercisePlanExercisesModel {/* Id = 12,*/ ExercisePlanEP_Id = 4, ExercisesE_Id = 13, Sets = 1, Reps = 0, Duration = 30, RestTime = "15 seconds" }, // Hamstring Stretch: 30 seconds
+   new ExercisePlanExercisesModel { /*Id = 13, */ExercisePlanEP_Id = 4, ExercisesE_Id = 14, Sets = 1, Reps = 0, Duration = 30, RestTime = "15 seconds" }, // Shoulder Stretch: 30 seconds
+   new ExercisePlanExercisesModel { /*Id = 14,*/ ExercisePlanEP_Id = 4, ExercisesE_Id = 15, Sets = 1, Reps = 0, Duration = 30, RestTime = "15 seconds" }, // Neck Stretch: 30 seconds
+   new ExercisePlanExercisesModel {/* Id = 15,*/ ExercisePlanEP_Id = 4, ExercisesE_Id = 16, Sets = 1, Reps = 0, Duration = 30, RestTime = "15 seconds" }  // Lunge Stretch: 30 seconds
 );
         }
     }

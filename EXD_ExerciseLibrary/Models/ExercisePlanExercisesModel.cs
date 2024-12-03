@@ -7,22 +7,19 @@ namespace ExerciseXData_ExerciseLibrary.Models
 {
     public class ExercisePlanExercisesModel
     {
-        [Key]
-        public int Id { get; set; }
-
+   
         [Required]
-        [ForeignKey("ExercisePlans")]
         [DisplayName("Exercise Plan")]
-        public int EP_Id { get; set; }
-
+        public int ExercisePlanEP_Id { get; set; }
+            
         public ExercisePlansModel ExercisePlan { get; set; }
 
         [Required]
-        [ForeignKey("Exercises")]
+        
         [DisplayName("Exercise")]
-        public int E_Id { get; set; }
+        public int ExercisesE_Id { get; set; }
+        public ExercisesModel Exercises { get; set; }
 
-        public ExercisesModel Exercise { get; set; }
 
         [DisplayName("Sets")]
         public int Sets { get; set; }

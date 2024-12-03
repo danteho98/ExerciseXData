@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExerciseXData_DietLibrary.Migrations
 {
     [DbContext(typeof(DietDbContext))]
-    [Migration("20241201114613_NewDiet")]
+    [Migration("20241203003129_NewDiet")]
     partial class NewDiet
     {
         /// <inheritdoc />
@@ -60,7 +60,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 1,
                             FoodsF_Id = 1,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9711),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6158),
                             DF_Recommended_Servings = "2-3 servings/day",
                             DF_Serving_Size = "1 tablespoon",
                             DF_Total_Calories = 119
@@ -70,7 +70,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 1,
                             FoodsF_Id = 2,
                             DF_Frequency = "Weekly",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9713),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6160),
                             DF_Recommended_Servings = "2-3 servings/week",
                             DF_Serving_Size = "4 oz",
                             DF_Total_Calories = 232
@@ -80,7 +80,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 1,
                             FoodsF_Id = 3,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9715),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6162),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 cup",
                             DF_Total_Calories = 222
@@ -90,7 +90,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 1,
                             FoodsF_Id = 4,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9717),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6164),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 cup cooked",
                             DF_Total_Calories = 41
@@ -100,7 +100,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 1,
                             FoodsF_Id = 5,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9719),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6166),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 cup",
                             DF_Total_Calories = 60
@@ -110,7 +110,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 1,
                             FoodsF_Id = 6,
                             DF_Frequency = "Weekly",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9721),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6168),
                             DF_Recommended_Servings = "3-4 servings/week",
                             DF_Serving_Size = "1/2 cup cooked",
                             DF_Total_Calories = 134
@@ -120,7 +120,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 1,
                             FoodsF_Id = 7,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9722),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6169),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 ounce",
                             DF_Total_Calories = 160
@@ -130,7 +130,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 1,
                             FoodsF_Id = 8,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9724),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6171),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 teaspoon dried",
                             DF_Total_Calories = 3
@@ -140,7 +140,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 1,
                             FoodsF_Id = 9,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9726),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6173),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1/2 cup",
                             DF_Total_Calories = 100
@@ -150,7 +150,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 1,
                             FoodsF_Id = 10,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9728),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6175),
                             DF_Recommended_Servings = "1 serving/day",
                             DF_Serving_Size = "5 oz",
                             DF_Total_Calories = 125
@@ -160,7 +160,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 1,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9730),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6177),
                             DF_Recommended_Servings = "1 serving/day",
                             DF_Serving_Size = "1/2 avocado",
                             DF_Total_Calories = 160
@@ -170,7 +170,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 2,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9732),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6178),
                             DF_Recommended_Servings = "3-4 servings/day",
                             DF_Serving_Size = "1 large egg",
                             DF_Total_Calories = 72
@@ -180,7 +180,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 3,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9733),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6180),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "4 oz",
                             DF_Total_Calories = 187
@@ -190,7 +190,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 4,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9735),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6182),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "2 slices",
                             DF_Total_Calories = 80
@@ -200,7 +200,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 5,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9737),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6184),
                             DF_Recommended_Servings = "2-3 servings/day",
                             DF_Serving_Size = "1 oz",
                             DF_Total_Calories = 115
@@ -210,7 +210,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 6,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9739),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6186),
                             DF_Recommended_Servings = "2-3 servings/day",
                             DF_Serving_Size = "1 tablespoon",
                             DF_Total_Calories = 119
@@ -220,7 +220,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 7,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9741),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6187),
                             DF_Recommended_Servings = "1 serving/day",
                             DF_Serving_Size = "1 ounce",
                             DF_Total_Calories = 160
@@ -230,7 +230,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 8,
                             DF_Frequency = "Weekly",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9743),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6189),
                             DF_Recommended_Servings = "2-3 servings/week",
                             DF_Serving_Size = "4 oz",
                             DF_Total_Calories = 232
@@ -240,7 +240,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 9,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9744),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6191),
                             DF_Recommended_Servings = "2-3 servings/day",
                             DF_Serving_Size = "1 cup",
                             DF_Total_Calories = 25
@@ -250,7 +250,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 10,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9746),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6193),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 medium zucchini",
                             DF_Total_Calories = 33
@@ -260,7 +260,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 11,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9748),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6195),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 cup cooked",
                             DF_Total_Calories = 41
@@ -270,7 +270,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 12,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9750),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6197),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 tablespoon",
                             DF_Total_Calories = 117
@@ -280,7 +280,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 13,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9752),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6198),
                             DF_Recommended_Servings = "1 serving/day",
                             DF_Serving_Size = "1 oz",
                             DF_Total_Calories = 170
@@ -290,7 +290,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 14,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9753),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6200),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 cup cooked",
                             DF_Total_Calories = 35
@@ -300,7 +300,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 2,
                             FoodsF_Id = 15,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9755),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6202),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "2 tablespoons",
                             DF_Total_Calories = 138
@@ -310,7 +310,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 1,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9757),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6204),
                             DF_Recommended_Servings = "1 serving/day",
                             DF_Serving_Size = "1/2 avocado",
                             DF_Total_Calories = 160
@@ -320,7 +320,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 2,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9759),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6206),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "4 oz",
                             DF_Total_Calories = 94
@@ -330,7 +330,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 3,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9761),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6207),
                             DF_Recommended_Servings = "2-3 servings/day",
                             DF_Serving_Size = "1/2 cup cooked",
                             DF_Total_Calories = 115
@@ -340,7 +340,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 4,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9763),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6209),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1/2 cup cooked",
                             DF_Total_Calories = 135
@@ -350,7 +350,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 5,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9765),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6211),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 cup cooked",
                             DF_Total_Calories = 222
@@ -360,7 +360,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 6,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9766),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6213),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 cup cooked",
                             DF_Total_Calories = 41
@@ -370,7 +370,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 7,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9768),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6215),
                             DF_Recommended_Servings = "1 serving/day",
                             DF_Serving_Size = "1 ounce",
                             DF_Total_Calories = 160
@@ -380,7 +380,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 8,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9770),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6216),
                             DF_Recommended_Servings = "1 serving/day",
                             DF_Serving_Size = "1 medium potato",
                             DF_Total_Calories = 112
@@ -390,7 +390,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 9,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9772),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6218),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 cup cooked",
                             DF_Total_Calories = 55
@@ -400,7 +400,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 10,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9774),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6220),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 medium carrot",
                             DF_Total_Calories = 25
@@ -410,7 +410,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 11,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9775),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6222),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 tablespoon",
                             DF_Total_Calories = 120
@@ -420,7 +420,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 12,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9810),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6224),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1/2 cup",
                             DF_Total_Calories = 120
@@ -430,7 +430,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 13,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9812),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6225),
                             DF_Recommended_Servings = "1 serving/day",
                             DF_Serving_Size = "2 tablespoons",
                             DF_Total_Calories = 138
@@ -440,7 +440,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 14,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9814),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6227),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1/2 cucumber",
                             DF_Total_Calories = 8
@@ -450,7 +450,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 15,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9815),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6229),
                             DF_Recommended_Servings = "1-2 servings/day",
                             DF_Serving_Size = "1 cup cooked",
                             DF_Total_Calories = 35
@@ -460,7 +460,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             DietsD_Id = 3,
                             FoodsF_Id = 16,
                             DF_Frequency = "Daily",
-                            DF_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9817),
+                            DF_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6231),
                             DF_Recommended_Servings = "1 serving/day",
                             DF_Serving_Size = "1/2 cup",
                             DF_Total_Calories = 100
@@ -510,19 +510,19 @@ namespace ExerciseXData_DietLibrary.Migrations
                         new
                         {
                             D_Id = 1,
-                            D_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9572),
+                            D_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(5973),
                             D_Name = "Mediterranean Diet"
                         },
                         new
                         {
                             D_Id = 2,
-                            D_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9579),
+                            D_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(5981),
                             D_Name = "Keto Diet"
                         },
                         new
                         {
                             D_Id = 3,
-                            D_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9580),
+                            D_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6018),
                             D_Name = "Vegetarian Diet"
                         });
                 });
@@ -560,7 +560,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 1,
                             F_Calories = 160,
                             F_Group = "Fruit",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9664),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6111),
                             F_Name = "Avocado"
                         },
                         new
@@ -568,7 +568,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 2,
                             F_Calories = 94,
                             F_Group = "Protein",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9666),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6113),
                             F_Name = "Tofu"
                         },
                         new
@@ -576,7 +576,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 3,
                             F_Calories = 115,
                             F_Group = "Legume",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9666),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6114),
                             F_Name = "Lentils"
                         },
                         new
@@ -584,7 +584,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 4,
                             F_Calories = 135,
                             F_Group = "Legume",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9668),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6115),
                             F_Name = "Chickpeas"
                         },
                         new
@@ -592,7 +592,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 5,
                             F_Calories = 222,
                             F_Group = "Grain",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9669),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6116),
                             F_Name = "Quinoa"
                         },
                         new
@@ -600,7 +600,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 6,
                             F_Calories = 41,
                             F_Group = "Vegetable",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9670),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6117),
                             F_Name = "Spinach"
                         },
                         new
@@ -608,7 +608,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 7,
                             F_Calories = 160,
                             F_Group = "Nut",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9671),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6118),
                             F_Name = "Almonds"
                         },
                         new
@@ -616,7 +616,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 8,
                             F_Calories = 112,
                             F_Group = "Vegetable",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9672),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6119),
                             F_Name = "Sweet Potatoes"
                         },
                         new
@@ -624,7 +624,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 9,
                             F_Calories = 55,
                             F_Group = "Vegetable",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9673),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6120),
                             F_Name = "Broccoli"
                         },
                         new
@@ -632,7 +632,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 10,
                             F_Calories = 25,
                             F_Group = "Vegetable",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9674),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6121),
                             F_Name = "Carrots"
                         },
                         new
@@ -640,7 +640,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 11,
                             F_Calories = 120,
                             F_Group = "Oil",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9675),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6122),
                             F_Name = "Avocado Oil"
                         },
                         new
@@ -648,7 +648,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 12,
                             F_Calories = 120,
                             F_Group = "Legume",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9676),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6123),
                             F_Name = "Edamame"
                         },
                         new
@@ -656,7 +656,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 13,
                             F_Calories = 138,
                             F_Group = "Seed",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9677),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6125),
                             F_Name = "Chia Seeds"
                         },
                         new
@@ -664,7 +664,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 14,
                             F_Calories = 8,
                             F_Group = "Vegetable",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9678),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6126),
                             F_Name = "Cucumbers"
                         },
                         new
@@ -672,7 +672,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 15,
                             F_Calories = 35,
                             F_Group = "Vegetable",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9679),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6127),
                             F_Name = "Mushrooms"
                         },
                         new
@@ -680,7 +680,7 @@ namespace ExerciseXData_DietLibrary.Migrations
                             F_Id = 16,
                             F_Calories = 100,
                             F_Group = "Dairy",
-                            F_Modified_Date = new DateTime(2024, 12, 1, 19, 46, 13, 479, DateTimeKind.Local).AddTicks(9681),
+                            F_Modified_Date = new DateTime(2024, 12, 3, 8, 31, 29, 60, DateTimeKind.Local).AddTicks(6128),
                             F_Name = "Greek Yogurt"
                         });
                 });
