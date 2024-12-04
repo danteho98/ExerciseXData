@@ -23,9 +23,9 @@ namespace ExerciseXData_UserLibrary.Data
             
 
             //UsersModel
-            modelBuilder.Entity<UsersModel>()
-                .Property(u => u.U_UserGender)
-                .HasConversion<string>(); // Convert enum to string in DB
+            //modelBuilder.Entity<UsersModel>()
+            //    .Property(u => u.U_UserGender)
+            //    .HasConversion<string>(); // Convert enum to string in DB
 
            
 

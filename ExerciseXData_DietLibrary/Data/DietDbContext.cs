@@ -32,7 +32,21 @@ namespace ExerciseXData_DietLibrary.Data
                 .WithMany(f => f.DietsFoods)
                 .HasForeignKey(df => df.FoodsF_Id);
 
-            
+            modelBuilder.Entity<UsersDietsModel>()
+                .HasKey(ud => ud.UD_Id);
+
+            modelBuilder.Entity<UsersDietsModel>()
+                .HasOne(ud => ud.User)
+                .WithMany() // Avoid navigation property on ApplicationUser
+                .HasForeignKey(ud => ud.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UsersDietsModel>()
+                .HasOne(ud => ud.Diet)
+                .WithMany(d => d.UsersDiets)
+                .HasForeignKey(ud => ud.D_Id)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

@@ -47,6 +47,8 @@ namespace ExerciseXData_ExerciseLibrary.Models
         [DisplayName("Modified Date")]
         public DateTime E_Modified_Date { get; set; } = DateTime.Now;
 
+        public ICollection<UsersExercisesModel> UsersExercises { get; set; }
+
      
     }
 }

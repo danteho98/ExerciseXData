@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using ExerciseXData_SharedContracts.Interfaces;
-using ExerciseXData_SharedLibrary.Enum;
+//using ExerciseXData_SharedLibrary.Enum;
 using ExerciseXData_UserLibrary.DataTransferObject;
 using ExerciseXData_UserLibrary.Models;
 using ExerciseXData_UserLibrary.Repositories;
@@ -59,36 +59,36 @@ namespace ExerciseXData_UserLibrary.Services
                 }
 
                 // Convert string list of health conditions to enum list
-                List<HealthCondition> healthConditionsList = new List<HealthCondition>();
+                //List<HealthCondition> healthConditionsList = new List<HealthCondition>();
 
-                foreach (var healthConditionString in dto.HealthConditions)
-                {
-                    if (Enum.TryParse<HealthCondition>(healthConditionString, ignoreCase: true, out var healthCondition))
-                    {
-                        healthConditionsList.Add(healthCondition);
-                    }
-                    else
-                    {
-                        _logger.LogWarning("Invalid health condition: {HealthConditionString}", healthConditionString);
-                    }
-                }
+                //foreach (var healthConditionString in dto.HealthConditions)
+                //{
+                //    if (Enum.TryParse<HealthCondition>(healthConditionString, ignoreCase: true, out var healthCondition))
+                //    {
+                //        healthConditionsList.Add(healthCondition);
+                //    }
+                //    else
+                //    {
+                //        _logger.LogWarning("Invalid health condition: {HealthConditionString}", healthConditionString);
+                //    }
+                //}
 
                 // Map DTO to domain model
                 var user = new UsersModel
                 {
                     Email = dto.Email,
                     UserName = dto.UserName,
-                    U_UserGender = dto.Gender,
+                    //U_UserGender = dto.Gender,
                     U_Age = dto.Age,
                     U_Height_CM = dto.Height,
                     U_Weight_KG = dto.Weight,
-                    FitnessGoal = dto.FitnessGoal,  
-                    U_ActivityLevel = dto.U_ActivityLevel, 
+                    //FitnessGoal = dto.FitnessGoal,  
+                    //U_ActivityLevel = dto.U_ActivityLevel, 
                     DietaryPreferences = dto.DietaryPreferences,  
-                    HealthConditions = dto.HealthConditions
-                        .Select(condition => Enum.Parse<HealthCondition>(condition))
-                        .ToList(), // Convert strings to HealthCondition enum
-                    SleepPatterns = dto.SleepPatterns, 
+                    //HealthConditions = dto.HealthConditions
+                    //    .Select(condition => Enum.Parse<HealthCondition>(condition))
+                    //    .ToList(), // Convert strings to HealthCondition enum
+                    //SleepPatterns = dto.SleepPatterns, 
                     ConsentToDataCollection = dto.ConsentToDataCollection,
                     U_Created_Date = DateTime.UtcNow
                 };

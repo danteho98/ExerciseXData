@@ -41,6 +41,21 @@ namespace ExerciseXData_ExerciseLibrary.Data
                 .WithOne(e => e.Categories) // One Category has many Exercises
                 .HasForeignKey(e => e.CategoriesC_Id); // Foreign key in Exercises table
 
+            modelBuilder.Entity<UsersExercisesModel>()
+                .HasKey(ue => ue.UE_Id);
+
+            modelBuilder.Entity<UsersExercisesModel>()
+                .HasOne(ue => ue.User)
+                .WithMany() // Avoid navigation property on ApplicationUser
+                .HasForeignKey(ue => ue.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UsersExercisesModel>()
+                .HasOne(ue => ue.Exercise)
+                .WithMany(e => e.UsersExercises)
+                .HasForeignKey(ue => ue.E_Id)
+                .OnDelete(DeleteBehavior.Cascade);
+
 
         }
     }

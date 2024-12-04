@@ -44,6 +44,7 @@ namespace ExerciseXData_DietLibrary.Models
         //Relationships
         [NotMapped]
         public ICollection<DietsFoodsModel> DietsFoods { get; set; }
+        public ICollection<UsersDietsModel> UsersDiets { get; set; }
     
     }
 }
