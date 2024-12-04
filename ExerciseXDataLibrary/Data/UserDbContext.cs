@@ -12,7 +12,7 @@ namespace ExerciseXData_UserLibrary.Data
     {
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) {}
 
-        public DbSet<UsersModel> Users {  get; set; }
+        public DbSet<UsersModel> User {  get; set; }
        
         //public DbSet<SecurityQuestionModel> SecurityQuestions { get; set; }
        // public DbSet<UserSecurityQuestionModel> UserSecurityQuestions { get; set; }
@@ -20,14 +20,14 @@ namespace ExerciseXData_UserLibrary.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
             base.OnModelCreating(modelBuilder); // Ensures the Identity configurations are applied
-            
 
-            //UsersModel
-            //modelBuilder.Entity<UsersModel>()
-            //    .Property(u => u.U_UserGender)
-            //    .HasConversion<string>(); // Convert enum to string in DB
 
            
+            modelBuilder.Entity<UsersModel>()
+                .Property(u => u.U_UserGender)
+                .HasConversion<string>(); // Convert enum to string in DB
+
+
 
             // Configure IdentityUser mappings if required
             modelBuilder.Entity<IdentityUser>()

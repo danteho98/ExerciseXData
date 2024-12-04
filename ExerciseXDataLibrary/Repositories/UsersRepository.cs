@@ -186,12 +186,12 @@ namespace ExerciseXData_UserLibrary.Repositories
 
         public async Task<int> GetTotalUsersAsync()
         {
-            return await _userDbContext.Users.CountAsync();
+            return await _userDbContext.User.CountAsync();
         }
 
         public async Task<UsersModel> FindByEmailOrUsernameAsync(string emailOrUsername)
         {
-            return await _userDbContext.Users
+            return await _userDbContext.User
             //    .Include(u => u.UserExercises)
             //        .ThenInclude(ue => ue.ExercisePlan) // Assuming UserExercises has ExercisePlan navigation property
             //    .Include(u => u.UserDiets)

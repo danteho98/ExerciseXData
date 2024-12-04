@@ -7,7 +7,7 @@ using ExerciseXData_UserLibrary.DataTransferObject;
 using System.Security.Claims;
 using ExerciseXData_SharedLibrary.Enum;
 
-namespace ExerciseXData_UserLibrary.Controllers
+namespace ExerciseXData.Controllers
 {
     [Route("account")]
     public class AccountController : Controller
@@ -46,12 +46,12 @@ namespace ExerciseXData_UserLibrary.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    // Convert HealthConditions from List<string> to List<HealthCondition>
-                    var healthConditions = model.HealthConditions?
-                        .Select(condition => Enum.Parse<HealthCondition>(condition))
-                        .ToList();
+                //try
+                //{
+                //    // Convert HealthConditions from List<string> to List<HealthCondition>
+                //    var healthConditions = model.HealthConditions?
+                //        .Select(condition => Enum.Parse<HealthCondition>(condition))
+                //        .ToList();
 
                  
 
@@ -59,18 +59,18 @@ namespace ExerciseXData_UserLibrary.Controllers
                     {
                         Email = model.Email,
                         UserName = model.UserName,
-                        //U_UserGender = model.Gender,
+                        U_UserGender = model.Gender,
                         U_Age = model.Age,
                         U_Height_CM = model.Height,
                         U_Weight_KG = model.Weight,
-                        //FitnessGoal = model.FitnessGoal,
+                        FitnessGoal = model.FitnessGoal,
                         DietaryPreferences = model.DietaryPreferences,
-                        //U_ActivityLevel = model.U_ActivityLevel,  
+                        U_ActivityLevel = model.U_ActivityLevel,  
                         //HealthConditions = healthConditions,
-                        //SleepPatterns = model.SleepPatterns, 
+                        SleepPatterns = model.SleepPatterns, 
                         ConsentToDataCollection = model.ConsentToDataCollection,
-                        U_Created_Date = DateTime.UtcNow,
-                        U_Last_Login = DateTime.UtcNow
+                        U_CreatedDate = DateTime.UtcNow,
+                        U_LastLogin = DateTime.UtcNow
                     };
 
                     var result = await _userManager.CreateAsync(user, model.Password);
@@ -89,15 +89,15 @@ namespace ExerciseXData_UserLibrary.Controllers
                         _logger.LogInformation("User created a new account with password.");
 
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return RedirectToAction("UserDashboard", "User");
+                        return RedirectToAction("UserDashboard", "Users");
                     }
                     AddErrors(result);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Error occurred during registration.");
-                    ModelState.AddModelError(string.Empty, "An error occurred during registration. Please try again.");
-                }
+                //}
+                //catch (Exception ex)
+                //{
+                //    _logger.LogError(ex, "Error occurred during registration.");
+                //    ModelState.AddModelError(string.Empty, "An error occurred during registration. Please try again.");
+                //}
             }
             else
             {

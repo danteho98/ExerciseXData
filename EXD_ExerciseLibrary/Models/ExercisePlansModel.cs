@@ -9,6 +9,7 @@ namespace ExerciseXData_ExerciseLibrary.Models
     public class ExercisePlansModel
     {
         [Key]
+        [DisplayName("Exercise Plan ID")]
         public int EP_Id { get; set; }
 
         [Required]

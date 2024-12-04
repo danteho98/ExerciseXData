@@ -37,10 +37,10 @@ namespace ExerciseXData_UserLibrary.Models
         public SleepPattern SleepPatterns { get; set; }
 
         [DisplayName("Created Date")]
-        public DateTime U_Created_Date { get; set; } = DateTime.UtcNow;
+        public DateTime U_CreatedDate { get; set; } = DateTime.UtcNow;
 
         [DisplayName("Last Login")]
-        public DateTime U_Last_Login {  get; set; } = DateTime.UtcNow;
+        public DateTime U_LastLogin {  get; set; } = DateTime.UtcNow;
 
         public bool ConsentToDataCollection { get; set; }
         //public ICollection<UserSecurityQuestionModel> UserSecurityQuestions { get; set; }

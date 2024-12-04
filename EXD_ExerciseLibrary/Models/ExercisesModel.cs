@@ -6,6 +6,7 @@ namespace ExerciseXData_ExerciseLibrary.Models
     public class ExercisesModel
     {
         [Key]
+        [DisplayName("Exercise ID")]
         public int E_Id { get; set; }
 
         // Category Relationship

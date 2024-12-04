@@ -43,7 +43,7 @@ namespace ExerciseXData_ExerciseLibrary.Services
                 existingCategory.C_Image = category.C_Image;
 
             // Always update the modified date
-            existingCategory.C_Modified_Date = DateTime.Now;
+            existingCategory.C_ModifiedDate = DateTime.Now;
 
             // Update the entity in the repository
             // Assuming EF Core is being used, this is optional as EF tracks changes automatically

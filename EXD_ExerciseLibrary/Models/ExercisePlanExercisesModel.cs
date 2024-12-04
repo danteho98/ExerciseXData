@@ -8,24 +8,22 @@ namespace ExerciseXData_ExerciseLibrary.Models
     public class ExercisePlanExercisesModel
     {
         [Key]
-        public int Id { get; set; }
+        public int EPE_Id { get; set; }
 
         [Required]
-        [ForeignKey("ExercisePlans")]
-        [DisplayName("Exercise Plan")]
+        [DisplayName("Exercise Plan ID")]
         public int EP_Id { get; set; }
 
         public ExercisePlansModel ExercisePlan { get; set; }
 
         [Required]
-        [ForeignKey("Exercises")]
-        [DisplayName("Exercise")]
+        [DisplayName("Exercise ID")]
         public int E_Id { get; set; }
 
         public ExercisesModel Exercise { get; set; }
 
-        [DisplayName("Order")]
-        public int? Order { get; set; }
+        //[DisplayName("Order")]
+        //public int? Order { get; set; }
 
         [DisplayName("Sets")]
         public int Sets { get; set; }

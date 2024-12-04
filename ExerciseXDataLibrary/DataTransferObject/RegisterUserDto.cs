@@ -1,4 +1,5 @@
 ﻿//using ExerciseXData_SharedLibrary.Enum;
+using ExerciseXData_SharedLibrary.Enum;
 using ExerciseXData_UserLibrary.Models;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -26,8 +27,8 @@ namespace ExerciseXData_UserLibrary.DataTransferObject
         [Compare("Password", ErrorMessage = "Passwords do not match.")]
         public string ConfirmPassword { get; set; }
 
-        //[Required(ErrorMessage = "Gender is required.")]
-        //public Gender Gender { get; set; }
+        [Required(ErrorMessage = "Gender is required.")]
+        public Gender Gender { get; set; }
 
         [Required]
         [Range(13, 120, ErrorMessage = "Age must be between 13 and 120.")]
@@ -43,21 +44,21 @@ namespace ExerciseXData_UserLibrary.DataTransferObject
         [Range(20, 500, ErrorMessage = "Weight must be between 20 kg and 500 kg.")]
         public double Weight { get; set; }
 
-        //[DisplayName("Fitness Goal")]
-        //[Required(ErrorMessage = "Please specify your goal.")]
-        //public FitnessGoal FitnessGoal { get; set; } 
+        [DisplayName("Fitness Goal")]
+        [Required(ErrorMessage = "Please specify your goal.")]
+        public FitnessGoal FitnessGoal { get; set; }
 
-        //[DisplayName("Activity Level")]
-        //public ActivityLevel U_ActivityLevel { get; set; } 
-        
+        [DisplayName("Activity Level")]
+        public ActivityLevel U_ActivityLevel { get; set; }
+
         [DisplayName("Dietary Preferences")]
         public string DietaryPreferences { get; set; }
 
-        [DisplayName("Health Conditions")]
-        public List<string> HealthConditions { get; set; }
+        //[DisplayName("Health Conditions")]
+        //public List<string> HealthConditions { get; set; }
 
-        //[DisplayName("Sleep Patterns")]
-        //public SleepPattern SleepPatterns { get; set; }
+        [DisplayName("Sleep Patterns")]
+        public SleepPattern SleepPatterns { get; set; }
 
         public bool ConsentToDataCollection { get; set; }
     }

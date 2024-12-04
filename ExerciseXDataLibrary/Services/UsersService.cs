@@ -53,10 +53,10 @@ namespace ExerciseXData_UserLibrary.Services
 
 
                 // Ensure HealthConditions is not null or empty
-                if (dto.HealthConditions == null || !dto.HealthConditions.Any())
-                {
-                    throw new Exception("At least one health condition must be selected.");
-                }
+                //if (dto.HealthConditions == null || !dto.HealthConditions.Any())
+                //{
+                //    throw new Exception("At least one health condition must be selected.");
+                //}
 
                 // Convert string list of health conditions to enum list
                 //List<HealthCondition> healthConditionsList = new List<HealthCondition>();
@@ -90,7 +90,7 @@ namespace ExerciseXData_UserLibrary.Services
                     //    .ToList(), // Convert strings to HealthCondition enum
                     //SleepPatterns = dto.SleepPatterns, 
                     ConsentToDataCollection = dto.ConsentToDataCollection,
-                    U_Created_Date = DateTime.UtcNow
+                    U_CreatedDate = DateTime.UtcNow
                 };
 
                 // Delegate user creation to the repository

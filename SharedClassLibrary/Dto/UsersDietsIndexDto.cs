@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExerciseXData_DietLibrary.DataTransferObject
+namespace ExerciseXData_SharedLibrary.Dto
 {
     public class UsersDietsIndexDto
     {

@@ -40,19 +40,19 @@ namespace ExerciseXData.Utilities
                 {
                     UserName = "Admin",
                     Email = "admin@example.com",
-                    //U_UserGender = Gender.PreferNotToSay, // Or as applicable
+                    U_UserGender = Gender.PreferNotToSay, // Or as applicable
                     U_Age = 30,
-                    //FitnessGoal = FitnessGoal.Maintenance,
-                    //U_ActivityLevel = ActivityLevel.Active, // Example activity level
+                    FitnessGoal = FitnessGoal.Maintenance,
+                    U_ActivityLevel = ActivityLevel.Active, // Example activity level
                     DietaryPreferences = "Vegetarian", // Example dietary preference
                     //HealthConditions = new List<HealthCondition>
                     //{
                     //    HealthCondition.None // Example condition
                     //}, // Example health condition
-                    //SleepPatterns = SleepPattern.NinePlus, // Example sleep pattern
+                    SleepPatterns = SleepPattern.NinePlus, // Example sleep pattern
                     ConsentToDataCollection = true, // Example consent
-                    U_Created_Date = DateTime.UtcNow,
-                    U_Last_Login = DateTime.UtcNow
+                    U_CreatedDate = DateTime.UtcNow,
+                    U_LastLogin = DateTime.UtcNow
                 };
 
                 var createResult = await userManager.CreateAsync(newAdmin, "Admin12345"); // Default password
@@ -77,21 +77,21 @@ namespace ExerciseXData.Utilities
                 {
                     UserName = "User",
                     Email = "user@example.com",
-                    //U_UserGender = Gender.Male,
+                    U_UserGender = Gender.Male,
                     U_Age = 25,
                     U_Height_CM = 175,  // Example height
                     U_Weight_KG = 68,    // Example weight
-                    //FitnessGoal = FitnessGoal.GeneralHealth,
-                    //U_ActivityLevel = ActivityLevel.Active, // Example activity level
+                    FitnessGoal = FitnessGoal.GeneralHealth,
+                    U_ActivityLevel = ActivityLevel.Active, // Example activity level
                     DietaryPreferences = "Non-Vegetarian", // Example dietary preference
                     ////HealthConditions = new List<HealthCondition>
                     //{
                     //    HealthCondition.Diabetes // Example condition
                     //}, // Example health condition
-                    //SleepPatterns = SleepPattern.NinePlus, // Example sleep pattern
+                    SleepPatterns = SleepPattern.NinePlus, // Example sleep pattern
                     ConsentToDataCollection = true, // Example consent
-                    U_Created_Date = DateTime.UtcNow,
-                    U_Last_Login = DateTime.UtcNow
+                    U_CreatedDate = DateTime.UtcNow,
+                    U_LastLogin = DateTime.UtcNow
                 };
 
                 var createResult = await userManager.CreateAsync(newUser, "User@12345"); // Default password

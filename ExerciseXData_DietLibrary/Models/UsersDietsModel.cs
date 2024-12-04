@@ -11,7 +11,7 @@ namespace ExerciseXData_DietLibrary.Models
         public int UD_Id { get; set; }
 
         [DisplayName("User Id")]
-        public string UserId { get; set; }
+        public string Id { get; set; }
         public UsersModel User { get; set; }
 
         [ForeignKey("D_Id")]

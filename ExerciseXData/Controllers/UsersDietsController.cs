@@ -4,8 +4,7 @@ using ExerciseXData_DietLibrary.Data;
 using ExerciseXData_DietLibrary.Models;
 using ExerciseXData_UserLibrary.Models;
 using Microsoft.AspNetCore.Identity;
-using ExerciseXData_UserLibrary.DataTransferObject;
-using ExerciseXData_DietLibrary.DataTransferObject;
+using ExerciseXData_SharedLibrary.Dto;
 
 namespace ExerciseXData.Controllers
 {

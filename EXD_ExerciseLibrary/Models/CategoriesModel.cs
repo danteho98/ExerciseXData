@@ -20,7 +20,7 @@ namespace ExerciseXData_ExerciseLibrary.Models
         public string ? C_Name { get; set; }
 
         [DisplayName("Modified Date")]
-        public DateTime C_Modified_Date { get; set; } = DateTime.Now;
+        public DateTime C_ModifiedDate { get; set; } = DateTime.Now;
 
         //Relationships
         // Mark this as non-validated to prevent validation issues

@@ -13,8 +13,8 @@ namespace ExerciseXData_ExerciseLibrary.Utilities
         public static void SeedData(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CategoriesModel>().HasData(
-                new CategoriesModel { C_Id = 1, C_Name = "Cardio", C_Modified_Date = DateTime.Now },
-                new CategoriesModel { C_Id = 2, C_Name = "Strength", C_Modified_Date = DateTime.Now }
+                new CategoriesModel { C_Id = 1, C_Name = "Cardio", C_ModifiedDate = DateTime.Now },
+                new CategoriesModel { C_Id = 2, C_Name = "Strength", C_ModifiedDate = DateTime.Now }
             );
 
             modelBuilder.Entity<ExercisesModel>().HasData(

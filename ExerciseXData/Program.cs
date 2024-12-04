@@ -60,9 +60,9 @@ builder.Services.AddDbContext<DietDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TestDietConnection"),
     b => b.MigrationsAssembly("ExerciseXData_DietLibrary")));
 
-builder.Services.AddDbContext<SharedDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("TestSharedConnection"),
-    b => b.MigrationsAssembly("ExerciseXData_SharedLibrary")));
+//builder.Services.AddDbContext<SharedDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("TestSharedConnection"),
+//    b => b.MigrationsAssembly("ExerciseXData_SharedLibrary")));
 
 builder.Services.AddIdentity<UsersModel, IdentityRole>(options =>
 {
@@ -145,8 +145,8 @@ using (var scope = app.Services.CreateScope())
         await dietDbContext.Database.MigrateAsync();
 
         // Apply migrations for SharedDbContext
-        var sharedDbContext = services.GetRequiredService<SharedDbContext>();
-        await sharedDbContext.Database.MigrateAsync();
+        //var sharedDbContext = services.GetRequiredService<SharedDbContext>();
+        //await sharedDbContext.Database.MigrateAsync();
 
         // Seed roles and admin account
         await DataSeeder.SeedRoles(services);

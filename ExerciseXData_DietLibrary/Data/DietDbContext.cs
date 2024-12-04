@@ -21,7 +21,7 @@ namespace ExerciseXData_DietLibrary.Data
             DietDataSeeder.SeedData(modelBuilder);
 
             modelBuilder.Entity<DietsFoodsModel>()
-                .HasKey(df => new { df.DietsD_Id, df.FoodsF_Id });
+                .HasKey(df => new { df.DietsD_Id, df.FoodsF_Id });  
 
             modelBuilder.Entity<DietsFoodsModel>()
                 .HasOne(df => df.Diets)
@@ -40,12 +40,12 @@ namespace ExerciseXData_DietLibrary.Data
             modelBuilder.Entity<UsersDietsModel>()
                 .HasOne(ud => ud.User)
                 .WithMany() // Avoid navigation property on ApplicationUser
-                .HasForeignKey(ud => ud.UserId)
+                .HasForeignKey(ud => ud.Id)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<UsersDietsModel>()
                 .HasOne(ud => ud.Diet)
-                .WithMany(d => d.UsersDiets)
+                .WithMany(/*d => d.UsersDiets*/)
                 .HasForeignKey(ud => ud.D_Id)
                 .OnDelete(DeleteBehavior.Cascade);
 
