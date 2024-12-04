@@ -12,7 +12,6 @@ namespace ExerciseXData_ExerciseLibrary.Data
         public DbSet<ExercisesModel> Exercises { get; set; }
         public DbSet<CategoriesModel> Categories { get; set; }
         public DbSet<ExercisePlansModel> ExercisePlans { get; set; }
-     
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -14,8 +14,8 @@ namespace ExerciseXData_UserLibrary.Data
 
         public DbSet<UsersModel> Users {  get; set; }
        
-        public DbSet<SecurityQuestionModel> SecurityQuestions { get; set; }
-        public DbSet<UserSecurityQuestionModel> UserSecurityQuestions { get; set; }
+        //public DbSet<SecurityQuestionModel> SecurityQuestions { get; set; }
+       // public DbSet<UserSecurityQuestionModel> UserSecurityQuestions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
@@ -34,25 +34,25 @@ namespace ExerciseXData_UserLibrary.Data
                 .HasIndex(iu => iu.Email)
                 .IsUnique();
 
-            modelBuilder.Entity<SecurityQuestionModel>()
-                .HasKey(sq => sq.SQ_Id);
+            //modelBuilder.Entity<SecurityQuestionModel>()
+                //.HasKey(sq => sq.SQ_Id);
 
-            modelBuilder.Entity<UserSecurityQuestionModel>(entity =>
-            {
-                // Configure composite primary key
-                entity.HasKey(usq => new { usq.U_Id, usq.SecurityQuestionId });
+            //modelBuilder.Entity<UserSecurityQuestionModel>(entity =>
+            //{
+            //    // Configure composite primary key
+            //    entity.HasKey(usq => new { usq.U_Id, usq.SecurityQuestionId });
 
-                // Relationship with UsersModel
-                entity.HasOne(usq => usq.Users)
-                      .WithMany(u => u.UserSecurityQuestions)
-                      .HasForeignKey(usq => usq.U_Id)
-                      .OnDelete(DeleteBehavior.Cascade);
+            //    // Relationship with UsersModel
+            //    entity.HasOne(usq => usq.Users)
+            //          .WithMany(u => u.UserSecurityQuestions)
+            //          .HasForeignKey(usq => usq.U_Id)
+            //          .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasOne(usq => usq.UserSecurityQuestions)
-                      .WithMany()
-                      .HasForeignKey(usq => usq.SecurityQuestionId)
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
+            //    entity.HasOne(usq => usq.UserSecurityQuestions)
+            //          .WithMany()
+            //          .HasForeignKey(usq => usq.SecurityQuestionId)
+            //          .OnDelete(DeleteBehavior.Cascade);
+            //});
         }
     }
 }

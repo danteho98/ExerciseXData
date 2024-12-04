@@ -32,20 +32,36 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 //builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AlternateConnection")));
 
 
+//builder.Services.AddDbContext<UserDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("UserConnection"),
+//    b => b.MigrationsAssembly("ExerciseXData_UserLibrary")));
+
+//builder.Services.AddDbContext<ExerciseDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("ExerciseConnection"),
+//    b => b.MigrationsAssembly("ExerciseXData_ExerciseLibrary")));
+
+//builder.Services.AddDbContext<DietDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DietConnection"),
+//    b => b.MigrationsAssembly("ExerciseXData_DietLibrary")));
+
+//builder.Services.AddDbContext<SharedDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("SharedConnection"),
+//    b => b.MigrationsAssembly("ExerciseXData_SharedLibrary")));
+
 builder.Services.AddDbContext<UserDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("UserConnection"),
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TestUserConnection"),
     b => b.MigrationsAssembly("ExerciseXData_UserLibrary")));
 
 builder.Services.AddDbContext<ExerciseDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ExerciseConnection"),
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TestExerciseConnection"),
     b => b.MigrationsAssembly("ExerciseXData_ExerciseLibrary")));
 
 builder.Services.AddDbContext<DietDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DietConnection"),
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TestDietConnection"),
     b => b.MigrationsAssembly("ExerciseXData_DietLibrary")));
 
 builder.Services.AddDbContext<SharedDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SharedConnection"),
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TestSharedConnection"),
     b => b.MigrationsAssembly("ExerciseXData_SharedLibrary")));
 
 builder.Services.AddIdentity<UsersModel, IdentityRole>(options =>

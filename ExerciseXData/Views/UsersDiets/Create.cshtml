@@ -1,0 +1,65 @@
+﻿@model ExerciseXData_DietLibrary.DataTransferObject.UsersDietsCreateEditDto
+
+@{
+    Layout = null;
+}
+
+@{
+    ViewData["Title"] = "Create User Diet";
+}
+
+<h1>Create User Diet</h1>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Id" class="control-label">User</label>
+        <select asp-for="Id" asp-items="@(new SelectList(ViewBag.Users, "Id", "UserName"))" class="form-control">
+            <option value="">Select User</option>
+        </select>
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="D_Id" class="control-label">Diet</label>
+        <select asp-for="D_Id" asp-items="@(new SelectList(ViewBag.Diets, "D_Id", "DietName"))" class="form-control">
+            <option value="">Select Diet</option>
+        </select>
+        <span asp-validation-for="D_Id" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CustomDietName" class="control-label"></label>
+        <input asp-for="CustomDietName" class="form-control" />
+        <span asp-validation-for="CustomDietName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UD_ServingSize" class="control-label"></label>
+        <input asp-for="UD_ServingSize" class="form-control" />
+        <span asp-validation-for="UD_ServingSize" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UD_Frequency" class="control-label"></label>
+        <input asp-for="UD_Frequency" class="form-control" />
+        <span asp-validation-for="UD_Frequency" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UD_TotalCalories" class="control-label"></label>
+        <input asp-for="UD_TotalCalories" class="form-control" />
+        <span asp-validation-for="UD_TotalCalories" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartDate" class="control-label"></label>
+        <input asp-for="StartDate" class="form-control" type="date" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EndDate" class="control-label"></label>
+        <input asp-for="EndDate" class="form-control" type="date" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IsCompleted" class="control-label"></label>
+        <input asp-for="IsCompleted" class="form-check-input" type="checkbox" />
+        <span asp-validation-for="IsCompleted" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

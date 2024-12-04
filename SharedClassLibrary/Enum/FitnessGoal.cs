@@ -8,10 +8,10 @@ namespace ExerciseXData_SharedLibrary.Enum
 {
     public enum FitnessGoal
     {
-        WeightLoss,
-        MuscleGain,
-        Maintenance,
-        ImproveEndurance,
-        GeneralHealth
+        WeightLoss = 1,
+        MuscleGain = 2,
+        Maintenance = 3,
+        ImproveEndurance = 4,
+        GeneralHealth= 5
     }
 }

@@ -8,8 +8,8 @@ namespace ExerciseXData_SharedLibrary.Enum
 {
     public enum ActivityLevel
     {
-        Active,
-        ModeratelyActive,
-        NotActive
+        Active = 1,
+        ModeratelyActive = 2,
+        NotActive = 3
     }
 }

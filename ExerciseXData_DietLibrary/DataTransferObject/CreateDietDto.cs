@@ -16,6 +16,6 @@ namespace ExerciseXData_DietLibrary.DataTransferObject
         public string D_Cons_1 { get; set; }
         public string D_Cons_2 { get; set; }
         public string D_Cons_3 { get; set; }
-        public DateTime? D_Modified_Date { get; set; }
+        public DateTime? D_ModifiedDate { get; set; }
     }
 }

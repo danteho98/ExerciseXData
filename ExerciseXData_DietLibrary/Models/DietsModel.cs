@@ -38,7 +38,7 @@ namespace ExerciseXData_DietLibrary.Models
         public string ? D_Cons_3 { get; set; }
 
         [DisplayName("Modified Date")]
-        public DateTime D_Modified_Date { get; set; } = DateTime.Now;
+        public DateTime D_ModifiedDate { get; set; } = DateTime.Now;
 
 
         //Relationships

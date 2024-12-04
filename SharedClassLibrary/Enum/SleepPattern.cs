@@ -8,9 +8,9 @@ namespace ExerciseXData_SharedLibrary.Enum
 {
     public enum SleepPattern
     {
-        LessThan5,
-        FiveToSix,
-        SevenToEight,
-        NinePlus
+        LessThan5 = 1,
+        FiveToSix = 2,
+        SevenToEight = 3,
+        NinePlus = 4
     }
 }

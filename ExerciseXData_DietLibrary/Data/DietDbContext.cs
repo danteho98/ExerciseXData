@@ -1,6 +1,7 @@
 ﻿using ExerciseXData_DietLibrary.Models;
 using ExerciseXData_DietLibrary.Utilities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace ExerciseXData_DietLibrary.Data
 {
@@ -11,6 +12,7 @@ namespace ExerciseXData_DietLibrary.Data
         
         public DbSet<DietsModel> Diets { get; set; }
         public DbSet<FoodsModel> Foods { get; set; }
+        public DbSet<UsersDietsModel> UsersDiets { get; set; }
         public DbSet<DietsFoodsModel> DietsFoods { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -205,21 +205,21 @@ namespace ExerciseXData_UserLibrary.Controllers
         }
 
         // POST: account/forgotpassword
-        [HttpPost("forgotpassword")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ForgotPassword(string email)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user == null)
-            {
-                ModelState.AddModelError(string.Empty, "No account found with this email.");
-                return View();
-            }
+        //[HttpPost("forgotpassword")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> ForgotPassword(string email)
+        //{
+        //    var user = await _userManager.FindByEmailAsync(email);
+        //    if (user == null)
+        //    {
+        //        ModelState.AddModelError(string.Empty, "No account found with this email.");
+        //        return View();
+        //    }
 
-            // Fetch security questions from the database
-            var questions = await _usersRepository.GetSecurityQuestionsForUserAsync(user.Id); // You need to implement this method
-            return View("SecurityQuestions", new SecurityQuestionsDto { SecurityQuestions = questions, Email = email });
-        }
+        //    //// Fetch security questions from the database
+        //    //var questions = await _usersRepository.GetSecurityQuestionsForUserAsync(user.Id); // You need to implement this method
+        //    //return View("SecurityQuestions", new SecurityQuestionsDto { SecurityQuestions = questions, Email = email });
+        //}
 
 
         // POST: account/logout

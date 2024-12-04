@@ -1,0 +1,55 @@
+﻿@* @{
+    Layout = null;
+} *@
+
+@model IEnumerable<ExerciseXData_DietLibrary.DataTransferObject.UsersDietsIndexDto>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    
+
+@{
+    ViewData["Title"] = "User Diets";
+}
+
+<h1>User Diets</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Diet</th>
+            <th>Custom Diet Name</th>
+            <th>Serving Size</th>
+            <th>Frequency</th>
+            <th>Total Calories</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Completed</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.DietName</td>
+                <td>@item.CustomDietName</td>
+                <td>@item.UD_ServingSize</td>
+                <td>@item.UD_Frequency</td>
+                <td>@item.UD_TotalCalories</td>
+                <td>@item.StartDate.ToShortDateString()</td>
+                <td>@item.EndDate.ToShortDateString()</td>
+                <td>@(item.IsCompleted ? "Yes" : "No")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.UD_Id" class="btn btn-primary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.UD_Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-success">Create New</a>

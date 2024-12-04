@@ -171,17 +171,17 @@ namespace ExerciseXData_UserLibrary.Repositories
         }
 
 
-        public async Task<List<SecurityQuestionModel>> GetSecurityQuestionsForUserAsync(string userId)
-        {
-            // Ensure the method queries the UserSecurityQuestions table to find the user's associated security questions
-            var userQuestions = await _userDbContext.UserSecurityQuestions
-                .Where(usc => usc.U_Id == userId)
-                .Include(usc => usc.UserSecurityQuestions) // Include the related SecurityQuestion entity
-                .Select(usc => usc.UserSecurityQuestions)  // Select only the SecurityQuestion part
-                .ToListAsync();
+        //public async Task<List<SecurityQuestionModel>> GetSecurityQuestionsForUserAsync(string userId)
+        //{
+        //    // Ensure the method queries the UserSecurityQuestions table to find the user's associated security questions
+        //    var userQuestions = await _userDbContext.UserSecurityQuestions
+        //        .Where(usc => usc.U_Id == userId)
+        //        .Include(usc => usc.UserSecurityQuestions) // Include the related SecurityQuestion entity
+        //        .Select(usc => usc.UserSecurityQuestions)  // Select only the SecurityQuestion part
+        //        .ToListAsync();
 
-            return userQuestions;
-        }
+        //    return userQuestions;
+        //}
 
 
         public async Task<int> GetTotalUsersAsync()
