@@ -1,0 +1,38 @@
+﻿@model ExerciseXData_UserLibrary.DataTransferObject.SecurityQuestionDto
+
+@{
+    Layout = Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Security Question";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="SubmitSecurityQuestion" method="post">
+    <div class="form-group">
+        <label for="SecurityQuestion">Choose a Security Question</label>
+        <select asp-for="SelectedQuestion" class="form-control" id="SecurityQuestion">
+            <option value="">-- Select a Question --</option>
+            @foreach (var question in Model.AvailableQuestions)
+            {
+                <option value="@question">@question</option>
+            }
+        </select>
+        <span asp-validation-for="SelectedQuestion" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label for="Answer">Your Answer</label>
+        <input asp-for="Answer" class="form-control" id="Answer" />
+        <span asp-validation-for="Answer" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

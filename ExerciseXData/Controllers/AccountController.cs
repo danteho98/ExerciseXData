@@ -270,5 +270,32 @@ namespace ExerciseXData.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
+
+        [HttpGet]
+        public IActionResult SecurityQuestion()
+        {
+            var model = new SecurityQuestionViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult SubmitSecurityQuestion(SecurityQuestionViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("SecurityQuestion", model);
+            }
+
+            // TODO: Process the selected question and answer.
+            // e.g., Store hashed answer in the database or verify it.
+
+            TempData["Message"] = "Your answer has been submitted successfully.";
+            return RedirectToAction("Confirmation");
+        }
+
+        public IActionResult Confirmation()
+        {
+            return View();
+        }
     }
 }
