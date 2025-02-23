@@ -20,10 +20,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">Home</a>
-                        </li>
-
+                        
                         @if (User.IsInRole("Admin"))
                         {
                             <!-- Admin-only links -->
@@ -66,7 +63,7 @@
                             </div>
                         </li>
                     </ul>
-
+                    
                     <div class="ms-auto">
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -81,60 +78,11 @@
                             <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Log In</a>
                         }
                     </div>
+                    
                 </div>
             </div>
         </nav>
     </header>
-                        @* <li class="nav-item">
-
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">Home</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Manage Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Exercises" asp-action="Index">Manage Exercises</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Diets" asp-action="Index">Manage Diets</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Foods" asp-action="Index">Manage Foods</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Manage Users</a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                Statistics
-                            </a>
-
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Statistics" asp-action="Diets">Diets</a>
-                                <a class="dropdown-item" asp-controller="Statistics" asp-action="Exercises"> Exercises</a>
-
-                            </div>
-                        </li>
-                    </ul>
-
-                    <div class="ms-auto">
-                        <a class="btn btn-primary" asp-controller="Account" asp-action="Register">Sign In</a>
-                    </div>
-
-                    <div class="ms-auto">
-                        <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Log In</a>
-                    </div>
-
-                    <div class="ms-auto">
-                        <a class="btn btn-primary" asp-controller="Admin" asp-action="Logout">Log Out</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header> *@
 
 <div class="container">
     <main role="main" class="pb-3">

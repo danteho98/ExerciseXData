@@ -46,15 +46,6 @@ namespace ExerciseXData.Controllers
         {
             if (ModelState.IsValid)
             {
-                //try
-                //{
-                //    // Convert HealthConditions from List<string> to List<HealthCondition>
-                //    var healthConditions = model.HealthConditions?
-                //        .Select(condition => Enum.Parse<HealthCondition>(condition))
-                //        .ToList();
-
-                 
-
                     var user = new UsersModel
                     {
                         Email = model.Email,
@@ -66,7 +57,7 @@ namespace ExerciseXData.Controllers
                         FitnessGoal = model.FitnessGoal,
                         DietaryPreferences = model.DietaryPreferences,
                         U_ActivityLevel = model.U_ActivityLevel,  
-                        //HealthConditions = healthConditions,
+                        
                         SleepPatterns = model.SleepPatterns, 
                         ConsentToDataCollection = model.ConsentToDataCollection,
                         U_CreatedDate = DateTime.UtcNow,
@@ -92,12 +83,7 @@ namespace ExerciseXData.Controllers
                         return RedirectToAction("UserDashboard", "Users");
                     }
                     AddErrors(result);
-                //}
-                //catch (Exception ex)
-                //{
-                //    _logger.LogError(ex, "Error occurred during registration.");
-                //    ModelState.AddModelError(string.Empty, "An error occurred during registration. Please try again.");
-                //}
+
             }
             else
             {
@@ -204,24 +190,6 @@ namespace ExerciseXData.Controllers
             return View();
         }
 
-        // POST: account/forgotpassword
-        //[HttpPost("forgotpassword")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> ForgotPassword(string email)
-        //{
-        //    var user = await _userManager.FindByEmailAsync(email);
-        //    if (user == null)
-        //    {
-        //        ModelState.AddModelError(string.Empty, "No account found with this email.");
-        //        return View();
-        //    }
-
-        //    //// Fetch security questions from the database
-        //    //var questions = await _usersRepository.GetSecurityQuestionsForUserAsync(user.Id); // You need to implement this method
-        //    //return View("SecurityQuestions", new SecurityQuestionsDto { SecurityQuestions = questions, Email = email });
-        //}
-
-
         // POST: account/logout
         [HttpPost("logout")]
         [ValidateAntiForgeryToken]
@@ -232,21 +200,6 @@ namespace ExerciseXData.Controllers
 
             return RedirectToAction("About", "Home");
         }
-
-        //private IActionResult RedirectToLocal(string returnUrl, IdentityUser user)
-        //{
-        //    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-        //    {
-        //        return Redirect(returnUrl);
-        //    }
-
-        //    if (User.IsInRole("Admin"))
-        //    {
-        //        return RedirectToAction("AdminDashboard", "Admin");
-        //    }
-
-        //    return RedirectToAction("UserDashboard", "Users");
-        //}
 
         // GET: account/accessdenied
         [HttpGet("accessdenied")]
