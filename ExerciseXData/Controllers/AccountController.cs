@@ -6,6 +6,7 @@ using ExerciseXData_UserLibrary.Repositories;
 using ExerciseXData_UserLibrary.DataTransferObject;
 using System.Security.Claims;
 using ExerciseXData_SharedLibrary.Enum;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ExerciseXData.Controllers
 {
@@ -184,10 +185,13 @@ namespace ExerciseXData.Controllers
         }
 
         // GET: account/forgotpassword
+        [AllowAnonymous]
         [HttpGet("forgotpassword")]
         public IActionResult ForgotPassword()
         {
+            
             return View();
+            
         }
 
         // POST: account/logout
@@ -202,7 +206,7 @@ namespace ExerciseXData.Controllers
         }
 
         // GET: account/accessdenied
-        [HttpGet("accessdenied")]
+        [HttpGet("AccessDenied")]
         public IActionResult AccessDenied()
         {
             return View();
